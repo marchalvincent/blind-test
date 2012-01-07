@@ -1,6 +1,5 @@
 package org.commons.logger;
 
-import java.io.IOException;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
@@ -59,6 +58,7 @@ public final class FileInfoProvider implements InfoProvider {
 	
 	private final void configure() {
 		try {
+			_logger.setUseParentHandlers(false);
 			final Configuration locConfiguration = ConfigurationManager.getConfiguration();
 			final Level locMinLevel = locConfiguration.getMinLevel();
 			_logger.setLevel(locMinLevel);
@@ -66,9 +66,10 @@ public final class FileInfoProvider implements InfoProvider {
 			locHander.setLevel(locMinLevel);
 			locHander.setFormatter(new DefaultFormatter());
 			_logger.addHandler(locHander);
+			_logger.addHandler(new DefaultConsoleHandler());
 			LogManager.getLogManager().addLogger(_logger);
-		} catch (SecurityException | IOException e) {
-			e.printStackTrace();
+		} catch (Exception locException) {
+			locException.printStackTrace();
 		}
 	}
 

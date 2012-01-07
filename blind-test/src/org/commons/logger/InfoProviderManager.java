@@ -20,7 +20,7 @@ public final class InfoProviderManager {
 	 * Singleton
 	 */
 	static private final class FileProviderLoader {
-		static private final String LOG_FILE = "blind_test.log";
+		static private final String LOG_FILE = "log/blind_test.log";
 		static private final InfoProvider INSTANCE = new FileInfoProvider(LOG_FILE);
 	}
 	

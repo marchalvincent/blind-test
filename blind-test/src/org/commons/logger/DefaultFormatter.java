@@ -9,8 +9,7 @@ import org.joda.time.DateTime;
 
 public final class DefaultFormatter extends Formatter {
 
-	protected DefaultFormatter() {
-		
+	protected DefaultFormatter() {		
 	}
 	
 	@Override
@@ -18,9 +17,9 @@ public final class DefaultFormatter extends Formatter {
 		final StringBuilder locBuilder = new StringBuilder();
 		final Level locLevel = parRecord.getLevel();
 		final String locMessage = parRecord.getMessage();
-		locBuilder.append(locLevel.getName()).append(" ");
+		locBuilder.append(locLevel.getName()).append(" - ");
 		final DateTime locDate = DateUtil.getCurrentDateTime();
-		locBuilder.append(DateUtil.format(locDate)).append(" ").append(locMessage);
+		locBuilder.append(DateUtil.format(locDate)).append(" : ").append(locMessage);
 		final Throwable locThrowable = parRecord.getThrown();
 		if(locThrowable != null) {
 			locBuilder.append("\n").append(locThrowable.getMessage());

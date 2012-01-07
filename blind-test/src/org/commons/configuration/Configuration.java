@@ -53,25 +53,25 @@ public interface Configuration {
 	 * Modifie le port de l'application.
 	 * @param parPort {@link Integer} le nouveau port de l'application.
 	 */
-	void setPort(final Integer parPort);
+	void setPort(final String parPort);
 	
 	/**
-	 * Met à jour l'adresse du serveur.
+	 * Modifie l'adresse du serveur.
 	 * @param parHostName {@link String} la nouvelle adresse du serveur.
 	 */
 	void setHostName(final String parHostName);
 	
 	/**
 	 * Modifie le {@link Charset} de l'application.
-	 * @param parCharset {@link Charset} le nouveau charset de l'application.
+	 * @param parCharset {@link String} le nouveau charset de l'application.
 	 */
-	void setCharset(final Charset parCharset);
+	void setCharset(final String parCharset);
 	
 	/**
 	 * Modifie le {@link Level} des messages de l'application.
-	 * @param parLevel {@link Level} le nouveau niveau de l'application.
+	 * @param parLevel {@link String} le nouveau niveau de l'application.
 	 */
-	void setMinLevel(final Level parLevel);
+	void setMinLevel(final String parLevel);
 	
 	/**
 	 * Charge la configuration de l'application.
@@ -86,5 +86,7 @@ public interface Configuration {
 	 * @throws BlindTestException Si l'écriture dans le fichier de configuration a échouée.
 	 */
 	Configuration refresh() throws BlindTestException;
+	
+	
 	
 }

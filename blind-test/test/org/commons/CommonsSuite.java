@@ -1,5 +1,6 @@
 package org.commons;
 
+import org.commons.configuration.ConfigurationSuite;
 import org.commons.util.UtilSuite;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -12,7 +13,8 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({
-	UtilSuite.class
+	UtilSuite.class,
+	ConfigurationSuite.class
 })
 public final class CommonsSuite {
 

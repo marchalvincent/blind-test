@@ -13,14 +13,14 @@ public final class ConfigurationTest {
 	@Test
 	public final void testSetPort() throws BlindTestException {
 		final Configuration locConfiguration = new DefaultConfiguration().load();
-		locConfiguration.setPort(123);
+		locConfiguration.setPort("123");
 		assertEquals(Integer.valueOf(123), locConfiguration.getPort());
 	}
 
 	@Test
 	public final void testSetHostName() throws BlindTestException {
 		final Configuration locConfiguration = new DefaultConfiguration().load();
-		final String locHostName = "123.234.345.786";
+		final String locHostName = "173.194.67.105";
 		locConfiguration.setHostName(locHostName);
 		assertEquals(locHostName, locConfiguration.getHostName());
 	}
@@ -29,7 +29,7 @@ public final class ConfigurationTest {
 	public final void testSetCharset() throws BlindTestException {
 		final Configuration locConfiguration = new DefaultConfiguration().load();
 		final Charset locCharset = Charset.defaultCharset();
-		locConfiguration.setCharset(locCharset);
+		locConfiguration.setCharset("utf-8");
 		assertEquals(locCharset, locConfiguration.getCharset());
 		assertEquals(locCharset.name(), locConfiguration.getCharsetName());
 	}
@@ -37,9 +37,8 @@ public final class ConfigurationTest {
 	@Test
 	public final void testSetMinLevel() throws BlindTestException {
 		final Configuration locConfiguration = new DefaultConfiguration().load();
-		final Level locMinLevel = Level.WARNING;
-		locConfiguration.setMinLevel(locMinLevel);
-		assertEquals(locMinLevel, locConfiguration.getMinLevel());
+		locConfiguration.setMinLevel("WARNING");
+		assertEquals(Level.WARNING, locConfiguration.getMinLevel());
 	}
 
 	@Test
@@ -48,14 +47,20 @@ public final class ConfigurationTest {
 		
 		final Configuration locConfiguration = new DefaultConfiguration();
 		locConfiguration.load();
-		final String locHostName = "value";
+		
 		final Charset locCharset = Charset.defaultCharset();
 		final Integer locPort = 123;
 		final Level locLevel = Level.OFF;
+		
+		final String locHostName = "173.194.67.105";
+		final String locCharsetName = locCharset.name();
+		final String locPortName = locPort.toString();
+		final String locLevelName = locLevel.getName();
+		
 		locConfiguration.setHostName(locHostName);
-		locConfiguration.setCharset(locCharset);
-		locConfiguration.setMinLevel(locLevel);
-		locConfiguration.setPort(locPort);
+		locConfiguration.setCharset(locCharsetName);
+		locConfiguration.setMinLevel(locLevelName);
+		locConfiguration.setPort(locPortName);
 		locConfiguration.refresh();
 		
 		final Configuration locNewConfiguration = new DefaultConfiguration();
