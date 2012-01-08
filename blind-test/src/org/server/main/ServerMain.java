@@ -1,5 +1,6 @@
 package org.server.main;
 
+import java.util.Properties;
 import java.util.logging.Level;
 
 import org.commons.configuration.Configuration;
@@ -10,6 +11,8 @@ import org.commons.logger.InfoProvider;
 import org.commons.logger.InfoProviderManager;
 import org.commons.util.SystemUtil;
 import org.server.monitor.MonitorRunnable;
+import org.server.persistence.EnumDatabaseProperties;
+import org.server.persistence.Managers;
 
 /**
  * La classe principale du serveur
@@ -23,24 +26,27 @@ public final class ServerMain {
 		loadApplication(locConfiguration);
 	}
 	
+	static private final void loadApplication(final Configuration parConfiguration) {		
+		final MonitorRunnable locRunnable = new MonitorRunnable();
+		locRunnable.start();
+		final InfoProvider locProvider = InfoProviderManager.getFileProvider();
+		locProvider.appendMessage(Level.INFO, "Démarrage de l'application en cours...");
+		locProvider.appendMessage(Level.INFO, "Lancement du moniteur réussi.");
+		final Properties locProperties = Managers.getDatabaseConfiguration();
+		final String locHostname = locProperties.getProperty(EnumDatabaseProperties.HOSTNAME.getConstName());
+		final String locPort = locProperties.getProperty(EnumDatabaseProperties.PORT.getConstName());
+		locProvider.appendMessage(Level.INFO, String.format("La connexion à la base de données a été effectuée. L'adresse de la base est \"%s\" sur le port \"%s\".", locHostname, locPort));
+	}
+	
 	static private final Configuration loadConfiguration(final String[] parArguments) {
 		final Configuration locConfiguration = ConfigurationManager.getConfiguration();
 		try {
 			EnumConfiguration.updateConfiguration(locConfiguration, parArguments);
 		} catch (final BlindTestException locException) {
-			final String locDocumentation = EnumConfiguration.getSupport();
+			final String locDocumentation = EnumConfiguration.getDocumentation();
 			System.err.println(locDocumentation);
 			SystemUtil.exit();
 		}
 		return locConfiguration;
-	}
-	
-	static private final void loadApplication(final Configuration parConfiguration) {		
-		final MonitorRunnable locRunnable = new MonitorRunnable();
-		locRunnable.start();
-		final InfoProvider locProvider = InfoProviderManager.getFileProvider();
-		locProvider.appendMessage(Level.INFO, "Démarrage de l'application.");
-		locProvider.appendMessage(Level.INFO, String.format("L'adresse du serveur est \"%s\".", parConfiguration.getHostName()));
-		locProvider.appendMessage(Level.INFO, String.format("Le port par défaut est \"%d\".", parConfiguration.getPort()));
 	}
 }

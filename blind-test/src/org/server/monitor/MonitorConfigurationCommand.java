@@ -1,12 +1,15 @@
 package org.server.monitor;
 
-import org.commons.configuration.Configuration;
-import org.commons.configuration.ConfigurationManager;
 import org.commons.configuration.EnumConfiguration;
 import org.commons.exception.BlindTestException;
 import org.commons.util.WithUtilities;
 
-public class MonitorConfigurationCommand extends MonitorCommand {
+/**
+ * L'implémentation d'un {@link MonitorCommand} pour obtenir des informations sur la configuration.
+ * @author pitton
+ *
+ */
+public final class MonitorConfigurationCommand extends MonitorCommand {
 
 	public MonitorConfigurationCommand(final String parCommand) {
 		super(EnumMonitorCommand.CONFIGURATION, parCommand, null);
@@ -17,8 +20,7 @@ public class MonitorConfigurationCommand extends MonitorCommand {
 		final EnumConfiguration locEnumConfiguration = WithUtilities.getByName(EnumConfiguration.values(), getConstName());
 		if(locEnumConfiguration == null) throw new BlindTestException("La commande spécifiée est " + getConstName() + ". Elle n'existe pas.");
 		
-		final Configuration locConfiguration = ConfigurationManager.getConfiguration();
-		return locEnumConfiguration.getFormattedValue(locConfiguration);
+		return locEnumConfiguration.getSupport();
 	}
 
 }

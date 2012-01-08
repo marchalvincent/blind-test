@@ -4,6 +4,11 @@ import java.util.concurrent.Callable;
 
 import org.commons.util.IWithName;
 
+/**
+ * La classe par défaut de toutes les commandes que peut effectuer un utilisateur
+ * @author pitton
+ *
+ */
 public abstract class MonitorCommand implements IWithName, Callable<String> {
 
 	protected final EnumMonitorCommand _type;
@@ -21,6 +26,10 @@ public abstract class MonitorCommand implements IWithName, Callable<String> {
 		return _commandName;
 	}	
 	
+	/**
+	 * Retourne vrai si cette commande a des arguments.
+	 * @return {@code boolean} vrai si cette commande a des arguments.
+	 */
 	final public boolean hasArguments() {
 		return _type.hasArguments();
 	}

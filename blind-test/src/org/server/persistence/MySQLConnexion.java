@@ -11,7 +11,11 @@ import org.commons.logger.InfoProvider;
 import org.commons.logger.InfoProviderManager;
 import org.commons.util.SystemUtil;
 
-
+/**
+ * La classe représentant la connexion à la base de données MySQL.
+ * @author pitton
+ *
+ */
 final class MySQLConnexion {
 
 	static protected final MySQLConnexion instance() {
@@ -22,40 +26,69 @@ final class MySQLConnexion {
 		static private final MySQLConnexion INSTANCE = new MySQLConnexion(InfoProviderManager.getFileProvider());
 	}
 	
+	private Properties _properties;
 	final private Connection _connection;
+	final private InfoProvider _infoProvider;
 	
 	private MySQLConnexion(final InfoProvider parInfoProvider) {
-		_connection = init(parInfoProvider);
+		_infoProvider = parInfoProvider;
+		_connection = init(_infoProvider);
 	}
 	
+	/**
+	 * Retourne les {@link Properties} de la base de données.
+	 * @return les {@link Properties} de la base de données.
+	 */
+	protected final Properties getProperties() {
+		return new Properties(_properties);
+	}
+	
+	/**
+	 * Retourne l'{@link InfoProvider} de la connexion à la base de données.
+	 * @return l'{@link InfoProvider} de la connexion à la base de données.
+	 */
+	protected final InfoProvider getInfoProvider() {
+		return _infoProvider;
+	}
+	
+	/**
+	 * Retourne la {@link Connection} à la base de données.
+	 * @return
+	 */
 	protected final Connection getConnection() {
 		return _connection;
 	}
 	
+	/**
+	 * Initialise la {@link Connection} à la base de données. 
+	 * @param parProvider {@link InfoProvider} un logger pour le démarrage de la connexion.
+	 * @return {@link Connection} la connexion à la base de données.
+	 */
 	private final Connection init(final InfoProvider parProvider) {		
-		final Properties locProperties = new Properties();
+		_properties = new Properties();
 		try {
-			locProperties.load(MySQLConnexion.class.getResourceAsStream("database.properties"));
+			_properties.load(MySQLConnexion.class.getResourceAsStream("database.properties"));
 		} catch (IOException locException) {
 			parProvider.appendMessage(Level.SEVERE, "Impossible de charger la configuration de la base de données", locException);
 			SystemUtil.exit();
 		}
 		try {
-			Class.forName(locProperties.getProperty(EnumDatabase.DRIVER.getConstName()));
+			Class.forName(_properties.getProperty(EnumDatabaseProperties.DRIVER.getConstName()));
 		} catch (ClassNotFoundException locException) {
 			parProvider.appendMessage(Level.SEVERE, "Impossible de charger le driver MySQL", locException);
 			SystemUtil.exit();
 		}
-		final String locURL = locProperties.getProperty(EnumDatabase.URL.getConstName());
-		final String locUser = locProperties.getProperty(EnumDatabase.LOGIN.getConstName());
-		final String locPassword = locProperties.getProperty(EnumDatabase.PASSWORD.getConstName());
+		final String locURL = _properties.getProperty(EnumDatabaseProperties.URL.getConstName());
+		final String locUser = _properties.getProperty(EnumDatabaseProperties.LOGIN.getConstName());
+		final String locPassword = _properties.getProperty(EnumDatabaseProperties.PASSWORD.getConstName());
 		try {
-			return DriverManager.getConnection(locURL, locUser, locPassword);
+			final Connection locConnection = DriverManager.getConnection(locURL, locUser, locPassword);
+			locConnection.setAutoCommit(false);
+			return locConnection;
 		} catch (SQLException locException) {
 			parProvider.appendMessage(Level.SEVERE, "Impossible de se connecter à la base de données", locException);
 			SystemUtil.exit();
 		}
 		return null;
 	}
-	
 }

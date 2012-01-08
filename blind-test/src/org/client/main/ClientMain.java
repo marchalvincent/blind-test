@@ -28,7 +28,7 @@ public final class ClientMain {
 		try {
 			EnumConfiguration.updateConfiguration(locConfiguration, parArguments);
 		} catch (final BlindTestException locException) {
-			final String locDocumentation = EnumConfiguration.getSupport();
+			final String locDocumentation = EnumConfiguration.getDocumentation();
 			System.err.println(locDocumentation);
 			SystemUtil.exit();
 		}

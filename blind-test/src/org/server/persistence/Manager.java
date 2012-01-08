@@ -18,11 +18,18 @@ public interface Manager<T> {
 	T add (final T parObject);
 	
 	/**
-	 * Supprime l'entité dont l'identifiant est spécifié.
-	 * @param parId {@code int} l'identifiant de l'objet à supprimer.
+	 * Supprime l'entité dont le nom constant est spécifié, si elle en a un.
+	 * @param parName {@link String} le nom à supprimer.
 	 * @return {@code boolean} vrai si l'entité à supprimer.
 	 */
-	boolean remove (final int parId);
+	boolean remove (final String parName);
+	
+	/**
+	 * Supprime l'entité dont l'identifiant est spécifié.
+	 * @param parId {@link Integer} un identifiant.
+	 * @return {@code boolean} vrai si l'entité a bien été supprimé.
+	 */
+	boolean remove (final Integer parId);
 	
 	/**
 	 * Met à jour l'entité spécifiée et renvoie l'entité mise à jour.

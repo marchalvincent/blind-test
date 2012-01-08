@@ -8,7 +8,13 @@ import java.util.List;
 import org.commons.configuration.EnumConfiguration;
 import org.commons.util.IWithId;
 import org.commons.util.StringUtil;
+import org.server.persistence.EnumDatabaseProperties;
 
+/**
+ * L'énumération de toutes les commandes pouvant être effectuées par un utilisateur.
+ * @author pitton
+ *
+ */
 public enum EnumMonitorCommand implements IWithId {
 
 	ADD(1, "add", true) {
@@ -37,6 +43,13 @@ public enum EnumMonitorCommand implements IWithId {
 		@Override
 		final public MonitorCommand createCommand(final String parCommandName, final String[] parArguments) {
 			return new MonitorConfigurationCommand(parCommandName);
+		}
+	},
+	DATABASE(5, EnumDatabaseProperties.getKeys(), false) {
+		
+		@Override
+		final public MonitorCommand createCommand(final String parCommandName, final String[] parArguments) {
+			return new MonitorDatabaseCommand(parCommandName);
 		}
 	};
 	
@@ -70,10 +83,20 @@ public enum EnumMonitorCommand implements IWithId {
 		return Integer.valueOf(_id);
 	}
 	
+	/**
+	 * Retourne vrai si le nom d'une commande est contenu dans le type de commande.
+	 * @param parCommand {@link String} le nom d'une commande
+	 * @return {@code boolean} vrai si le nom de la commande spécifiée est contenu dans le type de commande.
+	 */
 	public final boolean contains (final String parCommand) {
 		return _command.contains(parCommand);
 	}
 	
+	/**
+	 * Retourne le {@code EnumMonitorCommand} associée au nom d'une commande.
+	 * @param parCommand {@link String} le nom d'une commande.
+	 * @return le {@code EnumMonitorCommand} associée au nom d'une commande.
+	 */
 	static public final EnumMonitorCommand getCommand (final String parCommand) {
 		if(StringUtil.isEmpty(parCommand)) return null;
 		
@@ -85,10 +108,31 @@ public enum EnumMonitorCommand implements IWithId {
 		return null;
 	}
 	
-	static public final List<String> getCommands() {
+	/**
+	 * Retourne la {@link List} de toutes les commandes ayant des arguments.
+	 * @return la {@link List} de toutes les commandes ayant des arguments.
+	 */
+	static public final List<String> getArgumentCommands() {
 		final List<String> locResultat = new ArrayList<String>();
 		for(final EnumMonitorCommand locCommand : values()) {
-			locResultat.addAll(locCommand._command);
+			if(locCommand.hasArguments()) {
+				locResultat.addAll(locCommand._command);
+			}
+		}
+		Collections.sort(locResultat);
+		return Collections.unmodifiableList(locResultat);
+	}
+
+	/**
+	 * Retourne la {@link List} de toutes les commandes n'ayant pas d'arguments.
+	 * @return la {@link List} de toutes les commandes n'ayant pas d'arguments.
+	 */
+	static public final List<String> getNoArgumentCommands() {
+		final List<String> locResultat = new ArrayList<String>();
+		for(final EnumMonitorCommand locCommand : values()) {
+			if(locCommand.hasArguments() == false) {
+				locResultat.addAll(locCommand._command);
+			}
 		}
 		Collections.sort(locResultat);
 		return Collections.unmodifiableList(locResultat);

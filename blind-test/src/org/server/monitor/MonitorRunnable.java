@@ -8,9 +8,17 @@ import java.util.logging.Level;
 
 import org.commons.logger.InfoProvider;
 import org.commons.logger.InfoProviderManager;
+import org.commons.util.IWithName;
 import org.server.concurrent.BlindTestExecutor;
 
-public final class MonitorRunnable {
+/**
+ * Un {@link Thread} pour les entrées / sorties dans la console et effectuer des commandes.
+ * Ce thread ne peut être utilisé que par un utilisateur.
+ * @see EnumMonitorCommand
+ * @author pitton
+ *
+ */
+public final class MonitorRunnable implements IWithName {
 
 	final private MonitorReadWriter _monitor;
 	final private Thread _thread;
@@ -21,7 +29,15 @@ public final class MonitorRunnable {
 		_thread = init(_monitor);
 		_pool = new BlindTestExecutor(4, 1200, TimeUnit.SECONDS);
 	}
+	
+	@Override
+	final public String getConstName() {
+		return _thread.getName();
+	}
 
+	/**
+	 * Lance le moniteur
+	 */
 	public final void start() {
 		if (_thread.isAlive()) {
 			final InfoProvider locFileProvider = InfoProviderManager
@@ -38,6 +54,12 @@ public final class MonitorRunnable {
 		_thread.start();
 	}
 
+	/**
+	 * Initialise un thread permettant de lire dans la console et d'effectuer les actions demandées par l'utilisateur.
+	 * @see #_thread
+	 * @param parMonitorReader {@link MonitorReadWriter} un flux d'entrée / sortie dans la console
+	 * @return {@link Thread} un thread permettant de lire dans la console et d'effectuer les actions demandées par l'utilisateur.
+	 */
 	private final Thread init(final MonitorReadWriter parMonitorReader) {
 		return new Thread(new Runnable() {
 
@@ -69,14 +91,26 @@ public final class MonitorRunnable {
 		}, "Console Monitor Reader");
 	}
 
+	/**
+	 * Affiche un message d'erreur à l'utilisateur lorsque la commande spécifiée est invalide.
+	 * Une commande est invalide lorsqu'elle n'existe pas ou que ses arguments sont incorrects.
+	 * @param parCommandName {@link String} le nom de la commadne entrées par l'utilisateur.
+	 */
 	private final void showCommand(final String parCommandName) {
-		final String locMessage = String
-				.format("La commande \"%s\" est invalide. La liste des commandes disponible est : %s",
-						parCommandName, EnumMonitorCommand.getCommands()
-								.toString());
-		_monitor.println(locMessage);
+		final StringBuilder locBuilder = new StringBuilder();
+		locBuilder.append("La commande \"").append(parCommandName).append("\" est invalide. Les commandes autorisées sont : \n  - Information : ");
+		locBuilder.append(EnumMonitorCommand.getNoArgumentCommands().toString());
+		locBuilder.append("\n  - Avec arguments : ");
+		locBuilder.append(EnumMonitorCommand.getArgumentCommands().toString());
+		_monitor.println(locBuilder.toString());
 	}
 
+	/**
+	 * Exécute la commande spécifiée par l'utilisateur.
+	 * @param locCommandName {@link String} la commande.
+	 * @param parArguments {@code String[]} les arguments de la commande, si elle en a.
+	 * @param parEnumCommand {@link EnumMonitorCommand} le type de commande.
+	 */
 	private final void invoke(final String locCommandName,
 			final String[] parArguments, final EnumMonitorCommand parEnumCommand) {
 		final boolean locHasArgument = parEnumCommand.hasArguments();

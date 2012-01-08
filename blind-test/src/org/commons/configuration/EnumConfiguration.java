@@ -11,6 +11,7 @@ import java.util.logging.Level;
 
 import org.commons.exception.BlindTestException;
 import org.commons.util.IWithName;
+import org.commons.util.IWithSupport;
 import org.commons.util.SystemUtil;
 
 /**
@@ -20,7 +21,7 @@ import org.commons.util.SystemUtil;
  * @author pitton
  *
  */
-public enum EnumConfiguration implements IWithName {
+public enum EnumConfiguration implements IWithName, IWithSupport {
 
 	MIN_LEVEL("min_level", "-l", Level.WARNING) {
 
@@ -121,6 +122,11 @@ public enum EnumConfiguration implements IWithName {
 	final public Object getDefaultValue() {
 		return _defaultValue;
 	}
+	
+	@Override
+	final public String getSupport() {
+		return getFormattedValue(ConfigurationManager.getConfiguration());
+	}
 
 	@Override
 	final public String toString() {
@@ -172,7 +178,7 @@ public enum EnumConfiguration implements IWithName {
 	 * est spécifié dans la console indiquant que l'on ne peut l'afficher.
 	 * @return {@link String} le contenu de la documentation du serveur.
 	 */
-	static public final String getSupport() {
+	static public final String getDocumentation() {
 		FileInputStream locStream = null;
 		try {
 			final File locFile = new File(DOCUMENTATION);

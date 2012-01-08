@@ -1,21 +1,20 @@
-package org.commons;
+package org;
 
 import org.commons.configuration.ConfigurationSuite;
 import org.commons.util.UtilSuite;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
+import org.server.monitor.MonitorSuite;
+import org.server.persistence.PersistenceSuite;
 
-/**
- * Une suite de tests pour tout les packages {@code commons}
- * @author pitton
- *
- */
 @RunWith(Suite.class)
 @SuiteClasses({
 	UtilSuite.class,
-	ConfigurationSuite.class
+	ConfigurationSuite.class,
+	MonitorSuite.class,
+	PersistenceSuite.class
 })
-public final class CommonsSuite {
+public class FastTestSuite {
 
 }
