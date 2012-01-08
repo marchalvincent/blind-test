@@ -1,3 +1,4 @@
 syntax: glob
 .metadata/*
 bin/*
+*.orig
