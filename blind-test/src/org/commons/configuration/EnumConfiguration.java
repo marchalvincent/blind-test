@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
@@ -28,6 +29,11 @@ public enum EnumConfiguration implements IWithName {
 				final Configuration parConfiguration, final String parValue) {
 			parConfiguration.setMinLevel(parValue);
 		}
+		
+		@Override
+		public final String getFormattedValue(final Configuration parConfiguration) {
+			return String.format("Le niveau minimum des messages est de : %s", parConfiguration.getMinLevel().getName());
+		}
 	},
 	PORT("port", "-p", Integer.valueOf(9999)) {
 
@@ -35,6 +41,11 @@ public enum EnumConfiguration implements IWithName {
 		public final void setConfigurationValue(
 				final Configuration parConfiguration, final String parValue) {
 			parConfiguration.setPort(parValue);
+		}
+		
+		@Override
+		public final String getFormattedValue(final Configuration parConfiguration) {
+			return String.format("Le port d'écoute et d'envoi est : %d", parConfiguration.getPort());
 		}
 	},
 	HOSTNAME("hostname", "-h", "127.0.0.1") {
@@ -44,6 +55,11 @@ public enum EnumConfiguration implements IWithName {
 				final Configuration parConfiguration, final String parValue) {
 			parConfiguration.setHostName(parValue);
 		}
+
+		@Override
+		public final String getFormattedValue(final Configuration parConfiguration) {
+			return String.format("L'adresse du serveur est : %s", parConfiguration.getHostName());
+		}
 	},
 	CHARSET("charset", "-c", Charset.forName("UTF-8")) {
 
@@ -51,6 +67,11 @@ public enum EnumConfiguration implements IWithName {
 		public final void setConfigurationValue(
 				final Configuration parConfiguration, final String parValue) {
 			parConfiguration.setCharset(parValue);
+		}
+
+		@Override
+		public final String getFormattedValue(final Configuration parConfiguration) {
+			return String.format("L'encodage est défini en : %s", parConfiguration.getCharsetName());
 		}
 	};
 
@@ -72,6 +93,13 @@ public enum EnumConfiguration implements IWithName {
 	 * @param parValue {@link String} la nouvelle valeur de la configuration.
 	 */
 	abstract public void setConfigurationValue(final Configuration parConfiguration, final String parValue);
+	
+	/**
+	 * Retourne un message contenant la valeur actuelle de la {@link Configuration} spécifiée.
+	 * @param parConfiguration {@link Configuration} une configuration.
+	 * @return un message contenant la valeur actuelle de la {@link Configuration} spécifiée.
+	 */
+	abstract public String getFormattedValue(final Configuration parConfiguration);
 
 	@Override
 	final public String getConstName() {
@@ -160,5 +188,14 @@ public enum EnumConfiguration implements IWithName {
 		} finally {
 			SystemUtil.close(locStream);
 		}
+	}
+	
+	static public final List<String> getKeys() {
+		final EnumConfiguration[] locValues = values();
+		final List<String> locKeys = new ArrayList<String>(locValues.length);
+		for(final EnumConfiguration locValue : locValues) {
+			locKeys.add(locValue.getConstName());
+		}
+		return locKeys;
 	}
 }

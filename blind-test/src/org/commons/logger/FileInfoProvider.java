@@ -42,6 +42,8 @@ public final class FileInfoProvider implements InfoProvider {
 			final LogRecord locRecord = new LogRecord(parLevel, parMessage);
 			locRecord.setThrown(parThrowable);
 			_logger.log(locRecord);
+			final String locValue = _logger.getHandlers()[0].getFormatter().format(locRecord);
+			System.err.print(locValue);
 		}
 		return this;
 	}

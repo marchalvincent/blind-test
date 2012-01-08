@@ -48,7 +48,7 @@ public interface Configuration {
 	 * @return {@link Integer} le port par défaut du serveur.
 	 */
 	Integer getPort();
-	
+
 	/**
 	 * Modifie le port de l'application.
 	 * @param parPort {@link Integer} le nouveau port de l'application.

@@ -9,6 +9,7 @@ import org.commons.exception.BlindTestException;
 import org.commons.logger.InfoProvider;
 import org.commons.logger.InfoProviderManager;
 import org.commons.util.SystemUtil;
+import org.server.monitor.MonitorRunnable;
 
 /**
  * La classe principale du serveur
@@ -34,7 +35,9 @@ public final class ServerMain {
 		return locConfiguration;
 	}
 	
-	static private final void loadApplication(final Configuration parConfiguration) {
+	static private final void loadApplication(final Configuration parConfiguration) {		
+		final MonitorRunnable locRunnable = new MonitorRunnable();
+		locRunnable.start();
 		final InfoProvider locProvider = InfoProviderManager.getFileProvider();
 		locProvider.appendMessage(Level.INFO, "Démarrage de l'application.");
 		locProvider.appendMessage(Level.INFO, String.format("L'adresse du serveur est \"%s\".", parConfiguration.getHostName()));
