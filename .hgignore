@@ -1,4 +1,3 @@
 syntax: glob
 .metadata/*
-blind-test/bin/*
-blind-test/.classpath
+bin/*

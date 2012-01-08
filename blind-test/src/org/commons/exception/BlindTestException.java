@@ -1,5 +1,10 @@
 package org.commons.exception;
 
+/**
+ * L'exception par défaut utilisée dans toute l'application
+ * @author pitton
+ *
+ */
 public final class BlindTestException extends Exception {
 
 	private static final long serialVersionUID = 1L;

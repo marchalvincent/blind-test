@@ -2,7 +2,7 @@ package org.commons.logger;
 
 
 /**
- * Le manager des {@link InfoProvider}
+ * Le manager des {@link InfoProvider}.
  * @author pitton
  *
  */

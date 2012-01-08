@@ -12,8 +12,16 @@ import java.util.logging.Level;
 import org.commons.exception.BlindTestException;
 import org.commons.util.StringUtil;
 
+/**
+ * Une {@link Configuration} par défaut de l'application.
+ * @author pitton
+ *
+ */
 public final class DefaultConfiguration implements Configuration {
 
+	/**
+	 * Le fichier de configuration
+	 */
 	static private final String DEFAULT_FILE_NAME = "conf/configuration.properties";
 	
 	private Level _minLevel;
@@ -154,6 +162,13 @@ public final class DefaultConfiguration implements Configuration {
 		return true;
 	}
 
+	/**
+	 * Vérifie que la valeur spécifiée n'est pas incorrecte. Si c'est le cas, 
+	 * cette méthode garde la valeur précédente, s'il y en avait une, ou prend la valeur par défaut.
+	 * Une adresse inaccessible est considérée comme invalide.
+	 * @param parHostname {@link String} l'adresse du serveur
+	 * @return {@link String} l'adresse du serveur.
+	 */
 	private final String resolveHostname(final String parHostname) {
 		if(StringUtil.isEmpty(parHostname)) {
 			return (StringUtil.isEmpty(_hostName)) ? _hostName : (String) EnumConfiguration.HOSTNAME.getDefaultValue();
@@ -166,6 +181,15 @@ public final class DefaultConfiguration implements Configuration {
 		return parHostname;
 	}
 	
+	/**
+	 * Vérifie le nom du {@link Charset} spécifié n'est pas invalide. Si c'est le cas, 
+	 * cette méthode garde la valeur précédente, s'il y en avait une, ou prend la valeur par défaut.
+	 * Un nom de {@link Charset} associé à aucun {@link Charset} est invalide.
+	 * @param parCharset {@link String} le nom d'un {@link Charset}
+	 * @see Charset#availableCharsets()
+	 * @see Charset#defaultCharset()
+	 * @return {@link Charset} le charset de l'application
+	 */
 	private final Charset resolveCharset(final String parCharset) {
 		if(StringUtil.isEmpty(parCharset)) {
 			return (_charset != null) ? _charset : (Charset) EnumConfiguration.CHARSET.getDefaultValue();
@@ -177,6 +201,13 @@ public final class DefaultConfiguration implements Configuration {
 		}
 	}
 	
+	/**
+	 * Vérifie que le port de l'application n'est pas invalide. Si c'est le cas, 
+	 * cette méthode garde la valeur précédente, s'il y en avait une, ou prend la valeur par défaut.
+	 * Un port qui n'est pas un entier ou qui est null est invalide.
+	 * @param parName {@link String} le port de l'application.
+	 * @return {@link Integer} le port de l'application
+	 */
 	private final Integer resolvePort(final String parName) {
 		final Integer locPort = StringUtil.toInteger(parName);
 		if(locPort == null) {
@@ -185,6 +216,16 @@ public final class DefaultConfiguration implements Configuration {
 		return locPort;
 	}
 	
+	/**
+	 * Vérifie que le niveau des messages n'est pas invalide. Si c'est le cas, 
+	 * cette méthode garde la valeur précédente, s'il y en avait une, ou prend la valeur par défaut.
+	 * Un {@link Level} est considéré comme invalide si la méthode {@link Level#parse(String)} lance une
+	 * {@link IllegalArgumentException}, ou que le nom de niveau est null.
+	 * @param parMinLevel {@link String} le nom du niveau des messages de l'application
+	 * @see {@link Level}
+	 * @see {@link Level#parse(String)}
+	 * @return {@link Level} le niveau des message de l'application.
+	 */
 	private final Level resolveLevel(final String parMinLevel) {
 		if(StringUtil.isEmpty(parMinLevel)) {
 			return (_minLevel != null) ? _minLevel : (Level) EnumConfiguration.MIN_LEVEL.getDefaultValue();
@@ -194,7 +235,5 @@ public final class DefaultConfiguration implements Configuration {
 		} catch (IllegalArgumentException locException) {
 			return (_minLevel != null) ? _minLevel : (Level) EnumConfiguration.MIN_LEVEL.getDefaultValue();
 		}
-	}
-
-	
+	}	
 }

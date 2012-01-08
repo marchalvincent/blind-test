@@ -25,7 +25,7 @@ public final class ServerMain {
 	static private final Configuration loadConfiguration(final String[] parArguments) {
 		final Configuration locConfiguration = ConfigurationManager.getConfiguration();
 		try {
-			EnumConfiguration.readArguments(locConfiguration, parArguments);
+			EnumConfiguration.updateConfiguration(locConfiguration, parArguments);
 		} catch (final BlindTestException locException) {
 			final String locDocumentation = EnumConfiguration.getSupport();
 			System.err.println(locDocumentation);

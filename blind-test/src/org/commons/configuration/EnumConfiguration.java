@@ -12,10 +12,18 @@ import org.commons.exception.BlindTestException;
 import org.commons.util.IWithName;
 import org.commons.util.SystemUtil;
 
+/**
+ * Une énumération de toutes les propriétés supportées pour une {@link Configuration}.
+ * Cette énumération associe un nom de propriété, un argument et une valeur par défaut à chaque
+ * propriété de la {@link Configuration}
+ * @author pitton
+ *
+ */
 public enum EnumConfiguration implements IWithName {
 
 	MIN_LEVEL("min_level", "-l", Level.WARNING) {
 
+		@Override
 		public final void setConfigurationValue(
 				final Configuration parConfiguration, final String parValue) {
 			parConfiguration.setMinLevel(parValue);
@@ -23,6 +31,7 @@ public enum EnumConfiguration implements IWithName {
 	},
 	PORT("port", "-p", Integer.valueOf(9999)) {
 
+		@Override
 		public final void setConfigurationValue(
 				final Configuration parConfiguration, final String parValue) {
 			parConfiguration.setPort(parValue);
@@ -30,13 +39,15 @@ public enum EnumConfiguration implements IWithName {
 	},
 	HOSTNAME("hostname", "-h", "127.0.0.1") {
 
+		@Override
 		public final void setConfigurationValue(
 				final Configuration parConfiguration, final String parValue) {
 			parConfiguration.setHostName(parValue);
 		}
 	},
-	CHARSET("charset", "-c", Charset.forName("utf-8")) {
+	CHARSET("charset", "-c", Charset.forName("UTF-8")) {
 
+		@Override
 		public final void setConfigurationValue(
 				final Configuration parConfiguration, final String parValue) {
 			parConfiguration.setCharset(parValue);
@@ -54,18 +65,31 @@ public enum EnumConfiguration implements IWithName {
 		_defaultValue = parDefaultValue;
 	}
 
-	abstract public void setConfigurationValue(
-			final Configuration parConfiguration, final String parValue);
+	/**
+	 * Modifie la {@link Configuration} spécifiée avec la valeur spécifiée.
+	 * Si la valeur est invalide, la {@link Configuration} n'est pas modifiée.
+	 * @param parConfiguration {@link Configuration} la configuration à modifier.
+	 * @param parValue {@link String} la nouvelle valeur de la configuration.
+	 */
+	abstract public void setConfigurationValue(final Configuration parConfiguration, final String parValue);
 
 	@Override
 	final public String getConstName() {
 		return _name;
 	}
 
+	/**
+	 * Retourne l'argument associé à une propriété.
+	 * @return {@link String} l'argument associé à une propriété.
+	 */
 	final public String getArgument() {
 		return _argument;
 	}
 
+	/**
+	 * Retourne la valeur par défaut d'une propriété.
+	 * @return {@link Object} la valeur par défaut d'une propriété.
+	 */
 	final public Object getDefaultValue() {
 		return _defaultValue;
 	}
@@ -75,7 +99,20 @@ public enum EnumConfiguration implements IWithName {
 		return getConstName();
 	}
 
-	static public final void readArguments(final Configuration parConfiguration, final String[] parValue) throws BlindTestException {
+	/**
+	 * Met à jour une {@link Configuration} depuis la liste des arguments spécifiée.
+	 * La {@link Configuration} n'est pas rafraichit, impliquant que le fichier de configuration n'est pas
+	 * mis à jour.
+	 * Le tableau doit être du type : <argument> <value> <argument> <value> ... 
+	 * Si un argument n'existe pas, il est sauté.
+	 * Si une valeur spécifiée est considérée comme invalide, est elle sautée.
+	 * Si un argument n'a pas de valeur associée une erreur est renvoyée.
+	 * Si deux arguments se suivent, le premier est ignoré.
+	 * @param parConfiguration {@link Configuration} la configuration à mettre à jour.
+	 * @param parValue {@code Sttring[]} un tableau d'éléments.
+	 * @throws BlindTestException Si un argument n'a aucune valeur associée.
+	 */
+	static public final void updateConfiguration(final Configuration parConfiguration, final String[] parValue) throws BlindTestException {
 		if (parValue == null || parValue.length == 0 || parConfiguration == null) {
 			return;
 		}
@@ -96,8 +133,17 @@ public enum EnumConfiguration implements IWithName {
 		}
 	}
 
+	/**
+	 * Le fichier contenant la documentation des arguments au lancement. Elle est similaire à un "man".
+	 */
 	static private final String DOCUMENTATION = "conf/documentation.txt";
 
+	/**
+	 * Retourne le contenu de la documentation du serveur à propos des arguments et du lancement
+	 * du serveur avec ceux-ci. Si le fichier de documentation n'existe pas, un message d'erreur
+	 * est spécifié dans la console indiquant que l'on ne peut l'afficher.
+	 * @return {@link String} le contenu de la documentation du serveur.
+	 */
 	static public final String getSupport() {
 		FileInputStream locStream = null;
 		try {

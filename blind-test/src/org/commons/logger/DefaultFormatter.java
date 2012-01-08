@@ -7,6 +7,14 @@ import java.util.logging.LogRecord;
 import org.commons.util.DateUtil;
 import org.joda.time.DateTime;
 
+/**
+ * Un {@link Formatter} de message spécifique à l'application.
+ * Ce {@link Formatter} est utilisé plutôt que le {@link java.util.logging.SimpleFormatter} car les messages
+ * générés par ce-dernier sont trop simples et affiche des informations inutiles, comme la classe et la méthode. Ce 
+ * qu'un client n'a que faire.
+ * @author pitton
+ *
+ */
 public final class DefaultFormatter extends Formatter {
 
 	protected DefaultFormatter() {		
