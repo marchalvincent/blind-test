@@ -1,8 +1,10 @@
 package org.server.main;
 
-import java.net.Socket;
+import java.io.IOException;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
+
+import org.server.concurrent.ReadWriterUtil;
 
 public class ServerWriter implements Runnable {
 	
@@ -18,10 +20,18 @@ public class ServerWriter implements Runnable {
 		_taskList = new ArrayBlockingQueue<EncapsulatorMessage>(100);
 	}
 
+	public final void submit(final EncapsulatorMessage parMessage) {
+		_taskList.add(parMessage);
+	}
 	
 	public void run() {
 		  while(_taskList.isEmpty() == false){
 			  final EncapsulatorMessage locEncapsulator = _taskList.poll();
+			  try {
+				ReadWriterUtil.write(locEncapsulator.getSocket(), locEncapsulator.getMessage());
+			} catch (IOException e) {
+				
+			}
 		  }
 	}
 }
