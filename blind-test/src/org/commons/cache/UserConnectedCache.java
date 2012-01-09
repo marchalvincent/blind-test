@@ -1,8 +1,8 @@
 package org.commons.cache;
 
-import java.net.Socket;
+import org.commons.entity.User;
 
-public final class UserConnectedCache extends AbstractCache<String, Socket> {
+public final class UserConnectedCache extends AbstractCache<String, User> {
 
 	protected UserConnectedCache() {
 		super();

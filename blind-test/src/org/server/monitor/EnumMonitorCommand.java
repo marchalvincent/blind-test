@@ -35,7 +35,7 @@ public enum EnumMonitorCommand implements IWithId {
 
 		@Override
 		final public MonitorCommand createCommand(final String parCommandName, final String[] parArguments) {
-			return null;
+			return new MonitorUserConnected(parCommandName);
 		}
 	},
 	CONFIGURATION(4, EnumConfiguration.getKeys(), false) {

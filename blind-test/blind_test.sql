@@ -25,6 +25,10 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- Structure de la table `banque`
 --
 
+CREATE DATABASE IF NOT EXISTS blind_test DEFAULT CHARACTER SET utf8;
+
+USE blind_test;
+
 CREATE TABLE IF NOT EXISTS `banque` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `answer` varchar(60) NOT NULL,
@@ -45,48 +49,14 @@ CREATE TABLE IF NOT EXISTS `banque` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `stat`
---
-
-CREATE TABLE IF NOT EXISTS `stat` (
-  `idStat` int(11) NOT NULL AUTO_INCREMENT,
-  `defaite` int(11) NOT NULL,
-  `victoire` int(11) NOT NULL,
-  PRIMARY KEY (`idStat`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- Contenu de la table `stat`
---
-
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `user`
 --
 
 CREATE TABLE IF NOT EXISTS `user` (
   `idUser` int(11) NOT NULL AUTO_INCREMENT,
-  `idStat` int(11) NOT NULL,
   `name` varchar(60) NOT NULL,
   `login` varchar(60) NOT NULL,
   `password` varchar(60) NOT NULL,
-  PRIMARY KEY (`idUser`),
-  UNIQUE KEY `idStat` (`idStat`)
+  `score` int NOT NULL,
+  PRIMARY KEY (`idUser`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- Contenu de la table `user`
---
-
-
---
--- Contraintes pour les tables exportées
---
-
---
--- Contraintes pour la table `user`
---
-ALTER TABLE `user`
-  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`idStat`) REFERENCES `stat` (`idStat`) ON DELETE CASCADE ON UPDATE CASCADE;

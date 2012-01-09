@@ -7,37 +7,30 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 
-import org.commons.entity.Stat;
 import org.commons.entity.User;
 
 public class UserManager extends AbstractManager<User> {
 	
 	static private final String ADD = "INSERT INTO user VALUES (NULL,?,?,?,?)";
-	static private final String MERGE = "UPDATE user SET idStat= ?, name = ?, login = ?, password = ? WHERE idUser = ?";
+	static private final String MERGE = "UPDATE user SET name = ?, login = ?, password = ?, score = ? WHERE idUser = ?";
 	static private final String REMOVE_LOGIN = "DELETE FROM user WHERE login = ?";
 	static private final String REMOVE_ID = "DELETE FROM user WHERE idUser = ?";
 	static private final String FINDALL = "SELECT * FROM user";
 	static private final String FIND_ID = "SELECT * from user WHERE idUser = ?";
 	static private final String FIND_LOGIN = "SELECT * FROM user WHERE login = ?";
 	
-	static private  Manager<Stat> stat = Managers.createStatManager();
-	final Stat locStat = new Stat(-1,0,0);
-	
 	@Override
 	public User add(User parUser) {
-		// TODO Auto-generated method stub
 		_lock.writeLock().lock();
 		PreparedStatement locStatement = null;
 		ResultSet locResultSet = null;
-		stat.add(locStat);
-		parUser.setStat(locStat);
 		
 		try{
 			locStatement = getConnection().prepareStatement(ADD, PreparedStatement.RETURN_GENERATED_KEYS);
-			locStatement.setInt(1, parUser.getStat().getId());
-			locStatement.setString(2, parUser.getConstName());
-			locStatement.setString(3, parUser.getLogin());
-			locStatement.setString(4, parUser.getPassword());
+			locStatement.setString(1, parUser.getConstName());
+			locStatement.setString(2, parUser.getLogin());
+			locStatement.setString(3, parUser.getPassword());
+			locStatement.setInt(4, parUser.getScore().intValue());
 			locStatement.executeUpdate();
 			_connection.commit();
 			locResultSet = locStatement.getGeneratedKeys();
@@ -98,14 +91,13 @@ public class UserManager extends AbstractManager<User> {
 	public User merge(final User parUser) {
 		_lock.writeLock().lock();
 		PreparedStatement locStatement = null;
-		stat.add(locStat);
-		parUser.setStat(locStat);
 		try {
 			locStatement = _connection.prepareStatement(MERGE,PreparedStatement.RETURN_GENERATED_KEYS);
-			locStatement.setInt(1, parUser.getStat().getId());
-			locStatement.setString(2, parUser.getConstName());
-			locStatement.setString(3, parUser.getLogin());
-			locStatement.setString(4, parUser.getPassword());
+			locStatement.setString(1, parUser.getConstName());
+			locStatement.setString(2, parUser.getLogin());
+			locStatement.setString(3, parUser.getPassword());
+			locStatement.setInt(4, parUser.getScore().intValue());
+			locStatement.setInt(5, parUser.getId().intValue());
 			locStatement.executeUpdate();
 			_connection.commit();
 			return parUser;
@@ -187,20 +179,19 @@ public class UserManager extends AbstractManager<User> {
 	}
 	
 	private final User createUser (final ResultSet parResultSet) throws SQLException {
-		stat.add(locStat);
 		final User locUser = new User();
 
 		final int locId = parResultSet.getInt(1);
-		//final int locStatId = parResultSet.getInt(2);
-		final String locName = parResultSet.getString(3);
-		final String locLogin = parResultSet.getString(4);
-		final String locPassword = parResultSet.getString(5);
+		final String locName = parResultSet.getString(2);
+		final String locLogin = parResultSet.getString(3);
+		final String locPassword = parResultSet.getString(4);
+		final int locScore = parResultSet.getInt(5);
 		
 		locUser.setId(Integer.valueOf(locId));
-		locUser.setStat(locStat);
 		locUser.setName(locName);
 		locUser.setLogin(locLogin);
 		locUser.setPassword(locPassword);
+		locUser.setScore(Integer.valueOf(locScore));
 		return locUser;
 	}
 

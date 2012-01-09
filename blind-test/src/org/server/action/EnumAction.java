@@ -20,7 +20,7 @@ public enum EnumAction implements IWithId {
 		
 		@Override
 		final public AbstractAction createAction (final Socket parSocket, final IMessage parMessage) {
-			throw new UnsupportedOperationException("Not supported yet");
+			return new ConnexionAction(parSocket, parMessage);
 		}
 		
 	},
