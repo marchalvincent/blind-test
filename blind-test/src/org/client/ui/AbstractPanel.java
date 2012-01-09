@@ -12,6 +12,14 @@ import javax.swing.JPanel;
 
 import org.commons.entity.BanqueFacade;
 
+/**
+ * panel de base avec ses :
+ * layout
+ * contraintes
+ * et marges
+ * @author francois
+ *
+ */
 public abstract class AbstractPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;

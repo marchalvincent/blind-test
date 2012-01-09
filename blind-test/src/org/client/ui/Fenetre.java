@@ -25,15 +25,17 @@ public class Fenetre extends JFrame {
 	}
 	
 	protected void initFenetre () {
-		fenetre.setSize(800, 600);
+		fenetre.setSize(800, 700);
 		fenetre.setMinimumSize(new Dimension (500, 400));
 		fenetre.setContentPane(new ConnexionPanel());
 		fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		fenetre.add(LogClient.getInstance());
 		fenetre.setVisible(true);
 	}
 	
 	public static void changePage (JPanel nouveau) {
 		fenetre.setContentPane(nouveau);
+		fenetre.add(LogClient.getInstance());
 		fenetre.validate();
 	}
 	
