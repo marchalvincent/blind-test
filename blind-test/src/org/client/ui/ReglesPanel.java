@@ -1,5 +1,6 @@
 package org.client.ui;
 
+import java.awt.Color;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -47,13 +48,14 @@ public class ReglesPanel extends AbstractPanel {
 		//Présentation
 		JTextArea locArea = new JTextArea(locRule);
 		locArea.setOpaque(false);
+		locArea.setForeground(Color.WHITE);
 		locArea.setEditable(false);
 		getContraintes().gridx = 0;
 		getContraintes().gridy = 0;
 		this.add(locArea, getContraintes());
 		
 		//Bouton Retour
-		JButton boutonRetour = new JButton ("< Retour");
+		JButton boutonRetour = new BoutonGris ("< Retour");
 		boutonRetour.addMouseListener(new RetourMenuListener ());
 		getContraintes().gridy = 1;
 		this.add(boutonRetour, getContraintes());

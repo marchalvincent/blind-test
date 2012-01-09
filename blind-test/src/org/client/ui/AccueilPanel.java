@@ -28,7 +28,7 @@ public class AccueilPanel extends AbstractPanel {
 		setLayout(getLayout());
 				
 		//Bouton Quitter
-		JButton boutonQuitter = new JButton ("Quitter");
+		JButton boutonQuitter = new BoutonGris ("Quitter");
 		boutonQuitter.addMouseListener(new QuitterListener ());
 		getContraintes().gridx = 0;
 		getContraintes().gridy = 0;
@@ -41,7 +41,7 @@ public class AccueilPanel extends AbstractPanel {
 		this.add(boutonQuitter, getContraintes());
 		
 		//Bouton Deconnexion
-		JButton boutonDeconnexion = new JButton ("Déconnexion");
+		JButton boutonDeconnexion = new BoutonGris ("Déconnexion");
 		boutonDeconnexion.addMouseListener(new DeconnexionListener ());
 		getContraintes().gridx = 1;
 		getContraintes().gridy = 0;
@@ -53,7 +53,7 @@ public class AccueilPanel extends AbstractPanel {
 		this.add(boutonDeconnexion, getContraintes());
 		
 		//Bouton Jouer
-		JButton boutonJouer = new JButton ("Jouer !");
+		JButton boutonJouer = new BoutonGris ("Jouer !");
 		boutonJouer.addMouseListener(new JouerListener ());
 		getContraintes().gridx = 0;
 		getContraintes().gridy = 1;
@@ -63,7 +63,7 @@ public class AccueilPanel extends AbstractPanel {
 		this.add(boutonJouer, getContraintes());
 		
 		//Bouton Règles
-		JButton boutonRegles = new JButton ("Règles");
+		JButton boutonRegles = new BoutonGris ("Règles");
 		boutonRegles.addMouseListener(new ReglesListener ());
 		getContraintes().gridx = 0;
 		getContraintes().gridy = 2;
