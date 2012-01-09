@@ -14,9 +14,6 @@ import org.client.ui.listeners.ReglesListener;
  */
 public class AccueilPanel extends AbstractPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	public AccueilPanel () {
@@ -55,6 +52,5 @@ public class AccueilPanel extends AbstractPanel {
 		boutonQuitter.addMouseListener(new QuitterListener ());
 		getContraintes().gridy = 3;
 		this.add(boutonQuitter, getContraintes());
-		
 	}
 }

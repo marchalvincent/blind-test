@@ -33,7 +33,6 @@ public class ConnexionPanel extends AbstractPanel {
 		
 		//Image de Présentation
 		
-		
 		//Label Login
 		JLabel txtLogin = new JLabel ("Login");
 		getContraintes().gridx = 0;
