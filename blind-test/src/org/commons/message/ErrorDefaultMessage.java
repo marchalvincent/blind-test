@@ -1,17 +1,17 @@
 package org.commons.message;
 
 
-public final class InfoMessage extends AbstractMessage {
+public final class ErrorDefaultMessage extends AbstractMessage {
 
 	private static final long serialVersionUID = 1L;
 	private String message = null;
-	
-	protected InfoMessage() {
+
+	protected ErrorDefaultMessage() {
 		this("");
 	}
 	
-	protected InfoMessage(String message) {
-		super(EnumMessage.INFO);
+	protected ErrorDefaultMessage(String message) {
+		super(EnumMessage.ERROR);
 		this.message = message;
 	}
 
@@ -22,4 +22,5 @@ public final class InfoMessage extends AbstractMessage {
 	public void setMessage(String message) {
 		this.message = message;
 	}
+
 }

@@ -7,7 +7,7 @@ public enum EnumMessage implements IWithId {
 	INSCRIPTION (1) {
 		@Override
 		public IMessage creatMessage() {
-			return new InfoMessage();
+			return new InfoDefaultMessage();
 		}
 	},
 	CONNEXION (2) {
@@ -25,25 +25,25 @@ public enum EnumMessage implements IWithId {
 	DOWNLOAD(4) {
 		@Override
 		public IMessage creatMessage() {
-			return new DownloadMessage();
+			return new DownloadDefaultMessage();
 		}
 	},
 	DISPLAY(5) {
 		@Override
 		public IMessage creatMessage() {
-			return new DisplayMessage();
+			return new DisplayDefaultMessage();
 		}
 	},
 	INFO(6) {
 		@Override
 		public IMessage creatMessage() {
-			return new InfoMessage();
+			return new InfoDefaultMessage();
 		}
 	},
 	ERROR(7) {
 		@Override
 		public IMessage creatMessage() {
-			return new ErrorMessage();
+			return new ErrorDefaultMessage();
 		}
 	};
 	
