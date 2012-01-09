@@ -5,7 +5,8 @@ import org.commons.util.IWithId;
 public enum EnumMessage implements IWithId {
 	
 	INSCRIPTION (1),
-	CONNEXION (2);
+	CONNEXION (2),
+	ANSWER(3);
 	
 	private final int id;
 	

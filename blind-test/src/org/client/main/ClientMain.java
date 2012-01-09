@@ -1,5 +1,8 @@
 package org.client.main;
 
+import java.io.IOException;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.logging.Level;
 
 import org.commons.configuration.Configuration;
@@ -16,12 +19,31 @@ import org.commons.util.SystemUtil;
  *
  */
 public final class ClientMain {
+	public static Socket socket = null;
+	public static Thread t1;
 	
 	public final static void main(final String[] parArguments) {
 		final Configuration locConfiguration = loadConfiguration(parArguments);
 		loadApplication(locConfiguration);
-	}
-	
+		try {
+			
+			System.out.println("Asking Connexion");
+			socket = new Socket(locConfiguration.getHostName(),locConfiguration.getPort());
+			System.out.println("Connexion established with server, authentication :"); 
+			
+			t1 = new Thread(new Connexion(socket));
+			t1.start();
+			
+			
+		} catch (UnknownHostException e) {
+		  System.err.println("Impossible to connect with this adress "+socket.getLocalAddress());
+		} catch (IOException e) {
+		  System.err.println("No server listening to this port "+socket.getLocalPort());
+		}
+		
+		
+
+		}
 	
 
 	static private final Configuration loadConfiguration(final String[] parArguments) {
