@@ -8,6 +8,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import org.client.ui.listeners.ConnexionListener;
+import org.client.ui.listeners.QuitterListener;
 
 /**
  * Classe representant le panel de connexion
@@ -67,12 +68,22 @@ public class ConnexionPanel extends AbstractPanel {
 		this.add(champsMdp, getContraintes());
 		
 		//Bouton Connexion
-		JButton boutConn = new JButton ("Connexion");
-		boutConn.addMouseListener(new ConnexionListener ());
+		JButton boutonConnexion = new JButton ("Connexion");
+		boutonConnexion.addMouseListener(new ConnexionListener ());
 		getContraintes().gridx = 0;
 		getContraintes().gridy = 3;
 		getContraintes().gridwidth = GridBagConstraints.REMAINDER;
 		getContraintes().anchor = GridBagConstraints.CENTER;
-		this.add(boutConn, getContraintes());
+		this.add(boutonConnexion, getContraintes());
+		
+		//Bouton Quitter
+		JButton boutonQuitter = new JButton ("Quitter");
+		boutonQuitter.addMouseListener(new QuitterListener ());
+		getContraintes().gridx = 0;
+		getContraintes().gridy = 4;
+		getContraintes().gridwidth = GridBagConstraints.REMAINDER;
+		getContraintes().anchor = GridBagConstraints.CENTER;
+		getMarges().top = 30;
+		this.add(boutonQuitter, getContraintes());
 	}
 }

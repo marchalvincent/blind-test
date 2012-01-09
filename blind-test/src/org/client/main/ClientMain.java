@@ -3,6 +3,7 @@ package org.client.main;
 import java.net.Socket;
 import java.util.logging.Level;
 
+import org.client.ui.Fenetre;
 import org.commons.configuration.Configuration;
 import org.commons.configuration.ConfigurationManager;
 import org.commons.configuration.EnumConfiguration;
@@ -24,6 +25,7 @@ public final class ClientMain {
 	public final static void main(final String[] parArguments) {
 		final Configuration locConfiguration = loadConfiguration(parArguments);
 		loadApplication(locConfiguration);
+		new Fenetre ();
 	}
 
 	static private final Configuration loadConfiguration(
