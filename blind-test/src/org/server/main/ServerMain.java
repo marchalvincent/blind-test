@@ -1,6 +1,8 @@
 package org.server.main;
 
+import java.io.IOException;
 import java.util.Properties;
+import java.net.ServerSocket;
 import java.util.logging.Level;
 
 import org.commons.configuration.Configuration;
@@ -21,21 +23,36 @@ import org.server.persistence.Managers;
  */
 public final class ServerMain {
 	
+	public static ServerSocket ss = null;
+	 public static Thread t;
+	 public static int port;		
+
 	public final static void main(final String[] parArguments) {
 		final Configuration locConfiguration = loadConfiguration(parArguments);
 		loadApplication(locConfiguration);
+		try {
+			ss = new ServerSocket(locConfiguration.getPort());
+			System.out.println("Server listening on "+ss.getLocalPort());
+			
+			t = new Thread(new AcceptConnexion(ss));
+			t.start();
+			
+		} catch (IOException e) {
+			System.err.println("Port number "+ss.getLocalPort()+" is already used !!");
+		}
+	
 	}
 	
 	static private final void loadApplication(final Configuration parConfiguration) {		
 		final MonitorRunnable locRunnable = new MonitorRunnable();
 		locRunnable.start();
 		final InfoProvider locProvider = InfoProviderManager.getFileProvider();
-		locProvider.appendMessage(Level.INFO, "Démarrage de l'application en cours...");
-		locProvider.appendMessage(Level.INFO, "Lancement du moniteur réussi.");
+		locProvider.appendMessage(Level.INFO, "DÃ©marrage de l'application en cours...");
+		locProvider.appendMessage(Level.INFO, "Lancement du moniteur rÃ©ussi.");
 		final Properties locProperties = Managers.getDatabaseConfiguration();
 		final String locHostname = locProperties.getProperty(EnumDatabaseProperties.HOSTNAME.getConstName());
 		final String locPort = locProperties.getProperty(EnumDatabaseProperties.PORT.getConstName());
-		locProvider.appendMessage(Level.INFO, String.format("La connexion à la base de données a été effectuée. L'adresse de la base est \"%s\" sur le port \"%s\".", locHostname, locPort));
+		locProvider.appendMessage(Level.INFO, String.format("La connexion Ã  la base de donnÃ©es a Ã©tÃ© effectuÃ©e. L'adresse de la base est \"%s\" sur le port \"%s\".", locHostname, locPort));
 	}
 	
 	static private final Configuration loadConfiguration(final String[] parArguments) {
@@ -49,4 +66,6 @@ public final class ServerMain {
 		}
 		return locConfiguration;
 	}
+	
+	
 }
