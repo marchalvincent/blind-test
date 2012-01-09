@@ -106,4 +106,9 @@ public class User implements Comparable<User>, IWithName, IWithId, Serializable 
 		return locCompareTo;
 	}
 	
+	@Override
+	public final String toString() {
+		return _login;
+	}
+	
 }
