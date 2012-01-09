@@ -3,14 +3,16 @@ package org.server.main;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 
 public class DataServer implements Runnable {
 
 	private Socket socket = null;
-	private BufferedReader in = null;
-	private PrintWriter out = null;
+	private ObjectInputStream in = null;
+	private ObjectOutputStream out = null;
 	private String login = "zero";
 	private Thread t3, t4;
 	
@@ -23,12 +25,12 @@ public class DataServer implements Runnable {
 	public void run() {
 		
 		try {
-		in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-		out = new PrintWriter(socket.getOutputStream());
+		in = new ObjectInputStream (socket.getInputStream());
+		out = new ObjectOutputStream (socket.getOutputStream());
 		
 		t3 = new Thread(new Receive (in,login));
 		t3.start();
-		t4 = new Thread(new Send (out));
+		t4 = new Thread(Send.getInstance());
 		t4.start();
 		
 		} catch (IOException e) {
