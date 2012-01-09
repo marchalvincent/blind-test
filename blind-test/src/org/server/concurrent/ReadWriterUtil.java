@@ -20,7 +20,7 @@ public final class ReadWriterUtil {
 		}
 	}
 	
-	static public final void write(final Socket parSocket, final IMessage parMessage) throws ClassNotFoundException, IOException {
+	static public final void write(final Socket parSocket, final IMessage parMessage) throws IOException {
 		ObjectOutputStream locStream = null;
 		try {
 			locStream= new ObjectOutputStream (parSocket.getOutputStream());
