@@ -1,5 +1,6 @@
 package org.client.ui;
 
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 
 import javax.swing.JButton;
@@ -39,6 +40,7 @@ public class ConnexionPanel extends AbstractPanel {
 		getContraintes().weightx = (double) 0.5;
 		getContraintes().anchor = GridBagConstraints.LAST_LINE_END;
 		getContraintes().insets = getMarges();
+		txtLogin.setForeground(Color.WHITE);
 		this.add(txtLogin, getContraintes());
 		
 		//Champs Login
@@ -57,6 +59,7 @@ public class ConnexionPanel extends AbstractPanel {
 		getContraintes().weighty = 0.1;
 		getContraintes().gridwidth = 1;
 		getContraintes().anchor = GridBagConstraints.FIRST_LINE_END;
+		txtMdp.setForeground(Color.WHITE);
 		this.add(txtMdp, getContraintes());
 		
 		//Champs Mot de passe
