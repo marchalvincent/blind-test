@@ -1,4 +1,4 @@
-package org.commons.incremental;
+package org.commons.downloader;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -35,6 +35,10 @@ public final class ImageIndex {
 	
 	public final Map<String, Integer> getData() {
 		return new HashMap<String, Integer>(_images);
+	}
+	
+	public final void clear() {
+		_images.clear();
 	}
 	
 	public final void put(final String parFile, final Integer parVersion) {

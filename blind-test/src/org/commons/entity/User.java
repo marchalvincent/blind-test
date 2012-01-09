@@ -8,14 +8,13 @@ import org.commons.util.StringUtil;
 
 public class User implements Comparable<User>, IWithName, IWithId, Serializable {
 
-	
 	private static final long serialVersionUID = 1L;
+	
 	private Integer _id;
 	private String _name;
 	private String _login;
 	private String _password;
-	private Integer _score;
-	
+	private Integer _score;	
 	
 	public User() {
 		this(Integer.valueOf(-1),"", "", "", Integer.valueOf(0));
@@ -49,20 +48,20 @@ public class User implements Comparable<User>, IWithName, IWithId, Serializable 
 	
 	@Override
 	public final String getConstName() {
-		return _name;
-	}
-	
-	public final void setName(final String parName) {
-		_name = parName;
-	}
-	
-	
-	public final String getLogin() {
 		return _login;
 	}
 	
 	public final void setLogin(final String parLogin) {
 		_login = parLogin;
+	}
+	
+	
+	public final String getName() {
+		return _name;
+	}
+	
+	public final void setName(final String parName) {
+		_name = parName;
 	}
 	
 	public final String getPassword() {

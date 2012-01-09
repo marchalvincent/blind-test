@@ -8,6 +8,7 @@ import org.client.ui.Fenetre;
 import org.commons.configuration.Configuration;
 import org.commons.configuration.ConfigurationManager;
 import org.commons.configuration.EnumConfiguration;
+import org.commons.downloader.DownloaderPool;
 import org.commons.exception.BlindTestException;
 import org.commons.logger.InfoProvider;
 import org.commons.logger.InfoProviderManager;
@@ -25,6 +26,15 @@ public final class ClientMain {
 		final Configuration locConfiguration = loadConfiguration(parArguments);
 		loadApplication(locConfiguration);
 		loadUI();
+		/*final String locLogin = "login2";
+		final ThreadInscription locInscription = new ThreadInscription(locLogin, locLogin, locLogin);
+		locInscription.call();
+		final ThreadConnexion locConnexion = new ThreadConnexion(locLogin, locLogin);
+		locConnexion.run();*/
+		final DownloaderPool locPool = DownloaderPool.getInstance();
+		if(locPool.isShutdown() == false) {
+			locPool.shutdown();
+		}
 	}
 
 	static private final Configuration loadConfiguration(final String[] parArguments) {
