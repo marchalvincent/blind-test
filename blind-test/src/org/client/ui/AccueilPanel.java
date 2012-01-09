@@ -1,14 +1,13 @@
 package org.client.ui;
 
 import javax.swing.JButton;
-import javax.swing.JPanel;
 
 /**
  * Classe représentant le panel de l'accueil du jeu.
  * @author francois
  *
  */
-public class AccueilPanel extends JPanel {
+public class AccueilPanel extends AbstractPanel {
 
 	/**
 	 * 
@@ -19,6 +18,7 @@ public class AccueilPanel extends JPanel {
 		initPanel ();
 	}
 	
+	@Override
 	protected void initPanel () {
 		JButton test = new JButton ("coucou");
 		this.add(test);
