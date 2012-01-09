@@ -1,0 +1,37 @@
+NAME
+	blind-test - Un blind test en réseau.
+
+SYNOPSIS
+	java -jar <jarname> [option] <value> ...
+
+DESCRIPTION
+	Au lancement de l'application, vous pouvez spécifier un ensemble d'arguments
+	pour modifier la configuration dynamiquement. Ces paramètres ne modifient pas
+	de manière persistante la configuration de l'application, ils sont pris en compte
+	uniquement durant une utilisation. Si vous désirez modifier de manière permanente
+	un paramètre, vous pouvez le modifier dans le fichier "conf/configuration.properties".
+	
+OPTION
+	-l 
+		modifie le niveau de logs par défaut de l'application. Les valeurs autorisées sont :
+		OFF, SEVERE, WARNING, CONFIG, FINE, FINER, FINEST, ALL.
+	
+	-p 
+		modifie le port d'écoute du serveur et le port d'envoi des sockets.
+		Si le port est déjà utilisé, le serveur ne pourra être lancé et/ou
+		le client ne pourra se connecter au serveur.
+	-h
+		modifie l'adresse du serveur. Ce paramètre n'est utilisé que pour le 
+		client.
+	-c 
+		modifie l'encodage de l'application.
+
+AUTHOR
+	Ecrit par Takfarinas Adour, Guillaume Laloum, Vincent Marchal,Olivier Pitton et Francois Reynal.
+	
+EXAMPLES
+	java -jar <jarfile> -l INFO -h 192.168.23.3 -p 5678 -c UTF-8
+	java -jar <jarfile> -p 9999 -h ovh.server.opx
+	
+
+	
