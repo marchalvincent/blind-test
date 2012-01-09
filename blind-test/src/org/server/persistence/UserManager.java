@@ -13,14 +13,15 @@ import org.commons.entity.User;
 public class UserManager extends AbstractManager<User> {
 	
 	static private final String ADD = "INSERT INTO user VALUES (NULL,?,?,?,?)";
-	static private final String MERGE = "UPDATE user SET idStat= ?, name = ?, login = ?, password = ? WHERE id = ?";
+	static private final String MERGE = "UPDATE user SET idStat= ?, name = ?, login = ?, password = ? WHERE idUser = ?";
 	static private final String REMOVE_LOGIN = "DELETE FROM user WHERE login = ?";
-	static private final String REMOVE_ID = "DELETE FROM user WHERE id = ?";
+	static private final String REMOVE_ID = "DELETE FROM user WHERE idUser = ?";
 	static private final String FINDALL = "SELECT * FROM user";
-	static private final String FIND_ID = "SELECT * from user WHERE id = ?";
-	static private final String FIND_NAME = "SELECT * FROM user WHERE name = ?";
+	static private final String FIND_ID = "SELECT * from user WHERE idUser = ?";
+	static private final String FIND_LOGIN = "SELECT * FROM user WHERE login = ?";
 	
-	static private  StatManager stat = new StatManager();
+	static private  Manager<Stat> stat = Managers.createStatManager();
+	final Stat locStat = new Stat(-1,0,0);
 	
 	@Override
 	public User add(User parUser) {
@@ -28,7 +29,6 @@ public class UserManager extends AbstractManager<User> {
 		_lock.writeLock().lock();
 		PreparedStatement locStatement = null;
 		ResultSet locResultSet = null;
-		final Stat locStat = new Stat(-1,0,0);
 		stat.add(locStat);
 		parUser.setStat(locStat);
 		
@@ -98,11 +98,9 @@ public class UserManager extends AbstractManager<User> {
 	public User merge(final User parUser) {
 		_lock.writeLock().lock();
 		PreparedStatement locStatement = null;
-		final Stat locStat = new Stat(-1,0,0);
 		stat.add(locStat);
 		parUser.setStat(locStat);
 		try {
-			
 			locStatement = _connection.prepareStatement(MERGE,PreparedStatement.RETURN_GENERATED_KEYS);
 			locStatement.setInt(1, parUser.getStat().getId());
 			locStatement.setString(2, parUser.getConstName());
@@ -122,13 +120,46 @@ public class UserManager extends AbstractManager<User> {
 
 	@Override
 	public User find(int parId) {
-		// TODO Auto-generated method stub
+		_lock.readLock().lock();
+		PreparedStatement locStatement = null;
+		ResultSet locResultSet = null;
+		try {
+			locStatement = _connection.prepareStatement(FIND_ID);
+			locStatement.setInt(1, parId);
+			locResultSet = locStatement.executeQuery();
+			if(false == locResultSet.next()) {
+				return null;
+			}
+			return createUser(locResultSet);
+		} catch (SQLException locException) {	
+			getInfoProvider().appendMessage(Level.SEVERE, String.format("Impossible de trouver l'idenfitiant %d", parId), locException);
+		} finally {
+			closeResultSet(locResultSet);
+			closeStatement(locStatement);
+			_lock.readLock().unlock();
+		}
 		return null;
 	}
 
 	@Override
-	public User find(String parName) {
-		// TODO Auto-generated method stub
+	public User find(String parLogin) {
+		_lock.readLock().lock();
+		PreparedStatement locStatement = null;
+		ResultSet locResultSet = null;
+		try {
+			locStatement = _connection.prepareStatement(FIND_LOGIN);
+			locStatement.setString(1, parLogin);
+			locResultSet = locStatement.executeQuery();
+			if(locResultSet.next() == false) {
+				return null;
+			}
+			return createUser(locResultSet);
+		} catch (SQLException locException) {
+		} finally {
+			closeResultSet(locResultSet);
+			closeStatement(locStatement);
+			_lock.readLock().unlock();
+		}
 		return null;
 	}
 
@@ -156,14 +187,15 @@ public class UserManager extends AbstractManager<User> {
 	}
 	
 	private final User createUser (final ResultSet parResultSet) throws SQLException {
-		final User locUser = new User();
-		final Stat locStat = new Stat(-1,0,0);
 		stat.add(locStat);
-		
+		final User locUser = new User();
+
 		final int locId = parResultSet.getInt(1);
+		//final int locStatId = parResultSet.getInt(2);
 		final String locName = parResultSet.getString(3);
 		final String locLogin = parResultSet.getString(4);
 		final String locPassword = parResultSet.getString(5);
+		
 		locUser.setId(Integer.valueOf(locId));
 		locUser.setStat(locStat);
 		locUser.setName(locName);
