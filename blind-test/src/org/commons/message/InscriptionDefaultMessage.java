@@ -1,20 +1,27 @@
 package org.commons.message;
 
 
-public final class ConnexionMessage extends AbstractMessage {
+public final class InscriptionDefaultMessage extends AbstractMessage {
 
 	private static final long serialVersionUID = 1L;
 	private String login = null;
 	private String password = null;
+	private String nom = null;
 
-	protected ConnexionMessage() {
-		this("", "");
+	protected InscriptionDefaultMessage() {
+		this ("", "", "");
 	}
 	
-	protected ConnexionMessage(String login, String password) {
-		super(EnumMessage.CONNEXION);
+	protected InscriptionDefaultMessage(String login, String password, String nom) {
+		super(EnumMessage.INSCRIPTION);
 		this.login = login;
 		this.password = password;
+		this.nom = nom;
+	}
+	
+	public IMessage createMessage() {
+		return null;
+		
 	}
 
 	public String getLogin() {
@@ -32,4 +39,13 @@ public final class ConnexionMessage extends AbstractMessage {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+	
 }

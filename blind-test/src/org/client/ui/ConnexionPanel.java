@@ -1,101 +1,100 @@
 package org.client.ui;
 
 import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import org.client.ui.listeners.ConnexionListener;
+import org.client.ui.listeners.QuitterListener;
 
 /**
  * Classe representant le panel de connexion
  * @author francois
  *
  */
-public class ConnexionPanel extends JPanel {
+public class ConnexionPanel extends AbstractPanel {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private GridBagLayout layout;
-	private GridBagConstraints contraintes;
-	private Insets marges;
 	
 	public ConnexionPanel () {
-		layout = new GridBagLayout ();
-		contraintes = new GridBagConstraints ();
-		marges = new Insets (0, 15, 15, 15);
+		getMarges().set(0, 15, 15, 15);
 		initPanel ();
 	}
 	
+	@Override
 	protected void initPanel () {
-		this.setLayout(layout);
-		
-		//Image de Présentation
-		
+		this.setLayout(getLayout());
 		
 		//Label Login
 		JLabel txtLogin = new JLabel ("Login");
-		contraintes.gridx = 0;
-		contraintes.gridy = 1;
-		contraintes.weightx = (double) 0.5;
-		contraintes.anchor = GridBagConstraints.LINE_END;
-		contraintes.insets = marges;
-		this.add(txtLogin, contraintes);
+		getContraintes().gridx = 0;
+		getContraintes().gridy = 1;
+		getContraintes().weighty = 0.1;
+		getContraintes().weightx = (double) 0.5;
+		getContraintes().anchor = GridBagConstraints.LAST_LINE_END;
+		getContraintes().insets = getMarges();
+		this.add(txtLogin, getContraintes());
 		
 		//Champs Login
 		JTextField champsLogin = new JTextField (15);
-		contraintes.gridx = 1;
-		contraintes.gridy = 1;
-		contraintes.gridwidth = GridBagConstraints.REMAINDER;
-		contraintes.anchor = GridBagConstraints.LINE_START;
-		this.add(champsLogin, contraintes);
+		getContraintes().gridx = 1;
+		getContraintes().gridy = 1;
+		getContraintes().weighty = 0.1;
+		getContraintes().gridwidth = GridBagConstraints.REMAINDER;
+		getContraintes().anchor = GridBagConstraints.LAST_LINE_START;
+		this.add(champsLogin, getContraintes());
 		
 		//Label Mot de passe
 		JLabel txtMdp = new JLabel ("Mot de passe");
-		contraintes.gridx = 0;
-		contraintes.gridy = 2;
-		contraintes.gridwidth = 1;
-		contraintes.anchor = GridBagConstraints.LINE_END;
-		this.add(txtMdp, contraintes);
+		getContraintes().gridx = 0;
+		getContraintes().gridy = 2;
+		getContraintes().weighty = 0.1;
+		getContraintes().gridwidth = 1;
+		getContraintes().anchor = GridBagConstraints.FIRST_LINE_END;
+		this.add(txtMdp, getContraintes());
 		
 		//Champs Mot de passe
 		JPasswordField champsMdp = new JPasswordField (15);
-		contraintes.gridx = 1;
-		contraintes.gridy = 2;
-		contraintes.gridwidth = GridBagConstraints.REMAINDER;
-		contraintes.anchor = GridBagConstraints.LINE_START;
-		this.add(champsMdp, contraintes);
+		getContraintes().gridx = 1;
+		getContraintes().gridy = 2;
+		getContraintes().weighty = 0.1;
+		getContraintes().gridwidth = GridBagConstraints.REMAINDER;
+		getContraintes().anchor = GridBagConstraints.FIRST_LINE_START;
+		this.add(champsMdp, getContraintes());
 		
 		//Bouton Connexion
-		JButton boutConn = new JButton ("Connexion");
-		boutConn.addMouseListener(new MouseListener () {
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-				Fenetre.changePage(new AccueilPanel ());
-			}
-			
-			@Override
-			public void mousePressed(MouseEvent e) {}
-			@Override
-			public void mouseReleased(MouseEvent e) {}
-			@Override
-			public void mouseEntered(MouseEvent e) {}
-			@Override
-			public void mouseExited(MouseEvent e) {}
-		});
-		contraintes.gridx = 0;
-		contraintes.gridy = 3;
-		contraintes.gridwidth = GridBagConstraints.REMAINDER;
-		contraintes.anchor = GridBagConstraints.CENTER;
-		this.add(boutConn, contraintes);
+		JButton boutonConnexion = new JButton ("Connexion");
+		boutonConnexion.addMouseListener(new ConnexionListener ());
+		getContraintes().gridx = 0;
+		getContraintes().gridy = 3;
+		getContraintes().weighty = 0.01;
+		getContraintes().gridwidth = GridBagConstraints.REMAINDER;
+		getContraintes().anchor = GridBagConstraints.PAGE_START;
+		this.add(boutonConnexion, getContraintes());
+		
+		//Bouton Quitter
+		JButton boutonQuitter = new JButton ("Quitter");
+		boutonQuitter.addMouseListener(new QuitterListener ());
+		getContraintes().gridx = 0;
+		getContraintes().gridy = 0;
+		getContraintes().weighty = 0.6;
+		getContraintes().gridwidth = GridBagConstraints.REMAINDER;
+		getContraintes().anchor = GridBagConstraints.FIRST_LINE_START;
+		getMarges().top = 30;
+		this.add(boutonQuitter, getContraintes());
+		
+		//Un espace pour ne pas que les composants ne soient tout en bas
+		JLabel espace = new JLabel (" ");
+		getContraintes().gridx = 0;
+		getContraintes().gridy = 4;
+		getContraintes().weighty = 0.4;
+		getContraintes().gridwidth = GridBagConstraints.REMAINDER;
+		this.add(espace, getContraintes());
 	}
 }
