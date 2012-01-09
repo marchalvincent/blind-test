@@ -8,22 +8,21 @@ public class Send implements Runnable {
 	
 	static private final Runnable INSTANCE = new Send ();
 	
-	private final BlockingQueue<MessageEncapsulator> _taskList;
+	static public final Runnable getInstance() {
+		return INSTANCE;
+	}
+	
+	private final BlockingQueue<EncapsulatorMessage> _taskList;
 	
 	private Send () {
-		_taskList = new ArrayBlockingQueue<MessageEncapsulator>(100);
+		_taskList = new ArrayBlockingQueue<EncapsulatorMessage>(100);
 	}
 
 	
 	public void run() {
 		  while(_taskList.isEmpty() == false){
-			  final MessageEncapsulator locEncapsulator = _taskList.poll();
+			  final EncapsulatorMessage locEncapsulator = _taskList.poll();
 			  final Socket locSocket;
 		  }
-	}
-	
-	public static Runnable getInstance() {
-		
-		return INSTANCE;
 	}
 }
