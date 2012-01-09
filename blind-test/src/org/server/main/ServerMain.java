@@ -31,7 +31,7 @@ public final class ServerMain {
 		final Configuration locConfiguration = loadConfiguration(parArguments);
 		loadApplication(locConfiguration);
 		try {
-			ss = new ServerSocket(port);
+			ss = new ServerSocket(locConfiguration.getPort());
 			System.out.println("Server listening on "+ss.getLocalPort());
 			
 			t = new Thread(new AcceptConnexion(ss));
@@ -47,12 +47,12 @@ public final class ServerMain {
 		final MonitorRunnable locRunnable = new MonitorRunnable();
 		locRunnable.start();
 		final InfoProvider locProvider = InfoProviderManager.getFileProvider();
-		locProvider.appendMessage(Level.INFO, "Démarrage de l'application en cours...");
-		locProvider.appendMessage(Level.INFO, "Lancement du moniteur réussi.");
+		locProvider.appendMessage(Level.INFO, "DÃ©marrage de l'application en cours...");
+		locProvider.appendMessage(Level.INFO, "Lancement du moniteur rÃ©ussi.");
 		final Properties locProperties = Managers.getDatabaseConfiguration();
 		final String locHostname = locProperties.getProperty(EnumDatabaseProperties.HOSTNAME.getConstName());
 		final String locPort = locProperties.getProperty(EnumDatabaseProperties.PORT.getConstName());
-		locProvider.appendMessage(Level.INFO, String.format("La connexion à la base de données a été effectuée. L'adresse de la base est \"%s\" sur le port \"%s\".", locHostname, locPort));
+		locProvider.appendMessage(Level.INFO, String.format("La connexion Ã  la base de donnÃ©es a Ã©tÃ© effectuÃ©e. L'adresse de la base est \"%s\" sur le port \"%s\".", locHostname, locPort));
 	}
 	
 	static private final Configuration loadConfiguration(final String[] parArguments) {
@@ -67,12 +67,5 @@ public final class ServerMain {
 		return locConfiguration;
 	}
 	
-	static private final void loadApplication(final Configuration parConfiguration) {		
-		final MonitorRunnable locRunnable = new MonitorRunnable();
-		locRunnable.start();
-		final InfoProvider locProvider = InfoProviderManager.getFileProvider();
-		locProvider.appendMessage(Level.INFO, "Démarrage de l'application.");
-		locProvider.appendMessage(Level.INFO, String.format("L'adresse du serveur est \"%s\".", parConfiguration.getHostName()));
-		locProvider.appendMessage(Level.INFO, String.format("Le port par défaut est \"%d\".", parConfiguration.getPort()));
-	}
+	
 }
