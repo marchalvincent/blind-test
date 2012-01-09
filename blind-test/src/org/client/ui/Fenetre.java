@@ -1,5 +1,7 @@
 package org.client.ui;
 
+import java.awt.Dimension;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -24,6 +26,7 @@ public class Fenetre extends JFrame {
 	
 	protected void initFenetre () {
 		fenetre.setSize(800, 600);
+		fenetre.setMinimumSize(new Dimension (500, 400));
 		fenetre.setContentPane(new ConnexionPanel());
 		fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		fenetre.setVisible(true);

@@ -8,29 +8,28 @@ import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import org.client.ui.listeners.ConnexionListener;
-import org.client.ui.listeners.InscriptionListener;
+import org.client.ui.listeners.CreerCompteListener;
 import org.client.ui.listeners.QuitterListener;
 
 /**
- * Classe representant le panel de connexion
+ * panel d'inscription
  * @author francois
  *
  */
-public class ConnexionPanel extends AbstractPanel {
+public class InscriptionPanel extends AbstractPanel {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	public ConnexionPanel () {
+	public InscriptionPanel () {
 		getMarges().set(0, 15, 15, 15);
-		initPanel ();
+		initPanel();
 	}
 	
 	@Override
-	protected void initPanel () {
+	protected void initPanel() {
 		this.setLayout(getLayout());
 		
 		//Label Login
@@ -73,24 +72,15 @@ public class ConnexionPanel extends AbstractPanel {
 		this.add(champsMdp, getContraintes());
 		
 		//Bouton Inscription
-		JButton boutonInscription = new BoutonGris ("S'inscrire");
-		boutonInscription.addMouseListener(new InscriptionListener ());
+		JButton boutonInscription = new BoutonGris ("Inscription");
+		boutonInscription.addMouseListener(new CreerCompteListener ());
 		getContraintes().gridx = 0;
 		getContraintes().gridy = 3;
 		getContraintes().weighty = 0.01;
 		getContraintes().gridwidth = 1;
-		getContraintes().anchor = GridBagConstraints.FIRST_LINE_END;
-		this.add(boutonInscription, getContraintes());
-		
-		//Bouton Connexion
-		JButton boutonConnexion = new BoutonGris ("Connexion");
-		boutonConnexion.addMouseListener(new ConnexionListener ());
-		getContraintes().gridx = 1;
-		getContraintes().gridy = 3;
-		getContraintes().weighty = 0.01;
 		getContraintes().gridwidth = GridBagConstraints.REMAINDER;
-		getContraintes().anchor = GridBagConstraints.FIRST_LINE_START;
-		this.add(boutonConnexion, getContraintes());
+		getContraintes().anchor = GridBagConstraints.PAGE_START;
+		this.add(boutonInscription, getContraintes());
 		
 		//Bouton Quitter
 		JButton boutonQuitter = new BoutonGris ("Quitter");
@@ -111,4 +101,5 @@ public class ConnexionPanel extends AbstractPanel {
 		getContraintes().gridwidth = GridBagConstraints.REMAINDER;
 		this.add(espace, getContraintes());
 	}
+
 }
