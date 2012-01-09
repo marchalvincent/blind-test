@@ -3,6 +3,7 @@ package org.server.persistence;
 import java.util.Properties;
 
 import org.commons.entity.Banque;
+import org.commons.entity.Stat;
 
 /**
  * Une clase utilitaire pour obtenir des {@link Manager}
@@ -19,11 +20,18 @@ public final class Managers {
 		return ManagerBanque.INSTANCE;
 	}
 	
+	final static public Manager<Stat> createStatManager() {
+		return ManagerStat.INSTANCE;
+	}
 	/**
 	 * Singleton
 	 */
 	static private final class ManagerBanque {
 		static private final Manager<Banque> INSTANCE = new BanqueManager();
+	}
+	
+	static private final class ManagerStat {
+		static private final Manager<Stat> INSTANCE = new StatManager();
 	}
 	
 	/**
