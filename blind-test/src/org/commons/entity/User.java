@@ -11,23 +11,23 @@ public class User implements Comparable<User>, IWithName, IWithId, Serializable 
 	
 	private static final long serialVersionUID = 1L;
 	private Integer _id;
-	private Stat _stat;
 	private String _name;
 	private String _login;
 	private String _password;
+	private Integer _score;
 	
 	
 	public User() {
-		this(Integer.valueOf(-1),new Stat(), "", "", "");
+		this(Integer.valueOf(-1),"", "", "", Integer.valueOf(0));
 	}
 	
-	public User (final Integer parId, final Stat parStat, final String parName, final String parLogin, final String parPassword) {
+	public User (final Integer parId, final String parName, final String parLogin, final String parPassword, final Integer parScore) {
 		
 		_id = parId;
-		_stat = parStat;
 		_name = parName;
 		_login = parLogin;
 		_password = parPassword;
+		_score = parScore;
 	}
 	
 	@Override
@@ -39,14 +39,13 @@ public class User implements Comparable<User>, IWithName, IWithId, Serializable 
 		_id = parId;
 	}
 	
-	public final Stat getStat() {
-		return _stat;
+	public final Integer getScore() {
+		return _score;
 	}
 	
-	public final void setStat(final Stat parStat) {
-		_stat = parStat;
+	public final void setScore(final Integer parScore) {
+		_score = parScore;
 	}
-	
 	
 	@Override
 	public final String getConstName() {
@@ -71,7 +70,7 @@ public class User implements Comparable<User>, IWithName, IWithId, Serializable 
 	}
 	
 	public final void setPassword(final String parPassword) {
-		_login = parPassword;
+		_password = parPassword;
 	}
 
 	@Override

@@ -6,28 +6,17 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 import org.commons.message.IMessage;
-import org.commons.util.SystemUtil;
 
 public final class ReadWriterUtil {
 
 	static public final IMessage read(final Socket parSocket) throws IOException, ClassNotFoundException {
-		ObjectInputStream locStream = null;
-		try {
-			locStream = new ObjectInputStream(parSocket.getInputStream());
-			return (IMessage) locStream.readObject();
-		} finally {
-			SystemUtil.close(locStream);
-		}
+		ObjectInputStream locStream = new ObjectInputStream(parSocket.getInputStream());
+		return (IMessage) locStream.readObject();
 	}
 	
 	static public final void write(final Socket parSocket, final IMessage parMessage) throws IOException {
-		ObjectOutputStream locStream = null;
-		try {
-			locStream= new ObjectOutputStream (parSocket.getOutputStream());
-			locStream.writeObject(parMessage);
-		} finally {
-			SystemUtil.close(locStream);
-		}
+		final ObjectOutputStream locStream= new ObjectOutputStream (parSocket.getOutputStream());
+		locStream.writeObject(parMessage);
 	}
 	private ReadWriterUtil() {}
 }
