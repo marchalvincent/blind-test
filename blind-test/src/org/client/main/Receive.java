@@ -26,7 +26,7 @@ public class Receive implements Runnable {
 			
 		    } catch (IOException e) {
 				
-		    	InfoProviderManager.getFileProvider().appendMessage(Level.SEVERE, " Client Receive Error");
+		    	InfoProviderManager.getFileProvider().appendMessage(Level.SEVERE, "Receive Error");
 			}
 		}
 	}
