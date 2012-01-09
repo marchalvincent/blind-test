@@ -11,7 +11,9 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({ 
-	StringUtilTest.class 
+	StringUtilTest.class,
+	BanqueFacadeTest.class,
+	MD5EncryptorTest.class
 	})
 public class UtilSuite {
 

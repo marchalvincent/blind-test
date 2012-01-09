@@ -77,8 +77,7 @@ public final class MonitorRunnable implements IWithName {
 							showCommand(locCommandName);
 							continue;
 						}
-						final boolean locHasArgument = locCommand
-								.hasArguments();
+						final boolean locHasArgument = locCommand.hasArguments();
 						if (locCommand == null || (locHasArgument && locHasArgument == (locSplitValue.length < 1))) {
 							showCommand(locCommandName);
 							continue;
@@ -116,14 +115,11 @@ public final class MonitorRunnable implements IWithName {
 		final boolean locHasArgument = parEnumCommand.hasArguments();
 		Future<String> locResultat = null;
 		if (locHasArgument == false) {
-			final MonitorCommand locCommand = parEnumCommand.createCommand(
-					locCommandName, null);
+			final MonitorCommand locCommand = parEnumCommand.createCommand(locCommandName, null);
 			locResultat = _pool.submit(locCommand);
 		} else {
-			final String[] locArguments = Arrays.copyOfRange(parArguments, 1,
-					parArguments.length);
-			final MonitorCommand locCommand = parEnumCommand.createCommand(
-					locCommandName, locArguments);
+			final String[] locArguments = Arrays.copyOfRange(parArguments, 1, parArguments.length);
+			final MonitorCommand locCommand = parEnumCommand.createCommand(locCommandName, locArguments);
 			locResultat = _pool.submit(locCommand);
 		}
 		assert (locResultat != null);

@@ -21,14 +21,14 @@ public enum EnumMonitorCommand implements IWithId {
 
 		@Override
 		final public MonitorCommand createCommand(final String parCommandName, final String[] parArguments) {
-			return null;
+			return new MonitorAddImageCommand(parCommandName, parArguments);
 		}
 	},
 	REMOVE(2, "remove", true) {
 
 		@Override
 		final public MonitorCommand createCommand(final String parCommandName, final String[] parArguments) {
-			return null;
+			return new MonitorRemoveCommand(parCommandName, parArguments);
 		}
 	},
 	USER(3, "users", true) {

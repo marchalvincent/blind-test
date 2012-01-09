@@ -1,13 +1,15 @@
 package org.commons.entity;
 
+import java.io.Serializable;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.commons.util.IWithId;
 import org.commons.util.IWithName;
 import org.commons.util.StringUtil;
 
-public final class Banque implements Comparable<Banque>, IWithName, IWithId {
+public class Banque implements Comparable<Banque>, IWithName, IWithId, Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private Integer _id;
 	private String _answer;
 	private String _name;
@@ -61,10 +63,6 @@ public final class Banque implements Comparable<Banque>, IWithName, IWithId {
 	
 	public final void setVersion(final AtomicInteger parVersion) {
 		_version = parVersion;
-	}
-	
-	public final void setVersion(final Integer parVersion) {
-		_version = new AtomicInteger(parVersion.intValue());
 	}
 
 	@Override

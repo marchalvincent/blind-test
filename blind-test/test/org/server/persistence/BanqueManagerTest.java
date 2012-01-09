@@ -95,7 +95,7 @@ public final class BanqueManagerTest {
 		locMergeBanque.setAnswer(locValue);
 		locMergeBanque.setDirectory(locValue);
 		locMergeBanque.setName(locValue);
-		locMergeBanque.setVersion(locNewBanque.getVersion());
+		locMergeBanque.setVersion(new AtomicInteger(locNewBanque.getVersion()));
 		_manager.merge(locMergeBanque);
 		assertNotNull(locMergeBanque);
 		assertEquals(locMergeBanque.getId(), locNewBanque.getId());

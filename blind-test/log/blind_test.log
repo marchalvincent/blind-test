@@ -40,3 +40,140 @@ INFO - 8 janv. 2012 15:30:34 : Le port par défaut est "9999".
 INFO - 8 janv. 2012 15:31:03 : Démarrage de l'application.
 INFO - 8 janv. 2012 15:31:03 : L'adresse du serveur est "127.0.0.1".
 INFO - 8 janv. 2012 15:31:03 : Le port par défaut est "9999".
+SEVERE - 8 janv. 2012 18:17:16 : Impossible d'insérer test en base
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'NULL,'test','test','test',1)' at line 1
+SEVERE - 8 janv. 2012 19:32:34 : Impossible d'insérer testAdd en base
+Before start of result set
+SEVERE - 8 janv. 2012 19:32:35 : Impossible d'insérer testRemove en base
+Before start of result set
+SEVERE - 8 janv. 2012 19:32:35 : Impossible d'insérer testMerge en base
+Before start of result set
+SEVERE - 8 janv. 2012 19:32:36 : Impossible d'insérer testFindInt en base
+Before start of result set
+SEVERE - 8 janv. 2012 19:32:37 : Impossible d'insérer testFindName en base
+Before start of result set
+SEVERE - 8 janv. 2012 19:32:38 : Impossible d'insérer testFindAll en base
+Before start of result set
+SEVERE - 8 janv. 2012 19:32:38 : Impossible d'insérer testFindAll en base
+Before start of result set
+SEVERE - 8 janv. 2012 19:32:38 : Impossible d'insérer testFindAll en base
+Before start of result set
+INFO - 8 janv. 2012 19:48:41 : Démarrage de l'application.
+INFO - 8 janv. 2012 19:48:41 : L'adresse du serveur est "127.0.0.1".
+INFO - 8 janv. 2012 19:48:41 : Le port par défaut est "9999".
+INFO - 8 janv. 2012 19:49:36 : Démarrage de l'application.
+INFO - 8 janv. 2012 19:49:36 : L'adresse du serveur est "127.0.0.1".
+INFO - 8 janv. 2012 19:49:36 : Le port par défaut est "9999".
+INFO - 8 janv. 2012 20:02:21 : Démarrage de l'application.
+INFO - 8 janv. 2012 20:02:21 : L'adresse du serveur est "127.0.0.1".
+INFO - 8 janv. 2012 20:02:21 : Le port par défaut est "9999".
+INFO - 8 janv. 2012 20:09:23 : Démarrage de l'application en cours...
+INFO - 8 janv. 2012 20:09:24 : La connexion à la base de données a été effectuée. L'adresse de la base est localhost sur le port 3306.
+INFO - 8 janv. 2012 20:16:43 : Démarrage de l'application en cours...
+INFO - 8 janv. 2012 20:16:43 : Lancement du moniteur réussi.
+INFO - 8 janv. 2012 20:16:44 : La connexion à la base de données a été effectuée.
+L'adresse de la base est localhost sur le port 3306.
+INFO - 8 janv. 2012 20:17:42 : Démarrage de l'application en cours...
+INFO - 8 janv. 2012 20:17:42 : Lancement du moniteur réussi.
+INFO - 8 janv. 2012 20:17:43 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 00:03:06 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 00:03:07 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 00:03:09 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+SEVERE - 9 janv. 2012 00:03:49 : Impossible d'insérer 2a1dab65535f6dd0a3cc762c8066fee4.png en base
+Data truncation: Data too long for column 'name' at row 1
+INFO - 9 janv. 2012 00:05:38 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 00:05:38 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 00:05:39 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 00:15:04 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 00:15:05 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 00:15:05 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 00:16:16 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 00:16:17 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 00:16:17 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 00:16:29 : L'image thg.png a correctement été ajouté. La réponse associée est thg.
+WARNING - 9 janv. 2012 00:16:58 : La commande add nécessite au moins deux arguments correspondant au chemin vers l'image et à la réponse.
+WARNING - 9 janv. 2012 00:17:03 : La commande add nécessite au moins deux arguments correspondant au chemin vers l'image et à la réponse.
+WARNING - 9 janv. 2012 00:17:21 : Le fichier /home/pitton/test n'existe pas ou n'est pas accessible en lecture.
+INFO - 9 janv. 2012 00:24:21 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 00:24:21 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 00:24:22 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 00:24:36 : L'image thg.png a correctement été ajouté. La réponse associée est thg.
+INFO - 9 janv. 2012 00:24:55 : L'image thg.png a correctement été ajouté. La réponse associée est salut.
+INFO - 9 janv. 2012 00:25:44 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 00:25:44 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 00:25:45 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 00:26:32 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 00:26:32 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 00:26:33 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 00:26:37 : L'image thg.png a correctement été ajouté. La réponse associée est thg.
+INFO - 9 janv. 2012 00:26:40 : L'image thg.png a correctement été ajouté. La réponse associée est thg.
+INFO - 9 janv. 2012 00:27:11 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 00:27:11 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 00:27:12 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 00:27:25 : L'image thg.png a correctement été ajouté. La réponse associée est thg.
+INFO - 9 janv. 2012 00:27:35 : L'image thg.png a correctement été ajouté. La réponse associée est thg.
+INFO - 9 janv. 2012 00:28:01 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 00:28:01 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 00:28:01 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 00:28:05 : L'image thg.png a correctement été ajouté. La réponse associée est thg.
+INFO - 9 janv. 2012 00:28:08 : L'image thg.png a correctement été ajouté. La réponse associée est thg.
+INFO - 9 janv. 2012 00:28:20 : L'image thg.png a correctement été ajouté. La réponse associée est thg.
+INFO - 9 janv. 2012 00:28:29 : L'image thg.png a correctement été ajouté. La réponse associée est value.
+INFO - 9 janv. 2012 00:30:12 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 00:30:13 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 00:30:13 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 00:30:32 : L'image thg.png a correctement été ajouté. La réponse associée est thg.
+INFO - 9 janv. 2012 00:30:42 : L'image thg.png a été mise à jour. La réponse associée est thg. La version actuelle est : 3
+INFO - 9 janv. 2012 00:31:31 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 00:31:31 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 00:31:32 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 00:31:41 : L'image thg.png a été mise à jour. La réponse associée est thg. La version actuelle est : 3
+INFO - 9 janv. 2012 00:31:48 : L'image thg.png a été mise à jour. La réponse associée est thg. La version actuelle est : 4
+INFO - 9 janv. 2012 00:31:58 : L'image thg.png a correctement été ajouté. La réponse associée est thg.
+INFO - 9 janv. 2012 00:32:02 : L'image thg.png a été mise à jour. La réponse associée est thg. La version actuelle est : 2
+INFO - 9 janv. 2012 00:32:05 : L'image thg.png a été mise à jour. La réponse associée est thg. La version actuelle est : 3
+INFO - 9 janv. 2012 00:43:19 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 00:43:19 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 00:43:20 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 00:43:32 : L'image thg.png a correctement été ajouté. La réponse associée est thg.
+INFO - 9 janv. 2012 00:44:29 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 00:44:29 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 00:44:30 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 00:45:21 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 00:45:22 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 00:45:23 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 00:46:12 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 00:46:13 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 00:46:13 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 00:47:49 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 00:47:50 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 00:47:51 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 00:48:05 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 00:48:05 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 00:48:06 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 00:50:46 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 00:50:46 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 00:50:47 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 00:50:50 : L'image 2a1dab65535f6dd0a3cc762c8066fee4.png a correctement été supprimé.
+INFO - 9 janv. 2012 00:51:28 : L'image thg.png a correctement été ajouté. La réponse associée est thg.
+INFO - 9 janv. 2012 00:51:40 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 00:51:41 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 00:51:41 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 00:51:44 : L'image 2a1dab65535f6dd0a3cc762c8066fee4.png a correctement été supprimé.
+INFO - 9 janv. 2012 00:53:25 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 00:53:25 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 00:53:25 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 00:53:34 : L'image thg.png a correctement été ajouté. La réponse associée est thg.
+INFO - 9 janv. 2012 00:53:44 : L'image 2a1dab65535f6dd0a3cc762c8066fee4.png a correctement été supprimé.
+INFO - 9 janv. 2012 00:54:04 : L'image thg.png a correctement été ajouté. La réponse associée est png.
+INFO - 9 janv. 2012 00:54:12 : L'image 2a1dab65535f6dd0a3cc762c8066fee4.png a correctement été supprimé.
+INFO - 9 janv. 2012 00:54:34 : L'image thg.png a correctement été ajouté. La réponse associée est thg.
+WARNING - 9 janv. 2012 00:55:22 : L'image 2a1dab65535f6dd0a3cc762c8066fee4.png n'existe pas.
+INFO - 9 janv. 2012 01:06:12 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 01:06:13 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 01:06:13 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 01:08:09 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 01:08:09 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 01:08:09 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 01:08:25 : L'image thg.png a correctement été ajouté. La réponse associée est thg.
+INFO - 9 janv. 2012 01:08:50 : L'image 2a1dab65535f6dd0a3cc762c8066fee4.png a correctement été supprimé.

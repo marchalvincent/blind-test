@@ -25,6 +25,7 @@ public final class DefaultConfiguration implements Configuration {
 	static private final String DEFAULT_FILE_NAME = "conf/configuration.properties";
 	
 	private Level _minLevel;
+	private String _imageDirectory;
 	private String _hostName;
 	private Charset _charset;
 	private Integer _port;
@@ -60,6 +61,17 @@ public final class DefaultConfiguration implements Configuration {
 	@Override
 	public final Integer getPort() {
 		return _port;
+	}
+	
+	@Override
+	public final String getImageDirectory() {
+		return _imageDirectory;
+	}
+	
+	@Override
+	public final void setImageDirectory(final String parImageDirectory) {
+		_imageDirectory = parImageDirectory;
+		_properties.put(EnumConfiguration.IMAGE_DIRECTORY.getConstName(), _imageDirectory);
 	}
 
 	@Override
@@ -103,6 +115,8 @@ public final class DefaultConfiguration implements Configuration {
 		setHostName(locHostName);
 		final String locCharset = _properties.getProperty(EnumConfiguration.CHARSET.getConstName());
 		setCharset(locCharset);
+		final String locImageDirectory = _properties.getProperty(EnumConfiguration.IMAGE_DIRECTORY.getConstName());
+		setImageDirectory(locImageDirectory);
 		return refresh();
 	}
 
