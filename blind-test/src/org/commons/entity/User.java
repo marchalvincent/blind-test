@@ -106,5 +106,4 @@ public class User implements Comparable<User>, IWithName, IWithId, Serializable 
 		return locCompareTo;
 	}
 	
-
 }

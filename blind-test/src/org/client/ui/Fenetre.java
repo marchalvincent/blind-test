@@ -33,4 +33,8 @@ public class Fenetre extends JFrame {
 		fenetre.setContentPane(nouveau);
 		fenetre.validate();
 	}
+	
+	public static JFrame getInstance () {
+		return fenetre;
+	}
 }

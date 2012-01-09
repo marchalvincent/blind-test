@@ -1,14 +1,17 @@
 package org.server.main;
 
-import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.util.logging.Level;
+
+import org.commons.logger.InfoProviderManager;
 
 public class Receive implements Runnable {
 
-	private BufferedReader in;
-	private String message = null, login = null;
+	private ObjectInputStream in;
+	private Object message = null, login = null;
 	
-	public Receive (BufferedReader in, String login){
+	public Receive (ObjectInputStream in, String login){
 		
 		this.in = in;
 		this.login = login;
@@ -19,12 +22,14 @@ public class Receive implements Runnable {
 		while(true){
 	        try {
 	        	
-			message = in.readLine();
-			System.out.println(login+" : "+message);
+			message = in.readObject();
+			InfoProviderManager.getFileProvider().appendMessage(Level.INFO, login+" : "+message);
 			
 		    } catch (IOException e) {
 				
-				e.printStackTrace();
+				InfoProviderManager.getFileProvider().appendMessage(Level.SEVERE, "Server Receive Error");
+			} catch (ClassNotFoundException e) {
+				InfoProviderManager.getFileProvider().appendMessage(Level.SEVERE, "Server Receive Error");
 			}
 		}
 	}
