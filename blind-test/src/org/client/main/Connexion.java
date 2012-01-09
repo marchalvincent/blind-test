@@ -6,6 +6,9 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
+import java.util.logging.Level;
+
+import org.commons.logger.InfoProviderManager;
 
 public class Connexion implements Runnable {
 
@@ -33,20 +36,20 @@ public class Connexion implements Runnable {
 		
 		while(!connect ){
 		
-		System.out.println(in.readLine());
-		login = sc.nextLine();
-		out.println(login);
-		out.flush();
+			InfoProviderManager.getFileProvider().appendMessage(Level.INFO, in.readLine());
+			login = sc.nextLine();
+			out.println(login);
+			out.flush();
 		
-		System.out.println(in.readLine());
-		pass = sc.nextLine();
-		out.println(pass);
-		out.flush();
+			InfoProviderManager.getFileProvider().appendMessage(Level.INFO, in.readLine());
+			pass = sc.nextLine();
+			out.println(pass);
+			out.flush();
 		
 		if(in.readLine().equals("connecting")){
 			
-		System.out.println("connected "); 
-		connect = true;
+			InfoProviderManager.getFileProvider().appendMessage(Level.INFO, "connected "); 
+			connect = true;
 		  }
 		
 		else {

@@ -2,6 +2,9 @@ package org.server.main;
 
 import java.io.PrintWriter;
 import java.util.Scanner;
+import java.util.logging.Level;
+
+import org.commons.logger.InfoProviderManager;
 
 public class Send implements Runnable {
 
@@ -19,7 +22,7 @@ public class Send implements Runnable {
 		  sc = new Scanner(message);
 		  
 		  while(true){
-			    System.out.println(message);
+			  InfoProviderManager.getFileProvider().appendMessage(Level.INFO, message);
 				message = sc.nextLine();
 				out.println(message);
 			    out.flush();

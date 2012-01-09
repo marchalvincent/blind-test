@@ -3,6 +3,9 @@ package org.server.main;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.logging.Level;
+
+import org.commons.logger.InfoProviderManager;
 
 	public class AcceptConnexion implements Runnable{
 
@@ -20,7 +23,7 @@ import java.net.Socket;
 				while(true){
 					
 				socket = socketserver.accept();
-				System.out.println("A client is connecting ");
+				InfoProviderManager.getFileProvider().appendMessage(Level.INFO, "A client is connecting ");
 				
 				t1 = new Thread(new Authentication(socket));
 				t1.start();

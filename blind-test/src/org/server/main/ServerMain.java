@@ -32,7 +32,7 @@ public final class ServerMain {
 		loadApplication(locConfiguration);
 		try {
 			ss = new ServerSocket(locConfiguration.getPort());
-			System.out.println("Server listening on "+ss.getLocalPort());
+			InfoProviderManager.getFileProvider().appendMessage(Level.SEVERE, "Server listening on "+ss.getLocalPort());
 			
 			t = new Thread(new AcceptConnexion(ss));
 			t.start();

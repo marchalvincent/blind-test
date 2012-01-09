@@ -8,6 +8,9 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
+import java.util.logging.Level;
+
+import org.commons.logger.InfoProviderManager;
 
 public class Authentication implements Runnable {
 
@@ -42,7 +45,7 @@ public class Authentication implements Runnable {
 			if(isValid(login, pass)){
 				
 				out.println("connecting");
-				System.out.println(login +" has just connected !!");
+				InfoProviderManager.getFileProvider().appendMessage(Level.SEVERE, login +" has just connected !!");
 				out.flush();
 				authentifier = true;	
 			}
