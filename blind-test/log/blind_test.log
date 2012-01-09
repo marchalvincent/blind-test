@@ -1,0 +1,398 @@
+INFO - 8 janv. 2012 10:50:01 : Démarrage de l'application.
+INFO - 8 janv. 2012 10:50:02 : L'adresse du serveur est "127.0.0.1".
+INFO - 8 janv. 2012 10:50:02 : Le port par défaut est "9999".
+INFO - 8 janv. 2012 10:56:45 : Démarrage de l'application.
+INFO - 8 janv. 2012 10:56:46 : L'adresse du serveur est "127.0.0.1".
+INFO - 8 janv. 2012 10:56:46 : Le port par défaut est "9999".
+INFO - 8 janv. 2012 10:57:26 : Démarrage de l'application.
+INFO - 8 janv. 2012 10:57:26 : L'adresse du serveur est "127.0.0.1".
+INFO - 8 janv. 2012 10:57:26 : Le port par défaut est "9999".
+INFO - 8 janv. 2012 10:58:31 : Démarrage de l'application.
+INFO - 8 janv. 2012 10:58:32 : L'adresse du serveur est "127.0.0.1".
+INFO - 8 janv. 2012 10:58:32 : Le port par défaut est "9999".
+INFO - 8 janv. 2012 10:59:26 : Démarrage de l'application.
+INFO - 8 janv. 2012 10:59:27 : L'adresse du serveur est "127.0.0.1".
+INFO - 8 janv. 2012 10:59:27 : Le port par défaut est "9999".
+INFO - 8 janv. 2012 11:00:21 : Démarrage de l'application.
+INFO - 8 janv. 2012 11:00:21 : L'adresse du serveur est "127.0.0.1".
+INFO - 8 janv. 2012 11:00:21 : Le port par défaut est "9999".
+INFO - 8 janv. 2012 11:02:36 : Démarrage de l'application.
+INFO - 8 janv. 2012 11:02:37 : L'adresse du serveur est "127.0.0.1".
+INFO - 8 janv. 2012 11:02:37 : Le port par défaut est "9999".
+INFO - 8 janv. 2012 15:25:21 : Démarrage de l'application.
+INFO - 8 janv. 2012 15:25:21 : L'adresse du serveur est "127.0.0.1".
+INFO - 8 janv. 2012 15:25:21 : Le port par défaut est "9999".
+INFO - 8 janv. 2012 15:25:48 : Démarrage de l'application.
+INFO - 8 janv. 2012 15:25:48 : L'adresse du serveur est "127.0.0.1".
+INFO - 8 janv. 2012 15:25:48 : Le port par défaut est "9999".
+INFO - 8 janv. 2012 15:26:07 : Démarrage de l'application.
+INFO - 8 janv. 2012 15:26:07 : L'adresse du serveur est "127.0.0.1".
+INFO - 8 janv. 2012 15:26:07 : Le port par défaut est "9999".
+INFO - 8 janv. 2012 15:26:30 : Démarrage de l'application.
+INFO - 8 janv. 2012 15:26:30 : L'adresse du serveur est "127.0.0.1".
+INFO - 8 janv. 2012 15:26:30 : Le port par défaut est "9999".
+INFO - 8 janv. 2012 15:28:30 : Démarrage de l'application.
+INFO - 8 janv. 2012 15:28:31 : L'adresse du serveur est "127.0.0.1".
+INFO - 8 janv. 2012 15:28:31 : Le port par défaut est "9999".
+INFO - 8 janv. 2012 15:30:34 : Démarrage de l'application.
+INFO - 8 janv. 2012 15:30:34 : L'adresse du serveur est "127.0.0.1".
+INFO - 8 janv. 2012 15:30:34 : Le port par défaut est "9999".
+INFO - 8 janv. 2012 15:31:03 : Démarrage de l'application.
+INFO - 8 janv. 2012 15:31:03 : L'adresse du serveur est "127.0.0.1".
+INFO - 8 janv. 2012 15:31:03 : Le port par défaut est "9999".
+SEVERE - 8 janv. 2012 18:17:16 : Impossible d'insérer test en base
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'NULL,'test','test','test',1)' at line 1
+SEVERE - 8 janv. 2012 19:32:34 : Impossible d'insérer testAdd en base
+Before start of result set
+SEVERE - 8 janv. 2012 19:32:35 : Impossible d'insérer testRemove en base
+Before start of result set
+SEVERE - 8 janv. 2012 19:32:35 : Impossible d'insérer testMerge en base
+Before start of result set
+SEVERE - 8 janv. 2012 19:32:36 : Impossible d'insérer testFindInt en base
+Before start of result set
+SEVERE - 8 janv. 2012 19:32:37 : Impossible d'insérer testFindName en base
+Before start of result set
+SEVERE - 8 janv. 2012 19:32:38 : Impossible d'insérer testFindAll en base
+Before start of result set
+SEVERE - 8 janv. 2012 19:32:38 : Impossible d'insérer testFindAll en base
+Before start of result set
+SEVERE - 8 janv. 2012 19:32:38 : Impossible d'insérer testFindAll en base
+Before start of result set
+INFO - 8 janv. 2012 19:48:41 : Démarrage de l'application.
+INFO - 8 janv. 2012 19:48:41 : L'adresse du serveur est "127.0.0.1".
+INFO - 8 janv. 2012 19:48:41 : Le port par défaut est "9999".
+INFO - 8 janv. 2012 19:49:36 : Démarrage de l'application.
+INFO - 8 janv. 2012 19:49:36 : L'adresse du serveur est "127.0.0.1".
+INFO - 8 janv. 2012 19:49:36 : Le port par défaut est "9999".
+INFO - 8 janv. 2012 20:02:21 : Démarrage de l'application.
+INFO - 8 janv. 2012 20:02:21 : L'adresse du serveur est "127.0.0.1".
+INFO - 8 janv. 2012 20:02:21 : Le port par défaut est "9999".
+INFO - 8 janv. 2012 20:09:23 : Démarrage de l'application en cours...
+INFO - 8 janv. 2012 20:09:24 : La connexion à la base de données a été effectuée. L'adresse de la base est localhost sur le port 3306.
+INFO - 8 janv. 2012 20:16:43 : Démarrage de l'application en cours...
+INFO - 8 janv. 2012 20:16:43 : Lancement du moniteur réussi.
+INFO - 8 janv. 2012 20:16:44 : La connexion à la base de données a été effectuée.
+L'adresse de la base est localhost sur le port 3306.
+INFO - 8 janv. 2012 20:17:42 : Démarrage de l'application en cours...
+INFO - 8 janv. 2012 20:17:42 : Lancement du moniteur réussi.
+INFO - 8 janv. 2012 20:17:43 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 00:03:06 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 00:03:07 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 00:03:09 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+SEVERE - 9 janv. 2012 00:03:49 : Impossible d'insérer 2a1dab65535f6dd0a3cc762c8066fee4.png en base
+Data truncation: Data too long for column 'name' at row 1
+INFO - 9 janv. 2012 00:05:38 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 00:05:38 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 00:05:39 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 00:15:04 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 00:15:05 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 00:15:05 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 00:16:16 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 00:16:17 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 00:16:17 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 00:16:29 : L'image thg.png a correctement été ajouté. La réponse associée est thg.
+WARNING - 9 janv. 2012 00:16:58 : La commande add nécessite au moins deux arguments correspondant au chemin vers l'image et à la réponse.
+WARNING - 9 janv. 2012 00:17:03 : La commande add nécessite au moins deux arguments correspondant au chemin vers l'image et à la réponse.
+WARNING - 9 janv. 2012 00:17:21 : Le fichier /home/pitton/test n'existe pas ou n'est pas accessible en lecture.
+INFO - 9 janv. 2012 00:24:21 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 00:24:21 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 00:24:22 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 00:24:36 : L'image thg.png a correctement été ajouté. La réponse associée est thg.
+INFO - 9 janv. 2012 00:24:55 : L'image thg.png a correctement été ajouté. La réponse associée est salut.
+INFO - 9 janv. 2012 00:25:44 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 00:25:44 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 00:25:45 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 00:26:32 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 00:26:32 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 00:26:33 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 00:26:37 : L'image thg.png a correctement été ajouté. La réponse associée est thg.
+INFO - 9 janv. 2012 00:26:40 : L'image thg.png a correctement été ajouté. La réponse associée est thg.
+INFO - 9 janv. 2012 00:27:11 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 00:27:11 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 00:27:12 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 00:27:25 : L'image thg.png a correctement été ajouté. La réponse associée est thg.
+INFO - 9 janv. 2012 00:27:35 : L'image thg.png a correctement été ajouté. La réponse associée est thg.
+INFO - 9 janv. 2012 00:28:01 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 00:28:01 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 00:28:01 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 00:28:05 : L'image thg.png a correctement été ajouté. La réponse associée est thg.
+INFO - 9 janv. 2012 00:28:08 : L'image thg.png a correctement été ajouté. La réponse associée est thg.
+INFO - 9 janv. 2012 00:28:20 : L'image thg.png a correctement été ajouté. La réponse associée est thg.
+INFO - 9 janv. 2012 00:28:29 : L'image thg.png a correctement été ajouté. La réponse associée est value.
+INFO - 9 janv. 2012 00:30:12 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 00:30:13 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 00:30:13 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 00:30:32 : L'image thg.png a correctement été ajouté. La réponse associée est thg.
+INFO - 9 janv. 2012 00:30:42 : L'image thg.png a été mise à jour. La réponse associée est thg. La version actuelle est : 3
+INFO - 9 janv. 2012 00:31:31 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 00:31:31 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 00:31:32 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 00:31:41 : L'image thg.png a été mise à jour. La réponse associée est thg. La version actuelle est : 3
+INFO - 9 janv. 2012 00:31:48 : L'image thg.png a été mise à jour. La réponse associée est thg. La version actuelle est : 4
+INFO - 9 janv. 2012 00:31:58 : L'image thg.png a correctement été ajouté. La réponse associée est thg.
+INFO - 9 janv. 2012 00:32:02 : L'image thg.png a été mise à jour. La réponse associée est thg. La version actuelle est : 2
+INFO - 9 janv. 2012 00:32:05 : L'image thg.png a été mise à jour. La réponse associée est thg. La version actuelle est : 3
+INFO - 9 janv. 2012 00:43:19 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 00:43:19 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 00:43:20 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 00:43:32 : L'image thg.png a correctement été ajouté. La réponse associée est thg.
+INFO - 9 janv. 2012 00:44:29 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 00:44:29 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 00:44:30 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 00:45:21 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 00:45:22 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 00:45:23 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 00:46:12 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 00:46:13 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 00:46:13 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 00:47:49 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 00:47:50 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 00:47:51 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 00:48:05 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 00:48:05 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 00:48:06 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 00:50:46 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 00:50:46 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 00:50:47 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 00:50:50 : L'image 2a1dab65535f6dd0a3cc762c8066fee4.png a correctement été supprimé.
+INFO - 9 janv. 2012 00:51:28 : L'image thg.png a correctement été ajouté. La réponse associée est thg.
+INFO - 9 janv. 2012 00:51:40 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 00:51:41 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 00:51:41 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 00:51:44 : L'image 2a1dab65535f6dd0a3cc762c8066fee4.png a correctement été supprimé.
+INFO - 9 janv. 2012 00:53:25 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 00:53:25 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 00:53:25 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 00:53:34 : L'image thg.png a correctement été ajouté. La réponse associée est thg.
+INFO - 9 janv. 2012 00:53:44 : L'image 2a1dab65535f6dd0a3cc762c8066fee4.png a correctement été supprimé.
+INFO - 9 janv. 2012 00:54:04 : L'image thg.png a correctement été ajouté. La réponse associée est png.
+INFO - 9 janv. 2012 00:54:12 : L'image 2a1dab65535f6dd0a3cc762c8066fee4.png a correctement été supprimé.
+INFO - 9 janv. 2012 00:54:34 : L'image thg.png a correctement été ajouté. La réponse associée est thg.
+WARNING - 9 janv. 2012 00:55:22 : L'image 2a1dab65535f6dd0a3cc762c8066fee4.png n'existe pas.
+INFO - 9 janv. 2012 01:06:12 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 01:06:13 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 01:06:13 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 01:08:09 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 01:08:09 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 01:08:09 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 01:08:25 : L'image thg.png a correctement été ajouté. La réponse associée est thg.
+INFO - 9 janv. 2012 01:08:50 : L'image 2a1dab65535f6dd0a3cc762c8066fee4.png a correctement été supprimé.
+INFO - 9 janv. 2012 10:56:58 : Démarrage de l'application.
+INFO - 9 janv. 2012 10:56:59 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 10:56:59 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 10:57:39 : Démarrage de l'application.
+INFO - 9 janv. 2012 10:57:40 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 10:57:40 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 11:07:42 : Démarrage de l'application.
+INFO - 9 janv. 2012 11:07:43 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 11:07:43 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 11:16:19 : Démarrage de l'application.
+INFO - 9 janv. 2012 11:16:20 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 11:16:20 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 11:18:31 : Démarrage de l'application.
+INFO - 9 janv. 2012 11:18:31 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 11:18:31 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 11:28:27 : Démarrage de l'application.
+INFO - 9 janv. 2012 11:28:28 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 11:28:28 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 11:29:51 : Démarrage de l'application.
+INFO - 9 janv. 2012 11:29:51 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 11:29:51 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 11:31:11 : Démarrage de l'application.
+INFO - 9 janv. 2012 11:31:11 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 11:31:11 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 11:32:24 : Démarrage de l'application.
+INFO - 9 janv. 2012 11:32:25 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 11:32:25 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 11:34:20 : Démarrage de l'application.
+INFO - 9 janv. 2012 11:34:20 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 11:34:20 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 11:36:44 : Démarrage de l'application.
+INFO - 9 janv. 2012 11:36:44 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 11:36:44 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 11:37:19 : Démarrage de l'application.
+INFO - 9 janv. 2012 11:37:19 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 11:37:19 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 11:37:47 : Démarrage de l'application.
+INFO - 9 janv. 2012 11:37:47 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 11:37:47 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 11:38:51 : Démarrage de l'application.
+INFO - 9 janv. 2012 11:38:52 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 11:38:52 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 11:45:21 : Démarrage de l'application.
+INFO - 9 janv. 2012 11:45:21 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 11:45:21 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 11:47:08 : Démarrage de l'application.
+INFO - 9 janv. 2012 11:47:08 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 11:47:08 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 11:47:59 : Démarrage de l'application.
+INFO - 9 janv. 2012 11:47:59 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 11:47:59 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 11:48:45 : Démarrage de l'application.
+INFO - 9 janv. 2012 11:48:45 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 11:48:45 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 11:49:16 : Démarrage de l'application.
+INFO - 9 janv. 2012 11:49:17 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 11:49:17 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 11:50:05 : Démarrage de l'application.
+INFO - 9 janv. 2012 11:50:05 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 11:50:05 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 11:51:53 : Démarrage de l'application.
+INFO - 9 janv. 2012 11:51:53 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 11:51:53 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 11:52:16 : Démarrage de l'application.
+INFO - 9 janv. 2012 11:52:17 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 11:52:17 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 11:57:24 : Démarrage de l'application.
+INFO - 9 janv. 2012 11:57:24 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 11:57:24 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 11:58:13 : Démarrage de l'application.
+INFO - 9 janv. 2012 11:58:14 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 11:58:14 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 11:59:16 : Démarrage de l'application.
+INFO - 9 janv. 2012 11:59:16 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 11:59:16 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 12:03:25 : Démarrage de l'application.
+INFO - 9 janv. 2012 12:03:26 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 12:03:26 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 12:05:29 : Démarrage de l'application.
+INFO - 9 janv. 2012 12:05:29 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 12:05:29 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 12:07:51 : Démarrage de l'application.
+INFO - 9 janv. 2012 12:07:51 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 12:07:51 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 12:10:56 : Démarrage de l'application.
+INFO - 9 janv. 2012 12:10:56 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 12:10:56 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 12:11:12 : Démarrage de l'application.
+INFO - 9 janv. 2012 12:11:12 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 12:11:12 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 12:11:37 : Démarrage de l'application.
+INFO - 9 janv. 2012 12:11:38 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 12:11:38 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 12:11:58 : Démarrage de l'application.
+INFO - 9 janv. 2012 12:11:58 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 12:11:58 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 12:12:49 : Démarrage de l'application.
+INFO - 9 janv. 2012 12:12:49 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 12:12:49 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 12:24:40 : Démarrage de l'application.
+INFO - 9 janv. 2012 12:24:40 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 12:24:40 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 12:24:48 : Démarrage de l'application.
+INFO - 9 janv. 2012 12:24:48 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 12:24:48 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 12:26:10 : Démarrage de l'application.
+INFO - 9 janv. 2012 12:26:11 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 12:26:11 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 12:27:37 : Démarrage de l'application.
+INFO - 9 janv. 2012 12:27:37 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 12:27:37 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 12:31:13 : Démarrage de l'application.
+INFO - 9 janv. 2012 12:31:13 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 12:31:13 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 12:32:11 : Démarrage de l'application.
+INFO - 9 janv. 2012 12:32:12 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 12:32:12 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 12:33:16 : Démarrage de l'application.
+INFO - 9 janv. 2012 12:33:16 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 12:33:16 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 12:34:08 : Démarrage de l'application.
+INFO - 9 janv. 2012 12:34:08 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 12:34:08 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 12:34:24 : Démarrage de l'application.
+INFO - 9 janv. 2012 12:34:24 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 12:34:24 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 12:34:55 : Démarrage de l'application.
+INFO - 9 janv. 2012 12:34:55 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 12:34:55 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 12:50:38 : Démarrage de l'application.
+INFO - 9 janv. 2012 12:50:39 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 12:50:39 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 13:07:33 : Démarrage de l'application.
+INFO - 9 janv. 2012 13:07:33 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 13:07:33 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 13:12:48 : Démarrage de l'application.
+INFO - 9 janv. 2012 13:12:48 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 13:12:48 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 13:16:42 : Démarrage de l'application.
+INFO - 9 janv. 2012 13:16:42 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 13:16:42 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 13:18:06 : Démarrage de l'application.
+INFO - 9 janv. 2012 13:18:07 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 13:18:07 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 13:20:43 : Démarrage de l'application.
+INFO - 9 janv. 2012 13:20:44 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 13:20:44 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 13:21:20 : Démarrage de l'application.
+INFO - 9 janv. 2012 13:21:21 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 13:21:21 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 13:21:28 : Démarrage de l'application.
+INFO - 9 janv. 2012 13:21:28 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 13:21:28 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 13:22:20 : Démarrage de l'application.
+INFO - 9 janv. 2012 13:22:20 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 13:22:20 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 13:22:30 : Démarrage de l'application.
+INFO - 9 janv. 2012 13:22:30 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 13:22:30 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 13:31:00 : Démarrage de l'application.
+INFO - 9 janv. 2012 13:31:01 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 13:31:01 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 13:31:22 : Démarrage de l'application.
+INFO - 9 janv. 2012 13:31:23 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 13:31:23 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 13:32:19 : Démarrage de l'application.
+INFO - 9 janv. 2012 13:32:19 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 13:32:19 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 13:37:36 : Démarrage de l'application.
+INFO - 9 janv. 2012 13:37:37 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 13:37:37 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 13:37:42 : Démarrage de l'application.
+INFO - 9 janv. 2012 13:37:42 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 13:37:42 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 13:38:24 : Démarrage de l'application.
+INFO - 9 janv. 2012 13:38:25 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 13:38:25 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 13:38:37 : Démarrage de l'application.
+INFO - 9 janv. 2012 13:38:37 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 13:38:37 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 13:39:37 : Démarrage de l'application.
+INFO - 9 janv. 2012 13:39:37 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 13:39:37 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 13:39:54 : Démarrage de l'application.
+INFO - 9 janv. 2012 13:39:55 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 13:39:55 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 13:48:39 : Démarrage de l'application.
+INFO - 9 janv. 2012 13:48:39 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 13:48:39 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 13:56:29 : Démarrage de l'application.
+INFO - 9 janv. 2012 13:56:29 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 13:56:29 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 13:59:58 : Démarrage de l'application.
+INFO - 9 janv. 2012 13:59:58 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 13:59:58 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 14:01:49 : Démarrage de l'application.
+INFO - 9 janv. 2012 14:01:49 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 14:01:49 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 14:02:09 : Démarrage de l'application.
+INFO - 9 janv. 2012 14:02:09 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 14:02:09 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 14:02:16 : Démarrage de l'application.
+INFO - 9 janv. 2012 14:02:16 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 14:02:16 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 14:03:52 : Démarrage de l'application.
+INFO - 9 janv. 2012 14:03:53 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 14:03:53 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 14:05:10 : Démarrage de l'application.
+INFO - 9 janv. 2012 14:05:11 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 14:05:11 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 14:13:55 : Démarrage de l'application.
+INFO - 9 janv. 2012 14:13:55 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 14:13:55 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 14:15:13 : Démarrage de l'application.
+INFO - 9 janv. 2012 14:15:14 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 14:15:14 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 14:16:37 : Démarrage de l'application.
+INFO - 9 janv. 2012 14:16:38 : L'adresse du serveur est "127.0.0.1".
+INFO - 9 janv. 2012 14:16:38 : Le port par défaut est "9999".
