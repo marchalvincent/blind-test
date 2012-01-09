@@ -30,7 +30,7 @@ public final class ThreadConnexion implements Runnable {
 	@Override
 	public final void run() {
 		//on créé le message
-		ConnexionMessage message = (ConnexionMessage) EnumMessage.CONNEXION.creatMessage();
+		ConnexionMessage message = (ConnexionMessage) EnumMessage.CONNEXION.createMessage();
 		message.setLogin(_login);
 		message.setPassword(_password);
 		

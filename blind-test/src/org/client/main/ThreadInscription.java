@@ -32,7 +32,7 @@ public final class ThreadInscription implements Callable<Boolean> {
 	@Override
 	public final Boolean call() {
 		//on construit l'objet message
-		InscriptionDefaultMessage inscription = (InscriptionDefaultMessage) EnumMessage.INSCRIPTION.creatMessage();
+		InscriptionDefaultMessage inscription = (InscriptionDefaultMessage) EnumMessage.INSCRIPTION.createMessage();
 		inscription.setLogin(login);
 		inscription.setNom(nom);
 		inscription.setPassword(password);
