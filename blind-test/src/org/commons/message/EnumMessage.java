@@ -4,13 +4,48 @@ import org.commons.util.IWithId;
 
 public enum EnumMessage implements IWithId {
 	
-	INSCRIPTION (1),
-	CONNEXION (2),
-	ANSWER(3),
-	DOWNLOAD(4),
-	DISPLAY(5),
-	INFO(6),
-	ERROR(7);
+	INSCRIPTION (1) {
+		@Override
+		public IMessage creatMessage() {
+			return new InfoDefaultMessage();
+		}
+	},
+	CONNEXION (2) {
+		@Override
+		public IMessage creatMessage() {
+			return new ConnexionMessage();
+		}
+	},
+	ANSWER(3) {
+		@Override
+		public IMessage creatMessage() {
+			return new AnswerMessage();
+		}
+	},
+	DOWNLOAD(4) {
+		@Override
+		public IMessage creatMessage() {
+			return new DownloadDefaultMessage();
+		}
+	},
+	DISPLAY(5) {
+		@Override
+		public IMessage creatMessage() {
+			return new DisplayDefaultMessage();
+		}
+	},
+	INFO(6) {
+		@Override
+		public IMessage creatMessage() {
+			return new InfoDefaultMessage();
+		}
+	},
+	ERROR(7) {
+		@Override
+		public IMessage creatMessage() {
+			return new ErrorDefaultMessage();
+		}
+	};
 	
 	private final int id;
 	
@@ -23,4 +58,5 @@ public enum EnumMessage implements IWithId {
 		return Integer.valueOf(id);
 	}
 
+	public abstract IMessage creatMessage();
 }
