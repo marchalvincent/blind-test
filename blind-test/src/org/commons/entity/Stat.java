@@ -13,7 +13,7 @@ public class Stat implements Comparable<Stat>, IWithName, IWithId, Serializable 
 	private Integer _victoire;
 	
 	public Stat(){
-		
+		this(Integer.valueOf(-1),0,0);
 	}
 	
 	public Stat(final int parId,final int parDefaite, final int parVictoire){
