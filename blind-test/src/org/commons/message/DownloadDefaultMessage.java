@@ -4,16 +4,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public final class DownloadMessage extends AbstractMessage {
+public final class DownloadDefaultMessage extends AbstractMessage {
 
 	private static final long serialVersionUID = 1L;
 	private Map<String, byte[]> download = null; 
 
-	protected DownloadMessage() {
+	protected DownloadDefaultMessage() {
 		this (new HashMap<String, byte[]>());
 	}
 
-	protected DownloadMessage(Map<String, byte[]> download) {
+	protected DownloadDefaultMessage(Map<String, byte[]> download) {
 		super(EnumMessage.DOWNLOAD);
 		this.download = download;
 	}
