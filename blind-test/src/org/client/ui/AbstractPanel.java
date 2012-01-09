@@ -6,6 +6,14 @@ import java.awt.Insets;
 
 import javax.swing.JPanel;
 
+/**
+ * Classe de base pour les panels avec :
+ * layout
+ * contraintes
+ * marges
+ * @author francois
+ *
+ */
 public abstract class AbstractPanel extends JPanel {
 
 	/**
