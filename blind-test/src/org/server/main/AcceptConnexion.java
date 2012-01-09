@@ -28,7 +28,7 @@ import java.net.Socket;
 				}
 			} catch (IOException e) {
 				
-				System.err.println("Erreur serveur");
+				System.err.println("Server Error");
 			}
 			
 		}
