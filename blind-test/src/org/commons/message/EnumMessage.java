@@ -6,43 +6,43 @@ public enum EnumMessage implements IWithId {
 	
 	INSCRIPTION (1) {
 		@Override
-		public IMessage creatMessage() {
+		public IMessage createMessage() {
 			return new InfoDefaultMessage();
 		}
 	},
 	CONNEXION (2) {
 		@Override
-		public IMessage creatMessage() {
+		public IMessage createMessage() {
 			return new ConnexionMessage();
 		}
 	},
 	ANSWER(3) {
 		@Override
-		public IMessage creatMessage() {
+		public IMessage createMessage() {
 			return new AnswerMessage();
 		}
 	},
 	DOWNLOAD(4) {
 		@Override
-		public IMessage creatMessage() {
+		public IMessage createMessage() {
 			return new DownloadDefaultMessage();
 		}
 	},
 	DISPLAY(5) {
 		@Override
-		public IMessage creatMessage() {
+		public IMessage createMessage() {
 			return new DisplayDefaultMessage();
 		}
 	},
 	INFO(6) {
 		@Override
-		public IMessage creatMessage() {
+		public IMessage createMessage() {
 			return new InfoDefaultMessage();
 		}
 	},
 	ERROR(7) {
 		@Override
-		public IMessage creatMessage() {
+		public IMessage createMessage() {
 			return new ErrorDefaultMessage();
 		}
 	};
@@ -62,5 +62,5 @@ public enum EnumMessage implements IWithId {
 		return EnumMessage.ERROR.equals(parMessage);
 	}
 	
-	public abstract IMessage creatMessage();
+	public abstract IMessage createMessage();
 }

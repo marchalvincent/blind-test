@@ -396,3 +396,6 @@ INFO - 9 janv. 2012 14:15:14 : Le port par défaut est "9999".
 INFO - 9 janv. 2012 14:16:37 : Démarrage de l'application.
 INFO - 9 janv. 2012 14:16:38 : L'adresse du serveur est "127.0.0.1".
 INFO - 9 janv. 2012 14:16:38 : Le port par défaut est "9999".
+INFO - 9 janv. 2012 16:21:37 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 16:21:37 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 16:21:38 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
