@@ -11,10 +11,10 @@ USE `blind_test` ;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `blind_test`.`banque` ;
 
-CREATE  TABLE IF NOT EXISTS `blind_test`.`banque` (
+CREATE TABLE IF NOT EXISTS `blind_test`.`banque` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `answer` VARCHAR(60) NOT NULL ,
-  `name` VARCHAR(35) NOT NULL ,
+  `name` CHAR(37) NOT NULL ,
   `directory` VARCHAR(100) NOT NULL ,
   `version` INT NOT NULL ,
   PRIMARY KEY (`id`) )

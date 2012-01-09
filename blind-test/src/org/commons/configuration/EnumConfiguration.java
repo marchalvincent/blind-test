@@ -72,7 +72,20 @@ public enum EnumConfiguration implements IWithName, IWithSupport {
 
 		@Override
 		public final String getFormattedValue(final Configuration parConfiguration) {
-			return String.format("L'encodage est défini en : %s", parConfiguration.getCharsetName());
+			return String.format("L'encodage est défini en : \"%s\"", parConfiguration.getCharsetName());
+		}
+	},
+	IMAGE_DIRECTORY("images", "-i", "image/") {
+
+		@Override
+		public final void setConfigurationValue(
+				final Configuration parConfiguration, final String parValue) {
+			parConfiguration.setImageDirectory(parValue);
+		}
+
+		@Override
+		public final String getFormattedValue(final Configuration parConfiguration) {
+			return String.format("Le répertoire où se situe les images est : \"%s\"", parConfiguration.getImageDirectory());
 		}
 	};
 

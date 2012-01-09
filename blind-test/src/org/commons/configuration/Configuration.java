@@ -48,6 +48,12 @@ public interface Configuration {
 	 * @return {@link Integer} le port par défaut du serveur.
 	 */
 	Integer getPort();
+	
+	/**
+	 * Retourne le répertoire dans lequel se trouve les images.
+	 * @return {@link String} le répertoire dans lequel se trouve les images.
+	 */
+	String getImageDirectory();
 
 	/**
 	 * Modifie le port de l'application.
@@ -72,6 +78,12 @@ public interface Configuration {
 	 * @param parLevel {@link String} le nouveau niveau de l'application.
 	 */
 	void setMinLevel(final String parLevel);
+	
+	/**
+	 * Modifie le répertoire des images.
+	 * @param parImageDirectory {@link String} le nouveau répertoire d'images.
+	 */
+	void setImageDirectory(final String parImageDirectory);
 	
 	/**
 	 * Charge la configuration de l'application.
