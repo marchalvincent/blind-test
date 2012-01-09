@@ -28,7 +28,7 @@ public class UserManager extends AbstractManager<User> {
 		try{
 			locStatement = getConnection().prepareStatement(ADD, PreparedStatement.RETURN_GENERATED_KEYS);
 			locStatement.setString(1, parUser.getConstName());
-			locStatement.setString(2, parUser.getLogin());
+			locStatement.setString(2, parUser.getName());
 			locStatement.setString(3, parUser.getPassword());
 			locStatement.setInt(4, parUser.getScore().intValue());
 			locStatement.executeUpdate();
@@ -94,7 +94,7 @@ public class UserManager extends AbstractManager<User> {
 		try {
 			locStatement = _connection.prepareStatement(MERGE,PreparedStatement.RETURN_GENERATED_KEYS);
 			locStatement.setString(1, parUser.getConstName());
-			locStatement.setString(2, parUser.getLogin());
+			locStatement.setString(2, parUser.getName());
 			locStatement.setString(3, parUser.getPassword());
 			locStatement.setInt(4, parUser.getScore().intValue());
 			locStatement.setInt(5, parUser.getId().intValue());

@@ -38,10 +38,11 @@ public final class DownloadImageFacade {
 		return locDownloadMessage;
 	}
 	
-	final static public void addImage(final Banque parBanque, final Map<String, byte[]> parImages, final Map<String, Integer> parVersion) throws IOException {
+	final static private void addImage(final Banque parBanque, final Map<String, byte[]> parImages, final Map<String, Integer> parVersion) throws IOException {
 		final BanqueFacade locFacade = BanqueFacade.instance();
 		final String locFileName = parBanque.getConstName();
-		final RenderedImage locImage = locFacade.readImage(locFileName);
+		final String locDirectory = parBanque.getDirectory();
+		final RenderedImage locImage = locFacade.readImage(locDirectory);
 		final byte[] locByteImage = locFacade.convertImage(locFacade.getFormat(locFileName), locImage);
 		parImages.put(locFileName, locByteImage);
 		parVersion.put(locFileName, parBanque.getVersion());

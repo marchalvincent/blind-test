@@ -5,6 +5,8 @@ import java.net.Socket;
 import java.util.logging.Level;
 
 import org.commons.cache.Caches;
+import org.commons.downloader.Downloader;
+import org.commons.downloader.ServerDownloader;
 import org.commons.entity.User;
 import org.commons.logger.InfoProvider;
 import org.commons.logger.InfoProviderManager;
@@ -54,18 +56,7 @@ public final class ConnexionAction extends AbstractAction {
 		}
 		final String locPassword = locConnexionMessage.getPassword();
 		if(StringUtil.equals(locPassword, locUser.getPassword())) {
-			Caches.user().put(locLogin, locUser);
-			final String locResponseMessage = String.format("L'utilisateur %s s'est connecté.", locLogin);
-			locInfoProvider.appendMessage(Level.INFO, locResponseMessage);
-			final InfoDefaultMessage locInfoMessage = (InfoDefaultMessage) EnumMessage.INFO.createMessage();
-			locInfoMessage.setMessage(locResponseMessage);
-			try {
-				ReadWriterUtil.write(locSocket, locInfoMessage);
-			} catch (IOException e) {
-				locInfoProvider.appendMessage(Level.SEVERE, String.format("Impossible d'écrire dans la socket d'adresse %s", locSocket.getInetAddress().getHostAddress()), e);
-			} finally {
-				SystemUtil.close(locSocket);
-			}
+			computeConnexion(locUser, locInfoProvider, locSocket);
 			return;
 		}
 		final String locResponseMessage = String.format("Le login ou le mot de passe est incorrect. Impossible de se connecter");
@@ -79,5 +70,21 @@ public final class ConnexionAction extends AbstractAction {
 		} finally {
 			SystemUtil.close(locSocket);
 		}
+	}
+	
+	private final void computeConnexion(final User parUser, final InfoProvider parInfoProvider, final Socket parSocket) {
+		final String locLogin = parUser.getConstName();
+		Caches.user().put(locLogin, parUser);
+		final String locResponseMessage = String.format("L'utilisateur %s s'est connecté.", locLogin);
+		parInfoProvider.appendMessage(Level.INFO, locResponseMessage);
+		final InfoDefaultMessage locInfoMessage = (InfoDefaultMessage) EnumMessage.INFO.createMessage();
+		locInfoMessage.setMessage(locResponseMessage);
+		try {
+			ReadWriterUtil.write(parSocket, locInfoMessage);
+		} catch (IOException e) {
+			parInfoProvider.appendMessage(Level.SEVERE, String.format("Impossible d'écrire dans la socket d'adresse %s", parSocket.getInetAddress().getHostAddress()), e);
+		} 
+		final Downloader locDownloader = new ServerDownloader(parSocket, parInfoProvider);
+		locDownloader.download();
 	}
 }
