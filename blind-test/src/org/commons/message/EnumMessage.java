@@ -7,7 +7,7 @@ public enum EnumMessage implements IWithId {
 	INSCRIPTION (1) {
 		@Override
 		public IMessage creatMessage() {
-			return new InfoDefaultMessage();
+			return new InscriptionDefaultMessage();
 		}
 	},
 	CONNEXION (2) {
