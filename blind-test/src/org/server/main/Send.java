@@ -1,28 +1,29 @@
 package org.server.main;
 
-import java.io.PrintWriter;
-import java.util.Scanner;
+import java.net.Socket;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
 
 public class Send implements Runnable {
-
-	private PrintWriter out;
-	private String message = null;
-	private Scanner sc = null;
 	
-	public Send (PrintWriter out) {
-		this.out = out;
+	static private final Runnable INSTANCE = new Send ();
+	
+	private final BlockingQueue<MessageEncapsulator> _taskList;
+	
+	private Send () {
+		_taskList = new ArrayBlockingQueue<MessageEncapsulator>(100);
 	}
 
 	
 	public void run() {
+		  while(_taskList.isEmpty() == false){
+			  final MessageEncapsulator locEncapsulator = _taskList.poll();
+			  final Socket locSocket;
+		  }
+	}
+	
+	public static Runnable getInstance() {
 		
-		  sc = new Scanner(message);
-		  
-		  while(true){
-			    System.out.println(message);
-				message = sc.nextLine();
-				out.println(message);
-			    out.flush();
-			  }
+		return INSTANCE;
 	}
 }

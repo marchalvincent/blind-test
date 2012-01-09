@@ -4,6 +4,7 @@ import java.util.Properties;
 
 import org.commons.entity.Banque;
 import org.commons.entity.Stat;
+import org.commons.entity.User;
 
 /**
  * Une clase utilitaire pour obtenir des {@link Manager}
@@ -23,6 +24,10 @@ public final class Managers {
 	final static public Manager<Stat> createStatManager() {
 		return ManagerStat.INSTANCE;
 	}
+	
+	final static public Manager<User> createUserManager() {
+		return ManagerUser.INSTANCE;
+	}
 	/**
 	 * Singleton
 	 */
@@ -32,6 +37,10 @@ public final class Managers {
 	
 	static private final class ManagerStat {
 		static private final Manager<Stat> INSTANCE = new StatManager();
+	}
+	
+	static private final class ManagerUser {
+		static private final Manager<User> INSTANCE = new UserManager();
 	}
 	
 	/**
