@@ -40,11 +40,7 @@ public final class ClientMain {
 		} catch (IOException e) {
 		  System.err.println("No server listening to this port "+socket.getLocalPort());
 		}
-		
-		
-
-		}
-	
+	}
 
 	static private final Configuration loadConfiguration(final String[] parArguments) {
 		final Configuration locConfiguration = ConfigurationManager.getConfiguration();

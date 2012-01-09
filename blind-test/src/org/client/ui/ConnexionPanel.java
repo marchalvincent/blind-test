@@ -12,6 +12,8 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import org.client.ui.listeners.ConnexionListener;
+
 /**
  * Classe representant le panel de connexion
  * @author francois
@@ -75,23 +77,7 @@ public class ConnexionPanel extends JPanel {
 		
 		//Bouton Connexion
 		JButton boutConn = new JButton ("Connexion");
-		boutConn.addMouseListener(new MouseListener () {
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-				Fenetre.changePage(new AccueilPanel ());
-			}
-			
-			@Override
-			public void mousePressed(MouseEvent e) {}
-			@Override
-			public void mouseReleased(MouseEvent e) {}
-			@Override
-			public void mouseEntered(MouseEvent e) {}
-			@Override
-			public void mouseExited(MouseEvent e) {}
-		});
+		boutConn.addMouseListener(new ConnexionListener ());
 		contraintes.gridx = 0;
 		contraintes.gridy = 3;
 		contraintes.gridwidth = GridBagConstraints.REMAINDER;
