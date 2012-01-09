@@ -1,8 +1,6 @@
 package org.server.main;
 
-import java.io.IOException;
 import java.util.Properties;
-import java.net.ServerSocket;
 import java.util.logging.Level;
 
 import org.commons.configuration.Configuration;
