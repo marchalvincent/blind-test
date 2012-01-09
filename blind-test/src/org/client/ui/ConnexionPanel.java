@@ -72,7 +72,7 @@ public class ConnexionPanel extends AbstractPanel {
 		this.add(champsMdp, getContraintes());
 		
 		//Bouton Connexion
-		JButton boutonConnexion = new JButton ("Connexion");
+		JButton boutonConnexion = new BoutonGris ("Connexion");
 		boutonConnexion.addMouseListener(new ConnexionListener ());
 		getContraintes().gridx = 0;
 		getContraintes().gridy = 3;
@@ -82,7 +82,7 @@ public class ConnexionPanel extends AbstractPanel {
 		this.add(boutonConnexion, getContraintes());
 		
 		//Bouton Quitter
-		JButton boutonQuitter = new JButton ("Quitter");
+		JButton boutonQuitter = new BoutonGris ("Quitter");
 		boutonQuitter.addMouseListener(new QuitterListener ());
 		getContraintes().gridx = 0;
 		getContraintes().gridy = 0;
