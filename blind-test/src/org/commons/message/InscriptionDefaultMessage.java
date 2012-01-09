@@ -19,11 +19,6 @@ public final class InscriptionDefaultMessage extends AbstractMessage {
 		this.nom = nom;
 	}
 	
-	public IMessage createMessage() {
-		return null;
-		
-	}
-
 	public String getLogin() {
 		return login;
 	}
