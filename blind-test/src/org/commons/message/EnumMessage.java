@@ -58,5 +58,9 @@ public enum EnumMessage implements IWithId {
 		return Integer.valueOf(id);
 	}
 
+	static public final boolean isError(final EnumMessage parMessage) {
+		return EnumMessage.ERROR.equals(parMessage);
+	}
+	
 	public abstract IMessage creatMessage();
 }

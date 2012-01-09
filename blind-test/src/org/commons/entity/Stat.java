@@ -13,7 +13,7 @@ public class Stat implements Comparable<Stat>, IWithName, IWithId, Serializable 
 	private Integer _victoire;
 	
 	public Stat(){
-		
+		this(Integer.valueOf(-1),0,0);
 	}
 	
 	public Stat(final int parId,final int parDefaite, final int parVictoire){
@@ -30,8 +30,16 @@ public class Stat implements Comparable<Stat>, IWithName, IWithId, Serializable 
 		_id = parId;
 	}
 	
+	public Integer getVictoire() {
+		return _victoire;
+	}
+	
 	public final void setVictoire(final Integer parVictoire) {
 		_victoire= parVictoire;
+	}
+	
+	public Integer getDefaite() {
+		return _defaite;
 	}
 	
 	public final void setDefaite(final Integer parDefaite) {
@@ -76,6 +84,11 @@ public class Stat implements Comparable<Stat>, IWithName, IWithId, Serializable 
 		if(parStat == null) return 1;
 		final int locCompareTo = parStat._victoire - parStat._defaite;
 		return locCompareTo;
+	}
+	
+	@Override
+	public final String toString() {
+		return "Victoires : "+_victoire+"\nDéfaites : "+_defaite;
 	}
 
 }
