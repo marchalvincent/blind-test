@@ -9,7 +9,7 @@ public interface IWithId {
 
 	/**
 	 * Retourne l'identifiant de l'objet
-	 * @return {@ ilink Integer} l'identifiant de l'objet
+	 * @return {@link Integer} l'identifiant de l'objet
 	 */
 	Integer getId();
 	
