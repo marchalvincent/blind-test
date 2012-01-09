@@ -103,7 +103,6 @@ public class Banque implements Comparable<Banque>, IWithName, IWithId, Serializa
 	@Override
 	public final int compareTo(final Banque parBanque) {
 		if(parBanque == null) return 1;
-		
 		final int locCompareTo = StringUtil.compareTo(_name, parBanque._name);
 		return (locCompareTo != 0) ? locCompareTo : _version.intValue() - parBanque._version.intValue();
 	}
