@@ -1,18 +1,18 @@
 package org.commons.message;
 
 
-public final class InscriptionMessage extends AbstractMessage {
+public final class InscriptionDefaultMessage extends AbstractMessage {
 
 	private static final long serialVersionUID = 1L;
 	private String login = null;
 	private String password = null;
 	private String nom = null;
 
-	protected InscriptionMessage() {
+	protected InscriptionDefaultMessage() {
 		this ("", "", "");
 	}
 	
-	protected InscriptionMessage(String login, String password, String nom) {
+	protected InscriptionDefaultMessage(String login, String password, String nom) {
 		super(EnumMessage.INSCRIPTION);
 		this.login = login;
 		this.password = password;
