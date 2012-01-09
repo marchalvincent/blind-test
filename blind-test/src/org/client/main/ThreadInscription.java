@@ -58,9 +58,9 @@ public final class ThreadInscription implements Callable<Boolean> {
 			return EnumMessage.isError(mess);
 			
 		} catch (ClassNotFoundException e) {
-			fileProvider.appendMessage(Level.SEVERE, "Inscription - class not found");
+			fileProvider.appendMessage(Level.SEVERE, "Inscription - class not found" + e);
 		} catch (IOException e) {
-			fileProvider.appendMessage(Level.SEVERE, "Inscription - socket error");
+			fileProvider.appendMessage(Level.SEVERE, "Inscription - socket error" + e);
 		}
 		return false;
 	}

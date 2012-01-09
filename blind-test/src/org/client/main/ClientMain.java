@@ -1,5 +1,6 @@
 package org.client.main;
 
+import java.util.concurrent.Callable;
 import java.util.logging.Level;
 
 import org.client.ui.Fenetre;
@@ -22,7 +23,15 @@ public final class ClientMain {
 	public final static void main(final String[] parArguments) {
 		final Configuration locConfiguration = loadConfiguration(parArguments);
 		loadApplication(locConfiguration);
-		new Fenetre ();
+		//new Fenetre ();
+		Callable<Boolean> c = new ThreadInscription("login", "password", "nom");
+		try {
+			boolean rep = c.call();
+			System.out.println(rep);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	static private final Configuration loadConfiguration(final String[] parArguments) {
