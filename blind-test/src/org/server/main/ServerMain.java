@@ -1,5 +1,7 @@
 package org.server.main;
 
+import java.io.IOException;
+import java.net.ServerSocket;
 import java.util.logging.Level;
 
 import org.commons.configuration.Configuration;
@@ -17,10 +19,25 @@ import org.server.monitor.MonitorRunnable;
  *
  */
 public final class ServerMain {
+	
+	public static ServerSocket ss = null;
+	 public static Thread t;
+	 public static int port;		
 
 	public final static void main(final String[] parArguments) {
 		final Configuration locConfiguration = loadConfiguration(parArguments);
 		loadApplication(locConfiguration);
+		try {
+			ss = new ServerSocket(port);
+			System.out.println("Server listening on "+ss.getLocalPort());
+			
+			t = new Thread(new AcceptConnexion(ss));
+			t.start();
+			
+		} catch (IOException e) {
+			System.err.println("Port number "+ss.getLocalPort()+" is already used !!");
+		}
+	
 	}
 	
 	static private final Configuration loadConfiguration(final String[] parArguments) {
