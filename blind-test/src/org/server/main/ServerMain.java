@@ -1,6 +1,8 @@
 package org.server.main;
 
+import java.io.IOException;
 import java.util.Properties;
+import java.net.ServerSocket;
 import java.util.logging.Level;
 
 import org.commons.configuration.Configuration;
@@ -21,9 +23,24 @@ import org.server.persistence.Managers;
  */
 public final class ServerMain {
 	
+	public static ServerSocket ss = null;
+	 public static Thread t;
+	 public static int port;		
+
 	public final static void main(final String[] parArguments) {
 		final Configuration locConfiguration = loadConfiguration(parArguments);
 		loadApplication(locConfiguration);
+		try {
+			ss = new ServerSocket(port);
+			System.out.println("Server listening on "+ss.getLocalPort());
+			
+			t = new Thread(new AcceptConnexion(ss));
+			t.start();
+			
+		} catch (IOException e) {
+			System.err.println("Port number "+ss.getLocalPort()+" is already used !!");
+		}
+	
 	}
 	
 	static private final void loadApplication(final Configuration parConfiguration) {		
@@ -48,5 +65,14 @@ public final class ServerMain {
 			SystemUtil.exit();
 		}
 		return locConfiguration;
+	}
+	
+	static private final void loadApplication(final Configuration parConfiguration) {		
+		final MonitorRunnable locRunnable = new MonitorRunnable();
+		locRunnable.start();
+		final InfoProvider locProvider = InfoProviderManager.getFileProvider();
+		locProvider.appendMessage(Level.INFO, "Démarrage de l'application.");
+		locProvider.appendMessage(Level.INFO, String.format("L'adresse du serveur est \"%s\".", parConfiguration.getHostName()));
+		locProvider.appendMessage(Level.INFO, String.format("Le port par défaut est \"%d\".", parConfiguration.getPort()));
 	}
 }
