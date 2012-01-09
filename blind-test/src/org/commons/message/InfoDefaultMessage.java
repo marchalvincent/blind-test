@@ -1,10 +1,12 @@
 package org.commons.message;
 
+import org.commons.util.IWithSupport;
 
-public final class InfoDefaultMessage extends AbstractMessage {
+
+public final class InfoDefaultMessage extends AbstractMessage implements IWithSupport {
 
 	private static final long serialVersionUID = 1L;
-	private String message = null;
+	private String message;
 	
 	protected InfoDefaultMessage() {
 		this("");
@@ -21,5 +23,10 @@ public final class InfoDefaultMessage extends AbstractMessage {
 
 	public void setMessage(String message) {
 		this.message = message;
+	}
+
+	@Override
+	public String getSupport() {
+		return getMessage();
 	}
 }

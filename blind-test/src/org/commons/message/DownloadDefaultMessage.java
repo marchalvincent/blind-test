@@ -1,19 +1,22 @@
 package org.commons.message;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
 public final class DownloadDefaultMessage extends AbstractMessage {
 
 	private static final long serialVersionUID = 1L;
-	private Map<String, byte[]> download = null; 
+	private Map<String, byte[]> download; 
 
 	protected DownloadDefaultMessage() {
 		this (new HashMap<String, byte[]>());
 	}
 
-	protected DownloadDefaultMessage(Map<String, byte[]> download) {
+	protected DownloadDefaultMessage(final Map<String, byte[]> download) {
 		super(EnumMessage.DOWNLOAD);
 		this.download = download;
 	}
@@ -22,7 +25,23 @@ public final class DownloadDefaultMessage extends AbstractMessage {
 		return download;
 	}
 
-	public void setDownload(Map<String, byte[]> download) {
-		this.download = download;
+	public final byte[] put(final String parName, final byte[] parValue) throws IOException {
+		return download.put(parName, parValue);
+	}
+	
+	public final byte[] get (final String parName) {
+		return download.get(parName);
+	}
+	
+	public final int size() {
+		return download.size();
+	}
+	
+	public final List<byte[]> values() {
+		return new ArrayList<byte[]>(download.values());
+	}
+	
+	public final List<String> keys() {
+		return new ArrayList<String>(download.keySet());
 	}
 }

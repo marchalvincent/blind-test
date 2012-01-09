@@ -1,6 +1,5 @@
 package org.client.main;
 
-import java.net.Socket;
 import java.util.logging.Level;
 
 import org.client.ui.Fenetre;
@@ -19,8 +18,6 @@ import org.commons.util.SystemUtil;
  * 
  */
 public final class ClientMain {
-	public static Socket socket = null;
-	public static Thread t1;
 
 	public final static void main(final String[] parArguments) {
 		final Configuration locConfiguration = loadConfiguration(parArguments);
@@ -28,10 +25,8 @@ public final class ClientMain {
 		new Fenetre ();
 	}
 
-	static private final Configuration loadConfiguration(
-			final String[] parArguments) {
-		final Configuration locConfiguration = ConfigurationManager
-				.getConfiguration();
+	static private final Configuration loadConfiguration(final String[] parArguments) {
+		final Configuration locConfiguration = ConfigurationManager.getConfiguration();
 		try {
 			EnumConfiguration.updateConfiguration(locConfiguration,
 					parArguments);
@@ -48,10 +43,7 @@ public final class ClientMain {
 			final Configuration parConfiguration) {
 		final InfoProvider locProvider = InfoProviderManager.getFileProvider();
 		locProvider.appendMessage(Level.INFO, "Démarrage de l'application.");
-		locProvider.appendMessage(Level.INFO, String.format(
-				"L'adresse du serveur est \"%s\".",
-				parConfiguration.getHostName()));
-		locProvider.appendMessage(Level.INFO, String.format(
-				"Le port par défaut est \"%d\".", parConfiguration.getPort()));
+		locProvider.appendMessage(Level.INFO, String.format("L'adresse du serveur est \"%s\".",	parConfiguration.getHostName()));
+		locProvider.appendMessage(Level.INFO, String.format("Le port par défaut est \"%d\".", parConfiguration.getPort()));
 	}
 }

@@ -1,66 +1,41 @@
 package org.client.main;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.Scanner;
+
+import org.commons.configuration.Configuration;
+import org.commons.configuration.ConfigurationManager;
+import org.commons.message.ConnexionMessage;
+import org.commons.message.EnumMessage;
+
 
 public class Connexion implements Runnable {
 
-	private Socket socket = null;
-	public static Thread t2;
-	public static String login = null, pass = null;
-	private PrintWriter out = null;
-	private BufferedReader in = null;
-	private Scanner sc = null;
-	private boolean connect = false;
+	final private String _login;
+	final private String _password;
+	private transient Socket _socket;
 	
-	public Connexion(Socket s){
-		
-		socket = s;
+	public Connexion(final String parHost, final String parPassword) {
+		_login = parHost;
+		_password = parPassword;
 	}
 	
-	public void run() {
-		
+	final public Socket getSocket() {
+		return _socket;
+	}
+
+	@Override
+	public final void run() {
+		final Configuration locConfiguration = ConfigurationManager.getConfiguration();
 		try {
+			_socket = new Socket(locConfiguration.getHostName(), locConfiguration.getPort().intValue());
+			final ConnexionMessage locMessage = (ConnexionMessage) EnumMessage.CONNEXION.creatMessage();
+			locMessage.setLogin(_login);
+			locMessage.setPassword(_password);
+			//TODO : Ecrire dans la socket
 			
-		out = new PrintWriter(socket.getOutputStream());
-		in = new BufferedReader(new InputStreamReader(socket.getInputStream()));	
-		sc = new Scanner(System.in);
-	
-		
-		while(!connect ){
-		
-		System.out.println(in.readLine());
-		login = sc.nextLine();
-		out.println(login);
-		out.flush();
-		
-		System.out.println(in.readLine());
-		pass = sc.nextLine();
-		out.println(pass);
-		out.flush();
-		
-		if(in.readLine().equals("connecting")){
-			
-		System.out.println("connected "); 
-		connect = true;
-		  }
-		
-		else {
-			System.err.println("Incorrect login or pass"); 
-		  }
-		
-	}
-			
-			t2 = new Thread(new DataClient(socket));
-			t2.start();
-		
 		} catch (IOException e) {
-			
-			System.err.println("Server not responding ");
 		}
+		
 	}
 }
