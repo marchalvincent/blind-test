@@ -4,9 +4,9 @@ import java.net.Socket;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
-public class Send implements Runnable {
+public class ServerWriter implements Runnable {
 	
-	static private final Runnable INSTANCE = new Send ();
+	static private final Runnable INSTANCE = new ServerWriter ();
 	
 	static public final Runnable getInstance() {
 		return INSTANCE;
@@ -14,7 +14,7 @@ public class Send implements Runnable {
 	
 	private final BlockingQueue<EncapsulatorMessage> _taskList;
 	
-	private Send () {
+	private ServerWriter () {
 		_taskList = new ArrayBlockingQueue<EncapsulatorMessage>(100);
 	}
 
@@ -22,7 +22,6 @@ public class Send implements Runnable {
 	public void run() {
 		  while(_taskList.isEmpty() == false){
 			  final EncapsulatorMessage locEncapsulator = _taskList.poll();
-			  final Socket locSocket;
 		  }
 	}
 }
