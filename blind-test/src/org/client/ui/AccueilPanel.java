@@ -1,5 +1,7 @@
 package org.client.ui;
 
+import java.awt.GridBagConstraints;
+
 import javax.swing.JButton;
 
 import org.client.ui.listeners.DeconnexionListener;
@@ -28,7 +30,8 @@ public class AccueilPanel extends AbstractPanel {
 		JButton boutonDeconnexion = new JButton ("Déconnexion");
 		boutonDeconnexion.addMouseListener(new DeconnexionListener ());
 		getContraintes().gridx = 0;
-		getContraintes().gridy = 0;
+		getContraintes().gridy = 1;
+		getContraintes().gridwidth = GridBagConstraints.REMAINDER;
 		getMarges().set(0, 15, 15, 15);
 		getContraintes().insets = getMarges();
 		//getContraintes().anchor = GridBagConstraints.LINE_END;
@@ -37,20 +40,21 @@ public class AccueilPanel extends AbstractPanel {
 		//Bouton Jouer
 		JButton boutonJouer = new JButton ("Jouer !");
 		boutonJouer.addMouseListener(new JouerListener ());;
-		getContraintes().gridy = 1;
+		getContraintes().gridy = 2;
 		//getContraintes().anchor = GridBagConstraints.REMAINDER;
 		this.add(boutonJouer, getContraintes());
 		
 		//Bouton Règles
 		JButton boutonRegles = new JButton ("Règles");
 		boutonRegles.addMouseListener(new ReglesListener ());
-		getContraintes().gridy = 2;
+		getContraintes().gridy = 3;
 		this.add(boutonRegles, getContraintes());
 		
 		//Bouton Quitter
 		JButton boutonQuitter = new JButton ("Quitter");
 		boutonQuitter.addMouseListener(new QuitterListener ());
-		getContraintes().gridy = 3;
+		getContraintes().gridx = 0;
+		getContraintes().gridy = 0;
 		this.add(boutonQuitter, getContraintes());
 	}
 }
