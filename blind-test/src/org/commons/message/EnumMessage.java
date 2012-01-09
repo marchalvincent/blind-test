@@ -6,13 +6,16 @@ public enum EnumMessage implements IWithId {
 	
 	INSCRIPTION (1),
 	CONNEXION (2),
-	ANSWER(3);
+	ANSWER(3),
+	DOWNLOAD(4),
+	DISPLAY(5),
+	INFO(6),
+	ERROR(7);
 	
 	private final int id;
 	
 	EnumMessage (int id) {
 		this.id = id;
-		
 	}
 
 	@Override
