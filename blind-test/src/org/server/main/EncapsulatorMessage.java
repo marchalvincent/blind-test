@@ -4,16 +4,16 @@ import java.net.Socket;
 
 import org.commons.message.IMessage;
 
-public final class MessageEncapsulator {
+public final class EncapsulatorMessage {
 
 	private IMessage _message;
 	private Socket _socket;
 	
-	public MessageEncapsulator() {
+	public EncapsulatorMessage() {
 		this(null, null);
 	}
 	
-	public MessageEncapsulator(final Socket parSocket, final IMessage parMessage) {
+	public EncapsulatorMessage(final Socket parSocket, final IMessage parMessage) {
 		_message = parMessage;
 		_socket = parSocket;
 	}
