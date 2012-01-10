@@ -1,15 +1,15 @@
 package org.commons.message;
 
-public class DisplayDefaultMessage extends AbstractMessage {
+public class DisplayMessage extends AbstractMessage {
 
 	private static final long serialVersionUID = 1L;
 	private String fileName = null;
 	
-	protected DisplayDefaultMessage() {
+	protected DisplayMessage() {
 		this("");
 	}
 	
-	protected DisplayDefaultMessage(String fileName) {
+	protected DisplayMessage(String fileName) {
 		super(EnumMessage.DISPLAY);
 		this.fileName = fileName;
 	}

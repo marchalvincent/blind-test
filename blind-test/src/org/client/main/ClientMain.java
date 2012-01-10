@@ -25,12 +25,12 @@ public final class ClientMain {
 	public final static void main(final String[] parArguments) {
 		final Configuration locConfiguration = loadConfiguration(parArguments);
 		loadApplication(locConfiguration);
-		loadUI();
-		/*final String locLogin = "login2";
+		//loadUI();
+		final String locLogin = "login2";
 		final ThreadInscription locInscription = new ThreadInscription(locLogin, locLogin, locLogin);
 		locInscription.call();
 		final ThreadConnexion locConnexion = new ThreadConnexion(locLogin, locLogin);
-		locConnexion.run();*/
+		locConnexion.run();
 		final DownloaderPool locPool = DownloaderPool.getInstance();
 		if(locPool.isShutdown() == false) {
 			locPool.shutdown();
