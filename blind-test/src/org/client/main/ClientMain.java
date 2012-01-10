@@ -30,7 +30,7 @@ public final class ClientMain {
 		final ThreadInscription locInscription = new ThreadInscription(locLogin, locLogin, locLogin);
 		locInscription.call();
 		final ThreadConnexion locConnexion = new ThreadConnexion(locLogin, locLogin);
-		locConnexion.run();
+		locConnexion.call();
 		final DownloaderPool locPool = DownloaderPool.getInstance();
 		if(locPool.isShutdown() == false) {
 			locPool.shutdown();
