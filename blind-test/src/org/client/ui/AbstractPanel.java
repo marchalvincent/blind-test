@@ -46,7 +46,7 @@ public abstract class AbstractPanel extends JPanel {
 	public void paintComponent (Graphics g) {
 		try {
 			RenderedImage image = BanqueFacade.instance().readImage("image/fond.jpeg");
-			g.drawImage((Image) image, 0, 0, Fenetre.getInstance().getWidth(), Fenetre.getInstance().getHeight(), null);
+			g.drawImage((Image) image, 0, 0, Fenetre.instance().getWidth(), Fenetre.instance().getHeight(), null);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
