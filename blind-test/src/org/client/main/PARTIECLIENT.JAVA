@@ -11,12 +11,12 @@ import org.commons.logger.InfoProvider;
 import org.commons.logger.InfoProviderManager;
 import org.commons.util.SystemUtil;
 
-public class PartieClien {
+public class PartieClient {
 
 	private JouerPanel fenetre = null;
 	private String login = null;
 	
-	public PartieClien(JouerPanel fenetre, String login) {
+	public PartieClient(JouerPanel fenetre, String login) {
 		this.fenetre = fenetre;
 		this.login = login;
 	}
