@@ -40,7 +40,6 @@ public class PlayAction extends AbstractAction {
 		final User locUser = locCacheUser.get(locLogin);
 		// Pas connecté : bug
 		if(locUser == null) {
-			//TODO : Il est pas co on lui envoie une erreur
 			final String locErrorMessage = String.format("Le joueur %s n'est pas connecté. Veuillez vous connecter.", locLogin);
 			final ErrorMessage locErrorRealMessage = (ErrorMessage) EnumMessage.ERROR.createMessage();
 			locErrorRealMessage.setMessage(locErrorMessage);
@@ -62,6 +61,7 @@ public class PlayAction extends AbstractAction {
 			locPartieCache.put(locNomPartie, locPartie);
 		}
 		locPartie.addUser(locUser);
-		new ThreadPartie(locUser.getConstName(), locSocket, locPartie);
+		final Thread locThread = new Thread(new ThreadPartie(locUser.getConstName(), locSocket, locPartie));
+		locThread.start();
 	}
 }

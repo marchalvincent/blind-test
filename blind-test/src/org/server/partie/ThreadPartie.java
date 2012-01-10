@@ -10,6 +10,8 @@ import org.commons.message.AnswerMessage;
 import org.commons.message.DisplayMessage;
 import org.commons.message.EnumMessage;
 import org.commons.message.ErrorMessage;
+import org.commons.message.IMessage;
+import org.commons.message.InfoMessage;
 import org.commons.util.StringUtil;
 import org.server.concurrent.ReadWriterUtil;
 
@@ -28,42 +30,49 @@ public final class ThreadPartie implements Runnable {
 	@Override
 	public final void run() {
 		final InfoProvider locInfoProvider = InfoProviderManager.getFileProvider();
-		while(_partie.isFinished() == false) {
-			final DisplayMessage locMessage = (DisplayMessage) EnumMessage.DISPLAY.createMessage();
-			final Banque locBanque = _partie.next();
-			locMessage.setFileName(locBanque.getConstName());
-			try {
-				ReadWriterUtil.write(_socket, locMessage);
-			} catch (IOException e) {
-			}
-			final String locBanqueAnswer = locBanque.getAnswer();
-			while(true) {
-				AnswerMessage locAnswerMessage = null;
+		while(_partie.isFinished() == false) { 
+			while (_partie.isReboot() == true) {
+				final DisplayMessage locMessage = (DisplayMessage) EnumMessage.DISPLAY
+						.createMessage();
+				final Banque locBanque = _partie.next();
+				locMessage.setFileName(locBanque.getConstName());
 				try {
-					locAnswerMessage = (AnswerMessage) ReadWriterUtil.read(_socket);
-				} catch (ClassNotFoundException e) {
+					ReadWriterUtil.write(_socket, locMessage);
 				} catch (IOException e) {
 				}
-				final String locAnswer = locAnswerMessage.getAnswer();
-				if(StringUtil.equals(locBanqueAnswer, locAnswer)) {
-					_partie.updateStats(_userName);
-					_partie.notifyWinner(locInfoProvider, _userName);
-					while(_partie.canDisplayNewImage() == false) {
-						if(_partie.isReboot() == false) {
+				final String locBanqueAnswer = locBanque.getAnswer();
+				while (true) {
+					IMessage locResponseMessage = null;
+					try {
+						locResponseMessage = (AnswerMessage) ReadWriterUtil.read(_socket);
+					} catch (ClassNotFoundException e) {
+					} catch (IOException e) {
+					}
+					if (locResponseMessage instanceof InfoMessage) {
+						_partie.incrementAck();
+						if (_partie.canDisplayNewImage() == true) {
 							_partie.rebootAck();
 						}
+						break;
 					}
-					break;
-				} else {
-					final ErrorMessage locErrorMessage = (ErrorMessage) EnumMessage.ERROR.createMessage();
-					final String locValue = "La réponse est incorrect.";
-					locErrorMessage.setMessage(locValue);
-					try {
-						ReadWriterUtil.write(_socket, locErrorMessage);
-					} catch (IOException e) {
+					final AnswerMessage locAnswerMessage = (AnswerMessage) locResponseMessage;
+					final String locAnswer = locAnswerMessage.getAnswer();
+					if (StringUtil.equals(locBanqueAnswer, locAnswer)) {
+						_partie.updateStats(_userName);
+						_partie.notifyWinner(locInfoProvider, _userName);
+						break;
+					} else {
+						final ErrorMessage locErrorMessage = (ErrorMessage) EnumMessage.ERROR.createMessage();
+						final String locValue = "La réponse est incorrect.";
+						locErrorMessage.setMessage(locValue);
+						try {
+							ReadWriterUtil.write(_socket, locErrorMessage);
+						} catch (IOException e) {
+						}
 					}
 				}
 			}
+			_partie.updateImage();
 		}
 	}	
 }
