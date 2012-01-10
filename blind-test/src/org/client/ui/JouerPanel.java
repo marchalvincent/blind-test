@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 import org.client.ui.listeners.ValidListener;
 import org.client.ui.listeners.boutonValidEntree;
 import org.commons.entity.BanqueFacade;
+import org.commons.util.StringUtil;
 
 /**
  * panel pour jouer au jeu
@@ -79,6 +80,7 @@ public class JouerPanel extends AbstractPanel {
 	@Override
 	public void paintComponent (Graphics g) {
 		super.paintComponent(g);
+		if(StringUtil.isEmpty(imagePath)) return;
 		try {
 			RenderedImage image = BanqueFacade.instance().readImage(imagePath);
 			g.drawImage((Image) image, 20, 20, Fenetre.instance().getWidth() - 20, Fenetre.instance().getHeight() - 50, null);
