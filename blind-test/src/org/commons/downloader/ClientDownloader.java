@@ -10,7 +10,7 @@ import org.commons.configuration.Configuration;
 import org.commons.configuration.ConfigurationManager;
 import org.commons.entity.BanqueFacade;
 import org.commons.logger.InfoProvider;
-import org.commons.message.DownloadDefaultMessage;
+import org.commons.message.DownloadMessage;
 import org.commons.message.EnumMessage;
 import org.commons.message.IMessage;
 import org.commons.util.SystemUtil;
@@ -24,7 +24,7 @@ public final class ClientDownloader extends AbstractDownloader {
 
 	@Override
 	public final Boolean call() {
-		final DownloadDefaultMessage locDownloadMessage = (DownloadDefaultMessage) EnumMessage.DOWNLOAD.createMessage();
+		final DownloadMessage locDownloadMessage = (DownloadMessage) EnumMessage.DOWNLOAD.createMessage();
 		final Configuration locConfiguration = ConfigurationManager.getConfiguration();
 		final ImageIndex locIndex = new ImageIndex();
 		try {
@@ -46,7 +46,7 @@ public final class ClientDownloader extends AbstractDownloader {
 		} finally {
 			SystemUtil.close(_socket);
 		}
-		final DownloadDefaultMessage locResponseDownload = (DownloadDefaultMessage) locResponseMessage;
+		final DownloadMessage locResponseDownload = (DownloadMessage) locResponseMessage;
 		locIndex.clear();
 		locIndex.putAll(locResponseDownload.getVersions());
 		try {
@@ -73,4 +73,8 @@ public final class ClientDownloader extends AbstractDownloader {
 	public final Boolean download() {
 		return DownloaderPool.getInstance().submit(this, _infoProvider);
 	}	
+	
+	public void disconnect (Socket parSocket) {
+		SystemUtil.close(parSocket);	
+	}
 }

@@ -11,15 +11,13 @@ import javax.swing.JPanel;
  * @author francois
  *
  */
-public final class Fenetre extends JFrame {
+public class Fenetre {
 
 	static private final Fenetre INSTANCE = new Fenetre();
 	
 	static public final Fenetre instance() {
 		return INSTANCE;
 	}
-	
-	private static final long serialVersionUID = 1L;
 	private JFrame fenetre;
 	
 	public Fenetre () {
@@ -28,15 +26,25 @@ public final class Fenetre extends JFrame {
 	}
 	
 	protected void initFenetre () {
-		fenetre.setSize(800, 600);
+		fenetre.setSize(800, 700);
 		fenetre.setMinimumSize(new Dimension (500, 400));
 		fenetre.setContentPane(new ConnexionPanel());
 		fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		fenetre.add(LogClient.getInstance());
 		fenetre.setVisible(true);
 	}
 	
 	public void changePage (JPanel nouveau) {
 		fenetre.setContentPane(nouveau);
+		fenetre.add(LogClient.getInstance());
 		fenetre.validate();
+	}
+	
+	public int getHeight () {
+		return fenetre.getHeight();
+	}
+	
+	public int getWidth () {
+		return fenetre.getWidth();
 	}
 }

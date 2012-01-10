@@ -5,6 +5,11 @@ import java.awt.event.MouseListener;
 import org.client.ui.AccueilPanel;
 import org.client.ui.Fenetre;
 
+/**
+ * renvoit sur la page d'accueil
+ * @author francois
+ *
+ */
 public class ConnexionListener implements MouseListener {
 	
 	@Override

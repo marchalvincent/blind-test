@@ -6,7 +6,7 @@ import java.util.logging.Level;
 
 import org.commons.incremental.DownloadImageFacade;
 import org.commons.logger.InfoProvider;
-import org.commons.message.DownloadDefaultMessage;
+import org.commons.message.DownloadMessage;
 import org.commons.message.IMessage;
 import org.commons.util.SystemUtil;
 import org.server.concurrent.ReadWriterUtil;
@@ -30,7 +30,7 @@ public final class ServerDownloader extends AbstractDownloader {
 			SystemUtil.close(_socket);
 			return Boolean.FALSE;
 		} 
-		final DownloadDefaultMessage locDownloadrealMessage = (DownloadDefaultMessage) locDownloadMessage;
+		final DownloadMessage locDownloadrealMessage = (DownloadMessage) locDownloadMessage;
 		try {
 			final IMessage locResponse = DownloadImageFacade.getImages(locDownloadrealMessage.getVersions());
 			ReadWriterUtil.write(_socket, locResponse);

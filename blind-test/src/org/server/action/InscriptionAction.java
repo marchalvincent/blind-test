@@ -8,10 +8,10 @@ import org.commons.entity.User;
 import org.commons.logger.InfoProvider;
 import org.commons.logger.InfoProviderManager;
 import org.commons.message.EnumMessage;
-import org.commons.message.ErrorDefaultMessage;
+import org.commons.message.ErrorMessage;
 import org.commons.message.IMessage;
-import org.commons.message.InfoDefaultMessage;
-import org.commons.message.InscriptionDefaultMessage;
+import org.commons.message.InfoMessage;
+import org.commons.message.InscriptionMessage;
 import org.commons.util.SystemUtil;
 import org.server.concurrent.ReadWriterUtil;
 import org.server.persistence.Manager;
@@ -27,11 +27,11 @@ public final class InscriptionAction extends AbstractAction {
 	public final void run() {
 		final InfoProvider locInfoProvider = InfoProviderManager.getFileProvider();
 		final IMessage locMessage = getMessage();
-		if(locMessage instanceof InscriptionDefaultMessage == false) {
+		if(locMessage instanceof InscriptionMessage == false) {
 			locInfoProvider.appendMessage(Level.SEVERE, "Le type du message est incorrect. Le message reçu est : " + locMessage);
 			return;
 		}
-		final InscriptionDefaultMessage locInscriptionMessage = (InscriptionDefaultMessage) locMessage;
+		final InscriptionMessage locInscriptionMessage = (InscriptionMessage) locMessage;
 		final Manager<User> locUserManager = Managers.createUserManager();
 		final String locLogin = locInscriptionMessage.getLogin();
 		User locUser = locUserManager.find(locLogin);
@@ -40,7 +40,7 @@ public final class InscriptionAction extends AbstractAction {
 		if(locUser != null) {
 			final String locResultat = String.format("Le compte %s existe déjà. Impossible de créer un nouveau compte avec ce login", locLogin);
 			locInfoProvider.appendMessage(Level.INFO, locResultat);
-			final ErrorDefaultMessage locDefaultMessage = (ErrorDefaultMessage) EnumMessage.ERROR.createMessage();
+			final ErrorMessage locDefaultMessage = (ErrorMessage) EnumMessage.ERROR.createMessage();
 			locDefaultMessage.setMessage(locResultat);
 			try {
 				ReadWriterUtil.write(locSocket, locDefaultMessage);
@@ -58,7 +58,7 @@ public final class InscriptionAction extends AbstractAction {
 		locUser = locUserManager.add(locUser);
 		final String locAnswerMessage = String.format("L'utilisateur %s a été créé.", locLogin);
 		locInfoProvider.appendMessage(Level.INFO, locAnswerMessage);
-		final InfoDefaultMessage locResponseMessage = (InfoDefaultMessage) EnumMessage.INFO.createMessage();
+		final InfoMessage locResponseMessage = (InfoMessage) EnumMessage.INFO.createMessage();
 		try {
 			ReadWriterUtil.write(locSocket, locResponseMessage);
 		} catch (IOException e) {
