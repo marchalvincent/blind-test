@@ -1,7 +1,6 @@
 package org.client.ui;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 
 import javax.swing.JLabel;

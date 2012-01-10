@@ -9,6 +9,7 @@ import javax.swing.JTextField;
 
 import org.client.ui.listeners.CreerCompteListener;
 import org.client.ui.listeners.QuitterListener;
+import org.client.ui.listeners.RetourConnexionListener;
 
 /**
  * panel d'inscription
@@ -88,16 +89,25 @@ public class InscriptionPanel extends AbstractPanel {
 		getContraintes().anchor = GridBagConstraints.LINE_START;
 		champsNom.setMinimumSize(champsNom.getPreferredSize());
 		this.add(champsNom, getContraintes());
-		
-		//Bouton Inscription
-		BoutonGris boutonInscription = new BoutonGris ("Inscription");
-		boutonInscription.addMouseListener(new CreerCompteListener (boutonInscription, this));
+
+		//Bouton Annuler
+		BoutonGris boutonAnnuler = new BoutonGris ("Annuler");
+		boutonAnnuler.addMouseListener(new RetourConnexionListener (boutonAnnuler));
 		getContraintes().gridx = 0;
 		getContraintes().gridy = 4;
 		getContraintes().weighty = 0.01;
 		getContraintes().gridwidth = 1;
+		getContraintes().anchor = GridBagConstraints.FIRST_LINE_END;
+		this.add(boutonAnnuler, getContraintes());
+
+		//Bouton Inscription
+		BoutonGris boutonInscription = new BoutonGris ("Inscription");
+		boutonInscription.addMouseListener(new CreerCompteListener (boutonInscription, this));
+		getContraintes().gridx = 1;
+		getContraintes().gridy = 4;
+		getContraintes().weighty = 0.01;
 		getContraintes().gridwidth = GridBagConstraints.REMAINDER;
-		getContraintes().anchor = GridBagConstraints.PAGE_START;
+		getContraintes().anchor = GridBagConstraints.FIRST_LINE_START;
 		this.add(boutonInscription, getContraintes());
 		
 		//Bouton Quitter

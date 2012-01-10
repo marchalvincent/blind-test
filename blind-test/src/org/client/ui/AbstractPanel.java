@@ -10,7 +10,6 @@ import java.awt.image.RenderedImage;
 import java.io.IOException;
 
 import javax.swing.BorderFactory;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
