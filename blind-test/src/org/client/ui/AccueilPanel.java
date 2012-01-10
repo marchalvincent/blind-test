@@ -2,7 +2,6 @@ package org.client.ui;
 
 import java.awt.GridBagConstraints;
 
-import javax.swing.JButton;
 import javax.swing.JLabel;
 
 import org.client.ui.listeners.DeconnexionListener;
@@ -20,16 +19,15 @@ public class AccueilPanel extends AbstractPanel {
 	private static final long serialVersionUID = 1L;
 	
 	public AccueilPanel () {
-		initPanel ();
+		super ();
 	}
 	
 	@Override
 	protected void initPanel () {
-		setLayout(getLayout());
 				
 		//Bouton Quitter
-		JButton boutonQuitter = new BoutonGris ("Quitter");
-		boutonQuitter.addMouseListener(new QuitterListener ());
+		BoutonGris boutonQuitter = new BoutonGris ("Quitter");
+		boutonQuitter.addMouseListener(new QuitterListener (boutonQuitter));
 		getContraintes().gridx = 0;
 		getContraintes().gridy = 0;
 		getContraintes().weighty = 0.6;
@@ -41,8 +39,8 @@ public class AccueilPanel extends AbstractPanel {
 		this.add(boutonQuitter, getContraintes());
 		
 		//Bouton Deconnexion
-		JButton boutonDeconnexion = new BoutonGris ("Déconnexion");
-		boutonDeconnexion.addMouseListener(new DeconnexionListener ());
+		BoutonGris boutonDeconnexion = new BoutonGris ("Déconnexion");
+		boutonDeconnexion.addMouseListener(new DeconnexionListener (boutonDeconnexion));
 		getContraintes().gridx = 1;
 		getContraintes().gridy = 0;
 		getContraintes().weighty = 0.6;
@@ -53,8 +51,8 @@ public class AccueilPanel extends AbstractPanel {
 		this.add(boutonDeconnexion, getContraintes());
 		
 		//Bouton Jouer
-		JButton boutonJouer = new BoutonGris ("Jouer !");
-		boutonJouer.addMouseListener(new JouerListener ());
+		BoutonGris boutonJouer = new BoutonGris ("Jouer !");
+		boutonJouer.addMouseListener(new JouerListener (boutonJouer));
 		getContraintes().gridx = 0;
 		getContraintes().gridy = 1;
 		getContraintes().weighty = 0.1;
@@ -63,8 +61,8 @@ public class AccueilPanel extends AbstractPanel {
 		this.add(boutonJouer, getContraintes());
 		
 		//Bouton Règles
-		JButton boutonRegles = new BoutonGris ("Règles");
-		boutonRegles.addMouseListener(new ReglesListener ());
+		BoutonGris boutonRegles = new BoutonGris ("Règles");
+		boutonRegles.addMouseListener(new ReglesListener (boutonRegles));
 		getContraintes().gridx = 0;
 		getContraintes().gridy = 2;
 		getContraintes().weighty = 0.1;
