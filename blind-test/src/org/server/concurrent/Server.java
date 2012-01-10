@@ -27,7 +27,7 @@ public final class Server {
     
     public Server(InfoProvider logger){
     	this.logger = logger;
-    	blindTestExecutor = new BlindTestExecutor(30); 
+    	blindTestExecutor = new BlindTestExecutor(30);
     	port = ConfigurationManager.getConfiguration().getPort();
     }
     
@@ -48,9 +48,9 @@ public final class Server {
 	        	 blindTestExecutor.submit(action);
 	        }
 	    	catch (IOException e) {
-	        	logger.appendMessage(Level.SEVERE, "",e);
+	        	logger.appendMessage(Level.SEVERE, String.format("Impossible de se connecter à l'adresse %s sur le port %d.", ConfigurationManager.getConfiguration().getHostName(), ConfigurationManager.getConfiguration().getPort()),e);
 	        } catch (ClassNotFoundException e) {
-	        	logger.appendMessage(Level.SEVERE, "",e);
+	        	logger.appendMessage(Level.SEVERE, String.format("Impossible de se connecter à l'adresse %s sur le port %d.", ConfigurationManager.getConfiguration().getHostName(), ConfigurationManager.getConfiguration().getPort()),e);
 			}
 	    }
     }
