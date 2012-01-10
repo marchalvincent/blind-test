@@ -1,8 +1,9 @@
 package org.client.ui.listeners;
 
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+
 import org.client.ui.AccueilPanel;
+import org.client.ui.BoutonGris;
 import org.client.ui.Fenetre;
 
 /**
@@ -10,19 +11,16 @@ import org.client.ui.Fenetre;
  * @author francois
  *
  */
-public class ConnexionListener implements MouseListener {
+public class ConnexionListener extends AbstractBoutonListener {
 	
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		Fenetre.instance().changePage(new AccueilPanel ());
+	public ConnexionListener(BoutonGris bouton) {
+		super(bouton);
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public void mousePressed(MouseEvent e) {}
-	@Override
-	public void mouseReleased(MouseEvent e) {}
-	@Override
-	public void mouseEntered(MouseEvent e) {}
-	@Override
-	public void mouseExited(MouseEvent e) {}
+	public void mouseClicked(MouseEvent e) {
+		super.mouseClicked (e);
+		Fenetre.instance().changePage(new AccueilPanel ());
+	}
 }

@@ -61,7 +61,7 @@ public final class ClientMain {
 			
 			@Override
 			public final void run() {
-				new Fenetre();
+				Fenetre.instance();
 				//TODO : Francois, tu ajoute un UiInfoProvider ici
 			}
 		});
