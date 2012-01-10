@@ -30,7 +30,7 @@ public class StatAction extends AbstractAction {
 		final IMessage locMessage = getMessage();
 		if(locMessage instanceof StatMessage == false) {
 			locInfoProvider.appendMessage(Level.SEVERE, "Le type du message est incorrect. Le message reçu est : " + locMessage);
-			SystemUtil.close(locSocket);
+			SystemUtil.close(getSocket());
 			return;
 		}
 		
