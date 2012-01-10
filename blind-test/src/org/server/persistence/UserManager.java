@@ -27,8 +27,8 @@ public class UserManager extends AbstractManager<User> {
 		
 		try{
 			locStatement = getConnection().prepareStatement(ADD, PreparedStatement.RETURN_GENERATED_KEYS);
-			locStatement.setString(1, parUser.getConstName());
-			locStatement.setString(2, parUser.getName());
+			locStatement.setString(1, parUser.getName());
+			locStatement.setString(2, parUser.getConstName());
 			locStatement.setString(3, parUser.getPassword());
 			locStatement.setInt(4, parUser.getScore().intValue());
 			locStatement.executeUpdate();

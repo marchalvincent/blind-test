@@ -527,3 +527,30 @@ INFO - 10 janv. 2012 09:22:31 : Le compte login2 existe déjà. Impossible de cr
 INFO - 10 janv. 2012 09:22:31 : L'utilisateur login2 s'est connecté.
 INFO - 10 janv. 2012 09:22:31 : Début du téléchargement des images...
 INFO - 10 janv. 2012 09:22:31 : Fin du téléchargement des images.
+INFO - 10 janv. 2012 14:36:12 : Démarrage de l'application en cours...
+INFO - 10 janv. 2012 14:36:12 : Lancement du moniteur réussi.
+INFO - 10 janv. 2012 14:36:21 : La connexion à la base de données a été effectuée. L'adresse de la base est "192.168.204.117" sur le port "3306".
+INFO - 10 janv. 2012 14:36:29 : L'utilisateur login a été créé.
+INFO - 10 janv. 2012 14:37:51 : Démarrage de l'application en cours...
+INFO - 10 janv. 2012 14:37:51 : Lancement du moniteur réussi.
+INFO - 10 janv. 2012 14:37:57 : La connexion à la base de données a été effectuée. L'adresse de la base est "192.168.204.117" sur le port "3306".
+INFO - 10 janv. 2012 14:38:00 : L'utilisateur login2 a été créé.
+INFO - 10 janv. 2012 14:38:19 : L'utilisateur login2 s'est connecté.
+INFO - 10 janv. 2012 14:38:19 : Début du téléchargement des images...
+INFO - 10 janv. 2012 14:38:21 : Fin du téléchargement des images.
+INFO - 10 janv. 2012 14:39:06 : Démarrage de l'application en cours...
+INFO - 10 janv. 2012 14:39:07 : Lancement du moniteur réussi.
+INFO - 10 janv. 2012 14:39:12 : La connexion à la base de données a été effectuée. L'adresse de la base est "192.168.204.117" sur le port "3306".
+INFO - 10 janv. 2012 14:39:44 : L'image thg.png a été mise à jour. La réponse associée est thg. La version actuelle est : 2
+INFO - 10 janv. 2012 14:40:01 : L'image thg.png a correctement été ajouté. La réponse associée est thg.
+INFO - 10 janv. 2012 14:40:04 : L'image thg.png a été mise à jour. La réponse associée est thg. La version actuelle est : 2
+INFO - 10 janv. 2012 14:40:06 : L'image thg.png a été mise à jour. La réponse associée est thg. La version actuelle est : 3
+WARNING - 10 janv. 2012 14:40:16 : Le fichier /home/pitton/Documents.francois.png n'existe pas ou n'est pas accessible en lecture.
+INFO - 10 janv. 2012 14:40:29 : L'image francois.png a correctement été ajouté. La réponse associée est fr.
+INFO - 10 janv. 2012 14:40:35 : L'utilisateur login3 a été créé.
+INFO - 10 janv. 2012 14:40:43 : L'utilisateur login3 s'est connecté.
+INFO - 10 janv. 2012 14:40:43 : Début du téléchargement des images...
+INFO - 10 janv. 2012 14:40:44 : Fin du téléchargement des images.
+INFO - 10 janv. 2012 14:41:32 : L'utilisateur login3 s'est connecté.
+INFO - 10 janv. 2012 14:41:32 : Début du téléchargement des images...
+INFO - 10 janv. 2012 14:41:33 : Fin du téléchargement des images.
