@@ -3,16 +3,16 @@ package org.commons.message;
 import org.commons.util.IWithSupport;
 
 
-public final class ErrorDefaultMessage extends AbstractMessage implements IWithSupport {
+public final class ErrorMessage extends AbstractMessage implements IWithSupport {
 
 	private static final long serialVersionUID = 1L;
 	private String message;
 
-	protected ErrorDefaultMessage() {
+	protected ErrorMessage() {
 		this("");
 	}
 	
-	protected ErrorDefaultMessage(String message) {
+	protected ErrorMessage(String message) {
 		super(EnumMessage.ERROR);
 		this.message = message;
 	}

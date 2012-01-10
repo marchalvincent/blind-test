@@ -12,9 +12,9 @@ import org.commons.logger.InfoProvider;
 import org.commons.logger.InfoProviderManager;
 import org.commons.message.ConnexionMessage;
 import org.commons.message.EnumMessage;
-import org.commons.message.ErrorDefaultMessage;
+import org.commons.message.ErrorMessage;
 import org.commons.message.IMessage;
-import org.commons.message.InfoDefaultMessage;
+import org.commons.message.InfoMessage;
 import org.commons.util.StringUtil;
 import org.commons.util.SystemUtil;
 import org.server.concurrent.ReadWriterUtil;
@@ -43,7 +43,7 @@ public final class ConnexionAction extends AbstractAction {
 		if(locUser == null) {
 			final String locResponseMessage = String.format("Le compte de l'utilisateur %s n'existe pas. Veuillez créer un compte avant de tenter de vous connecter.", locLogin);
 			locInfoProvider.appendMessage(Level.WARNING, locResponseMessage);
-			final ErrorDefaultMessage locErrorMessage = (ErrorDefaultMessage) EnumMessage.ERROR.createMessage();
+			final ErrorMessage locErrorMessage = (ErrorMessage) EnumMessage.ERROR.createMessage();
 			locErrorMessage.setMessage(locResponseMessage);
 			try {
 				ReadWriterUtil.write(locSocket, locErrorMessage);
@@ -61,7 +61,7 @@ public final class ConnexionAction extends AbstractAction {
 		}
 		final String locResponseMessage = String.format("Le login ou le mot de passe est incorrect. Impossible de se connecter");
 		locInfoProvider.appendMessage(Level.INFO, locResponseMessage);
-		final ErrorDefaultMessage locErrorMessage = (ErrorDefaultMessage) EnumMessage.ERROR.createMessage();
+		final ErrorMessage locErrorMessage = (ErrorMessage) EnumMessage.ERROR.createMessage();
 		locErrorMessage.setMessage(locResponseMessage);
 		try {
 			ReadWriterUtil.write(locSocket, locErrorMessage);
@@ -77,7 +77,7 @@ public final class ConnexionAction extends AbstractAction {
 		Caches.user().put(locLogin, parUser);
 		final String locResponseMessage = String.format("L'utilisateur %s s'est connecté.", locLogin);
 		parInfoProvider.appendMessage(Level.INFO, locResponseMessage);
-		final InfoDefaultMessage locInfoMessage = (InfoDefaultMessage) EnumMessage.INFO.createMessage();
+		final InfoMessage locInfoMessage = (InfoMessage) EnumMessage.INFO.createMessage();
 		locInfoMessage.setMessage(locResponseMessage);
 		try {
 			ReadWriterUtil.write(parSocket, locInfoMessage);

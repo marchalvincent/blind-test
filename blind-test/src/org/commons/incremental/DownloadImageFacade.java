@@ -8,7 +8,7 @@ import java.util.Map;
 
 import org.commons.entity.Banque;
 import org.commons.entity.BanqueFacade;
-import org.commons.message.DownloadDefaultMessage;
+import org.commons.message.DownloadMessage;
 import org.commons.message.EnumMessage;
 import org.commons.message.IMessage;
 import org.server.persistence.Managers;
@@ -32,7 +32,7 @@ public final class DownloadImageFacade {
 			}
 		}
 		
-		final DownloadDefaultMessage locDownloadMessage = (DownloadDefaultMessage) EnumMessage.DOWNLOAD.createMessage();
+		final DownloadMessage locDownloadMessage = (DownloadMessage) EnumMessage.DOWNLOAD.createMessage();
 		locDownloadMessage.putAllImage(locImagesMap);
 		locDownloadMessage.putAllVersion(locVersionMap);
 		return locDownloadMessage;
