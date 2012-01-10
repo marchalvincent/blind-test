@@ -11,7 +11,7 @@ import org.commons.logger.InfoProvider;
 import org.commons.logger.InfoProviderManager;
 import org.commons.message.EnumMessage;
 import org.commons.message.IMessage;
-import org.commons.message.InscriptionDefaultMessage;
+import org.commons.message.InscriptionMessage;
 import org.commons.util.IWithSupport;
 import org.commons.util.WithUtilities;
 import org.server.concurrent.ReadWriterUtil;
@@ -32,7 +32,7 @@ public final class ThreadInscription implements Callable<Boolean> {
 	@Override
 	public final Boolean call() {
 		//on construit l'objet message
-		InscriptionDefaultMessage inscription = (InscriptionDefaultMessage) EnumMessage.INSCRIPTION.createMessage();
+		InscriptionMessage inscription = (InscriptionMessage) EnumMessage.INSCRIPTION.createMessage();
 		inscription.setLogin(login);
 		inscription.setNom(nom);
 		inscription.setPassword(password);

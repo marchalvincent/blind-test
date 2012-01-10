@@ -6,17 +6,17 @@ import java.util.List;
 import java.util.Map;
 
 
-public final class DownloadDefaultMessage extends AbstractMessage {
+public final class DownloadMessage extends AbstractMessage {
 
 	private static final long serialVersionUID = 1L;
 	private Map<String, byte[]> download; 
 	private Map<String, Integer> versioning;
 
-	protected DownloadDefaultMessage() {
+	protected DownloadMessage() {
 		this (new HashMap<String, byte[]>(), new HashMap<String, Integer>());
 	}
 
-	protected DownloadDefaultMessage(final Map<String, byte[]> download, final Map<String, Integer> versioning) {
+	protected DownloadMessage(final Map<String, byte[]> download, final Map<String, Integer> versioning) {
 		super(EnumMessage.DOWNLOAD);
 		this.download = download;
 		this.versioning = versioning;
