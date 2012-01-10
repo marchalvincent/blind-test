@@ -52,7 +52,7 @@ public final class ThreadInscription implements Callable<Boolean> {
 				fileProvider.appendMessage(Level.INFO, locSupport.getSupport());
 			}
 			EnumMessage mess = WithUtilities.getById(EnumMessage.values(), messageRetour.getId());
-			return EnumMessage.isError(mess);
+			return false == EnumMessage.isError(mess);
 		} catch (ClassNotFoundException e) {
 			fileProvider.appendMessage(Level.SEVERE, "Inscription - class not found" + e);
 		} catch (IOException e) {
