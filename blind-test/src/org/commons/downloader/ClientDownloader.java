@@ -47,7 +47,6 @@ public final class ClientDownloader extends AbstractDownloader {
 			SystemUtil.close(_socket);
 		}
 		final DownloadMessage locResponseDownload = (DownloadMessage) locResponseMessage;
-		locIndex.clear();
 		locIndex.putAll(locResponseDownload.getVersions());
 		try {
 			locIndex.write();

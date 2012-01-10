@@ -81,4 +81,13 @@ public class Partie implements IWithName {
 		return _hasWinner.getAndSet(parWinner);
 	}
 	
+	public final void notifyWinner(final String parWinner) {
+		/*final WinnerMessage locMessage = (WinnerMessage) EnumMessage.WINNER.createMessage();
+		final String locValueMessage = String.format("Le joueur %s a gagné la partie.", parWinner);
+		locMessage.setMessage(locValueMessage);
+		for(final Map.Entry<User, Socket> locEntry : _sockets.entrySet()) {
+			
+		}*/
+	}
+	
 }
