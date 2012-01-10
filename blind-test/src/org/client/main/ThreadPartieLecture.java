@@ -36,12 +36,12 @@ public class ThreadPartieLecture implements Runnable {
 				EnumMessage mess = WithUtilities.getById(EnumMessage.values(), messageRetour.getId());
 				
 				if (EnumMessage.isDisplay(mess)) {
-					tEcriture.add(messageRetour);
+					tEcriture.addIMessage(messageRetour);
 				}
 				else if (EnumMessage.isError(mess)) {
 					DisplayMessage display = (DisplayMessage) EnumMessage.DISPLAY.createMessage();
 					display.setFileName(tEcriture.getCurrentImage());
-					tEcriture.add(display);
+					tEcriture.addIMessage(display);
 				}
 				else if (EnumMessage.isWinner(mess)) {
 					InfoMessage info = (InfoMessage) EnumMessage.INFO.createMessage();
