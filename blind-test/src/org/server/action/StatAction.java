@@ -7,11 +7,7 @@ import java.util.logging.Level;
 import org.commons.entity.User;
 import org.commons.logger.InfoProvider;
 import org.commons.logger.InfoProviderManager;
-import org.commons.message.EnumMessage;
-import org.commons.message.ErrorMessage;
 import org.commons.message.IMessage;
-import org.commons.message.InfoMessage;
-import org.commons.message.InscriptionMessage;
 import org.commons.message.StatMessage;
 import org.commons.util.SystemUtil;
 import org.server.concurrent.ReadWriterUtil;
@@ -30,7 +26,7 @@ public class StatAction extends AbstractAction {
 		final IMessage locMessage = getMessage();
 		if(locMessage instanceof StatMessage == false) {
 			locInfoProvider.appendMessage(Level.SEVERE, "Le type du message est incorrect. Le message reçu est : " + locMessage);
-			SystemUtil.close(locSocket);
+			SystemUtil.close(getSocket());
 			return;
 		}
 		

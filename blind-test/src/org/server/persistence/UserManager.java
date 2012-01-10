@@ -194,8 +194,8 @@ public class UserManager extends AbstractManager<User> {
 		locUser.setName(locName);
 		locUser.setLogin(locLogin);
 		locUser.setPassword(locPassword);
-		locUser.setScore(Integer.valueOf(locVictoire));
-		locUser.setScore(Integer.valueOf(locDefaite));
+		locUser.setVictoire(Integer.valueOf(locVictoire));
+		locUser.setDefaite(Integer.valueOf(locDefaite));
 		return locUser;
 	}
 

@@ -1,17 +1,25 @@
 package org.server.partie;
 
+import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.logging.Level;
 
 import org.commons.cache.AbstractCache;
 import org.commons.cache.Caches;
 import org.commons.entity.Banque;
 import org.commons.entity.User;
+import org.commons.logger.InfoProvider;
+import org.commons.message.EnumMessage;
+import org.commons.message.WinnerMessage;
 import org.commons.util.IWithName;
 import org.commons.util.StringUtil;
+import org.commons.util.SystemUtil;
+import org.server.concurrent.ReadWriterUtil;
 import org.server.persistence.Manager;
 import org.server.persistence.Managers;
 
@@ -23,14 +31,14 @@ public class Partie implements IWithName {
 	private String _name;
 	private AbstractCache<User, Socket> _sockets;
 	private Banque _banque;
-	private AtomicBoolean _hasWinner;
+	private AtomicInteger _currentAck;
 	
 	public Partie(final String name){
 		banqueList = new ArrayList<Banque>();
 		userList = new ArrayList<User>();
 		_name = name;
 		_sockets = Caches.createSocketCache();
-		_hasWinner = new AtomicBoolean(false);
+		_currentAck = new AtomicInteger(0);
 	}
 	
 	public List<User> getUsers(){
@@ -73,21 +81,55 @@ public class Partie implements IWithName {
 		return StringUtil.equals(parAnswer, _banque.getAnswer());
 	}
 	
-	public final boolean hasWinner() {
-		return _hasWinner.get();
+	public synchronized boolean canDisplayNewImage() {
+		return userList.size() == _currentAck.get();
 	}
 	
-	public final boolean setWinner(final boolean parWinner) {
-		return _hasWinner.getAndSet(parWinner);
+	public final int incrementAck() {
+		return _currentAck.incrementAndGet();
 	}
 	
-	public final void notifyWinner(final String parWinner) {
-		/*final WinnerMessage locMessage = (WinnerMessage) EnumMessage.WINNER.createMessage();
+	public synchronized final boolean isReboot() {
+		return _currentAck.get() == 0;
+	}
+	
+	public final void rebootAck() {
+		_currentAck.set(0);
+	}
+	
+	public final void updateStats(final String parWinner) {
+		final Manager<User> locUserManager = Managers.createUserManager();
+		for(final User locUser : _sockets.keys()) {
+			if(StringUtil.equals(parWinner, locUser.getConstName())) {
+				locUser.setVictoire(locUser.getVictoire().intValue() + 1);
+				continue;
+			}
+			locUser.setDefaite(locUser.getDefaite().intValue() + 1);
+			locUserManager.merge(locUser);
+		}
+	}
+	
+	public final void notifyWinner(final InfoProvider parInfoProvider, final String parWinner) {
+		final WinnerMessage locMessage = (WinnerMessage) EnumMessage.WINNER.createMessage();
 		final String locValueMessage = String.format("Le joueur %s a gagné la partie.", parWinner);
 		locMessage.setMessage(locValueMessage);
+		locMessage.setLogin(parWinner);
 		for(final Map.Entry<User, Socket> locEntry : _sockets.entrySet()) {
-			
-		}*/
+			final Socket locSocket = locEntry.getValue();
+			try {
+				ReadWriterUtil.write(locSocket, locMessage);
+			} catch (IOException e) {
+				final User locUser = locEntry.getKey();
+				// On vire le user de la partie, du cache socket de la partie et des connectés.
+				removeUser(locUser);
+				final String locLogin = locUser.getConstName();
+				Caches.user().remove(locLogin);
+				_sockets.remove(locUser);
+				final String locIp = locSocket.getInetAddress().getHostAddress();
+				parInfoProvider.appendMessage(Level.SEVERE, String.format("Impossible d'écrire dans la socket d'adresse %s du joueur %s.", locIp, locLogin), e);
+				SystemUtil.close(locSocket);
+			}
+		}
 	}
 	
 }
