@@ -75,6 +75,7 @@ public final class ThreadConnexion implements Callable <Boolean> {
 		}
 		final Downloader locDownloader = new ClientDownloader(locSocket, fileProvider);
 		locDownloader.download();
+		SystemUtil.close(locSocket);
 		return true;
 	}
 }

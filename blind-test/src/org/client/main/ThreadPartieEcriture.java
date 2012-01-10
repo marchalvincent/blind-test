@@ -7,10 +7,12 @@ import java.util.logging.Level;
 
 import org.client.ui.AccueilPanel;
 import org.client.ui.Fenetre;
+import org.client.ui.JouerPanel;
 import org.commons.configuration.Configuration;
 import org.commons.configuration.ConfigurationManager;
 import org.commons.logger.InfoProvider;
 import org.commons.logger.InfoProviderManager;
+import org.commons.message.AnswerMessage;
 import org.commons.message.DisplayMessage;
 import org.commons.message.EnumMessage;
 import org.commons.message.IMessage;
@@ -24,18 +26,24 @@ import org.server.concurrent.ReadWriterUtil;
 public class ThreadPartieEcriture implements Runnable {
 
 	private String login = null;
-	private Fenetre fenetre = null;
+	private JouerPanel fenetre = null;
 	private String currentImage = null;
+	private String answer = null;
 	private Boolean isClicked = false;
+	private Socket socket = null;
 	private ArrayBlockingQueue<IMessage> abq;
 	
-	
-	
-	public ThreadPartieEcriture(Fenetre fenetre, String login) {
+
+	public ThreadPartieEcriture(Socket socket, JouerPanel fenetre, String login) {
 		super();
 		this.login = login;
 		this.fenetre = fenetre;
+		this.socket = socket;
 		abq = new ArrayBlockingQueue<IMessage>(20);
+	}
+	
+	public final void setAnswer(String answer) {
+		this.answer = answer;
 	}
 	
 	public void setCurrentImage(String currentImage) {
@@ -51,7 +59,7 @@ public class ThreadPartieEcriture implements Runnable {
 		
 		Configuration config = ConfigurationManager.getConfiguration();
 		InfoProvider fileProvider = InfoProviderManager.getUiInfoProvider();
-		String name;
+		String name = null;
 		StringBuilder sb = new StringBuilder();
 		
 		while(!abq.isEmpty()) {
@@ -74,10 +82,28 @@ public class ThreadPartieEcriture implements Runnable {
 					sb.append(config.getImageDirectory());
 					sb.append(name);
 					String fileName = sb.toString();
-					
-					//
-					
+					//fenetre.newTest(fileName);
 				}
+			}
+			
+			while(!isClicked) {
+				//Si le client a cliqué on construit le AnswerMessage
+				if (false == abq.isEmpty()) {
+					break;
+				}
+			}
+			
+			if (isClicked) {
+				//ON construit le AnswerMessage
+				AnswerMessage answerMessage = (AnswerMessage) EnumMessage.ANSWER.createMessage();
+				answerMessage.setLogin(this.login);
+				answerMessage.setAnswer(this.answer);
+				try {
+					ReadWriterUtil.write(this.socket, answerMessage);
+				} catch (IOException e) {
+					fileProvider.appendMessage(Level.SEVERE, "Inscription - erreur de connexion au serveur");
+				}
+				
 			}
 		}
 		
