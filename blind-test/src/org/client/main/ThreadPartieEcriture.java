@@ -5,8 +5,6 @@ import java.net.Socket;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.logging.Level;
 
-import org.client.ui.AccueilPanel;
-import org.client.ui.Fenetre;
 import org.client.ui.JouerPanel;
 import org.commons.configuration.Configuration;
 import org.commons.configuration.ConfigurationManager;
@@ -16,10 +14,8 @@ import org.commons.message.AnswerMessage;
 import org.commons.message.DisplayMessage;
 import org.commons.message.EnumMessage;
 import org.commons.message.IMessage;
-import org.commons.message.PlayMessage;
 import org.commons.util.IWithSupport;
 import org.commons.util.StringUtil;
-import org.commons.util.SystemUtil;
 import org.commons.util.WithUtilities;
 import org.server.concurrent.ReadWriterUtil;
 
@@ -31,7 +27,7 @@ public class ThreadPartieEcriture implements Runnable {
 	private String answer = null;
 	private Boolean isClicked = false;
 	private Socket socket = null;
-	private ArrayBlockingQueue<IMessage> abq;
+	private ArrayBlockingQueue<IMessage> _currentMessages;
 	
 
 	public ThreadPartieEcriture(Socket socket, JouerPanel fenetre, String login) {
@@ -39,11 +35,19 @@ public class ThreadPartieEcriture implements Runnable {
 		this.login = login;
 		this.fenetre = fenetre;
 		this.socket = socket;
-		abq = new ArrayBlockingQueue<IMessage>(20);
+		_currentMessages = new ArrayBlockingQueue<IMessage>(20);
 	}
 	
+	public final void add(final IMessage parMessage) {
+		_currentMessages.add(parMessage);
+	}
+
 	public final void setAnswer(String answer) {
 		this.answer = answer;
+	}
+
+	public final String getCurrentImage() {
+		return currentImage;
 	}
 	
 	public void setCurrentImage(String currentImage) {
@@ -62,8 +66,8 @@ public class ThreadPartieEcriture implements Runnable {
 		String name = null;
 		StringBuilder sb = new StringBuilder();
 		
-		while(!abq.isEmpty()) {
-			IMessage messageRetour = abq.poll();
+		while(!_currentMessages.isEmpty()) {
+			IMessage messageRetour = _currentMessages.poll();
 
 			//on affiche dans la console du client
 			if(messageRetour instanceof IWithSupport) {
@@ -88,7 +92,7 @@ public class ThreadPartieEcriture implements Runnable {
 			
 			while(!isClicked) {
 				//Si le client a cliqué on construit le AnswerMessage
-				if (false == abq.isEmpty()) {
+				if (false == _currentMessages.isEmpty()) {
 					break;
 				}
 			}
