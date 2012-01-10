@@ -2,7 +2,6 @@ package org.client.ui;
 
 import java.awt.Color;
 import java.awt.GridBagConstraints;
-import java.util.Arrays;
 
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
@@ -123,7 +122,7 @@ public class InscriptionPanel extends AbstractPanel {
 	}
 	
 	public String getPassword () {
-		return Arrays.toString(champsMdp.getPassword());
+		return new String(champsMdp.getPassword());
 	}
 	
 	public String getNom () {
