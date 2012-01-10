@@ -33,6 +33,7 @@ public final class ConnexionAction extends AbstractAction {
 		final IMessage locMessage = getMessage();
 		if(locMessage instanceof ConnexionMessage == false) {
 			locInfoProvider.appendMessage(Level.SEVERE, "Le type du message est incorrect. Le message reçu est : " + locMessage);
+			SystemUtil.close(locSocket);
 			return;
 		}
 		final ConnexionMessage locConnexionMessage = (ConnexionMessage) getMessage();

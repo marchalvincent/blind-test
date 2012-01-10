@@ -57,6 +57,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `name` varchar(60) NOT NULL,
   `login` varchar(60) NOT NULL,
   `password` varchar(60) NOT NULL,
-  `score` int NOT NULL,
+  `victoire` int NOT NULL,
+  `defaite` int NOT NULL,
   PRIMARY KEY (`idUser`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
