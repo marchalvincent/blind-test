@@ -499,3 +499,31 @@ INFO - 9 janv. 2012 23:25:11 : L'utilisateur login s'est connecté.
 INFO - 9 janv. 2012 23:25:43 : L'image thg.png a été mise à jour. La réponse associée est thg. La version actuelle est : 2
 INFO - 9 janv. 2012 23:26:08 : L'utilisateur login2 a été créé.
 INFO - 9 janv. 2012 23:26:08 : L'utilisateur login2 s'est connecté.
+INFO - 10 janv. 2012 09:07:10 : Démarrage de l'application en cours...
+INFO - 10 janv. 2012 09:07:10 : Lancement du moniteur réussi.
+INFO - 10 janv. 2012 09:07:11 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 10 janv. 2012 09:07:26 : L'image thg.png a correctement été ajouté. La réponse associée est thg.
+INFO - 10 janv. 2012 09:08:43 : L'utilisateur login2 a été créé.
+INFO - 10 janv. 2012 09:08:44 : L'utilisateur login2 s'est connecté.
+INFO - 10 janv. 2012 09:08:44 : Début du téléchargement des images...
+INFO - 10 janv. 2012 09:08:45 : Fin du téléchargement des images.
+INFO - 10 janv. 2012 09:12:59 : Le compte login2 existe déjà. Impossible de créer un nouveau compte avec ce login
+INFO - 10 janv. 2012 09:12:59 : L'utilisateur login2 s'est connecté.
+INFO - 10 janv. 2012 09:12:59 : Début du téléchargement des images...
+INFO - 10 janv. 2012 09:12:59 : Fin du téléchargement des images.
+INFO - 10 janv. 2012 09:13:35 : Le compte login2 existe déjà. Impossible de créer un nouveau compte avec ce login
+INFO - 10 janv. 2012 09:13:35 : L'utilisateur login2 s'est connecté.
+INFO - 10 janv. 2012 09:13:35 : Début du téléchargement des images...
+INFO - 10 janv. 2012 09:13:35 : Fin du téléchargement des images.
+INFO - 10 janv. 2012 09:13:45 : Le compte login2 existe déjà. Impossible de créer un nouveau compte avec ce login
+INFO - 10 janv. 2012 09:13:45 : L'utilisateur login2 s'est connecté.
+INFO - 10 janv. 2012 09:13:45 : Début du téléchargement des images...
+INFO - 10 janv. 2012 09:13:45 : Fin du téléchargement des images.
+INFO - 10 janv. 2012 09:14:17 : Le compte login2 existe déjà. Impossible de créer un nouveau compte avec ce login
+INFO - 10 janv. 2012 09:14:17 : L'utilisateur login2 s'est connecté.
+INFO - 10 janv. 2012 09:14:17 : Début du téléchargement des images...
+INFO - 10 janv. 2012 09:14:18 : Fin du téléchargement des images.
+INFO - 10 janv. 2012 09:22:31 : Le compte login2 existe déjà. Impossible de créer un nouveau compte avec ce login
+INFO - 10 janv. 2012 09:22:31 : L'utilisateur login2 s'est connecté.
+INFO - 10 janv. 2012 09:22:31 : Début du téléchargement des images...
+INFO - 10 janv. 2012 09:22:31 : Fin du téléchargement des images.
