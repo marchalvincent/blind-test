@@ -1,6 +1,7 @@
 package org.commons.logger;
 
 import java.util.logging.FileHandler;
+import java.util.logging.Formatter;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.LogRecord;
@@ -14,7 +15,7 @@ import org.commons.configuration.ConfigurationManager;
  * @author pitton
  *
  */
-public final class FileInfoProvider implements InfoProvider {
+public class FileInfoProvider implements InfoProvider {
 
 	/**
 	 * Le chemin de fichier
@@ -32,20 +33,24 @@ public final class FileInfoProvider implements InfoProvider {
 	}
 
 	@Override
-	public final InfoProvider appendMessage(final Level parLevel, final String parMessage) {
+	public InfoProvider appendMessage(final Level parLevel, final String parMessage) {
 		return appendMessage(parLevel, parMessage, null);
 	}
 
 	@Override
-	public final InfoProvider appendMessage(final Level parLevel, final String parMessage, final Throwable parThrowable) {
+	public InfoProvider appendMessage(final Level parLevel, final String parMessage, final Throwable parThrowable) {
 		if(this.isShowable(parLevel)) {
 			final LogRecord locRecord = new LogRecord(parLevel, parMessage);
 			locRecord.setThrown(parThrowable);
 			_logger.log(locRecord);
-			final String locValue = _logger.getHandlers()[0].getFormatter().format(locRecord);
+			final String locValue = getFormatter().format(locRecord);
 			System.err.print(locValue);
 		}
 		return this;
+	}
+	
+	protected final Formatter getFormatter() {
+		return _logger.getHandlers()[0].getFormatter();
 	}
 
 	@Override
