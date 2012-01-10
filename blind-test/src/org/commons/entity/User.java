@@ -16,7 +16,6 @@ public class User implements Comparable<User>, IWithName, IWithId, Serializable 
 	private String _password;
 	private Integer _victoire;	
 	private Integer _defaite;
-	private Integer _score;
 	
 	//Constructeur initialisé
 	public User() {
@@ -55,18 +54,6 @@ public class User implements Comparable<User>, IWithName, IWithId, Serializable 
 	
 	public final void setId(final Integer parId) {
 		_id = parId;
-	}
-	
-	public final int getScore() {
-		if (_victoire >= _defaite){
-			return _victoire.intValue()-_defaite.intValue();
-		} else {
-			return 0;
-		}
-	}
-	
-	public final void setScore(final Integer parScore) {
-		_score = parScore;
 	}
 	
 	@Override

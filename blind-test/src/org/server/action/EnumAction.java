@@ -24,15 +24,14 @@ public enum EnumAction implements IWithId {
 		}
 		
 	},
-	ANSWER(EnumMessage.ANSWER.getId()) {
+	PLAY(EnumMessage.PLAY.getId()) {
 		
 		@Override
 		final public AbstractAction createAction (final Socket parSocket, final IMessage parMessage) {
-			throw new UnsupportedOperationException("Not supported yet");
+			return new PlayAction(parSocket, parMessage);
 		}
 		
 	},
-	
 	STAT(EnumMessage.STAT.getId()){
 		
 		@Override

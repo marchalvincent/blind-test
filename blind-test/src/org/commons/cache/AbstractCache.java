@@ -15,6 +15,10 @@ public abstract class AbstractCache<K, V> {
 		_cache = new ConcurrentHashMap<K, V>();
 	}
 	
+	public final void remove(final K parKey) {
+		_cache.remove(parKey);
+	}
+	
 	public final V put(final K parKey, final V parValue) {
 		return _cache.put(parKey, parValue);
 	}
