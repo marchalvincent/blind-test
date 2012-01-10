@@ -21,38 +21,41 @@ import org.server.action.EnumAction;
 public final class Server {
 
 	private int port; 
-    private ServerSocket  serverSocket;
-    private BlindTestExecutor blindTestExecutor;
-    private InfoProvider logger;
-    
-    public Server(InfoProvider logger){
-    	this.logger = logger;
-    	blindTestExecutor = new BlindTestExecutor(30);
-    	port = ConfigurationManager.getConfiguration().getPort();
-    }
-    
-    
-    public void start() throws IOException{
-       	serverSocket = new ServerSocket(port);
-        handleConnexion();
-    }
-	
-    
-    private void handleConnexion(){
+	private ServerSocket  serverSocket;
+	private BlindTestExecutor blindTestExecutor;
+	private InfoProvider logger;
+
+	public Server(InfoProvider logger){
+		this.logger = logger;
+		blindTestExecutor = new BlindTestExecutor(30);
+		port = ConfigurationManager.getConfiguration().getPort();
+	}
+
+
+	public void start() throws IOException{
+		serverSocket = new ServerSocket(port);
+		handleConnexion();
+	}
+
+
+	private void handleConnexion(){
 		while (true){
-	    	try {
-	        	 Socket socket = serverSocket.accept();
-	        	 IMessage message =  ReadWriterUtil.read(socket);
-	        	 EnumAction enumAction = WithUtilities.getById(EnumAction.values(), message.getId()); 
-	        	 AbstractAction action  = enumAction.createAction(socket, message);
-	        	 blindTestExecutor.submit(action);
-	        }
-	    	catch (IOException e) {
-	        	logger.appendMessage(Level.SEVERE, String.format("Impossible de se connecter à l'adresse %s sur le port %d.", ConfigurationManager.getConfiguration().getHostName(), ConfigurationManager.getConfiguration().getPort()),e);
-	        } catch (ClassNotFoundException e) {
-	        	logger.appendMessage(Level.SEVERE, String.format("Impossible de se connecter à l'adresse %s sur le port %d.", ConfigurationManager.getConfiguration().getHostName(), ConfigurationManager.getConfiguration().getPort()),e);
+			Socket socket = null;
+			IMessage message = null;
+			try {
+				socket = serverSocket.accept();
+				message =  ReadWriterUtil.read(socket);
 			}
-	    }
-    }
-	
+			catch (IOException e) {
+				logger.appendMessage(Level.SEVERE, String.format("Impossible de se connecter à l'adresse %s sur le port %d.", socket.getInetAddress().getHostAddress(), socket.getPort()),e);
+				continue;
+			} catch (ClassNotFoundException e) {
+				continue;
+			}
+			EnumAction enumAction = WithUtilities.getById(EnumAction.values(), message.getId()); 
+			AbstractAction action  = enumAction.createAction(socket, message);
+			blindTestExecutor.submit(action);
+		}
+	}
+
 }
