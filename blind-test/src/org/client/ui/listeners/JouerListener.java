@@ -1,27 +1,27 @@
 package org.client.ui.listeners;
 
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+
+import org.client.ui.BoutonGris;
+import org.client.ui.Fenetre;
+import org.client.ui.JouerPanel;
 
 /**
  * Affiche le jeu
  * @author francois
  *
  */
-public class JouerListener implements MouseListener {
+public class JouerListener extends AbstractBoutonListener {
+
+	public JouerListener(BoutonGris bouton) {
+		super(bouton);
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+		super.mouseClicked(e);
+		Fenetre.instance().changePage(new JouerPanel());
 	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {}
-	@Override
-	public void mouseReleased(MouseEvent e) {}
-	@Override
-	public void mouseEntered(MouseEvent e) {}
-	@Override
-	public void mouseExited(MouseEvent e) {}
 }

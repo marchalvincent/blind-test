@@ -3,7 +3,6 @@ package org.client.ui;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -24,13 +23,12 @@ public class InscriptionPanel extends AbstractPanel {
 	private static final long serialVersionUID = 1L;
 	
 	public InscriptionPanel () {
-		getMarges().set(0, 15, 15, 15);
-		initPanel();
+		super ();
 	}
 	
 	@Override
 	protected void initPanel() {
-		this.setLayout(getLayout());
+		getMarges().set(0, 15, 15, 15);
 		
 		//Label Login
 		JLabel txtLogin = new JLabel ("Login");
@@ -72,8 +70,8 @@ public class InscriptionPanel extends AbstractPanel {
 		this.add(champsMdp, getContraintes());
 		
 		//Bouton Inscription
-		JButton boutonInscription = new BoutonGris ("Inscription");
-		boutonInscription.addMouseListener(new CreerCompteListener ());
+		BoutonGris boutonInscription = new BoutonGris ("Inscription");
+		boutonInscription.addMouseListener(new CreerCompteListener (boutonInscription));
 		getContraintes().gridx = 0;
 		getContraintes().gridy = 3;
 		getContraintes().weighty = 0.01;
@@ -83,8 +81,8 @@ public class InscriptionPanel extends AbstractPanel {
 		this.add(boutonInscription, getContraintes());
 		
 		//Bouton Quitter
-		JButton boutonQuitter = new BoutonGris ("Quitter");
-		boutonQuitter.addMouseListener(new QuitterListener ());
+		BoutonGris boutonQuitter = new BoutonGris ("Quitter");
+		boutonQuitter.addMouseListener(new QuitterListener (boutonQuitter));
 		getContraintes().gridx = 0;
 		getContraintes().gridy = 0;
 		getContraintes().weighty = 0.6;
