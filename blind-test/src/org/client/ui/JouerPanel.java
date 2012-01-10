@@ -26,7 +26,6 @@ public class JouerPanel extends AbstractPanel {
 	private static final long serialVersionUID = 1L;
 	private String imagePath;
 	private JTextField champsReponse;
-	//private PartieClient partieClient;
 	
 	public JouerPanel (String imagePath) {
 		super ();
