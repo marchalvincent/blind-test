@@ -2,8 +2,10 @@ package org.client.ui.listeners;
 
 import java.awt.event.MouseEvent;
 
+import org.client.main.ThreadConnexion;
 import org.client.ui.AccueilPanel;
 import org.client.ui.BoutonGris;
+import org.client.ui.ConnexionPanel;
 import org.client.ui.Fenetre;
 
 /**
@@ -13,14 +15,20 @@ import org.client.ui.Fenetre;
  */
 public class ConnexionListener extends AbstractBoutonListener {
 	
-	public ConnexionListener(BoutonGris bouton) {
+	private ConnexionPanel panel;
+	
+	public ConnexionListener(BoutonGris bouton, ConnexionPanel panel) {
 		super(bouton);
 		// TODO Auto-generated constructor stub
+		this.panel = panel;
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		super.mouseClicked (e);
-		Fenetre.instance().changePage(new AccueilPanel ());
+		ThreadConnexion tc = new ThreadConnexion(panel.getLogin(), panel.getPassword());
+		if (tc.call()) {
+			Fenetre.instance().changePage(new AccueilPanel ());
+		}
 	}
 }

@@ -60,6 +60,7 @@ public final class InscriptionAction extends AbstractAction {
 		final String locAnswerMessage = String.format("L'utilisateur %s a été créé.", locLogin);
 		locInfoProvider.appendMessage(Level.INFO, locAnswerMessage);
 		final InfoMessage locResponseMessage = (InfoMessage) EnumMessage.INFO.createMessage();
+		locResponseMessage.setMessage(locAnswerMessage);
 		try {
 			ReadWriterUtil.write(locSocket, locResponseMessage);
 		} catch (IOException e) {

@@ -22,6 +22,8 @@ public class ConnexionPanel extends AbstractPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private JTextField champsLogin;
+	private JPasswordField champsMdp;
 	
 	public ConnexionPanel () {
 		super ();
@@ -43,7 +45,7 @@ public class ConnexionPanel extends AbstractPanel {
 		this.add(txtLogin, getContraintes());
 		
 		//Champs Login
-		JTextField champsLogin = new JTextField (15);
+		champsLogin = new JTextField (15);
 		getContraintes().gridx = 1;
 		getContraintes().gridy = 1;
 		getContraintes().weighty = 0.1;
@@ -62,7 +64,7 @@ public class ConnexionPanel extends AbstractPanel {
 		this.add(txtMdp, getContraintes());
 		
 		//Champs Mot de passe
-		JPasswordField champsMdp = new JPasswordField (15);
+		champsMdp = new JPasswordField (15);
 		getContraintes().gridx = 1;
 		getContraintes().gridy = 2;
 		getContraintes().weighty = 0.1;
@@ -82,7 +84,7 @@ public class ConnexionPanel extends AbstractPanel {
 		
 		//Bouton Connexion
 		BoutonGris boutonConnexion = new BoutonGris ("Connexion");
-		boutonConnexion.addMouseListener(new ConnexionListener (boutonConnexion));
+		boutonConnexion.addMouseListener(new ConnexionListener (boutonConnexion, this));
 		getContraintes().gridx = 1;
 		getContraintes().gridy = 3;
 		getContraintes().weighty = 0.01;
@@ -108,5 +110,13 @@ public class ConnexionPanel extends AbstractPanel {
 		getContraintes().weighty = 0.4;
 		getContraintes().gridwidth = GridBagConstraints.REMAINDER;
 		this.add(espace, getContraintes());
+	}
+	
+	public String getLogin () {
+		return champsLogin.getText();
+	}
+	
+	public String getPassword () {
+		return new String(champsMdp.getPassword());
 	}
 }
