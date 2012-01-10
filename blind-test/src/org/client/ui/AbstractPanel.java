@@ -27,6 +27,11 @@ public abstract class AbstractPanel extends JPanel {
 	private GridBagConstraints contraintes = new GridBagConstraints();
 	private Insets marges = new Insets(0, 0, 0, 0);
 	
+	protected AbstractPanel () {
+		this.setLayout(layout);
+		initPanel ();
+	}
+	
 	protected abstract void initPanel ();
 	
 	@Override
