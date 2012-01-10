@@ -11,13 +11,14 @@ import javax.swing.JPanel;
  * @author francois
  *
  */
-public class Fenetre extends JFrame {
+public class Fenetre {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private static JFrame fenetre;
+	static private final Fenetre INSTANCE = new Fenetre();
+	
+	static public final Fenetre instance() {
+		return INSTANCE;
+	}
+	private JFrame fenetre;
 	
 	public Fenetre () {
 		fenetre = new JFrame ("Blind Test");
@@ -33,13 +34,17 @@ public class Fenetre extends JFrame {
 		fenetre.setVisible(true);
 	}
 	
-	public static void changePage (JPanel nouveau) {
+	public void changePage (JPanel nouveau) {
 		fenetre.setContentPane(nouveau);
 		fenetre.add(LogClient.getInstance());
 		fenetre.validate();
 	}
 	
-	public static JFrame getInstance () {
-		return fenetre;
+	public int getHeight () {
+		return fenetre.getHeight();
+	}
+	
+	public int getWidth () {
+		return fenetre.getWidth();
 	}
 }

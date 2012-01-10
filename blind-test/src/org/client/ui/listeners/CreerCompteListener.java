@@ -15,7 +15,7 @@ public class CreerCompteListener implements MouseListener {
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		Fenetre.changePage(new ConnexionPanel ());
+		Fenetre.instance().changePage(new ConnexionPanel ());
 	}
 
 	@Override
