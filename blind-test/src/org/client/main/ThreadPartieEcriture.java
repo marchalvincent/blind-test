@@ -2,10 +2,12 @@ package org.client.main;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.concurrent.ArrayBlockingQueue;
 import java.util.logging.Level;
 
 import org.client.ui.AccueilPanel;
 import org.client.ui.Fenetre;
+import org.client.ui.JouerPanel;
 import org.commons.configuration.Configuration;
 import org.commons.configuration.ConfigurationManager;
 import org.commons.logger.InfoProvider;
@@ -16,6 +18,7 @@ import org.commons.message.EnumMessage;
 import org.commons.message.IMessage;
 import org.commons.message.PlayMessage;
 import org.commons.util.IWithSupport;
+import org.commons.util.StringUtil;
 import org.commons.util.SystemUtil;
 import org.commons.util.WithUtilities;
 import org.server.concurrent.ReadWriterUtil;
@@ -23,92 +26,87 @@ import org.server.concurrent.ReadWriterUtil;
 public class ThreadPartieEcriture implements Runnable {
 
 	private String login = null;
-	private Fenetre fenetre = null;
-	private Boolean connected = true;
+	private JouerPanel fenetre = null;
+	private String currentImage = null;
+	private String answer = null;
+	private Boolean isClicked = false;
+	private Socket socket = null;
+	private ArrayBlockingQueue<IMessage> abq;
 	
-	public ThreadPartieEcriture(Fenetre fenetre, String login) {
+
+	public ThreadPartieEcriture(Socket socket, JouerPanel fenetre, String login) {
 		super();
 		this.login = login;
 		this.fenetre = fenetre;
+		this.socket = socket;
+		abq = new ArrayBlockingQueue<IMessage>(20);
 	}
 	
+	public final void setAnswer(String answer) {
+		this.answer = answer;
+	}
+	
+	public void setCurrentImage(String currentImage) {
+		this.currentImage = currentImage;
+	}
+
+	public void setIsClicked(Boolean isClicked) {
+		this.isClicked = isClicked;
+	}
+
 	@Override
 	public void run() {
-		//on construit le message
-		PlayMessage message = (PlayMessage) EnumMessage.PLAY.createMessage();
-		message.setLogin(login);
 		
 		Configuration config = ConfigurationManager.getConfiguration();
-		final InfoProvider fileProvider = InfoProviderManager.getUiInfoProvider();
-		Socket locSocket = null;
+		InfoProvider fileProvider = InfoProviderManager.getUiInfoProvider();
+		String name = null;
+		StringBuilder sb = new StringBuilder();
 		
-		// on envoie le message pour demander a jouer
-		try {
-			locSocket = new Socket(config.getHostName(), config.getPort());
-			ReadWriterUtil.write(locSocket, message);
-		}
-		catch (IOException locException) {
-			fileProvider.appendMessage(Level.SEVERE, String.format("Impossible de se connecter à l'adresse %s sur le port %d.", config.getHostName(), config.getPort()), locException);
-			SystemUtil.close(locSocket);
-			connected = false;
-		}
-		
-		IMessage messageRetour = null;
-		
-		//la boucle du jeu, infinie tant que le user n'a pas quitté
-		while(connected) {
-			// on écoute la réponse
-			try {
-				messageRetour = ReadWriterUtil.read(locSocket);
-			} catch (ClassNotFoundException e) {
-				SystemUtil.close(locSocket);
-				connected = false;
-			} catch (IOException e) {
-				fileProvider.appendMessage(Level.SEVERE, String.format("Impossible de se connecter à l'adresse %s sur le port %d.", config.getHostName(), config.getPort()), e);
-				SystemUtil.close(locSocket);
-				connected = false;
-			}
-			
-			//On affiche un message dans la console du client
-			if (messageRetour instanceof IWithSupport) {
+		while(!abq.isEmpty()) {
+			IMessage messageRetour = abq.poll();
+
+			//on affiche dans la console du client
+			if(messageRetour instanceof IWithSupport) {
 				IWithSupport locSupport = (IWithSupport) messageRetour;
 				fileProvider.appendMessage(Level.INFO, locSupport.getSupport());
 			}
 			
-			//On teste le type du message de retour
-			final EnumMessage mess = WithUtilities.getById(EnumMessage.values(), messageRetour.getId());
-			if (EnumMessage.isError(mess)) {
-				SystemUtil.close(locSocket);
-				connected = false;
+			EnumMessage mess = WithUtilities.getById(EnumMessage.values(), messageRetour.getId());
+			if (EnumMessage.isDisplay(mess)) {
+				DisplayMessage dm = (DisplayMessage) messageRetour;
+				name = dm.getFileName();
+				
+				if (!StringUtil.equals(name, currentImage)) {
+					currentImage = name;
+					sb.delete(0, (sb.length() - 1));
+					sb.append(config.getImageDirectory());
+					sb.append(name);
+					String fileName = sb.toString();
+					//fenetre.newTest(fileName);
+				}
 			}
-			else if (EnumMessage.isDisplay(mess)) {
-				DisplayMessage answer = (DisplayMessage) messageRetour;
-				StringBuilder name = new StringBuilder();
-				name.append(config.getImageDirectory());
-				name.append(answer.getFileName());
-				String fileName = name.toString();
-				//TODO faire le traitement qui affiche l'image sur l'UI
-				
-				//read
-				
-				
-				//send answerMessage
+			
+			while(!isClicked) {
+				//Si le client a cliqué on construit le AnswerMessage
+				if (false == abq.isEmpty()) {
+					break;
+				}
+			}
+			
+			if (isClicked) {
+				//ON construit le AnswerMessage
+				AnswerMessage answerMessage = (AnswerMessage) EnumMessage.ANSWER.createMessage();
+				answerMessage.setLogin(this.login);
+				answerMessage.setAnswer(this.answer);
+				try {
+					ReadWriterUtil.write(this.socket, answerMessage);
+				} catch (IOException e) {
+					fileProvider.appendMessage(Level.SEVERE, "Inscription - erreur de connexion au serveur");
+				}
 				
 			}
 		}
 		
-		fenetre.changePage(new AccueilPanel());
-		
 	}
-
-	public Boolean getConnected() {
-		return connected;
-	}
-
-	public void setConnected(Boolean connected) {
-		this.connected = connected;
-	}
-	
-	
 
 }
