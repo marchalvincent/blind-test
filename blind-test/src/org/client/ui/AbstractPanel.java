@@ -1,5 +1,6 @@
 package org.client.ui;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -9,6 +10,7 @@ import java.awt.image.RenderedImage;
 import java.io.IOException;
 
 import javax.swing.BorderFactory;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -37,11 +39,12 @@ public abstract class AbstractPanel extends JPanel {
 		contraintes.gridx = 0;
 		contraintes.gridy = 15;
 		contraintes.gridwidth = GridBagConstraints.REMAINDER;
-		contraintes.anchor = GridBagConstraints.CENTER;
+		contraintes.anchor = GridBagConstraints.PAGE_END;
 		contraintes.fill = GridBagConstraints.BOTH;
 		scrollLog.setOpaque(false);
 		scrollLog.getViewport().setOpaque(false);
 		scrollLog.setBorder(BorderFactory.createEmptyBorder());
+		scrollLog.setPreferredSize(new Dimension(800, 50));
 		this.add(scrollLog, contraintes);
 	}
 	

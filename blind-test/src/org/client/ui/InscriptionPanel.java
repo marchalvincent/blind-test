@@ -50,6 +50,7 @@ public class InscriptionPanel extends AbstractPanel {
 		getContraintes().gridy = 1;
 		getContraintes().gridwidth = GridBagConstraints.REMAINDER;
 		getContraintes().anchor = GridBagConstraints.LINE_START;
+		champsLogin.setMinimumSize(champsLogin.getPreferredSize());
 		this.add(champsLogin, getContraintes());
 		
 		//Label Mot de passe
@@ -67,6 +68,7 @@ public class InscriptionPanel extends AbstractPanel {
 		getContraintes().gridy = 2;
 		getContraintes().gridwidth = GridBagConstraints.REMAINDER;
 		getContraintes().anchor = GridBagConstraints.LINE_START;
+		champsMdp.setMinimumSize(champsMdp.getPreferredSize());
 		this.add(champsMdp, getContraintes());
 		
 		//Label Nom
@@ -84,6 +86,7 @@ public class InscriptionPanel extends AbstractPanel {
 		getContraintes().gridy = 3;
 		getContraintes().gridwidth = GridBagConstraints.REMAINDER;
 		getContraintes().anchor = GridBagConstraints.LINE_START;
+		champsNom.setMinimumSize(champsNom.getPreferredSize());
 		this.add(champsNom, getContraintes());
 		
 		//Bouton Inscription
