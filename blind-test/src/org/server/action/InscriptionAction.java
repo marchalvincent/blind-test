@@ -29,6 +29,7 @@ public final class InscriptionAction extends AbstractAction {
 		final IMessage locMessage = getMessage();
 		if(locMessage instanceof InscriptionMessage == false) {
 			locInfoProvider.appendMessage(Level.SEVERE, "Le type du message est incorrect. Le message reçu est : " + locMessage);
+			SystemUtil.close(locSocket);
 			return;
 		}
 		final InscriptionMessage locInscriptionMessage = (InscriptionMessage) locMessage;

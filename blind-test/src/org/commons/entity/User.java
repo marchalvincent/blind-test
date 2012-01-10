@@ -14,21 +14,40 @@ public class User implements Comparable<User>, IWithName, IWithId, Serializable 
 	private String _name;
 	private String _login;
 	private String _password;
-	private Integer _score;	
+	private Integer _victoire;	
+	private Integer _defaite;
+	private Integer _score;
 	
+	//Constructeur initialisé
 	public User() {
-		this(Integer.valueOf(-1),"", "", "", Integer.valueOf(0));
+		this(Integer.valueOf(-1),"", "", "", Integer.valueOf(0), Integer.valueOf(0));
 	}
 	
-	public User (final Integer parId, final String parName, final String parLogin, final String parPassword, final Integer parScore) {
-		
+	public User (final Integer parId, final String parName, final String parLogin, final String parPassword, final Integer parVictoire, final Integer parDefaite) {
 		_id = parId;
 		_name = parName;
 		_login = parLogin;
 		_password = parPassword;
-		_score = parScore;
+		_victoire = parVictoire;
+		_defaite = parDefaite;
 	}
 	
+	public Integer getVictoire() {
+		return _victoire;
+	}
+
+	public void setVictoire(Integer _victoire) {
+		this._victoire = _victoire;
+	}
+
+	public Integer getDefaite() {
+		return _defaite;
+	}
+
+	public void setDefaite(Integer _defaite) {
+		this._defaite = _defaite;
+	}
+
 	@Override
 	public final Integer getId() {
 		return _id;
@@ -38,8 +57,12 @@ public class User implements Comparable<User>, IWithName, IWithId, Serializable 
 		_id = parId;
 	}
 	
-	public final Integer getScore() {
-		return _score;
+	public final int getScore() {
+		if (_victoire >= _defaite){
+			return _victoire.intValue()-_defaite.intValue();
+		} else {
+			return 0;
+		}
 	}
 	
 	public final void setScore(final Integer parScore) {
