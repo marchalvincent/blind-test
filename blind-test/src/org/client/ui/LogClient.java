@@ -12,14 +12,16 @@ import javax.swing.JTextArea;
 public class LogClient {
 
 	private JTextArea log;
-	private StringBuffer txtLog;
+	private StringBuilder txtLog;
 	
 	public LogClient () {
+		txtLog = new StringBuilder ();
 		init ();
 	}
 	
 	protected void init () {
 		log = new JTextArea ();
+		log.setEditable(false);
 		log.setOpaque(false);
 		log.setForeground(Color.WHITE);
 		log.setVisible(true);
