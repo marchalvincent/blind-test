@@ -25,23 +25,21 @@ public class Fenetre {
 	}
 	
 	private Fenetre () {
+		createLogClient ();
 		fenetre = new JFrame ("Blind Test");
-		initFenetre ();
+		//initFenetre ();
 	}
 	
-	protected void initFenetre () {
+	public void initFenetre () {
 		fenetre.setSize(800, 700);
-		fenetre.setMinimumSize(new Dimension (500, 400));
+		fenetre.setMinimumSize(new Dimension (800, 700));
 		fenetre.setContentPane(new ConnexionPanel());
 		fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		createLogClient ();
-		fenetre.add(logClient.getInstance());
 		fenetre.setVisible(true);
 	}
 	
 	public void changePage (JPanel nouveau) {
 		fenetre.setContentPane(nouveau);
-		fenetre.add(logClient.getInstance());
 		fenetre.validate();
 	}
 	
@@ -49,6 +47,10 @@ public class Fenetre {
 		logClient = new LogClient ();
 		UiInfoProvider infoProvider = new UiInfoProvider ("log/blind_test.log", logClient);
 		InfoProviderManager.setUiInfoProvider(infoProvider);
+	}
+	
+	public LogClient getLogClient () {
+		return logClient;
 	}
 	
 	public int getHeight () {
