@@ -24,5 +24,15 @@ public final class InfoProviderManager {
 		static private final InfoProvider INSTANCE = new FileInfoProvider(LOG_FILE);
 	}
 	
+	static private InfoProvider _uiInfoProvider;
+	
+	static public final void setUiInfoProvider(final InfoProvider parInfoProvider) {
+		_uiInfoProvider = parInfoProvider;
+	}
+	
+	static public final InfoProvider getUiInfoProvider() {
+		return _uiInfoProvider;
+	}
+	
 	private InfoProviderManager() {}
 }

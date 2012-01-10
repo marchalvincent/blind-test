@@ -15,7 +15,7 @@ public class RetourMenuListener implements MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		Fenetre.changePage(new AccueilPanel ());
+		Fenetre.instance().changePage(new AccueilPanel ());
 	}
 
 	@Override

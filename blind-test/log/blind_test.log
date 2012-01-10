@@ -407,3 +407,95 @@ INFO - 9 janv. 2012 17:38:40 : Démarrage de l'application.
 INFO - 9 janv. 2012 17:38:41 : L'adresse du serveur est "192.168.204.117".
 INFO - 9 janv. 2012 17:38:41 : Le port par défaut est "9999".
 SEVERE - 9 janv. 2012 17:38:41 : Inscription - socket errorjava.net.SocketException: Socket is closed
+INFO - 9 janv. 2012 17:49:22 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 17:49:22 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 17:49:23 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+SEVERE - 9 janv. 2012 17:49:50 : Impossible d'insérer password en base
+Cannot add or update a child row: a foreign key constraint fails (`blind_test`.`user`, CONSTRAINT `user_ibfk_1` FOREIGN KEY (`idStat`) REFERENCES `stat` (`idStat`) ON DELETE CASCADE ON UPDATE CASCADE)
+INFO - 9 janv. 2012 17:49:50 : L'utilisateur login a été créé.
+SEVERE - 9 janv. 2012 17:49:50 : Impossible d'écrire dans la socket d'adresse 127.0.0.1
+Socket is closed
+INFO - 9 janv. 2012 20:00:17 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 20:00:18 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 20:00:19 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+SEVERE - 9 janv. 2012 20:00:24 : Impossible d'insérer password en base
+No value specified for parameter 5
+INFO - 9 janv. 2012 20:00:24 : L'utilisateur login a été créé.
+SEVERE - 9 janv. 2012 20:00:24 : Impossible d'écrire dans la socket d'adresse 127.0.0.1
+Socket is closed
+INFO - 9 janv. 2012 20:01:00 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 20:01:00 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 20:01:01 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 20:01:04 : L'utilisateur login a été créé.
+SEVERE - 9 janv. 2012 20:01:04 : Impossible d'écrire dans la socket d'adresse 127.0.0.1
+Socket is closed
+INFO - 9 janv. 2012 20:03:08 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 20:03:08 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 20:03:08 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 20:03:14 : L'utilisateur login a été créé.
+SEVERE - 9 janv. 2012 20:03:14 : Impossible d'écrire dans la socket d'adresse 127.0.0.1
+Socket is closed
+INFO - 9 janv. 2012 20:04:50 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 20:04:51 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 20:04:51 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 20:04:53 : L'utilisateur login a été créé.
+SEVERE - 9 janv. 2012 20:04:53 : Impossible d'écrire dans la socket d'adresse 127.0.0.1
+Socket is closed
+INFO - 9 janv. 2012 20:06:38 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 20:06:38 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 20:06:39 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 20:06:42 : L'utilisateur login a été créé.
+INFO - 9 janv. 2012 20:10:25 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 20:10:26 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 20:10:26 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 20:10:28 : L'utilisateur login a été créé.
+INFO - 9 janv. 2012 20:11:58 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 20:11:59 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 20:11:59 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 20:12:02 : L'utilisateur login a été créé.
+INFO - 9 janv. 2012 20:13:29 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 20:13:29 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 20:13:30 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 20:13:32 : L'utilisateur login a été créé.
+INFO - 9 janv. 2012 20:13:32 : Le compte login existe déjà. Impossible de créer un nouveau compte avec ce login
+INFO - 9 janv. 2012 20:44:28 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 20:44:28 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 20:44:29 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 20:44:32 : L'utilisateur login a été créé.
+INFO - 9 janv. 2012 20:44:32 : L'utilisateur login s'est connecté.
+INFO - 9 janv. 2012 22:47:04 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 22:47:04 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 22:47:05 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 22:47:19 : L'image thg.png a correctement été ajouté. La réponse associée est thg.
+INFO - 9 janv. 2012 22:50:48 : Le compte login existe déjà. Impossible de créer un nouveau compte avec ce login
+INFO - 9 janv. 2012 22:50:48 : Le login ou le mot de passe est incorrect. Impossible de se connecter
+INFO - 9 janv. 2012 22:51:17 : L'utilisateur login a été créé.
+INFO - 9 janv. 2012 22:51:17 : L'utilisateur login s'est connecté.
+SEVERE - 9 janv. 2012 22:51:17 : Impossible d'envoyer des images dans la socket d'adresse 127.0.0.1
+Can't read input file!
+INFO - 9 janv. 2012 22:52:50 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 22:52:50 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 22:52:51 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 22:53:01 : L'utilisateur login a été créé.
+INFO - 9 janv. 2012 22:53:01 : L'utilisateur login s'est connecté.
+INFO - 9 janv. 2012 22:54:39 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 22:54:40 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 22:54:40 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 22:54:44 : L'utilisateur login a été créé.
+INFO - 9 janv. 2012 22:54:44 : L'utilisateur login s'est connecté.
+INFO - 9 janv. 2012 22:55:23 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 22:55:23 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 22:55:24 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 22:55:36 : L'image thg.png a été mise à jour. La réponse associée est thg. La version actuelle est : 2
+INFO - 9 janv. 2012 22:55:43 : L'utilisateur login a été créé.
+INFO - 9 janv. 2012 22:55:43 : L'utilisateur login s'est connecté.
+INFO - 9 janv. 2012 23:22:47 : Démarrage de l'application en cours...
+INFO - 9 janv. 2012 23:22:47 : Lancement du moniteur réussi.
+INFO - 9 janv. 2012 23:22:48 : La connexion à la base de données a été effectuée. L'adresse de la base est "localhost" sur le port "3306".
+INFO - 9 janv. 2012 23:23:07 : L'image 2a1dab65535f6dd0a3cc762c8066fee4.png a correctement été supprimé.
+INFO - 9 janv. 2012 23:23:24 : L'image thg.png a correctement été ajouté. La réponse associée est thg.
+INFO - 9 janv. 2012 23:25:11 : L'utilisateur login a été créé.
+INFO - 9 janv. 2012 23:25:11 : L'utilisateur login s'est connecté.
+INFO - 9 janv. 2012 23:25:43 : L'image thg.png a été mise à jour. La réponse associée est thg. La version actuelle est : 2
+INFO - 9 janv. 2012 23:26:08 : L'utilisateur login2 a été créé.
+INFO - 9 janv. 2012 23:26:08 : L'utilisateur login2 s'est connecté.

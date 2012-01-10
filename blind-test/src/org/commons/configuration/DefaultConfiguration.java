@@ -1,5 +1,6 @@
 package org.commons.configuration;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -28,7 +29,9 @@ public final class DefaultConfiguration implements Configuration {
 	private String _imageDirectory;
 	private String _hostName;
 	private Charset _charset;
+	private String _indexFile;
 	private Integer _port;
+	
 	private Properties _properties;
 	
 	protected DefaultConfiguration() {}
@@ -69,8 +72,19 @@ public final class DefaultConfiguration implements Configuration {
 	}
 	
 	@Override
+	public final String getIndexFile() {
+		return _indexFile;
+	}
+	
+	@Override
+	public final void setIndexFile(final String parIndexFile) {
+		_indexFile = resolveIndexFile(parIndexFile);
+		_properties.put(EnumConfiguration.INDEX_FILE.getConstName(), parIndexFile);
+	}
+	
+	@Override
 	public final void setImageDirectory(final String parImageDirectory) {
-		_imageDirectory = parImageDirectory;
+		_imageDirectory = resolveImageDirectory(parImageDirectory);
 		_properties.put(EnumConfiguration.IMAGE_DIRECTORY.getConstName(), _imageDirectory);
 	}
 
@@ -117,6 +131,8 @@ public final class DefaultConfiguration implements Configuration {
 		setCharset(locCharset);
 		final String locImageDirectory = _properties.getProperty(EnumConfiguration.IMAGE_DIRECTORY.getConstName());
 		setImageDirectory(locImageDirectory);
+		final String locIndexFile = _properties.getProperty(EnumConfiguration.INDEX_FILE.getConstName());
+		setIndexFile(locIndexFile);
 		return refresh();
 	}
 
@@ -249,5 +265,20 @@ public final class DefaultConfiguration implements Configuration {
 		} catch (IllegalArgumentException locException) {
 			return (_minLevel != null) ? _minLevel : (Level) EnumConfiguration.MIN_LEVEL.getDefaultValue();
 		}
-	}	
+	}
+	
+	private final String resolveImageDirectory (final String parPath) {
+		if(StringUtil.isEmpty(parPath)) {
+			return (_imageDirectory != null) ? _imageDirectory : (String) EnumConfiguration.INDEX_FILE.getDefaultValue();
+		}
+		final File locDirectory = new File(parPath);
+		return (locDirectory.isDirectory()) ? parPath : (String) EnumConfiguration.INDEX_FILE.getDefaultValue();
+	}
+	private final String resolveIndexFile (final String parPath) {
+		if(StringUtil.isEmpty(parPath)) {
+			return (_imageDirectory != null) ? _imageDirectory : (String) EnumConfiguration.INDEX_FILE.getDefaultValue();
+		}
+		final File locDirectory = new File(parPath);
+		return (locDirectory.isFile()) ? parPath : (String) EnumConfiguration.INDEX_FILE.getDefaultValue();
+	}
 }

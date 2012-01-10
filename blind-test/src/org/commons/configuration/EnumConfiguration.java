@@ -87,6 +87,19 @@ public enum EnumConfiguration implements IWithName, IWithSupport {
 		public final String getFormattedValue(final Configuration parConfiguration) {
 			return String.format("Le répertoire où se situe les images est : \"%s\"", parConfiguration.getImageDirectory());
 		}
+	},
+	INDEX_FILE("index_file", "-f", "image/index.properties") {
+
+		@Override
+		public final void setConfigurationValue(
+				final Configuration parConfiguration, final String parValue) {
+			parConfiguration.setIndexFile(parValue);
+		}
+
+		@Override
+		public final String getFormattedValue(final Configuration parConfiguration) {
+			return String.format("Le fichier d'index se situe à : \"%s\"", parConfiguration.getIndexFile());
+		}
 	};
 
 	final private String _name;

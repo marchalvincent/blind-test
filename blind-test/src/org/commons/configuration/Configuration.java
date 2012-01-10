@@ -54,7 +54,19 @@ public interface Configuration {
 	 * @return {@link String} le répertoire dans lequel se trouve les images.
 	 */
 	String getImageDirectory();
+	
+	/**
+	 * Retourne le chemin vers le fichier d'index
+	 * @return {@link String} le chemin vers le fichier d'index.
+	 */
+	String getIndexFile();
 
+	/**
+	 * Modifie le chemin vers le fichier d'index.
+	 * @param parIndexFile {@link String} le nouveau chemin d'index
+	 */
+	void setIndexFile(final String parIndexFile);
+	
 	/**
 	 * Modifie le port de l'application.
 	 * @param parPort {@link Integer} le nouveau port de l'application.

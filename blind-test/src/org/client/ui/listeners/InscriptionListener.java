@@ -15,7 +15,7 @@ public class InscriptionListener implements MouseListener {
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		Fenetre.changePage(new InscriptionPanel ());
+		Fenetre.instance().changePage(new InscriptionPanel ());
 	}
 
 	@Override
