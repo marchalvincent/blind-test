@@ -1,5 +1,7 @@
 package org.commons.cache;
 
+import java.net.Socket;
+
 import org.commons.entity.User;
 import org.server.partie.Partie;
 
@@ -16,6 +18,10 @@ public final class Caches {
 	
 	final static public AbstractCache<String, Partie> parties() {
 		return PartieCacheLoader.INSTANCE;
+	}
+	
+	final static public AbstractCache<User, Socket> createSocketCache() {
+		return new UserSocketCache();
 	}
 	
 	static private final class UserCache {
