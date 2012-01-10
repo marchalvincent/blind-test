@@ -59,7 +59,16 @@ public enum EnumMessage implements IWithId {
 		public IMessage createMessage() {
 			return new WinnerMessage();
 		}
+	},
+	
+	STAT(10){
+		@Override
+		public IMessage createMessage() {
+			return new StatMessage();
+		}
 	};
+	
+	
 	
 	private final int id;
 	
