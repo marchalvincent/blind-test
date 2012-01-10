@@ -14,6 +14,7 @@ import org.commons.message.AnswerMessage;
 import org.commons.message.DisplayMessage;
 import org.commons.message.EnumMessage;
 import org.commons.message.IMessage;
+import org.commons.message.PlayMessage;
 import org.commons.util.IWithSupport;
 import org.commons.util.StringUtil;
 import org.commons.util.WithUtilities;
@@ -65,6 +66,17 @@ public class ThreadPartieEcriture implements Runnable {
 		InfoProvider fileProvider = InfoProviderManager.getUiInfoProvider();
 		String name = null;
 		StringBuilder sb = new StringBuilder();
+		
+		PlayMessage play = (PlayMessage) EnumMessage.PLAY.createMessage();
+		play.setLogin(this.login);
+		play.setNomPartie("ma partie");
+		try {
+			ReadWriterUtil.write(socket, play);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		
+		
 		
 		while (true) {
 			while(!currentMessages.isEmpty()) {

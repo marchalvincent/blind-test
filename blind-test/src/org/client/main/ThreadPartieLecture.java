@@ -11,6 +11,7 @@ import org.commons.message.EnumMessage;
 import org.commons.message.IMessage;
 import org.commons.message.InfoMessage;
 import org.commons.message.WinnerMessage;
+import org.commons.util.SystemUtil;
 import org.commons.util.WithUtilities;
 import org.server.concurrent.ReadWriterUtil;
 
@@ -55,7 +56,9 @@ public class ThreadPartieLecture implements Runnable {
 				
 			} catch (ClassNotFoundException e) {}
 			catch (IOException e) {
-				fileProvider.appendMessage(Level.SEVERE, "Inscription - erreur de connexion au serveur");
+				fileProvider.appendMessage(Level.SEVERE, "Inscription - erreur de connexion au serveur" , e);
+				e.printStackTrace();
+				SystemUtil.exit();
 			}
 		}
 	}
