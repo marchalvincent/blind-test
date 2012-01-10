@@ -18,16 +18,14 @@ public class JouerListener extends AbstractBoutonListener {
 	
 	public JouerListener(BoutonGris bouton) {
 		super(bouton);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
 		super.mouseClicked(e);
 		JouerPanel jp = new JouerPanel ();
 		Fenetre.instance().changePage(jp);
-		partieClientLauncher = new PartieClientLauncher(jp, "francois");
+		partieClientLauncher = new PartieClientLauncher(jp, "a");
 		partieClientLauncher.startPartieClient();
 	}
 }
