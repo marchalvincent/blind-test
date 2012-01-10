@@ -3,7 +3,6 @@ package org.client.ui;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -25,13 +24,12 @@ public class ConnexionPanel extends AbstractPanel {
 	private static final long serialVersionUID = 1L;
 	
 	public ConnexionPanel () {
-		getMarges().set(0, 15, 15, 15);
-		initPanel ();
+		super ();
 	}
 	
 	@Override
 	protected void initPanel () {
-		this.setLayout(getLayout());
+		getMarges().set(0, 15, 15, 15);
 		
 		//Label Login
 		JLabel txtLogin = new JLabel ("Login");
@@ -73,8 +71,8 @@ public class ConnexionPanel extends AbstractPanel {
 		this.add(champsMdp, getContraintes());
 		
 		//Bouton Inscription
-		JButton boutonInscription = new BoutonGris ("S'inscrire");
-		boutonInscription.addMouseListener(new InscriptionListener ());
+		BoutonGris boutonInscription = new BoutonGris ("S'inscrire");
+		boutonInscription.addMouseListener(new InscriptionListener (boutonInscription));
 		getContraintes().gridx = 0;
 		getContraintes().gridy = 3;
 		getContraintes().weighty = 0.01;
@@ -83,8 +81,8 @@ public class ConnexionPanel extends AbstractPanel {
 		this.add(boutonInscription, getContraintes());
 		
 		//Bouton Connexion
-		JButton boutonConnexion = new BoutonGris ("Connexion");
-		boutonConnexion.addMouseListener(new ConnexionListener ());
+		BoutonGris boutonConnexion = new BoutonGris ("Connexion");
+		boutonConnexion.addMouseListener(new ConnexionListener (boutonConnexion));
 		getContraintes().gridx = 1;
 		getContraintes().gridy = 3;
 		getContraintes().weighty = 0.01;
@@ -93,8 +91,8 @@ public class ConnexionPanel extends AbstractPanel {
 		this.add(boutonConnexion, getContraintes());
 		
 		//Bouton Quitter
-		JButton boutonQuitter = new BoutonGris ("Quitter");
-		boutonQuitter.addMouseListener(new QuitterListener ());
+		BoutonGris boutonQuitter = new BoutonGris ("Quitter");
+		boutonQuitter.addMouseListener(new QuitterListener (boutonQuitter));
 		getContraintes().gridx = 0;
 		getContraintes().gridy = 0;
 		getContraintes().weighty = 0.6;
