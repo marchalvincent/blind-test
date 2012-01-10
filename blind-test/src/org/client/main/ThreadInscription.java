@@ -38,7 +38,7 @@ public final class ThreadInscription implements Callable<Boolean> {
 		inscription.setPassword(password);
 		
 		Configuration config = ConfigurationManager.getConfiguration();
-		final InfoProvider fileProvider = InfoProviderManager.getFileProvider();
+		final InfoProvider fileProvider = InfoProviderManager.getUiInfoProvider();
 		try {
 			//on envoie l'objet avec la socket
 			Socket socket = new Socket (config.getHostName(), config.getPort());

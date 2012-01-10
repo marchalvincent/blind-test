@@ -25,6 +25,7 @@ public final class ThreadConnexion implements Callable <Boolean> {
 	private final String _password;
 
 	public ThreadConnexion(final String parLogin, final String parPassword) {
+		super();
 		_login = parLogin;
 		_password = parPassword;
 	}
@@ -37,7 +38,7 @@ public final class ThreadConnexion implements Callable <Boolean> {
 		message.setPassword(_password);
 
 		Configuration config = ConfigurationManager.getConfiguration();
-		final InfoProvider fileProvider = InfoProviderManager.getFileProvider();
+		final InfoProvider fileProvider = InfoProviderManager.getUiInfoProvider();
 		Socket locSocket = null;
 		try {
 			// on envoie le message

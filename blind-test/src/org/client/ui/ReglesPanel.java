@@ -6,7 +6,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
 
-import javax.swing.JButton;
 import javax.swing.JTextArea;
 
 import org.client.ui.listeners.RetourMenuListener;
@@ -27,12 +26,11 @@ public class ReglesPanel extends AbstractPanel {
 	static private String fichierTxtRegles = "conf/regles.txt";
 	
 	public ReglesPanel () {
-		initPanel ();
+		super ();
 	}
 	
 	@Override
 	protected void initPanel () {
-		setLayout(getLayout());
 		
 		//Lecture du fichier regles
 		FileInputStream fis;
@@ -59,8 +57,8 @@ public class ReglesPanel extends AbstractPanel {
 		this.add(locArea, getContraintes());
 		
 		//Bouton Retour
-		JButton boutonRetour = new BoutonGris ("< Retour");
-		boutonRetour.addMouseListener(new RetourMenuListener ());
+		BoutonGris boutonRetour = new BoutonGris ("< Retour");
+		boutonRetour.addMouseListener(new RetourMenuListener (boutonRetour));
 		getContraintes().gridy = 1;
 		this.add(boutonRetour, getContraintes());
 		

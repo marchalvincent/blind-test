@@ -6,18 +6,21 @@ import java.util.List;
 
 import org.commons.entity.Banque;
 import org.commons.entity.User;
-import org.server.persistence.BanqueManager;
+import org.commons.util.IWithName;
+import org.server.persistence.Manager;
 import org.server.persistence.Managers;
 
 
-public class Partie {
+public class Partie implements IWithName {
 	
 	private final List<User> userList;
 	private List<Banque> banqueList;
+	private String _name;
 	
-	public Partie(){
+	public Partie(final String name){
 		banqueList = new ArrayList<Banque>();
 		userList = new ArrayList<User>();
+		_name = name;
 	}
 	
 	public List<User> getUsers(){
@@ -25,14 +28,12 @@ public class Partie {
 	}
 	
 	public void updateImage(){	
-		
-		/*if (banqueList.isEmpty()){
-			BanqueManager bm =  Managers.createBanqueManager();	
-			bm.findAll();
-			
-			Collections.shuffle(arrayList);
-			
-		}*/
+		if (isFinished()){
+			Manager<Banque> bm = Managers.createBanqueManager();	
+			List<Banque>listImage = bm.findAll();
+			Collections.shuffle(listImage);//On tire aléatoirement
+			banqueList.addAll(listImage);
+		}
 	}
 	
 	public void addUser(User user){
@@ -41,6 +42,20 @@ public class Partie {
 	
 	public void removeUser(User user){
 		userList.remove(user);
+	}
+
+	@Override
+	public String getConstName() {
+		return _name;
+	}
+	
+	public boolean isFinished(){
+		return banqueList.isEmpty();
+	}
+	
+	//Renvoi le prochain élement qu'on doit afficher
+	public Banque next(){
+		return banqueList.remove(banqueList.size()-1);
 	}
 	
 }

@@ -11,24 +11,31 @@ import javax.swing.JTextArea;
  */
 public class LogClient {
 
-	private static JTextArea log;
-	private static StringBuffer txtLog;
+	private JTextArea log;
+	private StringBuffer txtLog;
 	
-	public static JTextArea getInstance () {
-		if (log == null) {
-			log = new JTextArea ();
-			log.setOpaque(false);
-			log.setForeground(Color.WHITE);
-			log.setVisible(true);
-		}
+	public LogClient () {
+		init ();
+	}
+	
+	protected void init () {
+		log = new JTextArea ();
+		log.setOpaque(false);
+		log.setForeground(Color.WHITE);
+		log.setVisible(true);
+	}
+	
+	public JTextArea getInstance () {
 		return log;
 	}
 	
-	public static StringBuffer getStringBuffer () {
-		return txtLog;
+	public void ecrire (String texte) {
+		txtLog.append(texte);
+		txtLog.append("\n");
+		log.setText(txtLog.toString());
 	}
 	
-	public static void update () {
-		log.setText(txtLog.toString());
+	public String getText () {
+		return log.getText();
 	}
 }

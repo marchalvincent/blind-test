@@ -73,5 +73,10 @@ public enum EnumMessage implements IWithId {
 		return EnumMessage.INFO.equals(parMessage);
 	}
 	
+	public static boolean isDisplay(final EnumMessage parMessage) {
+		return EnumMessage.DISPLAY.equals(parMessage);
+	}
+	
 	public abstract IMessage createMessage();
+
 }
