@@ -2,6 +2,7 @@ package org.client.main;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.concurrent.Callable;
 import java.util.logging.Level;
 
 import org.commons.configuration.Configuration;
@@ -18,7 +19,7 @@ import org.commons.util.SystemUtil;
 import org.commons.util.WithUtilities;
 import org.server.concurrent.ReadWriterUtil;
 
-public final class ThreadConnexion implements Runnable {
+public final class ThreadConnexion implements Callable <Boolean> {
 
 	private final String _login;
 	private final String _password;
@@ -29,10 +30,9 @@ public final class ThreadConnexion implements Runnable {
 	}
 
 	@Override
-	public final void run() {
+	public final Boolean call() {
 		// on créé le message
-		ConnexionMessage message = (ConnexionMessage) EnumMessage.CONNEXION
-				.createMessage();
+		ConnexionMessage message = (ConnexionMessage) EnumMessage.CONNEXION.createMessage();
 		message.setLogin(_login);
 		message.setPassword(_password);
 
@@ -46,7 +46,7 @@ public final class ThreadConnexion implements Runnable {
 		} catch (IOException locException) {
 			fileProvider.appendMessage(Level.SEVERE, String.format("Impossible de se connecter à l'adresse %s sur le port %d.", config.getHostName(), config.getPort()), locException);
 			SystemUtil.close(locSocket);
-			return;
+			return false;
 		}
 		// on écoute la réponse
 		IMessage messageRetour = null;
@@ -54,10 +54,11 @@ public final class ThreadConnexion implements Runnable {
 			messageRetour = ReadWriterUtil.read(locSocket);
 		} catch (ClassNotFoundException e) {
 			SystemUtil.close(locSocket);
+			return false;
 		} catch (IOException e) {
 			fileProvider.appendMessage(Level.SEVERE, String.format("Impossible de se connecter à l'adresse %s sur le port %d.", config.getHostName(), config.getPort()), e);
 			SystemUtil.close(locSocket);
-			return;
+			return false;
 		}
 		
 		if (messageRetour instanceof IWithSupport) {
@@ -69,9 +70,10 @@ public final class ThreadConnexion implements Runnable {
 			// Va falloir qu'il se reconnecte. Le thread se fait kill, on en
 			// recréera pour une nouvelle connexion.
 			SystemUtil.close(locSocket);
-			return;
+			return false;
 		}
 		final Downloader locDownloader = new ClientDownloader(locSocket, fileProvider);
 		locDownloader.download();
+		return true;
 	}
 }
