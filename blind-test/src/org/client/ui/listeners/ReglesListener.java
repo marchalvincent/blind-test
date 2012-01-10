@@ -15,7 +15,7 @@ public class ReglesListener implements MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		Fenetre.changePage(new ReglesPanel ());
+		Fenetre.instance().changePage(new ReglesPanel ());
 	}
 
 	@Override
