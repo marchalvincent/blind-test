@@ -32,10 +32,10 @@ public class PartieClientLauncher {
 			
 			ThreadPartieEcriture tEcriture = new ThreadPartieEcriture(socket, fenetre, login);
 			ThreadPartieLecture tLecture = new ThreadPartieLecture(socket, tEcriture);
-			
+
 			Thread threadEcriture = new Thread (tEcriture);
 			Thread threadLecture = new Thread (tLecture);
-			
+
 			threadEcriture.start();
 			threadLecture.start();
 			
@@ -43,7 +43,5 @@ public class PartieClientLauncher {
 			fileProvider.appendMessage(Level.SEVERE, "Inscription - erreur de connexion au serveur");
 			SystemUtil.close(socket);
 		}
-		
-		SystemUtil.close(socket);
 	}
 }
