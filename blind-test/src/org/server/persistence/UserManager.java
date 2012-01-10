@@ -11,8 +11,8 @@ import org.commons.entity.User;
 
 public class UserManager extends AbstractManager<User> {
 	
-	static private final String ADD = "INSERT INTO user VALUES (NULL,?,?,?,?)";
-	static private final String MERGE = "UPDATE user SET name = ?, login = ?, password = ?, score = ? WHERE idUser = ?";
+	static private final String ADD = "INSERT INTO user VALUES (NULL,?,?,?,?,?)";
+	static private final String MERGE = "UPDATE user SET name = ?, login = ?, password = ?, victoire = ?, defaite = ? WHERE idUser = ?";
 	static private final String REMOVE_LOGIN = "DELETE FROM user WHERE login = ?";
 	static private final String REMOVE_ID = "DELETE FROM user WHERE idUser = ?";
 	static private final String FINDALL = "SELECT * FROM user";
@@ -30,7 +30,8 @@ public class UserManager extends AbstractManager<User> {
 			locStatement.setString(1, parUser.getConstName());
 			locStatement.setString(2, parUser.getName());
 			locStatement.setString(3, parUser.getPassword());
-			locStatement.setInt(4, parUser.getScore().intValue());
+			locStatement.setInt(4, parUser.getVictoire().intValue());
+			locStatement.setInt(5, parUser.getDefaite().intValue());
 			locStatement.executeUpdate();
 			_connection.commit();
 			locResultSet = locStatement.getGeneratedKeys();
@@ -96,8 +97,9 @@ public class UserManager extends AbstractManager<User> {
 			locStatement.setString(1, parUser.getConstName());
 			locStatement.setString(2, parUser.getName());
 			locStatement.setString(3, parUser.getPassword());
-			locStatement.setInt(4, parUser.getScore().intValue());
-			locStatement.setInt(5, parUser.getId().intValue());
+			locStatement.setInt(4, parUser.getVictoire().intValue());
+			locStatement.setInt(5, parUser.getDefaite().intValue());
+			locStatement.setInt(6, parUser.getId().intValue());
 			locStatement.executeUpdate();
 			_connection.commit();
 			return parUser;
@@ -185,13 +187,15 @@ public class UserManager extends AbstractManager<User> {
 		final String locName = parResultSet.getString(2);
 		final String locLogin = parResultSet.getString(3);
 		final String locPassword = parResultSet.getString(4);
-		final int locScore = parResultSet.getInt(5);
+		final int locVictoire = parResultSet.getInt(5);
+		final int locDefaite = parResultSet.getInt(6);
 		
 		locUser.setId(Integer.valueOf(locId));
 		locUser.setName(locName);
 		locUser.setLogin(locLogin);
 		locUser.setPassword(locPassword);
-		locUser.setScore(Integer.valueOf(locScore));
+		locUser.setScore(Integer.valueOf(locVictoire));
+		locUser.setScore(Integer.valueOf(locDefaite));
 		return locUser;
 	}
 

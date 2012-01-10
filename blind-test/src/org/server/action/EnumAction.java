@@ -31,6 +31,14 @@ public enum EnumAction implements IWithId {
 			throw new UnsupportedOperationException("Not supported yet");
 		}
 		
+	},
+	
+	STAT(EnumMessage.STAT.getId()){
+		
+		@Override
+		final public AbstractAction createAction (final Socket parSocket, final IMessage parMessage) {
+			return new StatAction(parSocket, parMessage);
+		}
 	};
 	
 	final private Integer _id;
