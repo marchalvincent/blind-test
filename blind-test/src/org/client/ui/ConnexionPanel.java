@@ -1,6 +1,7 @@
 package org.client.ui;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 
 import javax.swing.JLabel;
@@ -51,6 +52,7 @@ public class ConnexionPanel extends AbstractPanel {
 		getContraintes().weighty = 0.1;
 		getContraintes().gridwidth = GridBagConstraints.REMAINDER;
 		getContraintes().anchor = GridBagConstraints.LAST_LINE_START;
+		champsLogin.setMinimumSize(champsLogin.getPreferredSize());
 		this.add(champsLogin, getContraintes());
 		
 		//Label Mot de passe
@@ -70,6 +72,7 @@ public class ConnexionPanel extends AbstractPanel {
 		getContraintes().weighty = 0.1;
 		getContraintes().gridwidth = GridBagConstraints.REMAINDER;
 		getContraintes().anchor = GridBagConstraints.FIRST_LINE_START;
+		champsMdp.setMinimumSize(champsMdp.getPreferredSize());
 		this.add(champsMdp, getContraintes());
 		
 		//Bouton Inscription

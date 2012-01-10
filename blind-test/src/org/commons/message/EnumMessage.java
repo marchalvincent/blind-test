@@ -93,6 +93,11 @@ public enum EnumMessage implements IWithId {
 		return EnumMessage.DISPLAY.equals(parMessage);
 	}
 	
+	public static boolean isWinner(final EnumMessage parMessage) {
+		return EnumMessage.WINNER.equals(parMessage);
+	}
+	
 	public abstract IMessage createMessage();
+
 
 }
