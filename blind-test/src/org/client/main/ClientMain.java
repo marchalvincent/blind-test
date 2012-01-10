@@ -62,6 +62,7 @@ public final class ClientMain {
 			@Override
 			public final void run() {
 				new Fenetre();
+				//TODO : Francois, tu ajoute un UiInfoProvider ici
 			}
 		});
 	}

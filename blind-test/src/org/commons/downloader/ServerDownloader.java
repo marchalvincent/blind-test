@@ -45,6 +45,6 @@ public final class ServerDownloader extends AbstractDownloader {
 
 	@Override
 	public final Boolean download() {
-		return DownloaderPool.getInstance().submit(this);
+		return DownloaderPool.getInstance().submit(this, _infoProvider);
 	}
 }
