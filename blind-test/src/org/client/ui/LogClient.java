@@ -29,14 +29,18 @@ public class LogClient {
 		log.setOpaque(false);
 		log.setForeground(Color.WHITE);
 		log.setVisible(true);
+		log.setLineWrap(true);
 		scrollPane = new JScrollPane(log, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setOpaque(false);
 		scrollPane.getViewport().setOpaque(false);
 		scrollPane.setBorder(BorderFactory.createEmptyBorder());
-		scrollPane.setPreferredSize(new Dimension(700, 300));
 	}
 	
-	protected final JScrollPane getTextArea() {
+	public final JTextArea getTextArea() {
+		return log;
+	}
+	
+	public JScrollPane getScrollPane () {
 		return scrollPane;
 	}
 	

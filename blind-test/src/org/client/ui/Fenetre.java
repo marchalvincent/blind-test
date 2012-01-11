@@ -5,7 +5,6 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 
 import org.commons.logger.InfoProviderManager;
 import org.commons.logger.UiInfoProvider;
@@ -21,6 +20,7 @@ public class Fenetre {
 	static private final Fenetre INSTANCE = new Fenetre();
 	private JFrame fenetre;
 	private JFrame fenetreLog;
+	private JFrame fenetreParties;
 	private LogClient logClient;
 	
 	static public final Fenetre instance() {
@@ -41,7 +41,7 @@ public class Fenetre {
 		fenetre.setVisible(true);
 		fenetreLog.add(logClient.getTextArea());
 		fenetreLog.getContentPane().setBackground(Color.BLACK);
-		fenetreLog.setSize(700, 300);
+		fenetreLog.setSize(500, 300);
 		fenetreLog.setLocation(400, 100);
 		fenetreLog.setVisible(true);
 		fenetre.toFront();
@@ -50,6 +50,11 @@ public class Fenetre {
 	public void changePage (JPanel nouveau) {
 		fenetre.setContentPane(nouveau);
 		fenetre.validate();
+		fenetreLog.validate();
+	}
+	
+	public void chargeListParties () {
+		
 	}
 	
 	private void createLogClient () {
