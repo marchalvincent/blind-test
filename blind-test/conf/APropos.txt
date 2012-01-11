@@ -1,5 +1,17 @@
 Bienvenue sur Blind-Test
+v1.0
+
+
+Un jeu de Quizz Photos en Réseau intéractif.
+
 
 =================== A Propos ===================
 
-Programme réalisé par
+
+Programme réalisé par akfarinas Adour, Guillaume Laloum, 
+Vincent Marchal,Olivier Pitton et Francois Reynal.
+
+
+Projet Java 2012
+
+
