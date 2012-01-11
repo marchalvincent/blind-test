@@ -71,9 +71,5 @@ public final class ClientDownloader extends AbstractDownloader {
 	@Override
 	public final Boolean download() {
 		return DownloaderPool.getInstance().submit(this, _infoProvider);
-	}	
-	
-	public void disconnect (Socket parSocket) {
-		SystemUtil.close(parSocket);	
 	}
 }

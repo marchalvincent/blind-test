@@ -66,6 +66,27 @@ public enum EnumMessage implements IWithId {
 		public IMessage createMessage() {
 			return new StatMessage();
 		}
+	},
+	
+	DISCONNECT(11) {
+		@Override
+		public IMessage createMessage() {
+			return new DisconnectMessage();
+		}
+	}, 
+	
+	ENDGAME(12) {
+		@Override
+		public IMessage createMessage() {
+			return new EndGameMessage();
+		}
+	},
+	
+	LIST_GAMES(13) {
+		@Override
+		public IMessage createMessage() {
+			return new ListGamesMessage();
+		}
 	};
 	
 	
