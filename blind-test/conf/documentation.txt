@@ -1,5 +1,5 @@
 NAME
-	blind-test - Un blind test en réseau.
+	Blind-Test - Un blind test en réseau.
 
 SYNOPSIS
 	java -jar <jarname> [option] <value> ...

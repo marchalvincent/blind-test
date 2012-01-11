@@ -30,7 +30,7 @@ public final class DefaultConfiguration implements Configuration {
 	private String _hostName;
 	private Charset _charset;
 	private String _indexFile;
-	private Integer _port;
+	private Integer _port, _timer;
 	
 	private Properties _properties;
 	
@@ -77,6 +77,11 @@ public final class DefaultConfiguration implements Configuration {
 	}
 	
 	@Override
+	public final Integer getTimer() {
+		return _timer;
+	}
+	
+	@Override
 	public final void setIndexFile(final String parIndexFile) {
 		_indexFile = resolveIndexFile(parIndexFile);
 		_properties.put(EnumConfiguration.INDEX_FILE.getConstName(), parIndexFile);
@@ -111,6 +116,15 @@ public final class DefaultConfiguration implements Configuration {
 		_minLevel = resolveLevel(parLevel);
 		_properties.put(EnumConfiguration.MIN_LEVEL.getConstName(), _minLevel.getName());
 	}
+	
+	@Override
+	public void setTimer(final String parTimer) {
+		_timer = resolveTimer (parTimer);
+		_properties.put(EnumConfiguration.TIMER_PARTIE.getConstName(), _timer.toString());
+	}
+
+	
+
 
 	@Override
 	public final Configuration load() throws BlindTestException {
@@ -246,6 +260,14 @@ public final class DefaultConfiguration implements Configuration {
 		return locPort;
 	}
 	
+	private final Integer resolveTimer(final String parTimer) {
+		final Integer locTimer = StringUtil.toInteger(parTimer);
+		if (locTimer == null) {
+			return  (_timer != null) ? _timer : (Integer) EnumConfiguration.TIMER_PARTIE.getDefaultValue();
+		}
+		return locTimer;
+	}
+	
 	/**
 	 * Vérifie que le niveau des messages n'est pas invalide. Si c'est le cas, 
 	 * cette méthode garde la valeur précédente, s'il y en avait une, ou prend la valeur par défaut.
@@ -281,4 +303,6 @@ public final class DefaultConfiguration implements Configuration {
 		final File locDirectory = new File(parPath);
 		return (locDirectory.isFile()) ? parPath : (String) EnumConfiguration.INDEX_FILE.getDefaultValue();
 	}
+
+
 }
