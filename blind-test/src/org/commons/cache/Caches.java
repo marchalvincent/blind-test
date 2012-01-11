@@ -11,7 +11,7 @@ import org.server.partie.Partie;
  *
  */
 public final class Caches {
-
+	
 	final static public AbstractCache<String, User> user() {
 		return UserCache.INSTANCE;
 	}

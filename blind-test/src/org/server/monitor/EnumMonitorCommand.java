@@ -51,6 +51,13 @@ public enum EnumMonitorCommand implements IWithId {
 		final public MonitorCommand createCommand(final String parCommandName, final String[] parArguments) {
 			return new MonitorDatabaseCommand(parCommandName);
 		}
+	},
+	PARTIE(6, "partie", false) {
+		
+		@Override
+		final public MonitorCommand createCommand(final String parCommandName, final String[] parArguments) {
+			return new MonitorPartie(parCommandName);
+		}
 	};
 	
 	final private int _id;

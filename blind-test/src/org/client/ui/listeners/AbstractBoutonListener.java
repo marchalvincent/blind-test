@@ -1,16 +1,24 @@
 package org.client.ui.listeners;
 
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.Observable;
+import java.util.Observer;
 
 import org.client.ui.BoutonGris;
 
-public abstract class AbstractBoutonListener extends MouseAdapter {
+public abstract class AbstractBoutonListener extends Observable implements MouseListener {
 	
 	private BoutonGris bouton;
+	protected Observer _observer;
 	
 	public AbstractBoutonListener (BoutonGris bouton) {
-		this.bouton = bouton;
+		this(bouton, null);
+	}
+	
+	public AbstractBoutonListener (BoutonGris parButton, final Observer parObserver) {
+		bouton = parButton;
+		_observer = parObserver;
 	}
 
 	@Override

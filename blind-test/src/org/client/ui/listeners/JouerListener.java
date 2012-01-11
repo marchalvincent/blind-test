@@ -25,7 +25,7 @@ public class JouerListener extends AbstractBoutonListener {
 		super.mouseClicked(e);
 		JouerPanel jp = new JouerPanel ();
 		Fenetre.instance().changePage(jp);
-		partieClientLauncher = new PartieClientLauncher(jp, "a");
+		partieClientLauncher = new PartieClientLauncher(jp, "test");
 		partieClientLauncher.startPartieClient();
 	}
 }

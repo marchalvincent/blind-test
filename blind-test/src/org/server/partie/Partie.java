@@ -26,7 +26,7 @@ import org.server.persistence.Managers;
 
 public class Partie implements IWithName {
 	
-	private final List<User> userList;
+	private final List<User> _userList;
 	private List<Banque> banqueList;
 	private String _name;
 	private AbstractCache<User, Socket> _sockets;
@@ -35,14 +35,18 @@ public class Partie implements IWithName {
 	
 	public Partie(final String name){
 		banqueList = new ArrayList<Banque>();
-		userList = new ArrayList<User>();
+		_userList = new ArrayList<User>();
 		_name = name;
 		_sockets = Caches.createSocketCache();
 		_currentAck = new AtomicInteger(0);
 	}
 	
 	public List<User> getUsers(){
-		return Collections.unmodifiableList(userList);//Recopie défensive + Renvoi une sous liste non modifiable
+		return Collections.unmodifiableList(_userList);//Recopie défensive + Renvoi une sous liste non modifiable
+	}
+	
+	public final boolean hasUser (final User parUser) {
+		return _userList.contains(parUser);
 	}
 	
 	public void updateImage(){	
@@ -54,12 +58,14 @@ public class Partie implements IWithName {
 		}
 	}
 	
-	public void addUser(User user){
-		userList.add(user);
+	public void addUser(final User user, final Socket parSocket){
+		_userList.add(user);
+		_sockets.put(user, parSocket);
 	}
 	
 	public void removeUser(User user){
-		userList.remove(user);
+		_userList.remove(user);
+		_sockets.remove(user);
 	}
 
 	@Override
@@ -72,24 +78,30 @@ public class Partie implements IWithName {
 	}
 	
 	//Renvoi le prochain élement qu'on doit afficher
-	public Banque next(){
+	public final Banque next(){
+		if(isFinished()) updateImage();
+		
 		_banque = banqueList.remove(banqueList.size()-1);
 		return _banque;
 	}	
+	
+	public final Banque getCurrentAnswer() {
+		return _banque;
+	}
 	
 	public final boolean isValidAnswer(final String parAnswer) {
 		return StringUtil.equals(parAnswer, _banque.getAnswer());
 	}
 	
 	public synchronized boolean canDisplayNewImage() {
-		return userList.size() == _currentAck.get();
+		return _userList.size() == _currentAck.get();
 	}
 	
 	public final int incrementAck() {
 		return _currentAck.incrementAndGet();
 	}
 	
-	public synchronized final boolean isReboot() {
+	public final boolean isReboot() {
 		return _currentAck.get() == 0;
 	}
 	
@@ -97,10 +109,10 @@ public class Partie implements IWithName {
 		_currentAck.set(0);
 	}
 	
-	public final void updateStats(final String parWinner) {
+	public final void updateStats(final User parWinner) {
 		final Manager<User> locUserManager = Managers.createUserManager();
 		for(final User locUser : _sockets.keys()) {
-			if(StringUtil.equals(parWinner, locUser.getConstName())) {
+			if(locUser.equals(parWinner)) {
 				locUser.setVictoire(locUser.getVictoire().intValue() + 1);
 				continue;
 			}
@@ -114,22 +126,28 @@ public class Partie implements IWithName {
 		final String locValueMessage = String.format("Le joueur %s a gagné la partie.", parWinner);
 		locMessage.setMessage(locValueMessage);
 		locMessage.setLogin(parWinner);
+		parInfoProvider.appendMessage(Level.INFO, locValueMessage);
 		for(final Map.Entry<User, Socket> locEntry : _sockets.entrySet()) {
 			final Socket locSocket = locEntry.getValue();
 			try {
 				ReadWriterUtil.write(locSocket, locMessage);
+				parInfoProvider.appendMessage(Level.INFO, String.format("Le joueur %s a été notifié qu'il y a un gagnant.", locEntry.getKey().getConstName()));
 			} catch (IOException e) {
 				final User locUser = locEntry.getKey();
 				// On vire le user de la partie, du cache socket de la partie et des connectés.
 				removeUser(locUser);
 				final String locLogin = locUser.getConstName();
-				Caches.user().remove(locLogin);
 				_sockets.remove(locUser);
 				final String locIp = locSocket.getInetAddress().getHostAddress();
 				parInfoProvider.appendMessage(Level.SEVERE, String.format("Impossible d'écrire dans la socket d'adresse %s du joueur %s.", locIp, locLogin), e);
 				SystemUtil.close(locSocket);
 			}
 		}
+	}
+	
+	@Override
+	public final String toString() {
+		return getConstName();
 	}
 	
 }

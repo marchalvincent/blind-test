@@ -14,6 +14,10 @@ public final class UiInfoProvider extends FileInfoProvider {
 		_area = parLogClient;
 	}
 	
+	public InfoProvider appendMessage (final Level parLevel, final String parMessage) {
+		return this.appendMessage(parLevel, parMessage, null);
+	}
+	
 	public InfoProvider appendMessage(final Level parLevel, final String parMessage, final Throwable parThrowable) {
 		super.appendMessage(parLevel, parMessage, parThrowable);
 		if (isShowable(parLevel)) {

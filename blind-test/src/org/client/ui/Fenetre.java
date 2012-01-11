@@ -27,7 +27,6 @@ public class Fenetre {
 	private Fenetre () {
 		createLogClient ();
 		fenetre = new JFrame ("Blind Test");
-		//initFenetre ();
 	}
 	
 	public void initFenetre () {

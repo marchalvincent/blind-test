@@ -17,6 +17,7 @@ public final class ReadWriterUtil {
 	static public final void write(final Socket parSocket, final IMessage parMessage) throws IOException {
 		final ObjectOutputStream locStream= new ObjectOutputStream (parSocket.getOutputStream());
 		locStream.writeObject(parMessage);
+		locStream.flush();
 	}
 	private ReadWriterUtil() {}
 }

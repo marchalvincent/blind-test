@@ -46,8 +46,14 @@ public enum EnumAction implements IWithId {
 		_id = parId;
 	}
 	
+	@Override
 	final public Integer getId() {
 		return _id;
+	}
+	
+	@Override
+	final public String toString() {
+		return name();
 	}
 	
 	abstract public AbstractAction createAction(final Socket parSocket, final IMessage parMessage);

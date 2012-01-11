@@ -41,6 +41,7 @@ public class PlayAction extends AbstractAction {
 		// Pas connecté : bug
 		if(locUser == null) {
 			final String locErrorMessage = String.format("Le joueur %s n'est pas connecté. Veuillez vous connecter.", locLogin);
+			locInfoProvider.appendMessage(Level.SEVERE, locErrorMessage);
 			final ErrorMessage locErrorRealMessage = (ErrorMessage) EnumMessage.ERROR.createMessage();
 			locErrorRealMessage.setMessage(locErrorMessage);
 			try {
@@ -59,9 +60,9 @@ public class PlayAction extends AbstractAction {
 			locPartie = new Partie(locNomPartie);
 			locPartie.updateImage();
 			locPartieCache.put(locNomPartie, locPartie);
+			locInfoProvider.appendMessage(Level.INFO, String.format("La partie \"%s\" a été créée", locPartie));
 		}
-		locPartie.addUser(locUser);
-		final Thread locThread = new Thread(new ThreadPartie(locUser.getConstName(), locSocket, locPartie));
+		final Thread locThread = new Thread(new ThreadPartie(locUser, locSocket, locPartie));
 		locThread.start();
 	}
 }

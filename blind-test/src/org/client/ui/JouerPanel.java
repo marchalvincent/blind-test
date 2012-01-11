@@ -5,10 +5,11 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.RenderedImage;
 import java.io.IOException;
+import java.util.Observable;
 
-import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import org.client.ui.listeners.AbstractBoutonListener;
 import org.client.ui.listeners.ValidListener;
 import org.client.ui.listeners.boutonValidEntree;
 import org.commons.entity.BanqueFacade;
@@ -21,12 +22,10 @@ import org.commons.util.StringUtil;
  */
 public class JouerPanel extends AbstractPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private String imagePath;
 	private JTextField champsReponse;
+	private AbstractBoutonListener _observable;
 	
 	public JouerPanel (String imagePath) {
 		super ();
@@ -38,29 +37,29 @@ public class JouerPanel extends AbstractPanel {
 	}
 	
 	@Override
-	protected void initPanel() {
-		// TODO Auto-generated method stub
-		
-		//Label "Tapez votre réponse : "
-		JLabel txtReponse = new JLabel ("Tapez votre réponse : ");
-		getContraintes().gridx = 0;
-		getContraintes().gridy = 1;
-		txtReponse.setForeground(Color.WHITE);
-		this.add(txtReponse, getContraintes());
-		
+	protected void initPanel() {		
 		//Champs réponse
 		champsReponse = new JTextField (30);
-		getContraintes().gridx = 1;
-		getContraintes().gridy = 1;
+		getContraintes().gridx = 0;
+		getContraintes().gridy = 0;
 		this.add(champsReponse, getContraintes());
 		
 		//Bouton Valider !
 		BoutonGris boutonValid = new BoutonGris ("Valider !");
-		boutonValid.addMouseListener(new ValidListener (boutonValid));
+		_observable = new ValidListener (this, boutonValid);
+		boutonValid.addMouseListener(_observable);
 		boutonValid.addKeyListener(new boutonValidEntree ());
-		getContraintes().gridx = 2;
-		getContraintes().gridy = 1;
+		getContraintes().gridx = 1;
+		getContraintes().gridy = 0;
 		this.add(boutonValid, getContraintes());
+	}
+	
+	public final String getAnswer() {
+		return champsReponse.getText();
+	}
+	
+	public final Observable getObservable() {
+		return _observable;
 	}
 	
 	public String getCurrentImagePath () {
@@ -81,13 +80,14 @@ public class JouerPanel extends AbstractPanel {
 	public void paintComponent (Graphics g) {
 		super.paintComponent(g);
 		if(StringUtil.isEmpty(imagePath)) return;
+		
 		try {
 			RenderedImage image = BanqueFacade.instance().readImage(imagePath);
-			g.drawImage((Image) image, 20, 20, Fenetre.instance().getWidth() - 20, Fenetre.instance().getHeight() - 50, null);
+			g.drawImage((Image) image, 0, 0, Fenetre.instance().getWidth(), Fenetre.instance().getHeight(), null);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		g.setColor(Color.WHITE);
-		g.drawRect(20, 20, Fenetre.instance().getWidth() - 20, Fenetre.instance().getHeight() - 20);
+		//g.drawRect(20, 20, Fenetre.instance().getWidth() - 20, Fenetre.instance().getHeight() - 20);
 	}
 }
