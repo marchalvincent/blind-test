@@ -5,12 +5,12 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.RenderedImage;
 import java.io.IOException;
+import java.util.List;
 import java.util.Observable;
 import java.util.logging.Level;
 
 import javax.swing.JTextField;
 
-import org.client.ui.listeners.AbstractBoutonListener;
 import org.client.ui.listeners.ValidListener;
 import org.client.ui.listeners.boutonValidEntree;
 import org.commons.entity.BanqueFacade;
@@ -26,7 +26,7 @@ public class JouerPanel extends AbstractPanel {
 	private static final long serialVersionUID = 1L;
 	private RenderedImage _currentImage;
 	private JTextField champsReponse;
-	private AbstractBoutonListener _observable;
+	private List<Observable> _observable;
 	
 	public JouerPanel (final RenderedImage imagePath) {
 		super ();
@@ -47,9 +47,12 @@ public class JouerPanel extends AbstractPanel {
 		
 		//Bouton Valider !
 		BoutonGris boutonValid = new BoutonGris ("Valider !");
-		_observable = new ValidListener (this, boutonValid);
-		boutonValid.addMouseListener(_observable);
-		boutonValid.addKeyListener(new boutonValidEntree (this, null));
+		ValidListener validL = new ValidListener (this, boutonValid);
+		boutonValid.addMouseListener(validL);
+		_observable.add(validL);
+		boutonValidEntree bve = new boutonValidEntree (this, null);
+		boutonValid.addKeyListener(bve);
+		_observable.add(bve);
 		getContraintes().gridx = 1;
 		getContraintes().gridy = 0;
 		this.add(boutonValid, getContraintes());
@@ -61,7 +64,7 @@ public class JouerPanel extends AbstractPanel {
 		return champsReponse.getText();
 	}
 	
-	public final Observable getObservable() {
+	public final List<Observable> getObservable() {
 		return _observable;
 	}
 	
