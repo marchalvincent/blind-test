@@ -1,9 +1,12 @@
 package org.client.ui;
 
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.ListSelectionModel;
 
 import org.client.ui.listeners.DeconnexionListener;
 import org.client.ui.listeners.JouerListener;
@@ -57,14 +60,22 @@ public class AccueilPanel extends AbstractPanel {
 		this.add(boutonDeconnexion, getContraintes());
 		
 		//Liste des parties
-		JList<String> listParties = new JList<String> ();
+		DefaultListModel<String> liste = new DefaultListModel<String>();
+		JList listParties = new JList (liste);
+		liste.addElement("Un");
+		liste.addElement("Deux");
+		liste.addElement("Trois");
 		getContraintes().gridx = 0;
 		getContraintes().gridy = 0;
 		getContraintes().gridwidth = 1;
 		getContraintes().gridheight = 3;
 		getContraintes().weightx = 0.2;
 		getContraintes().weighty = 1.0;
+		getContraintes().fill = GridBagConstraints.BOTH;
 		listParties.setOpaque(false);
+		listParties.setAutoscrolls(true);
+		listParties.setPreferredSize(new Dimension(50, 600));
+		listParties.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		this.add(listParties, getContraintes());
 		
 		//Bouton Refresh Liste Parties
@@ -72,8 +83,9 @@ public class AccueilPanel extends AbstractPanel {
 		boutonRefresh.addMouseListener(new RefreshListener (_login, boutonRefresh));
 		getContraintes().gridx = 0;
 		getContraintes().gridy = 3;
-		getContraintes().weighty = 0.2;
-		getContraintes().anchor = GridBagConstraints.LAST_LINE_START;
+		getContraintes().weighty = 0.01;
+		getContraintes().anchor = GridBagConstraints.PAGE_END;
+		getContraintes().fill = GridBagConstraints.NONE;
 		this.add(boutonRefresh, getContraintes());
 		
 		//Bouton Jouer

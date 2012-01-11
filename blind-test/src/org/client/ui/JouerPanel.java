@@ -49,7 +49,7 @@ public class JouerPanel extends AbstractPanel {
 		BoutonGris boutonValid = new BoutonGris ("Valider !");
 		_observable = new ValidListener (this, boutonValid);
 		boutonValid.addMouseListener(_observable);
-		boutonValid.addKeyListener(new boutonValidEntree ());
+		boutonValid.addKeyListener(new boutonValidEntree (this, null));
 		getContraintes().gridx = 1;
 		getContraintes().gridy = 0;
 		this.add(boutonValid, getContraintes());
