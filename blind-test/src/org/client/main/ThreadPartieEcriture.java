@@ -31,7 +31,7 @@ public class ThreadPartieEcriture implements Runnable, Observer {
 	private Boolean isClicked;
 	private Socket socket;
 	private ArrayBlockingQueue<IMessage> currentMessages;
-	
+
 	public ThreadPartieEcriture(Socket socket, JouerPanel fenetre, String login) {
 		super();
 		this.login = login;
@@ -40,7 +40,7 @@ public class ThreadPartieEcriture implements Runnable, Observer {
 		this.currentMessages = new ArrayBlockingQueue<IMessage>(20);
 		isClicked = Boolean.FALSE;
 	}
-	
+
 	public final void addIMessage(final IMessage parMessage) {
 		currentMessages.add(parMessage);
 	}
@@ -52,7 +52,7 @@ public class ThreadPartieEcriture implements Runnable, Observer {
 	public final String getCurrentImage() {
 		return currentImage;
 	}
-	
+
 	public void setCurrentImage(String currentImage) {
 		this.currentImage = currentImage;
 	}
@@ -66,8 +66,8 @@ public class ThreadPartieEcriture implements Runnable, Observer {
 		Configuration config = ConfigurationManager.getConfiguration();
 		InfoProvider fileProvider = InfoProviderManager.getUiInfoProvider();
 		String name = null;
-		StringBuilder sb = new StringBuilder();
-		
+		StringBuilder _stringBuilder = new StringBuilder();
+
 		PlayMessage play = (PlayMessage) EnumMessage.PLAY.createMessage();
 		play.setLogin(this.login);
 		play.setNomPartie("ma partie");
@@ -76,7 +76,6 @@ public class ThreadPartieEcriture implements Runnable, Observer {
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-		//TODO : Lancer le thread de lecture
 		final Thread locThreadLecture = new Thread(new ThreadPartieLecture(socket, this));
 		locThreadLecture.start();
 		while (true) {
@@ -93,23 +92,23 @@ public class ThreadPartieEcriture implements Runnable, Observer {
 						break;
 					}
 				}
-				
+
 				if (EnumMessage.isDisplay(mess)) {
 					final DisplayMessage locDisplayMessage = (DisplayMessage) messageRetour;
 					name = locDisplayMessage.getFileName();
-					
+					fileProvider.appendMessage(Level.WARNING, String.format("Affichage de l'image %s", name));
 					if (!StringUtil.equals(name, currentImage)) {
 						currentImage = name;
-						if(sb.length() != 0) {
-							sb.delete(0, (sb.length() - 1));
+						if(_stringBuilder.length() != 0) {
+							_stringBuilder.delete(0, _stringBuilder.length());
 						}
-						sb.append(config.getImageDirectory());
-						sb.append(name);
-						String fileName = sb.toString();
-						fenetre.newTest(fileName);
+						_stringBuilder.append(config.getImageDirectory());
+						_stringBuilder.append(name);
+						final String fileName = _stringBuilder.toString();
+						fenetre.newTest(fileProvider, fileName);
 					}
 				}
-				
+
 				while(Boolean.FALSE == isClicked) {
 					//Si le client a cliqué on construit le AnswerMessage
 					if (false == currentMessages.isEmpty()) {
@@ -126,7 +125,6 @@ public class ThreadPartieEcriture implements Runnable, Observer {
 					} catch (IOException e) {
 						fileProvider.appendMessage(Level.SEVERE, "Inscription - erreur de connexion au serveur");
 					}
-					
 				}
 			}
 		}

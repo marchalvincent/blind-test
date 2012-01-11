@@ -27,9 +27,7 @@ public class ThreadPartieLecture implements Runnable {
 
 	@Override
 	public void run() {
-		
 		InfoProvider fileProvider = InfoProviderManager.getUiInfoProvider();
-		
 		while (true) {
 			try {
 				IMessage messageRetour = ReadWriterUtil.read(socket);
@@ -49,12 +47,11 @@ public class ThreadPartieLecture implements Runnable {
 					info.setMessage("ACK - WINNER");
 					ReadWriterUtil.write(socket, info);
 					tEcriture.addIMessage(messageRetour);
-				}
-				
-				
+				}				
 			} catch (ClassNotFoundException e) {}
 			catch (IOException e) {
-				fileProvider.appendMessage(Level.SEVERE, "Inscription - erreur de connexion au serveur");
+				fileProvider.appendMessage(Level.SEVERE, String.format("Impossible de se connecter au serveur %s", socket.getInetAddress().getHostAddress()));
+				break;
 			}
 		}
 	}

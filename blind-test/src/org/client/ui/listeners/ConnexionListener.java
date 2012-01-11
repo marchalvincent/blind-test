@@ -26,9 +26,10 @@ public class ConnexionListener extends AbstractBoutonListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		super.mouseClicked (e);
-		ThreadConnexion tc = new ThreadConnexion(panel.getLogin(), panel.getPassword());
+		final String locLogin = panel.getLogin();
+		ThreadConnexion tc = new ThreadConnexion(locLogin, panel.getPassword());
 		if (tc.call()) {
-			Fenetre.instance().changePage(new AccueilPanel ());
+			Fenetre.instance().changePage(new AccueilPanel (locLogin));
 		}
 	}
 }

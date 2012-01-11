@@ -13,14 +13,17 @@ import org.client.ui.ReglesPanel;
  */
 public class ReglesListener extends AbstractBoutonListener {
 
-	public ReglesListener(BoutonGris bouton) {
+	final private String _login;
+	
+	public ReglesListener(final String parLogin, BoutonGris bouton) {
 		super(bouton);
-		// TODO Auto-generated constructor stub
+		
+		_login = parLogin;
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		super.mouseClicked(e);
-		Fenetre.instance().changePage(new ReglesPanel ());
+		Fenetre.instance().changePage(new ReglesPanel (_login));
 	}
 }

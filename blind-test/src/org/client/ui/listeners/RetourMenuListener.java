@@ -13,15 +13,18 @@ import org.client.ui.Fenetre;
  */
 public class RetourMenuListener extends AbstractBoutonListener {
 
-	public RetourMenuListener(BoutonGris bouton) {
+	final private String _login;
+	
+	public RetourMenuListener(final String parLogin, final BoutonGris bouton) {
 		super(bouton);
-		// TODO Auto-generated constructor stub
+		
+		_login = parLogin;
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		super.mouseClicked(e);
-		Fenetre.instance().changePage(new AccueilPanel ());
+		Fenetre.instance().changePage(new AccueilPanel (_login));
 	}
 
 }

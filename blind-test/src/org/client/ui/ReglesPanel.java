@@ -19,14 +19,14 @@ import org.commons.configuration.ConfigurationManager;
  */
 public class ReglesPanel extends AbstractPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	static private String fichierTxtRegles = "conf/regles.txt";
+	static private final String fichierTxtRegles = "conf/regles.txt";
+	private String _login;
 	
-	public ReglesPanel () {
+	public ReglesPanel (final String parLogin) {
 		super ();
+		
+		_login = parLogin;
 	}
 	
 	@Override
@@ -58,7 +58,7 @@ public class ReglesPanel extends AbstractPanel {
 		
 		//Bouton Retour
 		BoutonGris boutonRetour = new BoutonGris ("< Retour");
-		boutonRetour.addMouseListener(new RetourMenuListener (boutonRetour));
+		boutonRetour.addMouseListener(new RetourMenuListener (_login, boutonRetour));
 		getContraintes().gridy = 1;
 		this.add(boutonRetour, getContraintes());
 		

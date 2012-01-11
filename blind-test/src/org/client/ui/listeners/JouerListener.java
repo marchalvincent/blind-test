@@ -15,9 +15,12 @@ import org.client.ui.JouerPanel;
 public class JouerListener extends AbstractBoutonListener {
 	
 	private PartieClientLauncher partieClientLauncher;
+	private final String _login;
 	
-	public JouerListener(BoutonGris bouton) {
+	public JouerListener(final String parLogin, BoutonGris bouton) {
 		super(bouton);
+		
+		_login = parLogin;
 	}
 
 	@Override
@@ -25,7 +28,7 @@ public class JouerListener extends AbstractBoutonListener {
 		super.mouseClicked(e);
 		JouerPanel jp = new JouerPanel ();
 		Fenetre.instance().changePage(jp);
-		partieClientLauncher = new PartieClientLauncher(jp, "test");
+		partieClientLauncher = new PartieClientLauncher(jp, _login);
 		partieClientLauncher.startPartieClient();
 	}
 }
