@@ -16,18 +16,17 @@ import org.commons.message.EnumMessage;
 import org.commons.message.ErrorMessage;
 import org.commons.message.IMessage;
 import org.commons.message.InfoMessage;
-import org.commons.util.SystemUtil;
 import org.server.concurrent.ReadWriterUtil;
 
 public final class ThreadPartie implements Runnable {
 
-	static private final ReentrantReadWriteLock LOCK = new ReentrantReadWriteLock(true);
+	static private final ReentrantReadWriteLock LOCK = new ReentrantReadWriteLock();
 
 	final private Partie _partie;
 	final private Socket _socket;
 	final private User _user;
 	private boolean _isDisconnect;
-	
+
 	public ThreadPartie(final User parUser, final Socket parSocket, final Partie parPartie) {
 		_partie = parPartie;
 		_socket = parSocket;
@@ -87,6 +86,9 @@ public final class ThreadPartie implements Runnable {
 							if (_partie.canDisplayNewImage() == true) {
 								_partie.rebootAck();
 							}
+							if(_partie.isFinished()) {
+								break end;
+							}
 							break;
 						} finally {
 							LOCK.writeLock().unlock();
@@ -94,39 +96,42 @@ public final class ThreadPartie implements Runnable {
 					}
 					final AnswerMessage locAnswerMessage = (AnswerMessage) locResponseMessage;
 					final String locAnswer = locAnswerMessage.getAnswer();
-					if (_partie.isValidAnswer(locAnswer)) {
-						LOCK.writeLock().lock();
-						try {
+					LOCK.writeLock().lock();
+					try {
+						if (_partie.hasWinner() == false && _partie.isValidAnswer(locAnswer)) {
 							_partie.updateStats(_user);
 							_partie.notifyWinner(locInfoProvider, _user.getConstName());
 							if(_partie.isFinished()) {
 								break end;
 							}
-						}finally {
-							LOCK.writeLock().unlock();
+						} else {
+							if(_partie.hasWinner()) {
+								continue;
+							}
+							final ErrorMessage locErrorMessage = (ErrorMessage) EnumMessage.ERROR.createMessage();
+							final String locValue = "La réponse est incorrect.";
+							locErrorMessage.setMessage(locValue);
+							try {
+								ReadWriterUtil.write(_socket, locErrorMessage);
+							} catch (IOException e) {
+							}
 						}
-					} else {
-						final ErrorMessage locErrorMessage = (ErrorMessage) EnumMessage.ERROR.createMessage();
-						final String locValue = "La réponse est incorrect.";
-						locErrorMessage.setMessage(locValue);
-						try {
-							ReadWriterUtil.write(_socket, locErrorMessage);
-						} catch (IOException e) {
-						}
+					}finally {
+						LOCK.writeLock().unlock();
 					}
 				}
 			}
 		}
-		//TODO : Envoyer un disconnect
 		if(_isDisconnect == false) {
-			System.out.println("Fin de la partie");
 			final EndGameMessage locMessage = (EndGameMessage) EnumMessage.END_GAME.createMessage();
 			locMessage.setMessage("La partie est finie");
 			try {
 				ReadWriterUtil.write(_socket, locMessage);
 			} catch (IOException e) {
-			} finally {
-				SystemUtil.close(_socket);
+			} 
+			_partie.removeUser(_user);
+			if(_partie.isEmpty()) {
+				_partie.close();
 			}
 		}
 	}	

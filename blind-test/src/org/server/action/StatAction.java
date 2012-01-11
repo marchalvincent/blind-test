@@ -35,7 +35,6 @@ public class StatAction extends AbstractAction {
 		final String locLogin = locStatMessage.getLogin();
 		User locUser = locUserManager.find(locLogin);
 		final Socket locSocket = getSocket();
-
 		locStatMessage.setDefaite(locUser.getDefaite());
 		locStatMessage.setVictoire(locUser.getVictoire());
 		

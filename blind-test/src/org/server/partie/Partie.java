@@ -1,5 +1,6 @@
 package org.server.partie;
 
+import java.io.Closeable;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -25,15 +26,17 @@ import org.server.persistence.Manager;
 import org.server.persistence.Managers;
 
 
-public class Partie implements IWithName {
 
-	private final List<User> _userList;
+public class Partie implements IWithName, Closeable {
+
+	private List<User> _userList;
 	private List<Banque> banqueList;
 	private String _name;
 	private AbstractCache<User, Socket> _sockets;
 	private Banque _banque;
 	private AtomicInteger _currentAck;
 	private AtomicBoolean _hasChangedImage;
+	private AtomicBoolean _hasWinner;
 
 	public Partie(final String name){
 		banqueList = new ArrayList<Banque>();
@@ -42,14 +45,19 @@ public class Partie implements IWithName {
 		_sockets = Caches.createSocketCache();
 		_currentAck = new AtomicInteger(0);
 		_hasChangedImage = new AtomicBoolean(false);
+		_hasWinner = new AtomicBoolean(false);
 	}
 
 	public List<User> getUsers(){
-		return Collections.unmodifiableList(_userList);//Recopie défensive + Renvoi une sous liste non modifiable
+		return new ArrayList<User>(_userList);//Recopie défensive + Renvoi une sous liste non modifiable
 	}
 
 	public final boolean hasUser (final User parUser) {
 		return _userList.contains(parUser);
+	}
+	
+	public final boolean isEmpty() {
+		return _userList.isEmpty();
 	}
 
 	public void updateImage(){	
@@ -98,9 +106,17 @@ public class Partie implements IWithName {
 	}
 
 	public final boolean isValidAnswer(final String parAnswer) {
-		return StringUtil.equals(parAnswer, _banque.getAnswer());
+		final boolean locAnswer = StringUtil.equals(parAnswer, _banque.getAnswer());
+		if(true == locAnswer) {
+			this._hasWinner.set(true);
+		}
+		return locAnswer;
 	}
 
+	public final boolean hasWinner() {
+		return _hasWinner.get();
+	}
+	
 	public boolean canDisplayNewImage() {
 		return _userList.size() == _currentAck.get();
 	}
@@ -115,6 +131,7 @@ public class Partie implements IWithName {
 
 	public final void rebootAck() {
 		_currentAck.set(0);
+		this._hasWinner.set(false);
 	}
 
 	public final void updateStats(final User parWinner) {
@@ -131,7 +148,7 @@ public class Partie implements IWithName {
 
 	public final void notifyWinner(final InfoProvider parInfoProvider, final String parWinner) {
 		final WinnerMessage locMessage = (WinnerMessage) EnumMessage.WINNER.createMessage();
-		final String locValueMessage = String.format("Le joueur %s a gagné la partie.", parWinner);
+		final String locValueMessage = String.format("Le joueur %s a gagné la manche.", parWinner);
 		locMessage.setMessage(locValueMessage);
 		locMessage.setLogin(parWinner);
 		parInfoProvider.appendMessage(Level.INFO, locValueMessage);
@@ -157,6 +174,21 @@ public class Partie implements IWithName {
 	@Override
 	public final String toString() {
 		return getConstName();
+	}
+
+	@Override
+	public final void close() {
+		Caches.parties().remove(getConstName());
+		_banque = null;
+		_currentAck = null;
+		_hasChangedImage = null;
+		_hasWinner = null;
+		for(final Socket locSocket : _sockets.values()) {
+			SystemUtil.close(locSocket);
+		}
+		_sockets = null;
+		_userList.clear();
+		_userList = null;
 	}
 
 }
