@@ -1,7 +1,10 @@
 package org.client.ui;
 
 import java.awt.Color;
+import java.awt.Dimension;
 
+import javax.swing.BorderFactory;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 /**
@@ -10,7 +13,8 @@ import javax.swing.JTextArea;
  *
  */
 public class LogClient {
-
+	
+	JScrollPane scrollPane;
 	private JTextArea log;
 	private StringBuilder txtLog;
 	
@@ -25,10 +29,15 @@ public class LogClient {
 		log.setOpaque(false);
 		log.setForeground(Color.WHITE);
 		log.setVisible(true);
+		scrollPane = new JScrollPane(log, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane.setOpaque(false);
+		scrollPane.getViewport().setOpaque(false);
+		scrollPane.setBorder(BorderFactory.createEmptyBorder());
+		scrollPane.setPreferredSize(new Dimension(700, 300));
 	}
 	
-	protected final JTextArea getTextArea() {
-		return log;
+	protected final JScrollPane getTextArea() {
+		return scrollPane;
 	}
 	
 	public void ecrire (String texte) {
