@@ -30,7 +30,7 @@ public class ConnexionPanel extends AbstractPanel {
 	}
 	
 	@Override
-	protected void initPanel () {
+	public ConnexionPanel initPanel () {
 		getMarges().set(0, 15, 15, 15);
 		
 		//Label Login
@@ -112,6 +112,8 @@ public class ConnexionPanel extends AbstractPanel {
 		getContraintes().weighty = 0.4;
 		getContraintes().gridwidth = GridBagConstraints.REMAINDER;
 		this.add(espace, getContraintes());
+		
+		return this;
 	}
 	
 	public String getLogin () {

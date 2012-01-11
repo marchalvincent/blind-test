@@ -28,7 +28,7 @@ public class CreerCompteListener extends AbstractBoutonListener {
 		super.mouseClicked(e);
 		ThreadInscription ti = new ThreadInscription(panel.getLogin(), panel.getPassword(), panel.getNom());
 		if (ti.call()) {
-			Fenetre.instance().changePage(new ConnexionPanel ());
+			Fenetre.instance().changePage(new ConnexionPanel ().initPanel());
 		}
 	}
 }

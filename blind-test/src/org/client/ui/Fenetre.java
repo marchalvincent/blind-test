@@ -32,7 +32,7 @@ public class Fenetre {
 	public void initFenetre () {
 		fenetre.setSize(800, 700);
 		fenetre.setMinimumSize(new Dimension (800, 700));
-		fenetre.setContentPane(new ConnexionPanel());
+		fenetre.setContentPane(new ConnexionPanel().initPanel());
 		fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		fenetre.setVisible(true);
 	}

@@ -24,6 +24,6 @@ public class ReglesListener extends AbstractBoutonListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		super.mouseClicked(e);
-		Fenetre.instance().changePage(new ReglesPanel (_login));
+		Fenetre.instance().changePage(new ReglesPanel (_login).initPanel());
 	}
 }
