@@ -99,7 +99,7 @@ public class ConnexionPanel extends AbstractPanel {
 		boutonQuitter.addMouseListener(new QuitterListener (boutonQuitter));
 		getContraintes().gridx = 0;
 		getContraintes().gridy = 0;
-		getContraintes().weighty = 0.6;
+		getContraintes().weighty = 0.3;
 		getContraintes().gridwidth = GridBagConstraints.REMAINDER;
 		getContraintes().anchor = GridBagConstraints.FIRST_LINE_START;
 		getMarges().top = 30;

@@ -21,6 +21,7 @@ import org.commons.message.IMessage;
 import org.commons.message.PlayMessage;
 import org.commons.util.IWithSupport;
 import org.commons.util.StringUtil;
+import org.commons.util.SystemUtil;
 import org.commons.util.WithUtilities;
 import org.server.concurrent.ReadWriterUtil;
 
@@ -138,6 +139,7 @@ public class ThreadPartieEcriture implements Runnable, Observer {
 		//Si on est sortie des deux boucles on revient à la page d'accueil
 		fileProvider.appendMessage(Level.INFO, String.format("La partie a été finie."));
 		Fenetre.instance().changePage(new AccueilPanel(login).initPanel());
+		SystemUtil.close(socket);
 	}
 
 	@Override
