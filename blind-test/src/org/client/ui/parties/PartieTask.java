@@ -7,7 +7,8 @@ import java.util.TimerTask;
 import org.commons.cache.Caches;
 
 public class PartieTask extends TimerTask {
-
+	
+	
 	Timer timer;
 	List <String> listParties;
 	
