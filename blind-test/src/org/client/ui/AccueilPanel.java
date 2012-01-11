@@ -35,7 +35,7 @@ public class AccueilPanel extends AbstractPanel {
 		boutonQuitter.addMouseListener(new QuitterListener (boutonQuitter));
 		getContraintes().gridx = 0;
 		getContraintes().gridy = 0;
-		getContraintes().weighty = 0.6;
+		getContraintes().weighty = 0.3;
 		getContraintes().weightx = 0.5;
 		getContraintes().gridwidth = GridBagConstraints.RELATIVE;
 		getContraintes().anchor = GridBagConstraints.FIRST_LINE_START;
@@ -48,7 +48,7 @@ public class AccueilPanel extends AbstractPanel {
 		boutonDeconnexion.addMouseListener(new DeconnexionListener (boutonDeconnexion));
 		getContraintes().gridx = 1;
 		getContraintes().gridy = 0;
-		getContraintes().weighty = 0.6;
+		getContraintes().weighty = 0.3;
 		getContraintes().weightx = 0.5;
 		getContraintes().gridwidth = GridBagConstraints.REMAINDER;
 		getContraintes().anchor = GridBagConstraints.FIRST_LINE_END;
@@ -101,6 +101,7 @@ public class AccueilPanel extends AbstractPanel {
 		boutonStat.addMouseListener(new StatListener (_login, boutonStat));
 		getContraintes().gridx = 0;
 		getContraintes().gridy = 2;
+		getContraintes().anchor = GridBagConstraints.CENTER;
 		this.add(boutonStat, getContraintes());
 		
 		//Bouton Règles
