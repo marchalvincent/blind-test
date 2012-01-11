@@ -98,7 +98,7 @@ public class AccueilPanel extends AbstractPanel {
 		
 		//Bouton Stats
 		BoutonGris boutonStat = new BoutonGris ("Statistiques");
-		boutonStat.addMouseListener(new StatListener (_login, boutonStat));
+		boutonStat.addMouseListener(new StatListener (_login, this, boutonStat));
 		getContraintes().gridx = 0;
 		getContraintes().gridy = 2;
 		getContraintes().anchor = GridBagConstraints.CENTER;
