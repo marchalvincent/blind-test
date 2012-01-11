@@ -41,19 +41,12 @@ public enum EnumAction implements IWithId {
 		final public AbstractAction createAction (final Socket parSocket, final IMessage parMessage) {
 			return new SendAllGamesAction(parSocket, parMessage);
 		}
-	}, 
+	},
 	
 	DISCONNECT(EnumMessage.DISCONNECT.getId()) {
 		@Override
 		public AbstractAction createAction(Socket parSocket, IMessage parMessage) {
 			return new DisconnectAction(parSocket, parMessage);
-		}
-	}, 
-	
-	FINISH_GAME(EnumMessage.FINISH_GAME.getId()) {
-		@Override
-		public AbstractAction createAction(Socket parSocket, IMessage parMessage) {
-			return new FinishGameAction(parSocket, parMessage);
 		}
 	};
 	

@@ -12,7 +12,7 @@ public class EndGameMessage extends AbstractMessage implements IWithSupport {
 	}
 	
 	protected EndGameMessage(String message) {
-		super(EnumMessage.FINISH_GAME);
+		super(EnumMessage.END_GAME);
 		this.message = message;
 	}
 

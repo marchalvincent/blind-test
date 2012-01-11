@@ -39,7 +39,7 @@ public class PartieClientLauncher {
 			threadEcriture.start();
 			
 		} catch (IOException e) {
-			fileProvider.appendMessage(Level.SEVERE, "Inscription - erreur de connexion au serveur");
+			fileProvider.appendMessage(Level.SEVERE, "Erreur de connexion au serveur");
 			SystemUtil.close(socket);
 		}
 	}

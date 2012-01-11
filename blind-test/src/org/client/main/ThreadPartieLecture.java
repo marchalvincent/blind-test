@@ -33,7 +33,7 @@ public class ThreadPartieLecture implements Runnable {
 				IMessage messageRetour = ReadWriterUtil.read(socket);
 				EnumMessage mess = WithUtilities.getById(EnumMessage.values(), messageRetour.getId());
 				
-				if (EnumMessage.isDisplay(mess)) {
+				if (EnumMessage.isDisplay(mess) || EnumMessage.isEndGame(mess)) {
 					tEcriture.addIMessage(messageRetour);
 				}
 				else if (EnumMessage.isError(mess)) {
@@ -47,7 +47,7 @@ public class ThreadPartieLecture implements Runnable {
 					info.setMessage("ACK - WINNER");
 					ReadWriterUtil.write(socket, info);
 					tEcriture.addIMessage(messageRetour);
-				}				
+				}
 			} catch (ClassNotFoundException e) {}
 			catch (IOException e) {
 				fileProvider.appendMessage(Level.SEVERE, String.format("Impossible de se connecter au serveur %s", socket.getInetAddress().getHostAddress()));
