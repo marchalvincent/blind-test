@@ -78,7 +78,6 @@ public final class ThreadPartie implements Runnable {
 					if (_partie.isValidAnswer(locAnswer)) {
 						_partie.updateStats(_user);
 						_partie.notifyWinner(locInfoProvider, _user.getConstName());
-						break;
 					} else {
 						final ErrorMessage locErrorMessage = (ErrorMessage) EnumMessage.ERROR.createMessage();
 						final String locValue = "La réponse est incorrect.";

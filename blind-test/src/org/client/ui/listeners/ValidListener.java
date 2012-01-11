@@ -22,7 +22,6 @@ public class ValidListener extends AbstractBoutonListener {
 	@Override
 	public void mouseClicked (MouseEvent e) {
 		super.mouseClicked(e);
-		
 		this.setChanged();
 		this.notifyObservers(_panel.getAnswer());
 	}

@@ -114,9 +114,9 @@ public class Partie implements IWithName {
 		for(final User locUser : _sockets.keys()) {
 			if(locUser.equals(parWinner)) {
 				locUser.setVictoire(locUser.getVictoire().intValue() + 1);
-				continue;
+			} else {
+				locUser.setDefaite(locUser.getDefaite().intValue() + 1);
 			}
-			locUser.setDefaite(locUser.getDefaite().intValue() + 1);
 			locUserManager.merge(locUser);
 		}
 	}

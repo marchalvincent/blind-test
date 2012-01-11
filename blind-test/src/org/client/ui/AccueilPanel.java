@@ -18,8 +18,12 @@ public class AccueilPanel extends AbstractPanel {
 
 	private static final long serialVersionUID = 1L;
 	
-	public AccueilPanel () {
+	final private String _login;
+	
+	public AccueilPanel (final String parLogin) {
 		super ();
+		
+		_login = parLogin;
 	}
 	
 	@Override
@@ -52,7 +56,7 @@ public class AccueilPanel extends AbstractPanel {
 		
 		//Bouton Jouer
 		BoutonGris boutonJouer = new BoutonGris ("Jouer !");
-		boutonJouer.addMouseListener(new JouerListener (boutonJouer));
+		boutonJouer.addMouseListener(new JouerListener (_login, boutonJouer));
 		getContraintes().gridx = 0;
 		getContraintes().gridy = 1;
 		getContraintes().weighty = 0.1;
@@ -62,7 +66,7 @@ public class AccueilPanel extends AbstractPanel {
 		
 		//Bouton Règles
 		BoutonGris boutonRegles = new BoutonGris ("Règles");
-		boutonRegles.addMouseListener(new ReglesListener (boutonRegles));
+		boutonRegles.addMouseListener(new ReglesListener (_login, boutonRegles));
 		getContraintes().gridx = 0;
 		getContraintes().gridy = 2;
 		getContraintes().weighty = 0.1;
