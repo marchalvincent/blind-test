@@ -1,28 +1,39 @@
 package org.commons.message;
 
-import org.commons.util.IWithSupport;
-
-public class DisconnectMessage extends AbstractMessage implements IWithSupport {
+public class DisconnectMessage extends AbstractMessage {
 
 	private static final long serialVersionUID = 1L;
-	private String message;
+	private String partie;
+	private String login;
 
 	protected DisconnectMessage() {
-		this("");
+		this("", "");
 	}
 	
-	protected DisconnectMessage(String message) {
+	protected DisconnectMessage(String partie, String login) {
 		super(EnumMessage.DISCONNECT);
-		this.message = message;
+		this.partie = partie;
+		this.login = login;
 	}
 
-	@Override
-	public String getSupport() {
-		return message;
+	public final String getPartie() {
+		return partie;
+	}
+
+	public final void setPartie(String partie) {
+		this.partie = partie;
 	}
 
 	public final void setMessage(String message) {
-		this.message = message;
+		this.partie = message;
+	}
+
+	public final String getLogin() {
+		return login;
+	}
+
+	public final void setLogin(String login) {
+		this.login = login;
 	}
 
 }

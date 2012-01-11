@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.RenderedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.logging.Level;
@@ -31,6 +32,7 @@ public class JouerPanel extends AbstractPanel {
 	public JouerPanel (final RenderedImage imagePath) {
 		super ();
 		this._currentImage = imagePath;
+		_observable = new ArrayList<Observable>();
 	}
 	
 	public JouerPanel () {
@@ -46,16 +48,16 @@ public class JouerPanel extends AbstractPanel {
 		this.add(champsReponse, getContraintes());
 		
 		//Bouton Valider !
-		BoutonGris boutonValid = new BoutonGris ("Valider !");
-		ValidListener validL = new ValidListener (this, boutonValid);
-		boutonValid.addMouseListener(validL);
+		final BoutonGris locBoutonValide = new BoutonGris ("Valider !");
+		ValidListener validL = new ValidListener (this, locBoutonValide);
+		locBoutonValide.addMouseListener(validL);
 		_observable.add(validL);
-		boutonValidEntree bve = new boutonValidEntree (this, null);
-		boutonValid.addKeyListener(bve);
-		_observable.add(bve);
+		boutonValidEntree locBoutonValidEntree = new boutonValidEntree (this, null);
+		champsReponse.addKeyListener(locBoutonValidEntree);
+		_observable.add(locBoutonValidEntree);
 		getContraintes().gridx = 1;
 		getContraintes().gridy = 0;
-		this.add(boutonValid, getContraintes());
+		this.add(locBoutonValide, getContraintes());
 		
 		return this;
 	}

@@ -75,7 +75,7 @@ public enum EnumMessage implements IWithId {
 		}
 	}, 
 	
-	ENDGAME(12) {
+	END_GAME(12) {
 		@Override
 		public IMessage createMessage() {
 			return new EndGameMessage();
@@ -114,11 +114,14 @@ public enum EnumMessage implements IWithId {
 		return EnumMessage.DISPLAY.equals(parMessage);
 	}
 	
+	public static boolean isEndGame(final EnumMessage parMessage) {
+		return EnumMessage.END_GAME.equals(parMessage);
+	}
+	
 	public static boolean isWinner(final EnumMessage parMessage) {
 		return EnumMessage.WINNER.equals(parMessage);
 	}
 	
 	public abstract IMessage createMessage();
-
 
 }

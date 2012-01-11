@@ -2,6 +2,7 @@ package org.server.partie;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.logging.Level;
 
 import org.commons.entity.Banque;
@@ -17,6 +18,8 @@ import org.commons.message.InfoMessage;
 import org.server.concurrent.ReadWriterUtil;
 
 public final class ThreadPartie implements Runnable {
+
+	static private final ReentrantReadWriteLock LOCK = new ReentrantReadWriteLock(true);
 
 	final private Partie _partie;
 	final private Socket _socket;
@@ -37,15 +40,24 @@ public final class ThreadPartie implements Runnable {
 			while (_partie.isReboot() == true) {
 				final DisplayMessage locMessage = (DisplayMessage) EnumMessage.DISPLAY.createMessage();
 				Banque locBanque = null;
-				if(_partie.hasUser(_user)) {
-					locBanque = _partie.next();
-				} else {
-					_partie.addUser(_user, _socket);
-					locInfoProvider.appendMessage(Level.INFO, String.format("Le joueur %s a rejoint la partie %s.", _user, _partie));
-					locBanque = _partie.getCurrentAnswer();
-					if(locBanque == null) {
-						locBanque = _partie.next();
+				LOCK.writeLock().lock();
+				try {
+					if(_partie.hasUser(_user)) {
+						if(_partie.hasChangedImage() == false) {
+							locBanque = _partie.next();
+						} else {
+							locBanque = _partie.getCurrentAnswer();
+						}
+					} else {
+						_partie.addUser(_user, _socket);
+						locInfoProvider.appendMessage(Level.INFO, String.format("Le joueur %s a rejoint la partie %s.", _user, _partie));
+						locBanque = _partie.getCurrentAnswer();
+						if(locBanque == null) {
+							locBanque = _partie.next();
+						}
 					}
+				}finally {
+					LOCK.writeLock().unlock();
 				}
 				locInfoProvider.appendMessage(Level.INFO, String.format("Le joueur %s a reçu l'image %s.", _user, locBanque));
 				locMessage.setFileName(locBanque.getConstName());
@@ -67,17 +79,27 @@ public final class ThreadPartie implements Runnable {
 						break;
 					}
 					if (locResponseMessage instanceof InfoMessage) {
-						_partie.incrementAck();
-						if (_partie.canDisplayNewImage() == true) {
-							_partie.rebootAck();
+						LOCK.writeLock().lock();
+						try {
+							_partie.incrementAck();
+							if (_partie.canDisplayNewImage() == true) {
+								_partie.rebootAck();
+							}
+							break;
+						} finally {
+							LOCK.writeLock().unlock();
 						}
-						break;
 					}
 					final AnswerMessage locAnswerMessage = (AnswerMessage) locResponseMessage;
 					final String locAnswer = locAnswerMessage.getAnswer();
 					if (_partie.isValidAnswer(locAnswer)) {
-						_partie.updateStats(_user);
-						_partie.notifyWinner(locInfoProvider, _user.getConstName());
+						LOCK.writeLock().lock();
+						try {
+							_partie.updateStats(_user);
+							_partie.notifyWinner(locInfoProvider, _user.getConstName());
+						}finally {
+							LOCK.writeLock().unlock();
+						}
 					} else {
 						final ErrorMessage locErrorMessage = (ErrorMessage) EnumMessage.ERROR.createMessage();
 						final String locValue = "La réponse est incorrect.";
