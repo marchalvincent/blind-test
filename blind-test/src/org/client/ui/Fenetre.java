@@ -39,7 +39,7 @@ public class Fenetre {
 		fenetre.setContentPane(new ConnexionPanel().initPanel());
 		fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		fenetre.setVisible(true);
-		fenetreLog.add(logClient.getTextArea());
+		fenetreLog.add(logClient.getScrollPane());
 		fenetreLog.getContentPane().setBackground(Color.BLACK);
 		fenetreLog.setSize(500, 300);
 		fenetreLog.setLocation(400, 100);
