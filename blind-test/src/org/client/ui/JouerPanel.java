@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.RenderedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.logging.Level;
@@ -31,6 +32,7 @@ public class JouerPanel extends AbstractPanel {
 	public JouerPanel (final RenderedImage imagePath) {
 		super ();
 		this._currentImage = imagePath;
+		_observable = new ArrayList<Observable>();
 	}
 	
 	public JouerPanel () {
