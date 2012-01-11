@@ -21,7 +21,7 @@ import org.commons.util.SystemUtil;
 import org.server.concurrent.ReadWriterUtil;
 
 /**
- * Affiche le jeu
+ * Affiche les stats
  * @author Takfarinas
  *
  */
@@ -52,12 +52,7 @@ public class StatListener extends AbstractBoutonListener {
 			ReadWriterUtil.write(socket,locStatMessage);
 			//on écoute la réponse
 			IMessage messageRetour = null;
-			try {
 				messageRetour = ReadWriterUtil.read(socket);
-			} catch (ClassNotFoundException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
 			if (messageRetour instanceof StatMessage) {
 				StatMessage msgStatRetour = (StatMessage) messageRetour;
 				displayMessage = "Nombre de vistoire : "+msgStatRetour.getVictoire()+"\n"+"Nombre de défaite : "+msgStatRetour.getDefaite();	
@@ -65,7 +60,11 @@ public class StatListener extends AbstractBoutonListener {
 				
 		} catch (IOException e1) {
 			fileProvider.appendMessage(Level.SEVERE, String.format("Impossible d'écrire dans la socket d'adresse %s", socket.getInetAddress().getHostAddress()), e1);
-		} finally {
+		}
+		catch (Exception e2) {
+			fileProvider.appendMessage(Level.SEVERE, String.format("Probeleme : "), e2);
+		}
+		finally {
 			SystemUtil.close(socket);
 		}
 		if (StringUtil.isNotEmpty(displayMessage)){
