@@ -100,6 +100,21 @@ public enum EnumConfiguration implements IWithName, IWithSupport {
 		public final String getFormattedValue(final Configuration parConfiguration) {
 			return String.format("Le fichier d'index se situe à : \"%s\"", parConfiguration.getIndexFile());
 		}
+	},
+	
+	TIMER_PARTIE ("integer", "-s", "10") {
+
+		@Override
+		public void setConfigurationValue(
+				final Configuration parConfiguration, final String parValue) {
+			parConfiguration.setTimer(parValue);
+		}
+
+		@Override
+		public final String getFormattedValue(Configuration parConfiguration) {
+			return String.format("Le Timer de refresh des parties est de : \"%s\"", parConfiguration.getTimer());
+		}
+		
 	};
 
 	final private String _name;

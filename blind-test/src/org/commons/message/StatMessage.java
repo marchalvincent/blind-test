@@ -12,7 +12,7 @@ public class StatMessage extends AbstractMessage {
 	}
 	
 	protected StatMessage(String login, Integer victoire, Integer defaite) {
-		super(EnumMessage.INSCRIPTION);
+		super(EnumMessage.STAT);
 		this.login = login;
 		this.victoire = victoire;
 		this.defaite = defaite;

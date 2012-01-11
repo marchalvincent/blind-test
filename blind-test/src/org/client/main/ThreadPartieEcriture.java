@@ -98,6 +98,7 @@ public class ThreadPartieEcriture implements Runnable, Observer {
 
 				if (EnumMessage.isEndGame(mess)) {
 					//Si c'est la fin de partie on quitte les deux boucles pour revenir a la page précédente
+					System.out.println("le lecteur recoit le END GAME et break");
 					break end;
 				}
 				else if (EnumMessage.isDisplay(mess)) {
@@ -135,9 +136,8 @@ public class ThreadPartieEcriture implements Runnable, Observer {
 				}
 			}
 		}
-
+		
 		//Si on est sortie des deux boucles on revient à la page d'accueil
-		fileProvider.appendMessage(Level.INFO, String.format("La partie a été finie."));
 		Fenetre.instance().changePage(new AccueilPanel(login).initPanel());
 		SystemUtil.close(socket);
 	}
