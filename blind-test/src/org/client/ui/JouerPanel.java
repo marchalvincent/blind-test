@@ -2,6 +2,7 @@ package org.client.ui;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.GridBagConstraints;
 import java.awt.Image;
 import java.awt.image.RenderedImage;
 import java.io.IOException;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.Observable;
 import java.util.logging.Level;
 
+import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import org.client.ui.listeners.ValidListener;
@@ -40,11 +42,27 @@ public class JouerPanel extends AbstractPanel {
 	}
 	
 	@Override
-	public JouerPanel initPanel() {		
+	public JouerPanel initPanel() {	
+		
+		//espace
+		JLabel espace = new JLabel (" ");
+		getContraintes().gridx = 0;
+		getContraintes().gridy = 0;
+		getContraintes().weighty = 1.0;
+		getContraintes().gridwidth = GridBagConstraints.REMAINDER;
+		this.add(espace, getContraintes());
+		
 		//Champs réponse
 		champsReponse = new JTextField (30);
 		getContraintes().gridx = 0;
-		getContraintes().gridy = 0;
+		getContraintes().gridy = 1;
+		getMarges().left = 15;
+		getMarges().bottom = 15;
+		getMarges().right = 15;
+		getContraintes().insets = getMarges();
+		getContraintes().anchor = GridBagConstraints.LAST_LINE_END;
+		getContraintes().weighty = 0.1;
+		getContraintes().gridwidth = 1;
 		this.add(champsReponse, getContraintes());
 		
 		//Bouton Valider !
@@ -56,8 +74,12 @@ public class JouerPanel extends AbstractPanel {
 		champsReponse.addKeyListener(locBoutonValidEntree);
 		_observable.add(locBoutonValidEntree);
 		getContraintes().gridx = 1;
-		getContraintes().gridy = 0;
+		getContraintes().gridy = 1;
+		getMarges().bottom = 12;
+		getContraintes().anchor = GridBagConstraints.LAST_LINE_START;
 		this.add(locBoutonValide, getContraintes());
+		
+		champsReponse.requestFocus();
 		
 		return this;
 	}

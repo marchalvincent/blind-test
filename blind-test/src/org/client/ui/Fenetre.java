@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import org.client.ui.parties.PartieTimer;
 import org.commons.logger.InfoProviderManager;
 import org.commons.logger.UiInfoProvider;
 
@@ -22,6 +23,7 @@ public class Fenetre {
 	private JFrame fenetreLog;
 	private JFrame fenetreParties;
 	private LogClient logClient;
+	private PartieTimer pt;
 	
 	static public final Fenetre instance() {
 		return INSTANCE;
@@ -56,7 +58,7 @@ public class Fenetre {
 	}
 	
 	public void chargeListParties () {
-		
+		pt = new PartieTimer(10);
 	}
 	
 	private void createLogClient () {
