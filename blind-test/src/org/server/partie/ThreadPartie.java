@@ -120,7 +120,7 @@ public final class ThreadPartie implements Runnable {
 		//TODO : Envoyer un disconnect
 		if(_isDisconnect == false) {
 			System.out.println("Fin de la partie");
-			final EndGameMessage locMessage = (EndGameMessage) EnumMessage.FINISH_GAME.createMessage();
+			final EndGameMessage locMessage = (EndGameMessage) EnumMessage.END_GAME.createMessage();
 			locMessage.setMessage("La partie est finie");
 			try {
 				ReadWriterUtil.write(_socket, locMessage);
