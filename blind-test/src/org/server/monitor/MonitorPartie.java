@@ -18,6 +18,9 @@ public final class MonitorPartie extends MonitorCommand {
 	public final String call() throws Exception {
 		final AbstractCache<String, Partie> locPartieCache = Caches.parties();
 		final List<Partie> locPartieList = locPartieCache.values();
+		if(locPartieList.isEmpty()) {
+			return "Il n'y a aucune partie en cours";
+		}
 		WithUtilities.sortName(locPartieList);
 		final StringBuilder locBuilder = new StringBuilder();
 		for(final Partie locPartie : locPartieList) {
