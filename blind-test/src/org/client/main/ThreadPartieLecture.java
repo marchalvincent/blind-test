@@ -10,8 +10,7 @@ import org.commons.message.DisplayMessage;
 import org.commons.message.EnumMessage;
 import org.commons.message.IMessage;
 import org.commons.message.InfoMessage;
-import org.commons.message.WinnerMessage;
-import org.commons.util.SystemUtil;
+import org.commons.util.IWithSupport;
 import org.commons.util.WithUtilities;
 import org.server.concurrent.ReadWriterUtil;
 
@@ -43,22 +42,19 @@ public class ThreadPartieLecture implements Runnable {
 					DisplayMessage display = (DisplayMessage) EnumMessage.DISPLAY.createMessage();
 					display.setFileName(tEcriture.getCurrentImage());
 					tEcriture.addIMessage(display);
+					fileProvider.appendMessage(Level.WARNING, ((IWithSupport) messageRetour).getSupport());
 				}
 				else if (EnumMessage.isWinner(mess)) {
 					InfoMessage info = (InfoMessage) EnumMessage.INFO.createMessage();
 					info.setMessage("ACK - WINNER");
 					ReadWriterUtil.write(socket, info);
-					
-					WinnerMessage win = (WinnerMessage) messageRetour;
-					fileProvider.appendMessage(Level.INFO, "Bravo à l'utilisateur " + win.getLogin() + " qui a trouvé la bonne réponse !");
+					tEcriture.addIMessage(messageRetour);
 				}
 				
 				
 			} catch (ClassNotFoundException e) {}
 			catch (IOException e) {
-				fileProvider.appendMessage(Level.SEVERE, "Inscription - erreur de connexion au serveur" , e);
-				e.printStackTrace();
-				SystemUtil.exit();
+				fileProvider.appendMessage(Level.SEVERE, "Inscription - erreur de connexion au serveur");
 			}
 		}
 	}

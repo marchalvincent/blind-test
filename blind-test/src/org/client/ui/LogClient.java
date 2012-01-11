@@ -27,7 +27,7 @@ public class LogClient {
 		log.setVisible(true);
 	}
 	
-	public JTextArea getInstance () {
+	protected final JTextArea getTextArea() {
 		return log;
 	}
 	

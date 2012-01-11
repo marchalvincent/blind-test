@@ -7,6 +7,7 @@ import org.commons.cache.Caches;
 import org.commons.entity.User;
 
 
+
 public final class MonitorUserConnected extends MonitorCommand {
 
 	protected MonitorUserConnected(String parCommandName) {
@@ -21,5 +22,4 @@ public final class MonitorUserConnected extends MonitorCommand {
 		locBuilder.append("Les utilisateurs connectés sont : ").append(locUserList.toString());
 		return locBuilder.toString();
 	}
-
 }

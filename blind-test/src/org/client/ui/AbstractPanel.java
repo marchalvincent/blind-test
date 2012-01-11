@@ -30,7 +30,7 @@ public abstract class AbstractPanel extends JPanel {
 	private GridBagLayout layout = new GridBagLayout();
 	private GridBagConstraints contraintes = new GridBagConstraints();
 	private Insets marges = new Insets(0, 0, 0, 0);
-	private JScrollPane scrollLog = new JScrollPane (Fenetre.instance().getLogClient().getInstance(), JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+	private JScrollPane scrollLog = new JScrollPane (Fenetre.instance().getLogClient().getTextArea(), JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 	
 	protected AbstractPanel () {
 		this.setLayout(layout);
@@ -44,7 +44,8 @@ public abstract class AbstractPanel extends JPanel {
 		scrollLog.getViewport().setOpaque(false);
 		scrollLog.setBorder(BorderFactory.createEmptyBorder());
 		scrollLog.setPreferredSize(new Dimension(800, 50));
-		this.add(scrollLog, contraintes);
+		//TODO : Remettre le text area
+		//this.add(scrollLog, contraintes);
 	}
 	
 	protected abstract void initPanel ();

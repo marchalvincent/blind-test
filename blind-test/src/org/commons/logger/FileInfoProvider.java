@@ -44,9 +44,20 @@ public class FileInfoProvider implements InfoProvider {
 			locRecord.setThrown(parThrowable);
 			_logger.log(locRecord);
 			final String locValue = getFormatter().format(locRecord);
-			System.err.print(locValue);
+			if(isError(parLevel)) {
+				System.err.print(locValue);
+			} else {
+				System.out.print(locValue);
+			}
 		}
 		return this;
+	}
+	
+	public final boolean isError(final Level parLevel) {
+		if(this.isShowable(parLevel)) {
+			return Level.WARNING.equals(parLevel) || Level.SEVERE.equals(parLevel);
+		}
+		return false;
 	}
 	
 	protected final Formatter getFormatter() {

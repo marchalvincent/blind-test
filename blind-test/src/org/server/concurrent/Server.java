@@ -20,20 +20,20 @@ import org.server.action.EnumAction;
 
 public final class Server {
 
-	private int port; 
+	private int _port; 
 	private ServerSocket  serverSocket;
-	private BlindTestExecutor blindTestExecutor;
-	private InfoProvider logger;
+	private BlindTestExecutor _blindTestExecutor;
+	private InfoProvider _logger;
 
-	public Server(InfoProvider logger){
-		this.logger = logger;
-		blindTestExecutor = new BlindTestExecutor(30);
-		port = ConfigurationManager.getConfiguration().getPort();
+	public Server(final InfoProvider parLogger){
+		this._logger = parLogger;
+		_blindTestExecutor = new BlindTestExecutor(30);
+		_port = ConfigurationManager.getConfiguration().getPort();
 	}
 
 
-	public void start() throws IOException{
-		serverSocket = new ServerSocket(port);
+	public void start() throws IOException {
+		serverSocket = new ServerSocket(_port);
 		handleConnexion();
 	}
 
@@ -47,14 +47,14 @@ public final class Server {
 				message =  ReadWriterUtil.read(socket);
 			}
 			catch (IOException e) {
-				logger.appendMessage(Level.SEVERE, String.format("Impossible de se connecter à l'adresse %s sur le port %d.", socket.getInetAddress().getHostAddress(), socket.getPort()),e);
+				_logger.appendMessage(Level.SEVERE, String.format("Impossible de se connecter à l'adresse %s sur le port %d.", socket.getInetAddress().getHostAddress(), socket.getPort()),e);
 				continue;
 			} catch (ClassNotFoundException e) {
 				continue;
 			}
 			EnumAction enumAction = WithUtilities.getById(EnumAction.values(), message.getId()); 
 			AbstractAction action  = enumAction.createAction(socket, message);
-			blindTestExecutor.submit(action);
+			_blindTestExecutor.submit(action);
 		}
 	}
 

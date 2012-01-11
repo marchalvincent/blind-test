@@ -31,13 +31,9 @@ public class PartieClientLauncher {
 			socket = new Socket(config.getHostName(), config.getPort());
 			
 			ThreadPartieEcriture tEcriture = new ThreadPartieEcriture(socket, fenetre, login);
-			ThreadPartieLecture tLecture = new ThreadPartieLecture(socket, tEcriture);
-
+			fenetre.getObservable().addObserver(tEcriture);
 			Thread threadEcriture = new Thread (tEcriture);
-			Thread threadLecture = new Thread (tLecture);
-
 			threadEcriture.start();
-			threadLecture.start();
 			
 		} catch (IOException e) {
 			fileProvider.appendMessage(Level.SEVERE, "Inscription - erreur de connexion au serveur");

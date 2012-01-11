@@ -2,6 +2,8 @@ package org.client.main;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.logging.Level;
 
@@ -20,23 +22,23 @@ import org.commons.util.StringUtil;
 import org.commons.util.WithUtilities;
 import org.server.concurrent.ReadWriterUtil;
 
-public class ThreadPartieEcriture implements Runnable {
+public class ThreadPartieEcriture implements Runnable, Observer {
 
-	private String login = null;
-	private JouerPanel fenetre = null;
-	private String currentImage = null;
-	private String answer = null;
-	private Boolean isClicked = false;
-	private Socket socket = null;
+	private String login;
+	private JouerPanel fenetre;
+	private String currentImage;
+	private String answer;
+	private Boolean isClicked;
+	private Socket socket;
 	private ArrayBlockingQueue<IMessage> currentMessages;
 	
-
 	public ThreadPartieEcriture(Socket socket, JouerPanel fenetre, String login) {
 		super();
 		this.login = login;
 		this.fenetre = fenetre;
 		this.socket = socket;
 		this.currentMessages = new ArrayBlockingQueue<IMessage>(20);
+		isClicked = Boolean.FALSE;
 	}
 	
 	public final void addIMessage(final IMessage parMessage) {
@@ -61,7 +63,6 @@ public class ThreadPartieEcriture implements Runnable {
 
 	@Override
 	public void run() {
-		
 		Configuration config = ConfigurationManager.getConfiguration();
 		InfoProvider fileProvider = InfoProviderManager.getUiInfoProvider();
 		String name = null;
@@ -75,27 +76,33 @@ public class ThreadPartieEcriture implements Runnable {
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-		
-		
-		
+		//TODO : Lancer le thread de lecture
+		final Thread locThreadLecture = new Thread(new ThreadPartieLecture(socket, this));
+		locThreadLecture.start();
 		while (true) {
 			while(!currentMessages.isEmpty()) {
+				this.setIsClicked(Boolean.FALSE);
 				IMessage messageRetour = currentMessages.poll();
 
+				EnumMessage mess = WithUtilities.getById(EnumMessage.values(), messageRetour.getId());
 				//on affiche dans la console du client
 				if(messageRetour instanceof IWithSupport) {
 					IWithSupport locSupport = (IWithSupport) messageRetour;
 					fileProvider.appendMessage(Level.INFO, locSupport.getSupport());
+					if(EnumMessage.isWinner(mess)) {
+						break;
+					}
 				}
 				
-				EnumMessage mess = WithUtilities.getById(EnumMessage.values(), messageRetour.getId());
 				if (EnumMessage.isDisplay(mess)) {
-					DisplayMessage dm = (DisplayMessage) messageRetour;
-					name = dm.getFileName();
+					final DisplayMessage locDisplayMessage = (DisplayMessage) messageRetour;
+					name = locDisplayMessage.getFileName();
 					
 					if (!StringUtil.equals(name, currentImage)) {
 						currentImage = name;
-						sb.delete(0, (sb.length() - 1));
+						if(sb.length() != 0) {
+							sb.delete(0, (sb.length() - 1));
+						}
 						sb.append(config.getImageDirectory());
 						sb.append(name);
 						String fileName = sb.toString();
@@ -103,14 +110,13 @@ public class ThreadPartieEcriture implements Runnable {
 					}
 				}
 				
-				while(!isClicked) {
+				while(Boolean.FALSE == isClicked) {
 					//Si le client a cliqué on construit le AnswerMessage
 					if (false == currentMessages.isEmpty()) {
 						break;
 					}
 				}
-				
-				if (isClicked) {
+				if (isClicked.booleanValue()) {
 					//ON construit le AnswerMessage
 					AnswerMessage answerMessage = (AnswerMessage) EnumMessage.ANSWER.createMessage();
 					answerMessage.setLogin(this.login);
@@ -126,4 +132,9 @@ public class ThreadPartieEcriture implements Runnable {
 		}
 	}
 
+	@Override
+	public void update(final Observable parObservable, final Object parObject) {
+		this.setAnswer(parObject.toString());
+		this.setIsClicked(Boolean.TRUE);
+	}
 }
