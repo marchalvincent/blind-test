@@ -36,8 +36,9 @@ public class ThreadPartieLecture implements Runnable {
 				if (EnumMessage.isDisplay(mess)) {
 					tEcriture.addIMessage(messageRetour);
 				}
-				else if(EnumMessage.isEndGame(mess)) {
+				else if (EnumMessage.isEndGame(mess)) {
 					tEcriture.addIMessage(messageRetour);
+					break;
 				}
 				else if (EnumMessage.isError(mess)) {
 					DisplayMessage display = (DisplayMessage) EnumMessage.DISPLAY.createMessage();

@@ -7,6 +7,8 @@ import java.util.Observer;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.logging.Level;
 
+import org.client.ui.AccueilPanel;
+import org.client.ui.Fenetre;
 import org.client.ui.JouerPanel;
 import org.commons.configuration.Configuration;
 import org.commons.configuration.ConfigurationManager;
@@ -19,6 +21,7 @@ import org.commons.message.IMessage;
 import org.commons.message.PlayMessage;
 import org.commons.util.IWithSupport;
 import org.commons.util.StringUtil;
+import org.commons.util.SystemUtil;
 import org.commons.util.WithUtilities;
 import org.server.concurrent.ReadWriterUtil;
 
@@ -78,7 +81,7 @@ public class ThreadPartieEcriture implements Runnable, Observer {
 		}
 		final Thread locThreadLecture = new Thread(new ThreadPartieLecture(socket, this));
 		locThreadLecture.start();
-		while (true) {
+		end : while (true) {
 			while(!currentMessages.isEmpty()) {
 				this.setIsClicked(Boolean.FALSE);
 				IMessage messageRetour = currentMessages.poll();
@@ -93,7 +96,12 @@ public class ThreadPartieEcriture implements Runnable, Observer {
 					}
 				}
 
-				if (EnumMessage.isDisplay(mess)) {
+				if (EnumMessage.isEndGame(mess)) {
+					//Si c'est la fin de partie on quitte les deux boucles pour revenir a la page précédente
+					System.out.println("le lecteur recoit le END GAME et break");
+					break end;
+				}
+				else if (EnumMessage.isDisplay(mess)) {
 					final DisplayMessage locDisplayMessage = (DisplayMessage) messageRetour;
 					name = locDisplayMessage.getFileName();
 					fileProvider.appendMessage(Level.WARNING, String.format("Affichage de l'image %s", name));
@@ -128,6 +136,10 @@ public class ThreadPartieEcriture implements Runnable, Observer {
 				}
 			}
 		}
+		
+		//Si on est sortie des deux boucles on revient à la page d'accueil
+		Fenetre.instance().changePage(new AccueilPanel(login).initPanel());
+		SystemUtil.close(socket);
 	}
 
 	@Override

@@ -26,7 +26,7 @@ import org.server.persistence.Managers;
 
 
 public class Partie implements IWithName {
-	
+
 	private final List<User> _userList;
 	private List<Banque> banqueList;
 	private String _name;
@@ -34,7 +34,7 @@ public class Partie implements IWithName {
 	private Banque _banque;
 	private AtomicInteger _currentAck;
 	private AtomicBoolean _hasChangedImage;
-	
+
 	public Partie(final String name){
 		banqueList = new ArrayList<Banque>();
 		_userList = new ArrayList<User>();
@@ -43,37 +43,35 @@ public class Partie implements IWithName {
 		_currentAck = new AtomicInteger(0);
 		_hasChangedImage = new AtomicBoolean(false);
 	}
-	
+
 	public List<User> getUsers(){
 		return Collections.unmodifiableList(_userList);//Recopie défensive + Renvoi une sous liste non modifiable
 	}
-	
+
 	public final boolean hasUser (final User parUser) {
 		return _userList.contains(parUser);
 	}
-	
+
 	public void updateImage(){	
-		if (isFinished()){
-			Manager<Banque> bm = Managers.createBanqueManager();	
-			List<Banque>listImage = bm.findAll();
-			Collections.shuffle(listImage);//On tire aléatoirement
-			banqueList.addAll(listImage);
-		}
+		Manager<Banque> bm = Managers.createBanqueManager();	
+		List<Banque>listImage = bm.findAll();
+		Collections.shuffle(listImage);//On tire aléatoirement
+		banqueList.addAll(listImage);
 	}
-	
+
 	public final boolean hasChangedImage() {
 		return _hasChangedImage.get();
 	}
-	
+
 	public final void setChangedImage(final boolean parNewValue) {
 		_hasChangedImage.set(parNewValue);
 	}
-	
+
 	public void addUser(final User user, final Socket parSocket){
 		_userList.add(user);
 		_sockets.put(user, parSocket);
 	}
-	
+
 	public void removeUser(User user){
 		_userList.remove(user);
 		_sockets.remove(user);
@@ -83,44 +81,42 @@ public class Partie implements IWithName {
 	public String getConstName() {
 		return _name;
 	}
-	
+
 	public boolean isFinished(){
 		return banqueList.isEmpty();
 	}
-	
+
 	//Renvoi le prochain élement qu'on doit afficher
 	public final Banque next(){
-		if(isFinished()) updateImage();
-		
 		this.setChangedImage(true);
 		_banque = banqueList.remove(banqueList.size()-1);
 		return _banque;
 	}	
-	
+
 	public final Banque getCurrentAnswer() {
 		return _banque;
 	}
-	
+
 	public final boolean isValidAnswer(final String parAnswer) {
 		return StringUtil.equals(parAnswer, _banque.getAnswer());
 	}
-	
+
 	public boolean canDisplayNewImage() {
 		return _userList.size() == _currentAck.get();
 	}
-	
+
 	public final int incrementAck() {
 		return _currentAck.incrementAndGet();
 	}
-	
+
 	public final boolean isReboot() {
 		return _currentAck.get() == 0;
 	}
-	
+
 	public final void rebootAck() {
 		_currentAck.set(0);
 	}
-	
+
 	public final void updateStats(final User parWinner) {
 		final Manager<User> locUserManager = Managers.createUserManager();
 		for(final User locUser : _sockets.keys()) {
@@ -132,7 +128,7 @@ public class Partie implements IWithName {
 			locUserManager.merge(locUser);
 		}
 	}
-	
+
 	public final void notifyWinner(final InfoProvider parInfoProvider, final String parWinner) {
 		final WinnerMessage locMessage = (WinnerMessage) EnumMessage.WINNER.createMessage();
 		final String locValueMessage = String.format("Le joueur %s a gagné la partie.", parWinner);
@@ -157,10 +153,10 @@ public class Partie implements IWithName {
 		}
 		this.setChangedImage(false);
 	}
-	
+
 	@Override
 	public final String toString() {
 		return getConstName();
 	}
-	
+
 }
