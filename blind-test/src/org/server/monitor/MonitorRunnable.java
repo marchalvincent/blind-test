@@ -126,6 +126,7 @@ public final class MonitorRunnable implements IWithName {
 		try {
 			_monitor.println(locResultat.get());
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 }
