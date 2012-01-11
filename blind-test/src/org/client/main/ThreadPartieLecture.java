@@ -33,10 +33,7 @@ public class ThreadPartieLecture implements Runnable {
 				IMessage messageRetour = ReadWriterUtil.read(socket);
 				EnumMessage mess = WithUtilities.getById(EnumMessage.values(), messageRetour.getId());
 				
-				if (EnumMessage.isDisplay(mess)) {
-					tEcriture.addIMessage(messageRetour);
-				}
-				else if(EnumMessage.isEndGame(mess)) {
+				if (EnumMessage.isDisplay(mess) || EnumMessage.isEndGame(mess)) {
 					tEcriture.addIMessage(messageRetour);
 				}
 				else if (EnumMessage.isError(mess)) {
