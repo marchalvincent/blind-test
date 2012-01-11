@@ -62,7 +62,7 @@ public class StatListener extends AbstractBoutonListener {
 			fileProvider.appendMessage(Level.SEVERE, String.format("Impossible d'écrire dans la socket d'adresse %s", socket.getInetAddress().getHostAddress()), e1);
 		}
 		catch (Exception e2) {
-			fileProvider.appendMessage(Level.SEVERE, String.format("Probeleme : "), e2);
+			fileProvider.appendMessage(Level.SEVERE, String.format("Probleme : "), e2);
 		}
 		finally {
 			SystemUtil.close(socket);
