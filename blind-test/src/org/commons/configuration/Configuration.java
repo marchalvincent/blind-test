@@ -113,7 +113,6 @@ public interface Configuration {
 	
 	/**
 	 * Modifie la valeur du timer de refresh des parties en temps
-	 * @return {@link Integer) le timer.
 	 */
 
 	void setTimer(final String parValue);
