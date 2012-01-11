@@ -2,6 +2,7 @@ package org.client.main;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.Observable;
 import java.util.logging.Level;
 
 import org.client.ui.JouerPanel;
@@ -31,7 +32,9 @@ public class PartieClientLauncher {
 			socket = new Socket(config.getHostName(), config.getPort());
 			
 			ThreadPartieEcriture tEcriture = new ThreadPartieEcriture(socket, fenetre, login);
-			fenetre.getObservable().addObserver(tEcriture);
+			for (Observable e : fenetre.getObservable()) {
+				e.addObserver(tEcriture);
+			}
 			Thread threadEcriture = new Thread (tEcriture);
 			threadEcriture.start();
 			

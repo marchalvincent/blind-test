@@ -9,34 +9,51 @@ import org.commons.util.IWithId;
 public enum EnumAction implements IWithId {
 
 	INSCRIPTION(EnumMessage.INSCRIPTION.getId()) {
-		
 		@Override
 		final public AbstractAction createAction (final Socket parSocket, final IMessage parMessage) {
 			return new InscriptionAction(parSocket, parMessage);
 		}
-		
 	},
+	
 	CONNEXION(EnumMessage.CONNEXION.getId()) {
-		
 		@Override
 		final public AbstractAction createAction (final Socket parSocket, final IMessage parMessage) {
 			return new ConnexionAction(parSocket, parMessage);
 		}
-		
 	},
+	
 	PLAY(EnumMessage.PLAY.getId()) {
-		
 		@Override
 		final public AbstractAction createAction (final Socket parSocket, final IMessage parMessage) {
 			return new PlayAction(parSocket, parMessage);
 		}
-		
 	},
+	
 	STAT(EnumMessage.STAT.getId()){
-		
 		@Override
 		final public AbstractAction createAction (final Socket parSocket, final IMessage parMessage) {
 			return new StatAction(parSocket, parMessage);
+		}
+	},
+	
+	LIST_GAMES(EnumMessage.LIST_GAMES.getId()) {
+		@Override
+		final public AbstractAction createAction (final Socket parSocket, final IMessage parMessage) {
+			return new SendAllGamesAction(parSocket, parMessage);
+		}
+	}, 
+	
+	DISCONNECT(EnumMessage.DISCONNECT.getId()) {
+		@Override
+		public AbstractAction createAction(Socket parSocket, IMessage parMessage) {
+			return new DisconnectAction(parSocket, parMessage);
+		}
+	}, 
+	
+	FINISH_GAME(EnumMessage.FINISH_GAME.getId()) {
+		@Override
+		public AbstractAction createAction(Socket parSocket, IMessage parMessage) {
+			return new FinishGameAction(parSocket, parMessage);
 		}
 	};
 	
