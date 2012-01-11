@@ -11,6 +11,7 @@ import org.commons.logger.InfoProvider;
 import org.commons.logger.InfoProviderManager;
 import org.commons.message.AnswerMessage;
 import org.commons.message.DisplayMessage;
+import org.commons.message.EndGameMessage;
 import org.commons.message.EnumMessage;
 import org.commons.message.ErrorMessage;
 import org.commons.message.IMessage;
@@ -24,19 +25,19 @@ public final class ThreadPartie implements Runnable {
 	final private Partie _partie;
 	final private Socket _socket;
 	final private User _user;
-	private boolean _isDisconnected;
-
+	private boolean _isDisconnect;
+	
 	public ThreadPartie(final User parUser, final Socket parSocket, final Partie parPartie) {
 		_partie = parPartie;
 		_socket = parSocket;
 		_user = parUser;
-		_isDisconnected = false;
+		_isDisconnect = false;
 	}
 
 	@Override
 	public final void run() {
 		final InfoProvider locInfoProvider = InfoProviderManager.getFileProvider();
-		while(_partie.isFinished() == false) { 
+		end:while(_partie.isFinished() == false) { 
 			while (_partie.isReboot() == true) {
 				final DisplayMessage locMessage = (DisplayMessage) EnumMessage.DISPLAY.createMessage();
 				Banque locBanque = null;
@@ -75,8 +76,8 @@ public final class ThreadPartie implements Runnable {
 					if(locResponseMessage == null) {
 						locInfoProvider.appendMessage(Level.INFO, String.format("Le joueur %s s'est déconnecté de la partie %s", _user.getConstName(), _partie.getConstName()));
 						_partie.removeUser(_user);
-						_isDisconnected = true;
-						break;
+						_isDisconnect = true;
+						break end;
 					}
 					if (locResponseMessage instanceof InfoMessage) {
 						LOCK.writeLock().lock();
@@ -110,14 +111,12 @@ public final class ThreadPartie implements Runnable {
 						}
 					}
 				}
-				// On vérifie s'il a été déco ou s'il y a eu un vainqueur
-				if(_isDisconnected == true) {
-					break;
-				}
 			}
-			if(_isDisconnected == true) {
-				break;
-			}
+		}
+		//TODO : Envoyer un disconnect
+		if(_isDisconnect == false) {
+			System.out.println("Fin de la partie");
+			final EndGameMessage locMessage = (EndGameMessage) EnumMessage.FINISH_GAME.createMessage();
 		}
 	}	
 }
