@@ -75,7 +75,7 @@ public enum EnumMessage implements IWithId {
 		}
 	}, 
 	
-	ENDGAME(12) {
+	FINISH_GAME(12) {
 		@Override
 		public IMessage createMessage() {
 			return new EndGameMessage();
