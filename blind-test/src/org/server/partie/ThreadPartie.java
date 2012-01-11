@@ -16,7 +16,6 @@ import org.commons.message.EnumMessage;
 import org.commons.message.ErrorMessage;
 import org.commons.message.IMessage;
 import org.commons.message.InfoMessage;
-import org.commons.util.SystemUtil;
 import org.server.concurrent.ReadWriterUtil;
 
 public final class ThreadPartie implements Runnable {
@@ -117,17 +116,13 @@ public final class ThreadPartie implements Runnable {
 				}
 			}
 		}
-		//TODO : Envoyer un disconnect
 		if(_isDisconnect == false) {
-			System.out.println("Fin de la partie");
 			final EndGameMessage locMessage = (EndGameMessage) EnumMessage.END_GAME.createMessage();
 			locMessage.setMessage("La partie est finie");
 			try {
 				ReadWriterUtil.write(_socket, locMessage);
 			} catch (IOException e) {
-			} finally {
-				SystemUtil.close(_socket);
-			}
+			} 
 		}
 	}	
 }
