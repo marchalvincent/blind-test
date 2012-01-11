@@ -7,6 +7,8 @@ import java.util.Observer;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.logging.Level;
 
+import org.client.ui.AccueilPanel;
+import org.client.ui.Fenetre;
 import org.client.ui.JouerPanel;
 import org.commons.configuration.Configuration;
 import org.commons.configuration.ConfigurationManager;
@@ -78,7 +80,7 @@ public class ThreadPartieEcriture implements Runnable, Observer {
 		}
 		final Thread locThreadLecture = new Thread(new ThreadPartieLecture(socket, this));
 		locThreadLecture.start();
-		while (true) {
+		end : while (true) {
 			while(!currentMessages.isEmpty()) {
 				this.setIsClicked(Boolean.FALSE);
 				IMessage messageRetour = currentMessages.poll();
@@ -93,7 +95,11 @@ public class ThreadPartieEcriture implements Runnable, Observer {
 					}
 				}
 
-				if (EnumMessage.isDisplay(mess)) {
+				if (EnumMessage.isEndGame(mess)) {
+					//Si c'est la fin de partie on quitte les deux boucles pour revenir a la page précédente
+					break end;
+				}
+				else if (EnumMessage.isDisplay(mess)) {
 					final DisplayMessage locDisplayMessage = (DisplayMessage) messageRetour;
 					name = locDisplayMessage.getFileName();
 					fileProvider.appendMessage(Level.WARNING, String.format("Affichage de l'image %s", name));
@@ -128,6 +134,10 @@ public class ThreadPartieEcriture implements Runnable, Observer {
 				}
 			}
 		}
+
+		//Si on est sortie des deux boucles on revient à la page d'accueil
+		fileProvider.appendMessage(Level.INFO, String.format("La partie a été finie."));
+		Fenetre.instance().changePage(new AccueilPanel(login).initPanel());
 	}
 
 	@Override
