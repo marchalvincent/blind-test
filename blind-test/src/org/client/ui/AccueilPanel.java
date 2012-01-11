@@ -116,19 +116,19 @@ public class AccueilPanel extends AbstractPanel {
 		
 		//Bouton A Propos
 		BoutonGris boutonPropos = new BoutonGris ("A Propos");
-		boutonRegles.addMouseListener(new ProposListener (_login, boutonPropos));
+		boutonPropos.addMouseListener(new ProposListener (_login, boutonPropos));
 		getContraintes().gridx = 0;
 		getContraintes().gridy = 4;
 		getContraintes().weighty = 0.1;
 		getContraintes().anchor = GridBagConstraints.PAGE_START;
-		this.add(boutonRegles, getContraintes());
+		this.add(boutonPropos, getContraintes());
 		
 		//Un espace pour ne pas que les composants ne soient tout en bas
 		JLabel espace = new JLabel (" ");
 		getContraintes().gridx = 0;
 		getContraintes().gridy = 5;
 		getContraintes().weighty = 0.4;
-		getContraintes().gridwidth = GridBagConstraints.REMAINDER;
+		getContraintes().gridwidth = 1;
 		this.add(espace, getContraintes());
 		
 		return this;
