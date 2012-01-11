@@ -26,6 +26,15 @@ public final class MonitorAddImageCommand extends MonitorCommand {
 	protected MonitorAddImageCommand(final String parCommandName, final String[] parArguments) {
 		super(EnumMonitorCommand.ADD, parCommandName, parArguments);
 	}
+	
+	private final String createAnswer(final String[] parArguments) {
+		final StringBuilder locBuilder = new StringBuilder();
+		for(int i = 1 ; i < parArguments.length -1 ; ++i) {
+			locBuilder.append(parArguments[i]).append(" ");
+		}
+		locBuilder.append(parArguments[parArguments.length - 1]);
+		return locBuilder.toString();
+ 	}
 
 	@Override
 	public final String call() {
@@ -36,7 +45,7 @@ public final class MonitorAddImageCommand extends MonitorCommand {
 			return "";
 		}
 		final String locFile = _arguments[0];
-		final String locAnswer = _arguments[1];
+		final String locAnswer = createAnswer(_arguments);
 		final BanqueFacade locFacade = BanqueFacade.instance();
 		RenderedImage locImage = null;
 		try {

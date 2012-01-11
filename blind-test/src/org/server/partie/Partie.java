@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
 
@@ -32,6 +33,7 @@ public class Partie implements IWithName {
 	private AbstractCache<User, Socket> _sockets;
 	private Banque _banque;
 	private AtomicInteger _currentAck;
+	private AtomicBoolean _hasChangedImage;
 	
 	public Partie(final String name){
 		banqueList = new ArrayList<Banque>();
@@ -39,6 +41,7 @@ public class Partie implements IWithName {
 		_name = name;
 		_sockets = Caches.createSocketCache();
 		_currentAck = new AtomicInteger(0);
+		_hasChangedImage = new AtomicBoolean(false);
 	}
 	
 	public List<User> getUsers(){
@@ -56,6 +59,14 @@ public class Partie implements IWithName {
 			Collections.shuffle(listImage);//On tire aléatoirement
 			banqueList.addAll(listImage);
 		}
+	}
+	
+	public final boolean hasChangedImage() {
+		return _hasChangedImage.get();
+	}
+	
+	public final void setChangedImage(final boolean parNewValue) {
+		_hasChangedImage.set(parNewValue);
 	}
 	
 	public void addUser(final User user, final Socket parSocket){
@@ -81,6 +92,7 @@ public class Partie implements IWithName {
 	public final Banque next(){
 		if(isFinished()) updateImage();
 		
+		this.setChangedImage(true);
 		_banque = banqueList.remove(banqueList.size()-1);
 		return _banque;
 	}	
@@ -93,7 +105,7 @@ public class Partie implements IWithName {
 		return StringUtil.equals(parAnswer, _banque.getAnswer());
 	}
 	
-	public synchronized boolean canDisplayNewImage() {
+	public boolean canDisplayNewImage() {
 		return _userList.size() == _currentAck.get();
 	}
 	
@@ -143,6 +155,7 @@ public class Partie implements IWithName {
 				SystemUtil.close(locSocket);
 			}
 		}
+		this.setChangedImage(false);
 	}
 	
 	@Override
