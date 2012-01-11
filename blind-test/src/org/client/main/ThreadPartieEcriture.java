@@ -123,7 +123,7 @@ public class ThreadPartieEcriture implements Runnable, Observer {
 					try {
 						ReadWriterUtil.write(this.socket, answerMessage);
 					} catch (IOException e) {
-						fileProvider.appendMessage(Level.SEVERE, "Inscription - erreur de connexion au serveur");
+						fileProvider.appendMessage(Level.SEVERE, "Impossible de lire dans la socket");
 					}
 				}
 			}
