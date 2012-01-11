@@ -88,8 +88,6 @@ public class Partie implements IWithName {
 
 	//Renvoi le prochain élement qu'on doit afficher
 	public final Banque next(){
-		updateImage();
-
 		this.setChangedImage(true);
 		_banque = banqueList.remove(banqueList.size()-1);
 		return _banque;
