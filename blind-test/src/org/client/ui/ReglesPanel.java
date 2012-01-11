@@ -30,7 +30,7 @@ public class ReglesPanel extends AbstractPanel {
 	}
 	
 	@Override
-	protected void initPanel () {
+	public ReglesPanel initPanel () {
 		
 		//Lecture du fichier regles
 		FileInputStream fis;
@@ -62,5 +62,6 @@ public class ReglesPanel extends AbstractPanel {
 		getContraintes().gridy = 1;
 		this.add(boutonRetour, getContraintes());
 		
+		return this;
 	}
 }

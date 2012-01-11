@@ -31,7 +31,7 @@ public class InscriptionPanel extends AbstractPanel {
 	}
 	
 	@Override
-	protected void initPanel() {
+	public InscriptionPanel initPanel() {
 		getMarges().set(0, 15, 15, 15);
 		
 		//Label Login
@@ -128,6 +128,8 @@ public class InscriptionPanel extends AbstractPanel {
 		getContraintes().weighty = 0.4;
 		getContraintes().gridwidth = GridBagConstraints.REMAINDER;
 		this.add(espace, getContraintes());
+		
+		return this;
 	}
 	
 	public String getLogin () {

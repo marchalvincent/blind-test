@@ -38,7 +38,7 @@ public class JouerPanel extends AbstractPanel {
 	}
 	
 	@Override
-	protected void initPanel() {		
+	public JouerPanel initPanel() {		
 		//Champs réponse
 		champsReponse = new JTextField (30);
 		getContraintes().gridx = 0;
@@ -53,6 +53,8 @@ public class JouerPanel extends AbstractPanel {
 		getContraintes().gridx = 1;
 		getContraintes().gridy = 0;
 		this.add(boutonValid, getContraintes());
+		
+		return this;
 	}
 	
 	public final String getAnswer() {

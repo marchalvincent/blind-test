@@ -24,7 +24,7 @@ public class RetourMenuListener extends AbstractBoutonListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		super.mouseClicked(e);
-		Fenetre.instance().changePage(new AccueilPanel (_login));
+		Fenetre.instance().changePage(new AccueilPanel (_login).initPanel());
 	}
 
 }
