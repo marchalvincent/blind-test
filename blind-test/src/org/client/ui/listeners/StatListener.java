@@ -55,7 +55,7 @@ public class StatListener extends AbstractBoutonListener {
 				messageRetour = ReadWriterUtil.read(socket);
 			if (messageRetour instanceof StatMessage) {
 				StatMessage msgStatRetour = (StatMessage) messageRetour;
-				displayMessage = "Nombre de vistoire : "+msgStatRetour.getVictoire()+"\n"+"Nombre de défaite : "+msgStatRetour.getDefaite();	
+				displayMessage = "Nombre de victoires : "+msgStatRetour.getVictoire()+"\n"+"Nombre de défaites : "+msgStatRetour.getDefaite();	
 			}
 				
 		} catch (IOException e1) {
