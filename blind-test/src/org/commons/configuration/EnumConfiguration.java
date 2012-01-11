@@ -102,7 +102,7 @@ public enum EnumConfiguration implements IWithName, IWithSupport {
 		}
 	},
 	
-	TIMER_PARTIE ("integer", "-s", 10) {
+	TIMER_PARTIE ("integer", "-s", "10") {
 
 		@Override
 		public void setConfigurationValue(

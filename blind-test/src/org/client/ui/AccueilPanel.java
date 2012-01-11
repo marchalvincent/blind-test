@@ -6,6 +6,7 @@ import javax.swing.JLabel;
 
 import org.client.ui.listeners.DeconnexionListener;
 import org.client.ui.listeners.JouerListener;
+import org.client.ui.listeners.ProposListener;
 import org.client.ui.listeners.QuitterListener;
 import org.client.ui.listeners.ReglesListener;
 import org.client.ui.listeners.StatListener;
@@ -112,11 +113,20 @@ public class AccueilPanel extends AbstractPanel {
 		getContraintes().weighty = 0.1;
 		getContraintes().anchor = GridBagConstraints.PAGE_START;
 		this.add(boutonRegles, getContraintes());
-
+		
+		//Bouton A Propos
+		BoutonGris boutonPropos = new BoutonGris ("A Propos");
+		boutonRegles.addMouseListener(new ProposListener (_login, boutonPropos));
+		getContraintes().gridx = 0;
+		getContraintes().gridy = 4;
+		getContraintes().weighty = 0.1;
+		getContraintes().anchor = GridBagConstraints.PAGE_START;
+		this.add(boutonRegles, getContraintes());
+		
 		//Un espace pour ne pas que les composants ne soient tout en bas
 		JLabel espace = new JLabel (" ");
 		getContraintes().gridx = 0;
-		getContraintes().gridy = 4;
+		getContraintes().gridy = 5;
 		getContraintes().weighty = 0.4;
 		getContraintes().gridwidth = GridBagConstraints.REMAINDER;
 		this.add(espace, getContraintes());
