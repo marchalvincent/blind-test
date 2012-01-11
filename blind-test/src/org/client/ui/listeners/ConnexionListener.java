@@ -2,11 +2,14 @@ package org.client.ui.listeners;
 
 import java.awt.event.MouseEvent;
 
+import javax.swing.JOptionPane;
+
 import org.client.main.ThreadConnexion;
 import org.client.ui.AccueilPanel;
 import org.client.ui.BoutonGris;
 import org.client.ui.ConnexionPanel;
 import org.client.ui.Fenetre;
+import org.commons.util.StringUtil;
 
 /**
  * renvoit sur la page d'accueil
@@ -14,9 +17,9 @@ import org.client.ui.Fenetre;
  *
  */
 public class ConnexionListener extends AbstractBoutonListener {
-	
+
 	private ConnexionPanel panel;
-	
+
 	public ConnexionListener(BoutonGris bouton, ConnexionPanel panel) {
 		super(bouton);
 		// TODO Auto-generated constructor stub
@@ -27,10 +30,16 @@ public class ConnexionListener extends AbstractBoutonListener {
 	public void mouseClicked(MouseEvent e) {
 		super.mouseClicked (e);
 		final String locLogin = panel.getLogin();
-		ThreadConnexion tc = new ThreadConnexion(locLogin, panel.getPassword());
-		if (tc.call()) {
-			Fenetre.instance().changePage(new AccueilPanel (locLogin).initPanel());
-			Fenetre.instance().chargeListParties();
+		String locPassword = panel.getPassword();
+		if (StringUtil.isNotEmpty(locPassword) && StringUtil.isNotEmpty(locLogin)) {
+			ThreadConnexion tc = new ThreadConnexion(locLogin, panel.getPassword());
+			if (tc.call()) {
+				Fenetre.instance().changePage(new AccueilPanel (locLogin).initPanel());
+				Fenetre.instance().chargeListParties();
+			}
+		}
+		else {
+			JOptionPane.showMessageDialog(panel, "Veuillez remplir tous les champs !", "Attention !", JOptionPane.WARNING_MESSAGE);
 		}
 	}
 }
