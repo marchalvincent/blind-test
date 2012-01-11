@@ -45,12 +45,14 @@ public class Fenetre {
 		fenetreLog.setLocation(400, 100);
 		fenetreLog.setVisible(true);
 		fenetre.toFront();
+		System.out.println("a" + logClient.getText());
 	}
 	
 	public void changePage (JPanel nouveau) {
 		fenetre.setContentPane(nouveau);
 		fenetre.validate();
 		fenetreLog.validate();
+		System.out.println("b" + logClient.getText());
 	}
 	
 	public void chargeListParties () {
