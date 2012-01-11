@@ -16,6 +16,6 @@ public class RetourConnexionListener extends AbstractBoutonListener {
 	@Override
 	public void mouseClicked (MouseEvent e) {
 		super.mouseClicked(e);
-		Fenetre.instance().changePage(new ConnexionPanel());
+		Fenetre.instance().changePage(new ConnexionPanel().initPanel());
 	}
 }

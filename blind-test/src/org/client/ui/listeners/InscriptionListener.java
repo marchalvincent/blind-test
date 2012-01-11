@@ -21,6 +21,6 @@ public class InscriptionListener extends AbstractBoutonListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		super.mouseClicked(e);
-		Fenetre.instance().changePage(new InscriptionPanel());
+		Fenetre.instance().changePage(new InscriptionPanel().initPanel());
 	}
 }

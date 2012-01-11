@@ -34,21 +34,21 @@ public abstract class AbstractPanel extends JPanel {
 	
 	protected AbstractPanel () {
 		this.setLayout(layout);
-		initPanel ();
-		contraintes.gridx = 0;
-		contraintes.gridy = 15;
-		contraintes.gridwidth = GridBagConstraints.REMAINDER;
-		contraintes.anchor = GridBagConstraints.PAGE_END;
-		contraintes.fill = GridBagConstraints.BOTH;
-		scrollLog.setOpaque(false);
-		scrollLog.getViewport().setOpaque(false);
-		scrollLog.setBorder(BorderFactory.createEmptyBorder());
-		scrollLog.setPreferredSize(new Dimension(800, 50));
+		//initPanel ();
+//		contraintes.gridx = 0;
+//		contraintes.gridy = 15;
+//		contraintes.gridwidth = GridBagConstraints.REMAINDER;
+//		contraintes.anchor = GridBagConstraints.PAGE_END;
+//		contraintes.fill = GridBagConstraints.BOTH;
+//		scrollLog.setOpaque(false);
+//		scrollLog.getViewport().setOpaque(false);
+//		scrollLog.setBorder(BorderFactory.createEmptyBorder());
+//		scrollLog.setPreferredSize(new Dimension(800, 50));
 		//TODO : Remettre le text area
 		//this.add(scrollLog, contraintes);
 	}
 	
-	protected abstract void initPanel ();
+	public abstract AbstractPanel initPanel ();
 	
 	@Override
 	public GridBagLayout getLayout () {

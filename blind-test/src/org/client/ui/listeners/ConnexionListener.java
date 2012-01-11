@@ -29,7 +29,7 @@ public class ConnexionListener extends AbstractBoutonListener {
 		final String locLogin = panel.getLogin();
 		ThreadConnexion tc = new ThreadConnexion(locLogin, panel.getPassword());
 		if (tc.call()) {
-			Fenetre.instance().changePage(new AccueilPanel (locLogin));
+			Fenetre.instance().changePage(new AccueilPanel (locLogin).initPanel());
 		}
 	}
 }
