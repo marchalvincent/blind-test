@@ -13,7 +13,7 @@ import org.commons.configuration.Configuration;
 import org.commons.configuration.ConfigurationManager;
 
 /**
- * panel pour afficher les regles du jeu
+ * panel pour afficher les infos de conception du jeu
  * 
  *
  */
@@ -32,7 +32,7 @@ public class ProposFinalPanel extends AbstractPanel {
 	@Override
 	public ProposFinalPanel initPanel () {
 		
-		//Lecture du fichier regles
+		//Lecture du fichier APropos
 		FileInputStream fis;
 		final File locFile = new File(fichierTxtRegles);
 		final byte[] locResult = new byte[(int) (locFile.length() + 1)];

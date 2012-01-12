@@ -34,6 +34,7 @@ public class ThreadPartieEcriture implements Runnable, Observer {
 	private Boolean isClicked;
 	private Socket socket;
 	private ArrayBlockingQueue<IMessage> currentMessages;
+	private String _nomPartie = "";
 
 	public ThreadPartieEcriture(Socket socket, JouerPanel fenetre, String login) {
 		super();
@@ -42,6 +43,11 @@ public class ThreadPartieEcriture implements Runnable, Observer {
 		this.socket = socket;
 		this.currentMessages = new ArrayBlockingQueue<IMessage>(20);
 		isClicked = Boolean.FALSE;
+	}
+	
+	public ThreadPartieEcriture (Socket socket, JouerPanel fenetre, String login, String nomPartie) {
+		this (socket, fenetre, login);
+		_nomPartie = nomPartie;
 	}
 
 	public final void addIMessage(final IMessage parMessage) {
@@ -73,7 +79,7 @@ public class ThreadPartieEcriture implements Runnable, Observer {
 
 		PlayMessage play = (PlayMessage) EnumMessage.PLAY.createMessage();
 		play.setLogin(this.login);
-		play.setNomPartie("ma partie");
+		play.setNomPartie(_nomPartie);
 		try {
 			ReadWriterUtil.write(socket, play);
 		} catch (IOException e1) {
