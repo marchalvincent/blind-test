@@ -114,7 +114,7 @@ public final class ThreadPartie implements Runnable {
 							final ErrorMessage locErrorMessage = (ErrorMessage) EnumMessage.ERROR.createMessage();
 							final String locValue = "La réponse est incorrect.";
 							++_wrongAnswer;
-							if(_wrongAnswer == 3) {
+							if(_wrongAnswer >= 3) {
 								_partie.notifyWinner(locInfoProvider, _user.getConstName());
 								if(_partie.isFinished()) {
 									break end;
@@ -135,6 +135,7 @@ public final class ThreadPartie implements Runnable {
 		if(_isDisconnect == false) {
 			final EndGameMessage locMessage = (EndGameMessage) EnumMessage.END_GAME.createMessage();
 			locMessage.setMessage("La partie est finie");
+			locMessage.putAll(_partie.getCurrentScore());
 			try {
 				ReadWriterUtil.write(_socket, locMessage);
 			} catch (IOException e) {

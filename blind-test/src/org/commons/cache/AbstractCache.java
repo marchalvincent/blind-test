@@ -1,6 +1,7 @@
 package org.commons.cache;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,10 @@ public abstract class AbstractCache<K, V> {
 	
 	public final void remove(final K parKey) {
 		_cache.remove(parKey);
+	}
+	
+	public final Map<K, V> toMap() {
+		return new HashMap<K, V>(_cache);
 	}
 	
 	public final V put(final K parKey, final V parValue) {

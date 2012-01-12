@@ -19,13 +19,12 @@ import org.commons.logger.InfoProvider;
 import org.commons.message.EnumMessage;
 import org.commons.message.WinnerMessage;
 import org.commons.util.IWithName;
+import org.commons.util.ScoreUtil;
 import org.commons.util.StringUtil;
 import org.commons.util.SystemUtil;
 import org.server.concurrent.ReadWriterUtil;
 import org.server.persistence.Manager;
 import org.server.persistence.Managers;
-
-
 
 public class Partie implements IWithName, Closeable {
 
@@ -38,6 +37,7 @@ public class Partie implements IWithName, Closeable {
 	private AtomicBoolean _hasChangedImage;
 	private AtomicBoolean _hasWinner;
 	private final int _size;
+	private AbstractCache<String, Integer> _currentStat;
 
 	public Partie(final String name, final int parSize){
 		_size = parSize;
@@ -48,6 +48,7 @@ public class Partie implements IWithName, Closeable {
 		_currentAck = new AtomicInteger(0);
 		_hasChangedImage = new AtomicBoolean(false);
 		_hasWinner = new AtomicBoolean(false);
+		_currentStat = new PartieStat();
 	}
 
 	public List<User> getUsers(){
@@ -86,11 +87,13 @@ public class Partie implements IWithName, Closeable {
 	public void addUser(final User user, final Socket parSocket){
 		_userList.add(user);
 		_sockets.put(user, parSocket);
+		_currentStat.put(user.getConstName(), 0);
 	}
 
-	public void removeUser(User user){
+	public void removeUser(final User user){
 		_userList.remove(user);
 		_sockets.remove(user);
+		_currentStat.remove(user.getConstName());
 	}
 
 	@Override
@@ -145,19 +148,28 @@ public class Partie implements IWithName, Closeable {
 	public final void updateStats(final User parWinner) {
 		final Manager<User> locUserManager = Managers.createUserManager();
 		for(final User locUser : _sockets.keys()) {
+			final int locCurrentStat = _currentStat.get(locUser.getConstName());
 			if(locUser.equals(parWinner)) {
 				locUser.setVictoire(locUser.getVictoire().intValue() + 1);
+				final int locVictoire = ScoreUtil.computeVictoire(locCurrentStat);
+				_currentStat.put(locUser.getConstName(), Integer.valueOf(locVictoire));
 			} else {
 				locUser.setDefaite(locUser.getDefaite().intValue() + 1);
+				final int locDefaite = ScoreUtil.computeDefaite(locCurrentStat);
+				_currentStat.put(locUser.getConstName(), Integer.valueOf(locDefaite));
 			}
 			locUserManager.merge(locUser);
 		}
 	}
+	
+	public final Map<String, Integer> getCurrentScore() {
+		return _currentStat.toMap();
+	}
 
-	public final void notifyWinner(final InfoProvider parInfoProvider, final String parWinner, final boolean parNoWinner) {
+	public final void notifyWinner(final InfoProvider parInfoProvider, final String parWinner, final boolean parHasWinner) {
 		final WinnerMessage locMessage = (WinnerMessage) EnumMessage.WINNER.createMessage();
 		final String locValueMessage;
-		if(parNoWinner == false) {
+		if(parHasWinner == true) {
 			locValueMessage = String.format("Le joueur %s a gagné la manche.", parWinner);
 		} else {
 			locValueMessage = String.format("Il n'y a aucun gagnant. Le joueur %s a fait passer l'image.", parWinner);
