@@ -76,6 +76,7 @@ public final class ThreadPartie implements Runnable {
 					} catch (ClassNotFoundException e) {
 					} catch (IOException e) {
 					}
+					System.out.println("Thread Partie 79 : " + locResponseMessage);
 					if(locResponseMessage == null || locResponseMessage instanceof DisconnectMessage) {
 						locInfoProvider.appendMessage(Level.INFO, String.format("Le joueur %s s'est déconnecté de la partie %s", _user.getConstName(), _partie.getConstName()));
 						_partie.removeUser(_user);
