@@ -7,6 +7,7 @@ import java.util.Arrays;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import org.client.ui.parties.PartieTimer;
 import org.commons.logger.InfoProviderManager;
 import org.commons.logger.UiInfoProvider;
 
@@ -24,6 +25,7 @@ public class Fenetre {
 	private JFrame fenetreParties;
 	private PartiesPanel _partiesPanel;
 	private LogClient logClient;
+	private PartieTimer _partieTimer;
 	
 	static public final Fenetre instance() {
 		return INSTANCE;
@@ -62,6 +64,10 @@ public class Fenetre {
 		fenetreParties.setSize(300, 300);
 		fenetreParties.setVisible(true);
 		fenetreParties.setLocation(800, 300);
+		if(_partieTimer != null) {
+			_partieTimer.cancel();
+		} 
+		_partieTimer = new PartieTimer(parLogin, fenetreParties, _partiesPanel);
 	}
 	
 	public JFrame getPartieWindow () {
