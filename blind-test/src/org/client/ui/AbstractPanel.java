@@ -9,7 +9,6 @@ import java.awt.image.RenderedImage;
 import java.io.IOException;
 
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 
 import org.commons.entity.BanqueFacade;
 
@@ -27,8 +26,8 @@ public abstract class AbstractPanel extends JPanel {
 	private GridBagLayout layout = new GridBagLayout();
 	private GridBagConstraints contraintes = new GridBagConstraints();
 	private Insets marges = new Insets(0, 0, 0, 0);
-	@SuppressWarnings("unused")
-	private JScrollPane scrollLog = new JScrollPane (Fenetre.instance().getLogClient().getTextArea(), JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+	//@SuppressWarnings("unused")
+	//private JScrollPane scrollLog = new JScrollPane (Fenetre.instance().getLogClient().getTextArea(), JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 	
 	protected AbstractPanel () {
 		this.setLayout(layout);

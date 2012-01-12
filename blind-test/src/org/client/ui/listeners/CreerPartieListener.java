@@ -17,12 +17,12 @@ public class CreerPartieListener extends AbstractBoutonListener {
 	private AccueilPanel _panel;
 	private String _nomPartie;
 	private PartieClientLauncher partieClientLauncher;
+	@SuppressWarnings("unused")
 	private String[] listPossibl = {"10", "20", "30", "40", "Maximum"};
 	private String nbImges;
 	
 	public CreerPartieListener(AccueilPanel panel, String Login, BoutonGris bouton) {
 		super(bouton);
-		// TODO Auto-generated constructor stub
 		_login = Login;
 		_panel = panel;
 	}

@@ -1,6 +1,5 @@
 package org.client.ui;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -11,8 +10,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import org.client.ui.parties.PartieTimer;
-import org.commons.logger.InfoProviderManager;
-import org.commons.logger.UiInfoProvider;
 
 /**
  * Classe contenant un singleton de la fenetre de
@@ -23,10 +20,10 @@ public class Fenetre {
 
 	static private final Fenetre INSTANCE = new Fenetre();
 	private JFrame fenetre;
-	private JFrame fenetreLog;
+	//private JFrame fenetreLog;
 	private JFrame fenetreParties;
 	private PartiesPanel _partiesPanel;
-	private LogClient logClient;
+	//private LogClient logClient;
 	private PartieTimer _partieTimer;
 	
 	static public final Fenetre instance() {
@@ -34,9 +31,9 @@ public class Fenetre {
 	}
 	
 	private Fenetre () {
-		createLogClient ();
+		//createLogClient ();
 		fenetre = new JFrame ("Blind Test");
-		fenetreLog = new JFrame ("Historique");
+		//fenetreLog = new JFrame ("Historique");
 	}
 	
 	public void initFenetre () {
@@ -45,11 +42,12 @@ public class Fenetre {
 		fenetre.setContentPane(new ConnexionPanel().initPanel());
 		fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		fenetre.setVisible(true);
-		fenetreLog.add(logClient.getScrollPane());
-		fenetreLog.getContentPane().setBackground(Color.BLACK);
-		fenetreLog.setSize(500, 300);
-		fenetreLog.setLocation(800, 0);
-		fenetreLog.setVisible(true);
+		//logClient.getScrollPane().add(new JLabel ("coucou"));
+		//fenetreLog.add(logClient.getScrollPane());
+		//fenetreLog.getContentPane().setBackground(Color.BLACK);
+		//fenetreLog.setSize(500, 300);
+		//fenetreLog.setLocation(800, 0);
+		//fenetreLog.setVisible(true);
 		fenetre.toFront();
 		fenetre.addWindowFocusListener(new WindowFocusListener() {
 			
@@ -64,17 +62,12 @@ public class Fenetre {
 				}
 			}
 		});
-//		fenetre.addWindowListener(new WindowAdapter (){
-//			public void windowClosing (WindowEvent e) {
-//				
-//			}
-//		})
 	}
 	
 	public void changePage (JPanel nouveau) {
 		fenetre.setContentPane(nouveau);
 		fenetre.validate();
-		fenetreLog.validate();
+		//fenetreLog.validate();
 	}
 	
 	public int getPartieHeight () {
@@ -104,6 +97,13 @@ public class Fenetre {
 					 _partieTimer = null;
 				 }
 			 }
+			
+			public final void windowClosed(final WindowEvent parEvent) {
+				 if(_partieTimer != null) {
+					 _partieTimer.cancel();
+					 _partieTimer = null;
+				 }
+			 }
 		});
 	}
 	
@@ -111,7 +111,7 @@ public class Fenetre {
 		return fenetreParties;
 	}
 	
-	private void createLogClient () {
+	/*private void createLogClient () {
 		logClient = new LogClient ();
 		UiInfoProvider infoProvider = new UiInfoProvider ("log/blind_test.log", logClient);
 		InfoProviderManager.setUiInfoProvider(infoProvider);
@@ -119,7 +119,7 @@ public class Fenetre {
 	
 	public LogClient getLogClient () {
 		return logClient;
-	}
+	}*/
 	
 	public int getHeight () {
 		return fenetre.getHeight();

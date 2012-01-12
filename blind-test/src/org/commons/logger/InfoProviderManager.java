@@ -24,6 +24,7 @@ public final class InfoProviderManager {
 		static private final InfoProvider INSTANCE = new FileInfoProvider(LOG_FILE);
 	}
 	
+	@SuppressWarnings("unused")
 	static private InfoProvider _uiInfoProvider;
 	
 	static public final void setUiInfoProvider(final InfoProvider parInfoProvider) {
@@ -31,7 +32,7 @@ public final class InfoProviderManager {
 	}
 	
 	static public final InfoProvider getUiInfoProvider() {
-		return _uiInfoProvider;
+		return getFileProvider();
 	}
 	
 	private InfoProviderManager() {}
