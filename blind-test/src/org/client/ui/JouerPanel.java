@@ -14,7 +14,6 @@ import java.util.logging.Level;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import org.client.ui.listeners.QuitterPartieListener;
 import org.client.ui.listeners.ValidListener;
 import org.client.ui.listeners.boutonValidEntree;
 import org.commons.entity.BanqueFacade;

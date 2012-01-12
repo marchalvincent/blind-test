@@ -15,6 +15,7 @@ public class PlayMessage extends AbstractMessage {
 		super(EnumMessage.PLAY);
 		this.login = login;
 		this.nomPartie = nomPartie;
+		_size = parSize;
 	}
 
 	public int getSize() {
