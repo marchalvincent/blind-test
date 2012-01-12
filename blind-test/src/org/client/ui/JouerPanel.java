@@ -64,7 +64,8 @@ public class JouerPanel extends AbstractPanel {
 		getContraintes().weighty = 0.1;
 		getContraintes().gridwidth = 1;
 		this.add(champsReponse, getContraintes());
-		
+		champsReponse.setFocusable(true);
+		champsReponse.requestFocusInWindow();
 		//Bouton Valider !
 		final BoutonGris locBoutonValide = new BoutonGris ("Valider !");
 		ValidListener validL = new ValidListener (this, locBoutonValide);
@@ -77,10 +78,7 @@ public class JouerPanel extends AbstractPanel {
 		getContraintes().gridy = 1;
 		getMarges().bottom = 12;
 		getContraintes().anchor = GridBagConstraints.LAST_LINE_START;
-		this.add(locBoutonValide, getContraintes());
-		
-		champsReponse.requestFocus();
-		
+		this.add(locBoutonValide, getContraintes());		
 		return this;
 	}
 	
