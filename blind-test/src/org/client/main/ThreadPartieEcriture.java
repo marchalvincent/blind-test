@@ -37,6 +37,7 @@ public class ThreadPartieEcriture implements Runnable, Observer {
 	private Socket socket;
 	private ArrayBlockingQueue<IMessage> currentMessages;
 	private String _nomPartie = "";
+	private int nbImg;
 	
 	public ThreadPartieEcriture (Socket socket, JouerPanel fenetre, String login, String nomPartie) {
 		super();
@@ -50,6 +51,10 @@ public class ThreadPartieEcriture implements Runnable, Observer {
 		disconnectM.setLogin(login);
 		disconnectM.setPartie(nomPartie);
 		fenetre.getBoutonQuitter().addMouseListener(new QuitterPartieListener(login, socket, disconnectM, fenetre.getBoutonQuitter()));
+	}
+	
+	public void setNbImg (int nbImg) {
+		this.nbImg = nbImg;
 	}
 
 	public final void addIMessage(final IMessage parMessage) {
@@ -82,6 +87,10 @@ public class ThreadPartieEcriture implements Runnable, Observer {
 		PlayMessage play = (PlayMessage) EnumMessage.PLAY.createMessage();
 		play.setLogin(this.login);
 		play.setNomPartie(_nomPartie);
+		if (nbImg == 0) {
+			nbImg = 10;
+		}
+		play.setSize(nbImg);
 		try {
 			ReadWriterUtil.write(socket, play);
 		} catch (IOException e1) {

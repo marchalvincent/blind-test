@@ -17,11 +17,17 @@ public class PartieClientLauncher {
 	private JouerPanel fenetre = null;
 	private String login = null;
 	private String _nomPartie = "";
+	private int _nbImg;
 	
 	public PartieClientLauncher (JouerPanel fenetre, String login, String nomPartie) {
 		this.fenetre = fenetre;
 		this.login = login;
 		_nomPartie = nomPartie;
+	}
+	
+	public PartieClientLauncher (JouerPanel fenetre, String login, String nomPartie, int parNbImg) {
+		this (fenetre, login, nomPartie);
+		_nbImg = parNbImg;
 	}
 	
 	public void startPartieClient() {
@@ -34,6 +40,7 @@ public class PartieClientLauncher {
 			socket = new Socket(config.getHostName(), config.getPort());
 			
 			ThreadPartieEcriture tEcriture = new ThreadPartieEcriture(socket, fenetre, login, _nomPartie);
+			tEcriture.setNbImg(_nbImg);
 			for (Observable e : fenetre.getObservable()) {
 				e.addObserver(tEcriture);
 			}
