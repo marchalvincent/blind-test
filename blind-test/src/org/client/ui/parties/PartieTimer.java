@@ -12,6 +12,8 @@ public class PartieTimer {
 	public PartieTimer (String login) {
 		final Configuration locConfiguration = ConfigurationManager.getConfiguration();
 		timer = new Timer();
-		timer.schedule(new PartieTask(login, locConfiguration), locConfiguration.getTimer());
+		PartieTask pt = new PartieTask(login, locConfiguration);
+		timer.schedule(pt, locConfiguration.getTimer());
 	}
+	
 }
