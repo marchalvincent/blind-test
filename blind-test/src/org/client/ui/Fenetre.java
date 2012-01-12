@@ -58,7 +58,7 @@ public class Fenetre {
 	}
 	
 	public void chargeListParties () {
-		pt = new PartieTimer(10);
+		pt = new PartieTimer();
 	}
 	
 	private void createLogClient () {
