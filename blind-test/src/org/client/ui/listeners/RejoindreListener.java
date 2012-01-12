@@ -12,13 +12,12 @@ import org.client.ui.JouerPanel;
 
 public class RejoindreListener extends AbstractBoutonListener {
 	
-	private JList _list;
+	private JList<String> _list;
 	private String _login;
 	private PartieClientLauncher partieClientLauncher;
 	
-	public RejoindreListener(String login, JList list, BoutonGris bouton) {
+	public RejoindreListener(String login, JList<String> list, BoutonGris bouton) {
 		super(bouton);
-		// TODO Auto-generated constructor stub
 		_login = login;
 		_list = list;
 	}

@@ -9,7 +9,7 @@ import org.client.ui.listeners.DeconnexionListener;
 import org.client.ui.listeners.ProposListener;
 import org.client.ui.listeners.QuitterListener;
 import org.client.ui.listeners.ReglesListener;
-import org.client.ui.listeners.RejoindreListener;
+import org.client.ui.listeners.RejoindreMenuListener;
 import org.client.ui.listeners.StatListener;
 
 /**
