@@ -9,6 +9,9 @@ import org.client.ui.BoutonGris;
 import org.client.ui.ConnexionPanel;
 import org.client.ui.Fenetre;
 import org.client.ui.InscriptionPanel;
+import org.commons.logger.InfoProviderManager;
+import org.commons.security.Encryptor;
+import org.commons.security.MD5Encryptor;
 import org.commons.util.StringUtil;
 
 /**
@@ -33,6 +36,8 @@ public class CreerCompteListener extends AbstractBoutonListener {
 		String locPassword = panel.getPassword();
 		String locNom = panel.getNom();
 		if (StringUtil.isNotEmpty(locLogin) && StringUtil.isNotEmpty(locNom) && StringUtil.isNotEmpty(locPassword)) {
+			final Encryptor encript = new MD5Encryptor(InfoProviderManager.getUiInfoProvider());
+			locPassword = encript.encrypt(locPassword);
 			ThreadInscription ti = new ThreadInscription(locLogin, locPassword, locNom);
 			if (ti.call()) {
 				Fenetre.instance().changePage(new ConnexionPanel ().initPanel());
