@@ -8,7 +8,7 @@ import org.client.ui.PartiesPanel;
 import org.commons.configuration.Configuration;
 import org.commons.configuration.ConfigurationManager;
 
-public class PartieTimer {
+public final class PartieTimer {
 
 	private Timer _timer;
 	
