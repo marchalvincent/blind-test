@@ -9,6 +9,7 @@ import org.client.ui.listeners.DeconnexionListener;
 import org.client.ui.listeners.ProposListener;
 import org.client.ui.listeners.QuitterListener;
 import org.client.ui.listeners.ReglesListener;
+import org.client.ui.listeners.RejoindreListener;
 import org.client.ui.listeners.StatListener;
 
 /**
@@ -98,11 +99,23 @@ public class AccueilPanel extends AbstractPanel {
 		getContraintes().anchor = GridBagConstraints.PAGE_END;
 		this.add(boutonCreerPartie, getContraintes());
 		
+		//Bouton Jouer -> Rejoindre une partie
+//		BoutonGris boutonRejoindrePartie = new BoutonGris ("Rejoindre une partie");
+//		boutonRejoindrePartie.addMouseListener(new RejoindrePartieListener (this, _login, boutonRejoindrePartie));
+//		getContraintes().gridx = 0;
+//		getContraintes().gridy = 2;
+//		getContraintes().gridheight = 1;
+//		getContraintes().weighty = 0.1;
+//		getContraintes().gridwidth = GridBagConstraints.REMAINDER;
+//		getContraintes().weightx = 0.8;
+//		getContraintes().anchor = GridBagConstraints.PAGE_END;
+//		this.add(boutonRejoindrePartie, getContraintes());
+
 		//Bouton Stats
 		BoutonGris boutonStat = new BoutonGris ("Statistiques");
 		boutonStat.addMouseListener(new StatListener (_login, this, boutonStat));
 		getContraintes().gridx = 0;
-		getContraintes().gridy = 2;
+		getContraintes().gridy = 3;
 		getContraintes().anchor = GridBagConstraints.CENTER;
 		this.add(boutonStat, getContraintes());
 		
@@ -110,7 +123,7 @@ public class AccueilPanel extends AbstractPanel {
 		BoutonGris boutonRegles = new BoutonGris ("Règles");
 		boutonRegles.addMouseListener(new ReglesListener (_login, boutonRegles));
 		getContraintes().gridx = 0;
-		getContraintes().gridy = 3;
+		getContraintes().gridy = 4;
 		getContraintes().weighty = 0.1;
 		getContraintes().anchor = GridBagConstraints.PAGE_START;
 		this.add(boutonRegles, getContraintes());
@@ -119,7 +132,7 @@ public class AccueilPanel extends AbstractPanel {
 		BoutonGris boutonPropos = new BoutonGris ("A Propos");
 		boutonPropos.addMouseListener(new ProposListener (_login, boutonPropos));
 		getContraintes().gridx = 0;
-		getContraintes().gridy = 4;
+		getContraintes().gridy = 5;
 		getContraintes().weighty = 0.1;
 		getContraintes().anchor = GridBagConstraints.PAGE_START;
 		this.add(boutonPropos, getContraintes());
@@ -127,7 +140,7 @@ public class AccueilPanel extends AbstractPanel {
 		//Un espace pour ne pas que les composants ne soient tout en bas
 		JLabel espace = new JLabel (" ");
 		getContraintes().gridx = 0;
-		getContraintes().gridy = 5;
+		getContraintes().gridy = 6;
 		getContraintes().weighty = 0.4;
 		getContraintes().gridwidth = 1;
 		this.add(espace, getContraintes());

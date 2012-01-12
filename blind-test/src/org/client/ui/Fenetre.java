@@ -3,6 +3,7 @@ package org.client.ui;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.util.Timer;
+import java.util.Arrays;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -23,6 +24,7 @@ public class Fenetre {
 	private JFrame fenetre;
 	private JFrame fenetreLog;
 	private JFrame fenetreParties;
+	private PartiesPanel _partiesPanel;
 	private LogClient logClient;
 	private PartieTimer _partieTimer;
 	
@@ -48,7 +50,6 @@ public class Fenetre {
 		fenetreLog.setLocation(400, 100);
 		fenetreLog.setVisible(true);
 		fenetre.toFront();
-		System.out.println("a" + logClient.getText());
 	}
 	
 	public void changePage (JPanel nouveau) {
@@ -58,9 +59,16 @@ public class Fenetre {
 	}
 	
 	public void chargeListParties (final String parLogin) {
-		if(_partieTimer == null) {
-			_partieTimer = new PartieTimer(parLogin);
-		}
+		fenetreParties = new JFrame ("Parties");
+		_partiesPanel = new PartiesPanel(parLogin, Arrays.<String>asList("")).initPanel();
+		fenetreParties.setContentPane(_partiesPanel);
+		fenetreParties.setSize(300, 300);
+		fenetreParties.setVisible(true);
+		pt = new PartieTimer(parLogin, fenetreParties, _partiesPanel);
+	}
+	
+	public JFrame getPartieWindow () {
+		return fenetreParties;
 	}
 	
 	private void createLogClient () {
