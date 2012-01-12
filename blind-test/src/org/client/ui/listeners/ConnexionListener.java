@@ -25,7 +25,6 @@ public class ConnexionListener extends AbstractBoutonListener {
 
 	public ConnexionListener(BoutonGris bouton, ConnexionPanel panel) {
 		super(bouton);
-		// TODO Auto-generated constructor stub
 		this.panel = panel;
 	}
 
@@ -33,13 +32,14 @@ public class ConnexionListener extends AbstractBoutonListener {
 	public void mouseClicked(MouseEvent e) {
 		super.mouseClicked (e);
 		final String locLogin = panel.getLogin();
+
 		String locPassword = panel.getPassword();
 		if (StringUtil.isNotEmpty(locPassword) && StringUtil.isNotEmpty(locLogin)) {
 			final Encryptor encript = new MD5Encryptor(InfoProviderManager.getUiInfoProvider());
 			locPassword = encript.encrypt(locPassword);
 			ThreadConnexion tc = new ThreadConnexion(locLogin, locPassword);
 			if (tc.call()) {
-			Fenetre.instance().changePage(new AccueilPanel (locLogin).initPanel());
+				Fenetre.instance().changePage(new AccueilPanel (locLogin).initPanel());
 			}
 		}
 		else {
