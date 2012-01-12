@@ -57,8 +57,8 @@ public class Fenetre {
 		System.out.println("b" + logClient.getText());
 	}
 	
-	public void chargeListParties () {
-		pt = new PartieTimer();
+	public void chargeListParties (String parLogin) {
+		pt = new PartieTimer(parLogin);
 	}
 	
 	private void createLogClient () {

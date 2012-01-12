@@ -35,7 +35,7 @@ public class ConnexionListener extends AbstractBoutonListener {
 			ThreadConnexion tc = new ThreadConnexion(locLogin, panel.getPassword());
 			if (tc.call()) {
 				Fenetre.instance().changePage(new AccueilPanel (locLogin).initPanel());
-				Fenetre.instance().chargeListParties();
+				Fenetre.instance().chargeListParties(locLogin);
 			}
 		}
 		else {

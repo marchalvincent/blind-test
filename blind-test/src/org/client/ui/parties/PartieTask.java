@@ -26,10 +26,10 @@ public class PartieTask extends TimerTask {
 	private PartiesPanel _partiesPanel;
 	private final Configuration _configuration;
 	
-	public PartieTask (final Configuration parConfiguration) {
+	public PartieTask (final String parLogin, final Configuration parConfiguration) {
 		_configuration = parConfiguration;
 		_partiesWindow = new JFrame ("Parties");
-		_partiesPanel = new PartiesPanel(Arrays.<String>asList("")).initPanel();
+		_partiesPanel = new PartiesPanel(parLogin, Arrays.<String>asList("")).initPanel();
 		_partiesWindow.setContentPane(_partiesPanel);
 		_partiesWindow.setSize(300, 300);
 		_partiesWindow.setVisible(true);

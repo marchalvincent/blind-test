@@ -13,25 +13,25 @@ import org.client.ui.listeners.RejoindreListener;
 
 public class PartiesPanel extends AbstractPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private List<String> _listParties;
 	private DefaultListModel<String> _model;
-	private JList _jlist;
+	private JList<String> _jlist;
+	private String _login;
 	
-	public PartiesPanel (List<String> parListParties) {
+	public PartiesPanel (String login, List<String> parListParties) {
 		_listParties = parListParties;
+		_login = login;
 	}
 	
 	@Override
 	public PartiesPanel initPanel() {
-		// TODO Auto-generated method stub
 		_model = new DefaultListModel<String>();
-		_jlist = new JList (_model);
+		_jlist = new JList<String> (_model);
 		_jlist.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		_jlist.setAutoscrolls(true);
+		_jlist.setOpaque(false);
+		_jlist.setLayoutOrientation(JList.HORIZONTAL_WRAP);
 		refresh (_listParties);
 		getContraintes().gridx = 0;
 		getContraintes().gridy = 0;
@@ -40,8 +40,8 @@ public class PartiesPanel extends AbstractPanel {
 		this.setBackground(Color.BLACK);
 		
 		BoutonGris boutonRejoindre = new BoutonGris ("Rejoindre");
-		//TODO : a finir : mettre le login et tout dans rejoindre, pas passer en param la
-		boutonRejoindre.addMouseListener(new RejoindreListener (boutonRejoindre));
+
+		boutonRejoindre.addMouseListener(new RejoindreListener (_login, _jlist.getSelectedValue().toString(), boutonRejoindre));
 		getContraintes().gridx = 0;
 		getContraintes().gridy = 1;
 		getContraintes().anchor = GridBagConstraints.PAGE_END;
@@ -56,9 +56,7 @@ public class PartiesPanel extends AbstractPanel {
 		for (String i : _listParties) {
 			_model.addElement(i);
 		}
-		//TODO : pour tester la liste des parties
-		_model.addElement("Pour tester : Partie de machin");
-		_model.addElement("Pour tester : Ma Partie");
+		_jlist.validate();
 	}
 	
 	@Override
