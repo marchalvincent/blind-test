@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import org.client.ui.listeners.QuitterPartieListener;
 import org.client.ui.listeners.ValidListener;
 import org.client.ui.listeners.boutonValidEntree;
 import org.commons.entity.BanqueFacade;
@@ -30,24 +31,32 @@ public class JouerPanel extends AbstractPanel {
 	private RenderedImage _currentImage;
 	private JTextField champsReponse;
 	private List<Observable> _observable;
+	private String _login;
+	private BoutonGris boutonQuitter;
 	
-	public JouerPanel (final RenderedImage imagePath) {
-		super ();
-		this._currentImage = imagePath;
+	public JouerPanel (String parLogin) {
 		_observable = new ArrayList<Observable>();
-	}
-	
-	public JouerPanel () {
-		this (null);
+		_login = parLogin;
 	}
 	
 	@Override
 	public JouerPanel initPanel() {	
 		
+		//Bouton Quitter la partie
+		boutonQuitter = new BoutonGris("Quitter la partie :(");
+		getContraintes().gridx = 0;
+		getContraintes().gridy = 0;
+		getContraintes().weighty = 0.1;
+		getContraintes().anchor = GridBagConstraints.ABOVE_BASELINE;
+		getContraintes().gridwidth = 2;
+		getMarges().top = 15;
+		getContraintes().insets = getMarges();
+		this.add(boutonQuitter, getContraintes());
+		
 		//espace
 		JLabel espace = new JLabel (" ");
 		getContraintes().gridx = 0;
-		getContraintes().gridy = 0;
+		getContraintes().gridy = 1;
 		getContraintes().weighty = 1.0;
 		getContraintes().gridwidth = GridBagConstraints.REMAINDER;
 		this.add(espace, getContraintes());
@@ -55,7 +64,7 @@ public class JouerPanel extends AbstractPanel {
 		//Champs réponse
 		champsReponse = new JTextField (30);
 		getContraintes().gridx = 0;
-		getContraintes().gridy = 1;
+		getContraintes().gridy = 2;
 		getMarges().left = 15;
 		getMarges().bottom = 15;
 		getMarges().right = 15;
@@ -75,11 +84,15 @@ public class JouerPanel extends AbstractPanel {
 		champsReponse.addKeyListener(locBoutonValidEntree);
 		_observable.add(locBoutonValidEntree);
 		getContraintes().gridx = 1;
-		getContraintes().gridy = 1;
+		getContraintes().gridy = 2;
 		getMarges().bottom = 12;
 		getContraintes().anchor = GridBagConstraints.LAST_LINE_START;
 		this.add(locBoutonValide, getContraintes());		
 		return this;
+	}
+	
+	public BoutonGris getBoutonQuitter () {
+		return boutonQuitter;
 	}
 	
 	public final String getAnswer() {
@@ -107,6 +120,10 @@ public class JouerPanel extends AbstractPanel {
 		champsReponse.setText("");
 		this.validate();
 		this.repaint();
+	}
+	
+	public void clearText () {
+		champsReponse.setText("");
 	}
 	
 	@Override
