@@ -58,7 +58,6 @@ public class PartieTask extends TimerTask {
 			List<String> listGames = locGameMessage.getListGames();
 			_partiesPanel.refresh(listGames);
 			_partiesWindow.validate();
-
 		} catch (IOException e) {
 			locInfoProvider.appendMessage(Level.SEVERE, "Impossible d'envoyer la demande des listes des parties.");
 		} catch (ClassNotFoundException e) {

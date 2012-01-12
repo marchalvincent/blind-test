@@ -55,12 +55,14 @@ public class PartiesPanel extends AbstractPanel {
 	
 	
 	
-	public void refresh (List<String> parListe) {
+	public void refresh (final List<String> parListe) {
 		_listParties = parListe;
+		final int locSelectedIndex = _jlist.getSelectedIndex();
 		_model.clear();
-		for (String i : _listParties) {
-			_model.addElement(i);
+		for (final String locPartieName : _listParties) {
+			_model.addElement(locPartieName);
 		}
+		_jlist.setSelectedIndex(locSelectedIndex);
 		_jlist.validate();
 	}
 	

@@ -10,13 +10,17 @@ import org.commons.configuration.ConfigurationManager;
 
 public class PartieTimer {
 
-	private Timer timer;
-
+	private Timer _timer;
+	
 	public PartieTimer (String login, JFrame window, PartiesPanel panel) {
 		final Configuration locConfiguration = ConfigurationManager.getConfiguration();
-		timer = new Timer();
+		_timer = new Timer();
 		PartieTask pt = new PartieTask(login, locConfiguration, window, panel);
-		timer.scheduleAtFixedRate(pt, 100, locConfiguration.getTimer());
+		_timer.scheduleAtFixedRate(pt, 100, locConfiguration.getTimer());
+	}
+	
+	public final void cancel() {
+		_timer.cancel();
 	}
 	
 }
