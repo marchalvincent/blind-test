@@ -7,20 +7,11 @@ import org.commons.configuration.ConfigurationManager;
 
 public class PartieTimer {
 
-	Timer timer;
+	private Timer timer;
 
 	public PartieTimer (String login) {
 		final Configuration locConfiguration = ConfigurationManager.getConfiguration();
 		timer = new Timer();
 		timer.schedule(new PartieTask(login, locConfiguration), locConfiguration.getTimer());
 	}
-
-	public final Timer getTimer() {
-		return timer;
-	}
-
-	public final void setTimer(Timer timer) {
-		this.timer = timer;
-	}
-
 }
