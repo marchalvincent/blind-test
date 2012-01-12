@@ -7,7 +7,6 @@ import javax.swing.JLabel;
 import org.client.ui.listeners.CreerPartieListener;
 import org.client.ui.listeners.DeconnexionListener;
 import org.client.ui.listeners.ProposListener;
-import org.client.ui.listeners.QuitterListener;
 import org.client.ui.listeners.ReglesListener;
 import org.client.ui.listeners.RejoindreMenuListener;
 import org.client.ui.listeners.StatListener;
@@ -30,19 +29,6 @@ public class AccueilPanel extends AbstractPanel {
 	
 	@Override
 	public AccueilPanel initPanel () {
-				
-		//Bouton Quitter
-		BoutonGris boutonQuitter = new BoutonGris ("Quitter");
-		boutonQuitter.addMouseListener(new QuitterListener (boutonQuitter));
-		getContraintes().gridx = 0;
-		getContraintes().gridy = 0;
-		getContraintes().weighty = 0.3;
-		getContraintes().weightx = 0.5;
-		getContraintes().gridwidth = GridBagConstraints.RELATIVE;
-		getContraintes().anchor = GridBagConstraints.FIRST_LINE_START;
-		getContraintes().insets = getMarges();
-		getMarges().set(30, 15, 0, 0);
-		this.add(boutonQuitter, getContraintes());
 		
 		//Bouton Deconnexion
 		BoutonGris boutonDeconnexion = new BoutonGris ("Déconnexion");
