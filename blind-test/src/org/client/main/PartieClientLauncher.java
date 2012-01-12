@@ -38,12 +38,7 @@ public class PartieClientLauncher {
 			
 			socket = new Socket(config.getHostName(), config.getPort());
 			
-			if (StringUtil.isNotEmpty(_nomPartie)) {
-				ThreadPartieEcriture tEcriture = new ThreadPartieEcriture(socket, fenetre, login, _nomPartie);
-			}
-			else {
-				ThreadPartieEcriture tEcriture = new ThreadPartieEcriture(socket, fenetre, login);
-			}
+			ThreadPartieEcriture tEcriture = new ThreadPartieEcriture(socket, fenetre, login, _nomPartie);
 			for (Observable e : fenetre.getObservable()) {
 				e.addObserver(tEcriture);
 			}
