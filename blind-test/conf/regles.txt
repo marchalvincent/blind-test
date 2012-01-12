@@ -1,0 +1,36 @@
+Bienvenue sur Blind-Test
+
+=================== Comment Jouer ===================
+
+Afin de jouer, 2 options s'offrent à vous.
+Soit :
+
+- Vous voulez rejoindre une partie déjà existante. 
+Dans ce cas, cliquez sur le bouton "Rejoindre".
+Une fenêtre apparait avec la liste des parties créées.
+Sélectionnez celle que vous souhaitez rejoindre.
+Enfin, validez en cliquant sur le bouton "Rejoindre la partie".
+Le Blind-test commence alors.
+
+- Vous voulez créer une nouvelle partie.
+Dans ce cas, cliquez sur le bouton "Créer".
+Une fenêtre apparaît qui vous permet de régler les modalités de la partie (Nom de la partie, etc).
+Une fois ceux-ci réglés, cliquez sur le bouton "Créer la partie".
+Le Blind-test commence alors.
+
+Bon jeu !
+
+=================== Règles ===================
+
+Le système de Blind-Test se base sur un principe simple.
+A chaque fois qu'une réponse est entrée pour une des photos affichées,
+des points sont accordés au joueur trouvant la bonne réponse, 
+tandis que des points sont retirés aux joueurs spécifiant une mauvaise réponse.
+
+Une bonne réponse rapporte 5 points.
+Une mauvaise réponse enlève 1 point.
+
+A la fin de la partie, le total des joueurs est affichés.
+Le joueur ayant le total le plus haut remporte la partie.
+
+
