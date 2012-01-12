@@ -61,6 +61,10 @@ public class Fenetre {
 		pt = new PartieTimer(parLogin);
 	}
 	
+	public JFrame getPartieWindow () {
+		return pt.getPartieTask().getPartieWindow();
+	}
+	
 	private void createLogClient () {
 		logClient = new LogClient ();
 		UiInfoProvider infoProvider = new UiInfoProvider ("log/blind_test.log", logClient);
