@@ -47,8 +47,13 @@ public class PartiesPanel extends AbstractPanel {
 		getContraintes().anchor = GridBagConstraints.PAGE_END;
 		this.add(boutonRejoindre, getContraintes());
 		
+		//Focus Listener
+		
+		
 		return this;
 	}
+	
+	
 	
 	public void refresh (List<String> parListe) {
 		_listParties = parListe;
