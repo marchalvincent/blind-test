@@ -78,6 +78,14 @@ public class Fenetre {
 		fenetreLog.validate();
 	}
 	
+	public int getPartieHeight () {
+		return fenetreParties.getHeight();
+	}
+	
+	public int getPartieWidth() {
+		return fenetreParties.getWidth();
+	}
+	
 	public void chargeListParties (final String parLogin) {
 		fenetreParties = new JFrame ("Parties");
 		_partiesPanel = new PartiesPanel(parLogin, Arrays.<String>asList("")).initPanel();
