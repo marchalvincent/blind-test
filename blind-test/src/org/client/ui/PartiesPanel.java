@@ -13,13 +13,10 @@ import org.client.ui.listeners.RejoindreListener;
 
 public class PartiesPanel extends AbstractPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private List<String> _listParties;
 	private DefaultListModel<String> _model;
-	private JList _jlist;
+	private JList<String> _jlist;
 	
 	public PartiesPanel (List<String> parListParties) {
 		_listParties = parListParties;
@@ -27,9 +24,8 @@ public class PartiesPanel extends AbstractPanel {
 	
 	@Override
 	public PartiesPanel initPanel() {
-		// TODO Auto-generated method stub
 		_model = new DefaultListModel<String>();
-		_jlist = new JList (_model);
+		_jlist = new JList<String> (_model);
 		_jlist.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		_jlist.setAutoscrolls(true);
 		refresh (_listParties);
@@ -40,7 +36,7 @@ public class PartiesPanel extends AbstractPanel {
 		this.setBackground(Color.BLACK);
 		
 		BoutonGris boutonRejoindre = new BoutonGris ("Rejoindre");
-		//TODO : a finir : mettre le login et tout dans rejoindre, pas passer en param la
+
 		boutonRejoindre.addMouseListener(new RejoindreListener (boutonRejoindre));
 		getContraintes().gridx = 0;
 		getContraintes().gridy = 1;
@@ -56,9 +52,7 @@ public class PartiesPanel extends AbstractPanel {
 		for (String i : _listParties) {
 			_model.addElement(i);
 		}
-		//TODO : pour tester la liste des parties
-		_model.addElement("Pour tester : Partie de machin");
-		_model.addElement("Pour tester : Ma Partie");
+		_jlist.validate();
 	}
 	
 	@Override
