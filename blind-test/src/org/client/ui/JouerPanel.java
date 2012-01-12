@@ -30,6 +30,7 @@ public class JouerPanel extends AbstractPanel {
 	private RenderedImage _currentImage;
 	private JTextField champsReponse;
 	private List<Observable> _observable;
+	@SuppressWarnings("unused")
 	private String _login;
 	private BoutonGris boutonQuitter;
 	

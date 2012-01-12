@@ -78,11 +78,11 @@ public class StatListener extends AbstractBoutonListener {
 			final double locPercentVictoire = (locVictoires / locTotal) * 100;
 			final double locPercentDefaite = (locDefaites / locTotal) * 100;
 
-			sb.append("Nombre de victoires : " + locVictoires + "\n");
-			sb.append("Nombre de défaites : " + locDefaites + "\n");
+			sb.append("Nombre de victoires : " + (int) locVictoires + "\n");
+			sb.append("Nombre de défaites : " + (int) locDefaites + "\n");
 			sb.append("Victoires : " + Math.rint(locPercentVictoire) + "%"+"\n");
 			sb.append("Défaites : " + Math.rint(locPercentDefaite) + "%\n");
-			sb.append("Score total : " + locScore + "\n");
+			sb.append("Score total : " + (int) locScore + "\n");
 			
 			if (locVictoires*2 < locDefaites) {
 				sb.append("T'es un looser :-p");

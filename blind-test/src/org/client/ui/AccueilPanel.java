@@ -39,6 +39,7 @@ public class AccueilPanel extends AbstractPanel {
 		getContraintes().weightx = 0.5;
 		getContraintes().gridwidth = GridBagConstraints.REMAINDER;
 		getContraintes().anchor = GridBagConstraints.FIRST_LINE_END;
+		getContraintes().insets = getMarges();
 		getMarges().set(30, 0, 0, 15);
 		this.add(boutonDeconnexion, getContraintes());
 		
