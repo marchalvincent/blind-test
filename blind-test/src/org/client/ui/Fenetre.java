@@ -2,6 +2,8 @@ package org.client.ui;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.Arrays;
 
 import javax.swing.JFrame;
@@ -68,6 +70,15 @@ public class Fenetre {
 			_partieTimer.cancel();
 		} 
 		_partieTimer = new PartieTimer(parLogin, fenetreParties, _partiesPanel);
+		fenetreParties.addWindowListener(new WindowAdapter() {
+			
+			public final void windowClosing(final WindowEvent parEvent) {
+				 if(_partieTimer != null) {
+					 _partieTimer.cancel();
+					 _partieTimer = null;
+				 }
+			 }
+		});
 	}
 	
 	public JFrame getPartieWindow () {
