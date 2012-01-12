@@ -123,7 +123,4 @@ public interface Configuration {
 	 */
 	
 	Integer getTimer();
-	
-	
-	
 }

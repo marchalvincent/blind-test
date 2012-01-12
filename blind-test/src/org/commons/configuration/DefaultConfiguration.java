@@ -119,7 +119,7 @@ public final class DefaultConfiguration implements Configuration {
 	
 	@Override
 	public void setTimer(final String parTimer) {
-		_timer = resolveTimer (parTimer);
+		_timer = resolveTimer(parTimer);
 		_properties.put(EnumConfiguration.TIMER_PARTIE.getConstName(), _timer.toString());
 	}
 
@@ -147,6 +147,8 @@ public final class DefaultConfiguration implements Configuration {
 		setImageDirectory(locImageDirectory);
 		final String locIndexFile = _properties.getProperty(EnumConfiguration.INDEX_FILE.getConstName());
 		setIndexFile(locIndexFile);
+		final String locTimer = _properties.getProperty(EnumConfiguration.TIMER_PARTIE.getConstName());
+		setTimer(locTimer);
 		return refresh();
 	}
 
@@ -262,8 +264,12 @@ public final class DefaultConfiguration implements Configuration {
 	
 	private final Integer resolveTimer(final String parTimer) {
 		final Integer locTimer = StringUtil.toInteger(parTimer);
+		final Integer locDefaultValue = (Integer) EnumConfiguration.TIMER_PARTIE.getDefaultValue();
 		if (locTimer == null) {
-			return  (_timer != null) ? _timer : (Integer) EnumConfiguration.TIMER_PARTIE.getDefaultValue();
+			return  (_timer != null) ? _timer : locDefaultValue;
+		}
+		if(locTimer < locDefaultValue) {
+			return locDefaultValue;
 		}
 		return locTimer;
 	}
