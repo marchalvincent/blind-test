@@ -13,7 +13,6 @@ import org.client.ui.listeners.StatListener;
 
 /**
  * Classe représentant le panel de l'accueil du jeu.
- * @author francois
  *
  */
 public class AccueilPanel extends AbstractPanel {

@@ -19,7 +19,6 @@ import org.commons.entity.BanqueFacade;
  * contraintes
  * et marges
  * + ajout de log au depart
- * @author francois
  *
  */
 public abstract class AbstractPanel extends JPanel {

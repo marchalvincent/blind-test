@@ -14,7 +14,6 @@ import org.commons.configuration.ConfigurationManager;
 
 /**
  * panel pour afficher les regles du jeu
- * @author francois
  *
  */
 public class ReglesPanel extends AbstractPanel {

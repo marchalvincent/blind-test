@@ -8,7 +8,6 @@ import javax.swing.JTextArea;
 
 /**
  * class log du client
- * @author francois
  *
  */
 public class LogClient {
