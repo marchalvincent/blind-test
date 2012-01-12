@@ -41,7 +41,7 @@ public class PartiesPanel extends AbstractPanel {
 		
 		BoutonGris boutonRejoindre = new BoutonGris ("Rejoindre");
 
-		boutonRejoindre.addMouseListener(new RejoindreListener (_login, _jlist.getSelectedValue().toString(), boutonRejoindre));
+		boutonRejoindre.addMouseListener(new RejoindreListener (_login, _jlist, boutonRejoindre));
 		getContraintes().gridx = 0;
 		getContraintes().gridy = 1;
 		getContraintes().anchor = GridBagConstraints.PAGE_END;
