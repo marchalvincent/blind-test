@@ -35,6 +35,9 @@ public class PartieTask extends TimerTask {
 		_partiesWindow.setVisible(true);
 	}
 	
+	public JFrame getPartieWindow () {
+		return _partiesWindow;
+	}
 	
 	@Override
 	public final void run() {
