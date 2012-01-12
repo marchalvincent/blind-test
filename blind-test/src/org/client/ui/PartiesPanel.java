@@ -46,10 +46,7 @@ public class PartiesPanel extends AbstractPanel {
 		getContraintes().gridy = 1;
 		getContraintes().anchor = GridBagConstraints.PAGE_END;
 		this.add(boutonRejoindre, getContraintes());
-		
-		//Focus Listener
-		
-		
+				
 		return this;
 	}
 	
