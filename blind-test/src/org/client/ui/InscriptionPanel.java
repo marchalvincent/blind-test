@@ -13,7 +13,6 @@ import org.client.ui.listeners.RetourConnexionListener;
 
 /**
  * panel d'inscription
- * @author francois
  *
  */
 public class InscriptionPanel extends AbstractPanel {

@@ -13,7 +13,6 @@ import org.client.ui.listeners.QuitterListener;
 
 /**
  * Classe representant le panel de connexion
- * @author francois
  *
  */
 public class ConnexionPanel extends AbstractPanel {
