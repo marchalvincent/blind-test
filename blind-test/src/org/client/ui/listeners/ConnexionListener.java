@@ -9,6 +9,10 @@ import org.client.ui.AccueilPanel;
 import org.client.ui.BoutonGris;
 import org.client.ui.ConnexionPanel;
 import org.client.ui.Fenetre;
+import org.commons.logger.InfoProviderManager;
+import org.commons.logger.UiInfoProvider;
+import org.commons.security.Encryptor;
+import org.commons.security.MD5Encryptor;
 import org.commons.util.StringUtil;
 
 /**
@@ -32,7 +36,9 @@ public class ConnexionListener extends AbstractBoutonListener {
 		final String locLogin = panel.getLogin();
 		String locPassword = panel.getPassword();
 		if (StringUtil.isNotEmpty(locPassword) && StringUtil.isNotEmpty(locLogin)) {
-			ThreadConnexion tc = new ThreadConnexion(locLogin, panel.getPassword());
+			final Encryptor encript = new MD5Encryptor(InfoProviderManager.getUiInfoProvider());
+			locPassword = encript.encrypt(locPassword);
+			ThreadConnexion tc = new ThreadConnexion(locLogin, locPassword);
 			if (tc.call()) {
 				Fenetre.instance().changePage(new AccueilPanel (locLogin).initPanel());
 				Fenetre.instance().chargeListParties(locLogin);

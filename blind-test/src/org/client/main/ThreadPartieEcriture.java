@@ -35,18 +35,14 @@ public class ThreadPartieEcriture implements Runnable, Observer {
 	private Socket socket;
 	private ArrayBlockingQueue<IMessage> currentMessages;
 	private String _nomPartie = "";
-
-	public ThreadPartieEcriture(Socket socket, JouerPanel fenetre, String login) {
+	
+	public ThreadPartieEcriture (Socket socket, JouerPanel fenetre, String login, String nomPartie) {
 		super();
 		this.login = login;
 		this.fenetre = fenetre;
 		this.socket = socket;
 		this.currentMessages = new ArrayBlockingQueue<IMessage>(20);
 		isClicked = Boolean.FALSE;
-	}
-	
-	public ThreadPartieEcriture (Socket socket, JouerPanel fenetre, String login, String nomPartie) {
-		this (socket, fenetre, login);
 		_nomPartie = nomPartie;
 	}
 
