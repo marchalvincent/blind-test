@@ -57,7 +57,8 @@ public class PlayAction extends AbstractAction {
 		final String locNomPartie = locPlayMessage.getNomPartie();
 		Partie locPartie = locPartieCache.get(locNomPartie);
 		if(locPartie == null) {
-			locPartie = new Partie(locNomPartie);
+			final int locSize = locPlayMessage.getSize();
+			locPartie = new Partie(locNomPartie, locSize);
 			locPartie.updateImage();
 			locPartieCache.put(locNomPartie, locPartie);
 			locInfoProvider.appendMessage(Level.INFO, String.format("La partie \"%s\" a été créée", locPartie));

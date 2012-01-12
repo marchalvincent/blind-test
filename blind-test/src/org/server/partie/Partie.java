@@ -37,8 +37,10 @@ public class Partie implements IWithName, Closeable {
 	private AtomicInteger _currentAck;
 	private AtomicBoolean _hasChangedImage;
 	private AtomicBoolean _hasWinner;
+	private final int _size;
 
-	public Partie(final String name){
+	public Partie(final String name, final int parSize){
+		_size = parSize;
 		banqueList = new ArrayList<Banque>();
 		_userList = new ArrayList<User>();
 		_name = name;
@@ -55,14 +57,20 @@ public class Partie implements IWithName, Closeable {
 	public final boolean hasUser (final User parUser) {
 		return _userList.contains(parUser);
 	}
-	
+
 	public final boolean isEmpty() {
 		return _userList.isEmpty();
 	}
 
 	public void updateImage(){	
 		Manager<Banque> bm = Managers.createBanqueManager();	
-		List<Banque>listImage = bm.findAll();
+		final List<Banque> listImage = bm.findAll();
+		final int locSize = listImage.size();
+		if(locSize > _size) {
+			for(int i = 0 ; i < locSize - _size ; ++i) {
+				listImage.remove(i);
+			}
+		}
 		Collections.shuffle(listImage);//On tire aléatoirement
 		banqueList.addAll(listImage);
 	}
@@ -116,7 +124,7 @@ public class Partie implements IWithName, Closeable {
 	public final boolean hasWinner() {
 		return _hasWinner.get();
 	}
-	
+
 	public boolean canDisplayNewImage() {
 		return _userList.size() == _currentAck.get();
 	}
@@ -146,11 +154,16 @@ public class Partie implements IWithName, Closeable {
 		}
 	}
 
-	public final void notifyWinner(final InfoProvider parInfoProvider, final String parWinner) {
+	public final void notifyWinner(final InfoProvider parInfoProvider, final String parWinner, final boolean parNoWinner) {
 		final WinnerMessage locMessage = (WinnerMessage) EnumMessage.WINNER.createMessage();
-		final String locValueMessage = String.format("Le joueur %s a gagné la manche.", parWinner);
-		locMessage.setMessage(locValueMessage);
+		final String locValueMessage;
+		if(parNoWinner == false) {
+			locValueMessage = String.format("Le joueur %s a gagné la manche.", parWinner);
+		} else {
+			locValueMessage = String.format("Il n'y a aucun gagnant. Le joueur %s a fait passer l'image.", parWinner);
+		}
 		locMessage.setLogin(parWinner);
+		locMessage.setMessage(locValueMessage);
 		parInfoProvider.appendMessage(Level.INFO, locValueMessage);
 		for(final Map.Entry<User, Socket> locEntry : _sockets.entrySet()) {
 			final Socket locSocket = locEntry.getValue();
@@ -168,6 +181,10 @@ public class Partie implements IWithName, Closeable {
 			}
 		}
 		this.setChangedImage(false);
+	}
+
+	public final void notifyWinner(final InfoProvider parInfoProvider, final String parWinner) {
+		this.notifyWinner(parInfoProvider, parWinner, true);
 	}
 
 	@Override

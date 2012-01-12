@@ -27,6 +27,7 @@ public class boutonValidEntree extends Observable implements KeyListener {
 			//TODO : envoyer reponse jeu
 			this.setChanged();
 			this.notifyObservers(_panel.getAnswer());
+			_panel.clearText();
 		}
 	}
 

@@ -10,6 +10,7 @@ import org.commons.entity.User;
 import org.commons.logger.InfoProvider;
 import org.commons.logger.InfoProviderManager;
 import org.commons.message.AnswerMessage;
+import org.commons.message.DisconnectMessage;
 import org.commons.message.DisplayMessage;
 import org.commons.message.EndGameMessage;
 import org.commons.message.EnumMessage;
@@ -26,12 +27,14 @@ public final class ThreadPartie implements Runnable {
 	final private Socket _socket;
 	final private User _user;
 	private boolean _isDisconnect;
+	private int _wrongAnswer;
 
 	public ThreadPartie(final User parUser, final Socket parSocket, final Partie parPartie) {
 		_partie = parPartie;
 		_socket = parSocket;
 		_user = parUser;
 		_isDisconnect = false;
+		_wrongAnswer = 0;
 	}
 
 	@Override
@@ -41,6 +44,7 @@ public final class ThreadPartie implements Runnable {
 			while (_partie.isReboot() == true) {
 				final DisplayMessage locMessage = (DisplayMessage) EnumMessage.DISPLAY.createMessage();
 				Banque locBanque = null;
+				_wrongAnswer = 0;
 				LOCK.writeLock().lock();
 				try {
 					if(_partie.hasUser(_user)) {
@@ -72,7 +76,7 @@ public final class ThreadPartie implements Runnable {
 					} catch (ClassNotFoundException e) {
 					} catch (IOException e) {
 					}
-					if(locResponseMessage == null) {
+					if(locResponseMessage == null || locResponseMessage instanceof DisconnectMessage) {
 						locInfoProvider.appendMessage(Level.INFO, String.format("Le joueur %s s'est déconnecté de la partie %s", _user.getConstName(), _partie.getConstName()));
 						_partie.removeUser(_user);
 						_isDisconnect = true;
@@ -109,6 +113,13 @@ public final class ThreadPartie implements Runnable {
 							}
 							final ErrorMessage locErrorMessage = (ErrorMessage) EnumMessage.ERROR.createMessage();
 							final String locValue = "La réponse est incorrect.";
+							++_wrongAnswer;
+							if(_wrongAnswer == 3) {
+								_partie.notifyWinner(locInfoProvider, _user.getConstName());
+								if(_partie.isFinished()) {
+									break end;
+								}
+							}
 							locErrorMessage.setMessage(locValue);
 							try {
 								ReadWriterUtil.write(_socket, locErrorMessage);
