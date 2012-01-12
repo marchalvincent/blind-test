@@ -25,7 +25,6 @@ public class AccueilPanel extends AbstractPanel {
 	
 	public AccueilPanel (final String parLogin) {
 		super ();
-		
 		_login = parLogin;
 	}
 	
@@ -47,7 +46,7 @@ public class AccueilPanel extends AbstractPanel {
 		
 		//Bouton Deconnexion
 		BoutonGris boutonDeconnexion = new BoutonGris ("Déconnexion");
-		boutonDeconnexion.addMouseListener(new DeconnexionListener (boutonDeconnexion));
+		boutonDeconnexion.addMouseListener(new DeconnexionListener (boutonDeconnexion, _login));
 		getContraintes().gridx = 1;
 		getContraintes().gridy = 0;
 		getContraintes().weighty = 0.3;

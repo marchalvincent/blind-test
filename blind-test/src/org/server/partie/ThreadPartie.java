@@ -60,7 +60,6 @@ public final class ThreadPartie implements Runnable {
 				}finally {
 					LOCK.writeLock().unlock();
 				}
-				locInfoProvider.appendMessage(Level.INFO, String.format("Le joueur %s a reçu l'image %s.", _user, locBanque));
 				locMessage.setFileName(locBanque.getConstName());
 				try {
 					ReadWriterUtil.write(_socket, locMessage);

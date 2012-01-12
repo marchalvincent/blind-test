@@ -156,7 +156,6 @@ public class Partie implements IWithName, Closeable {
 			final Socket locSocket = locEntry.getValue();
 			try {
 				ReadWriterUtil.write(locSocket, locMessage);
-				parInfoProvider.appendMessage(Level.INFO, String.format("Le joueur %s a été notifié qu'il y a un gagnant.", locEntry.getKey().getConstName()));
 			} catch (IOException e) {
 				final User locUser = locEntry.getKey();
 				// On vire le user de la partie, du cache socket de la partie et des connectés.
