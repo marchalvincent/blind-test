@@ -23,6 +23,6 @@ public class DeconnexionListener extends AbstractBoutonListener {
 	public void mouseClicked(MouseEvent e) {
 		super.mouseClicked(e);
 		Fenetre.instance().getPartieWindow().dispose();
-		Fenetre.instance().changePage(new ConnexionPanel ().initPanel());
+		Fenetre.instance().changePage(new ConnexionPanel().initPanel());
 	}
 }

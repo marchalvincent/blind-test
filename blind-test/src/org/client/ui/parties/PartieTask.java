@@ -3,7 +3,6 @@ package org.client.ui.parties;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.TimerTask;
 import java.util.logging.Level;
@@ -26,17 +25,14 @@ public class PartieTask extends TimerTask {
 	private PartiesPanel _partiesPanel;
 	private final Configuration _configuration;
 	
-	public PartieTask (final String parLogin, final Configuration parConfiguration) {
+	public PartieTask (final String parLogin, final Configuration parConfiguration, JFrame window, PartiesPanel panel) {
 		_configuration = parConfiguration;
-		_partiesWindow = new JFrame ("Parties");
-		_partiesPanel = new PartiesPanel(parLogin, Arrays.<String>asList("")).initPanel();
-		_partiesWindow.setContentPane(_partiesPanel);
-		_partiesWindow.setSize(300, 300);
-		_partiesWindow.setVisible(true);
-	}
-	
-	public JFrame getPartieWindow () {
-		return _partiesWindow;
+		_partiesWindow = window;
+		_partiesPanel = panel;
+//		_partiesPanel = new PartiesPanel(parLogin, Arrays.<String>asList("")).initPanel();
+//		_partiesWindow.setContentPane(_partiesPanel);
+//		_partiesWindow.setSize(300, 300);
+//		_partiesWindow.setVisible(true);
 	}
 	
 	@Override
