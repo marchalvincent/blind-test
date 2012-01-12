@@ -129,10 +129,10 @@ public final class ThreadPartie implements Runnable {
 				ReadWriterUtil.write(_socket, locMessage);
 			} catch (IOException e) {
 			} 
-			_partie.removeUser(_user);
-			if(_partie.isEmpty()) {
-				_partie.close();
-			}
+		}
+		_partie.removeUser(_user);
+		if(_partie.isEmpty()) {
+			_partie.close();
 		}
 	}	
 }

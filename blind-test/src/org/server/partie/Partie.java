@@ -190,5 +190,4 @@ public class Partie implements IWithName, Closeable {
 		_userList.clear();
 		_userList = null;
 	}
-
 }
