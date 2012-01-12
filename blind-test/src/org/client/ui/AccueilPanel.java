@@ -9,7 +9,7 @@ import org.client.ui.listeners.DeconnexionListener;
 import org.client.ui.listeners.ProposListener;
 import org.client.ui.listeners.QuitterListener;
 import org.client.ui.listeners.ReglesListener;
-import org.client.ui.listeners.RejoindreListener;
+import org.client.ui.listeners.RejoindreMenuListener;
 import org.client.ui.listeners.StatListener;
 
 /**
@@ -100,16 +100,16 @@ public class AccueilPanel extends AbstractPanel {
 		this.add(boutonCreerPartie, getContraintes());
 		
 		//Bouton Jouer -> Rejoindre une partie
-//		BoutonGris boutonRejoindrePartie = new BoutonGris ("Rejoindre une partie");
-//		boutonRejoindrePartie.addMouseListener(new RejoindrePartieListener (this, _login, boutonRejoindrePartie));
-//		getContraintes().gridx = 0;
-//		getContraintes().gridy = 2;
-//		getContraintes().gridheight = 1;
-//		getContraintes().weighty = 0.1;
-//		getContraintes().gridwidth = GridBagConstraints.REMAINDER;
-//		getContraintes().weightx = 0.8;
-//		getContraintes().anchor = GridBagConstraints.PAGE_END;
-//		this.add(boutonRejoindrePartie, getContraintes());
+		BoutonGris boutonRejoindrePartie = new BoutonGris ("Rejoindre une partie");
+		boutonRejoindrePartie.addMouseListener(new RejoindreMenuListener (_login, boutonRejoindrePartie));
+		getContraintes().gridx = 0;
+		getContraintes().gridy = 2;
+		getContraintes().gridheight = 1;
+		getContraintes().weighty = 0.1;
+		getContraintes().gridwidth = GridBagConstraints.REMAINDER;
+		getContraintes().weightx = 0.8;
+		getContraintes().anchor = GridBagConstraints.PAGE_END;
+		this.add(boutonRejoindrePartie, getContraintes());
 
 		//Bouton Stats
 		BoutonGris boutonStat = new BoutonGris ("Statistiques");
