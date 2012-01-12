@@ -21,7 +21,6 @@ import org.commons.logger.InfoProvider;
 
 /**
  * panel pour jouer au jeu
- * @author francois
  *
  */
 public class JouerPanel extends AbstractPanel {

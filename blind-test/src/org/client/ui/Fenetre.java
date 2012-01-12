@@ -17,7 +17,6 @@ import org.commons.logger.UiInfoProvider;
 /**
  * Classe contenant un singleton de la fenetre de
  * l'application.
- * @author francois
  *
  */
 public class Fenetre {
