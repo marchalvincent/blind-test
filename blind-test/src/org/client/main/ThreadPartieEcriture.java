@@ -10,11 +10,13 @@ import java.util.logging.Level;
 import org.client.ui.AccueilPanel;
 import org.client.ui.Fenetre;
 import org.client.ui.JouerPanel;
+import org.client.ui.listeners.QuitterPartieListener;
 import org.commons.configuration.Configuration;
 import org.commons.configuration.ConfigurationManager;
 import org.commons.logger.InfoProvider;
 import org.commons.logger.InfoProviderManager;
 import org.commons.message.AnswerMessage;
+import org.commons.message.DisconnectMessage;
 import org.commons.message.DisplayMessage;
 import org.commons.message.EnumMessage;
 import org.commons.message.IMessage;
@@ -44,6 +46,10 @@ public class ThreadPartieEcriture implements Runnable, Observer {
 		this.currentMessages = new ArrayBlockingQueue<IMessage>(20);
 		isClicked = Boolean.FALSE;
 		_nomPartie = nomPartie;
+		DisconnectMessage disconnectM = (DisconnectMessage) EnumMessage.DISCONNECT.createMessage();
+		disconnectM.setLogin(login);
+		disconnectM.setPartie(nomPartie);
+		fenetre.getBoutonQuitter().addMouseListener(new QuitterPartieListener(login, socket, disconnectM, fenetre.getBoutonQuitter()));
 	}
 
 	public final void addIMessage(final IMessage parMessage) {
