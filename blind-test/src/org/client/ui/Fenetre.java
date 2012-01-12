@@ -2,6 +2,7 @@ package org.client.ui;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.util.Timer;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -23,7 +24,7 @@ public class Fenetre {
 	private JFrame fenetreLog;
 	private JFrame fenetreParties;
 	private LogClient logClient;
-	private PartieTimer pt;
+	private PartieTimer _partieTimer;
 	
 	static public final Fenetre instance() {
 		return INSTANCE;
@@ -54,11 +55,12 @@ public class Fenetre {
 		fenetre.setContentPane(nouveau);
 		fenetre.validate();
 		fenetreLog.validate();
-		System.out.println("b" + logClient.getText());
 	}
 	
-	public void chargeListParties (String parLogin) {
-		pt = new PartieTimer(parLogin);
+	public void chargeListParties (final String parLogin) {
+		if(_partieTimer == null) {
+			_partieTimer = new PartieTimer(parLogin);
+		}
 	}
 	
 	private void createLogClient () {

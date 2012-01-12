@@ -2,7 +2,6 @@ package org.client.ui.parties;
 
 import java.io.IOException;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.TimerTask;
@@ -62,8 +61,6 @@ public class PartieTask extends TimerTask {
 			_partiesPanel.refresh(listGames);
 			_partiesWindow.validate();
 
-		} catch (UnknownHostException e) {
-			locInfoProvider.appendMessage(Level.SEVERE, String.format("Impossible de trouver le serveur %s", _configuration.getHostName()));
 		} catch (IOException e) {
 			locInfoProvider.appendMessage(Level.SEVERE, "Impossible d'envoyer la demande des listes des parties.");
 		} catch (ClassNotFoundException e) {
@@ -71,6 +68,5 @@ public class PartieTask extends TimerTask {
 		} finally {
 			SystemUtil.close(locSocket);
 		}
-		
 	}
 }
