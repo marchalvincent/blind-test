@@ -25,8 +25,6 @@ import org.server.concurrent.ReadWriterUtil;
 import org.server.persistence.Manager;
 import org.server.persistence.Managers;
 
-
-
 public class Partie implements IWithName, Closeable {
 
 	private List<User> _userList;
@@ -38,6 +36,7 @@ public class Partie implements IWithName, Closeable {
 	private AtomicBoolean _hasChangedImage;
 	private AtomicBoolean _hasWinner;
 	private final int _size;
+	private AbstractCache<User, Integer> _currentStat;
 
 	public Partie(final String name, final int parSize){
 		_size = parSize;
@@ -48,6 +47,7 @@ public class Partie implements IWithName, Closeable {
 		_currentAck = new AtomicInteger(0);
 		_hasChangedImage = new AtomicBoolean(false);
 		_hasWinner = new AtomicBoolean(false);
+		_currentStat = new PartieStat();
 	}
 
 	public List<User> getUsers(){
@@ -86,11 +86,13 @@ public class Partie implements IWithName, Closeable {
 	public void addUser(final User user, final Socket parSocket){
 		_userList.add(user);
 		_sockets.put(user, parSocket);
+		_currentStat.put(user, 0);
 	}
 
-	public void removeUser(User user){
+	public void removeUser(final User user){
 		_userList.remove(user);
 		_sockets.remove(user);
+		_currentStat.remove(user);
 	}
 
 	@Override
