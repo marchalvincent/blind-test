@@ -33,7 +33,7 @@ public class CreerPartieListener extends AbstractBoutonListener {
 			throw new NullPointerException("login null !!");
 		}
 		if (StringUtil.isNotEmpty(_nomPartie)) {
-			JouerPanel jp = new JouerPanel ().initPanel();
+			JouerPanel jp = new JouerPanel (_login).initPanel();
 			Fenetre.instance().changePage(jp);
 			partieClientLauncher = new PartieClientLauncher(jp, _login, _nomPartie);
 			partieClientLauncher.startPartieClient();

@@ -24,5 +24,6 @@ public class ValidListener extends AbstractBoutonListener {
 		super.mouseClicked(e);
 		this.setChanged();
 		this.notifyObservers(_panel.getAnswer());
+		_panel.clearText();
 	}
 }

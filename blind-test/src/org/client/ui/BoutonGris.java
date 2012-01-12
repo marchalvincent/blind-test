@@ -8,16 +8,9 @@ import javax.swing.JButton;
 
 import org.client.ui.listeners.BoutonState;
 
-/**
- * classe pour bouton personnalisé
- * @author francois
- *
- */
+
 public class BoutonGris extends JButton {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private Color backgroundOff = new Color (131, 131, 131);
 	private Color backgroundOn = new Color (189, 189, 189);
