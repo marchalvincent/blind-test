@@ -31,6 +31,7 @@ public class RejoindreListener extends AbstractBoutonListener {
 			JOptionPane.showMessageDialog(null, "Vous n'avez pas sélectionné de partie !", "Attention !", JOptionPane.WARNING_MESSAGE);
 			return;
 		}
+		Fenetre.instance().getPartieWindow().dispose();
 		JouerPanel jp = new JouerPanel ().initPanel();
 		Fenetre.instance().changePage(jp);
 		partieClientLauncher = new PartieClientLauncher(jp, _login, nomPartie.toString());
