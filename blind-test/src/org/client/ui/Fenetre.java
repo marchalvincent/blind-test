@@ -2,6 +2,9 @@ package org.client.ui;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowFocusListener;
 import java.util.Arrays;
 
 import javax.swing.JFrame;
@@ -49,6 +52,24 @@ public class Fenetre {
 		fenetreLog.setLocation(800, 0);
 		fenetreLog.setVisible(true);
 		fenetre.toFront();
+		fenetre.addWindowFocusListener(new WindowFocusListener() {
+			
+			@Override
+			public void windowLostFocus(WindowEvent e) {}
+			
+			@Override
+			public void windowGainedFocus(WindowEvent e) {
+				if(fenetreParties != null) {
+					fenetreParties.dispose();
+					fenetreParties = null;
+				}
+			}
+		});
+//		fenetre.addWindowListener(new WindowAdapter (){
+//			public void windowClosing (WindowEvent e) {
+//				
+//			}
+//		})
 	}
 	
 	public void changePage (JPanel nouveau) {
