@@ -56,7 +56,6 @@ public class PartieTask extends TimerTask {
 			}
 			ListGamesMessage locGameMessage = (ListGamesMessage) locMessageRetour;
 			List<String> listGames = locGameMessage.getListGames();
-			System.out.println("List Partie " + listGames);
 			_partiesPanel.refresh(listGames);
 			_partiesWindow.validate();
 
