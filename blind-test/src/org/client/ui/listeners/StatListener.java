@@ -42,14 +42,17 @@ public class StatListener extends AbstractBoutonListener {
 
 		Configuration config = ConfigurationManager.getConfiguration();
 		InfoProvider fileProvider = InfoProviderManager.getUiInfoProvider();
-		String displayMessage ="";
+		StringBuilder sb = new StringBuilder();
+		
 		StatMessage locStatMessage = (StatMessage) EnumMessage.STAT.createMessage();
 		locStatMessage.setLogin(_login);
 		Socket socket = null;
 
 		try {
+			//on créé la socket, puis on envoie la demande de stat
 			socket = new Socket(config.getHostName(), config.getPort());
-			ReadWriterUtil.write(socket,locStatMessage);
+			ReadWriterUtil.write(socket, locStatMessage);
+			
 			//on écoute la réponse
 			IMessage messageRetour = null;
 			messageRetour = ReadWriterUtil.read(socket);
@@ -60,13 +63,23 @@ public class StatListener extends AbstractBoutonListener {
 				return;
 			}
 			
-			StatMessage msgStatRetour = (StatMessage) messageRetour;
-			int locPercent = msgStatRetour.getVictoire()+msgStatRetour.getDefaite();
-			if(locPercent == 0) locPercent= 1;
+			StatMessage statMessage = (StatMessage) messageRetour;
+			final Integer locVictoires = statMessage.getVictoire();
+			final Integer locDefaites = statMessage.getDefaite();
 			
-			int percentVictoire = (int)(msgStatRetour.getVictoire()/locPercent) * 100;
-			int percentDefaite = (int)(msgStatRetour.getDefaite()/locPercent) * 100;
-			displayMessage = "Nombre de victoires : "+msgStatRetour.getVictoire()+"\n"+"Nombre de défaites : "+msgStatRetour.getDefaite()+"\n"+"% Victoires : "+percentVictoire+"%"+"\n"+"% Défaites : "+percentDefaite+"%";
+			Integer locTotal = locDefaites + locVictoires;
+			
+			if(locTotal == 0) {
+				locTotal = 1;
+			}
+
+			final Integer locPercentVictoire = (locVictoires / locTotal) * 100;
+			final Integer locPercentDefaite = (locDefaites / locTotal) * 100;
+
+			sb.append("Nombre de victoires : " + locVictoires + "\n");
+			sb.append("Nombre de défaites : " + locDefaites + "\n");
+			sb.append("% Victoires : " + locPercentVictoire + "%"+"\n");
+			sb.append("% Défaites : " + locPercentDefaite + "%");
 			
 		} catch (IOException e1) {
 			fileProvider.appendMessage(Level.SEVERE, String.format("Impossible d'écrire dans la socket d'adresse %s", socket.getInetAddress().getHostAddress()), e1);
@@ -77,7 +90,9 @@ public class StatListener extends AbstractBoutonListener {
 		finally {
 			SystemUtil.close(socket);
 		}
-		if (StringUtil.isNotEmpty(displayMessage)){
+		
+		String displayMessage = sb.toString();
+		if (StringUtil.isNotEmpty(displayMessage)) {
 			JOptionPane.showMessageDialog(_panel, displayMessage);
 		}
 	}

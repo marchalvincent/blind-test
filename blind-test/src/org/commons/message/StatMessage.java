@@ -3,9 +3,9 @@ package org.commons.message;
 public class StatMessage extends AbstractMessage {
 
 	private static final long serialVersionUID = 1L;
-	private String login = null;
-	private Integer victoire = null;
-	private Integer defaite = null;
+	private String login;
+	private Integer victoire;
+	private Integer defaite;
 
 	protected StatMessage() {
 		this ("", 0, 0);
