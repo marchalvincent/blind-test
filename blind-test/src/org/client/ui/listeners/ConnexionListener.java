@@ -10,7 +10,6 @@ import org.client.ui.BoutonGris;
 import org.client.ui.ConnexionPanel;
 import org.client.ui.Fenetre;
 import org.commons.logger.InfoProviderManager;
-import org.commons.logger.UiInfoProvider;
 import org.commons.security.Encryptor;
 import org.commons.security.MD5Encryptor;
 import org.commons.util.StringUtil;
@@ -40,7 +39,7 @@ public class ConnexionListener extends AbstractBoutonListener {
 			locPassword = encript.encrypt(locPassword);
 			ThreadConnexion tc = new ThreadConnexion(locLogin, locPassword);
 			if (tc.call()) {
-				Fenetre.instance().changePage(new AccueilPanel (locLogin).initPanel());
+			Fenetre.instance().changePage(new AccueilPanel (locLogin).initPanel());
 			}
 		}
 		else {
