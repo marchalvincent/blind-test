@@ -8,10 +8,10 @@ Un jeu de Quizz Photos en Réseau intéractif.
 =================== A Propos ===================
 
 
-Programme réalisé par akfarinas Adour, Guillaume Laloum, 
-Vincent Marchal,Olivier Pitton et Francois Reynal.
+Programme réalisé par Takfarinas Adour, Guillaume Laloum, 
+Vincent Marchal, Olivier Pitton et Francois Reynal.
 
 
-Projet Java 2012
+Projet Java 2012 - L3 DANT
 
 
