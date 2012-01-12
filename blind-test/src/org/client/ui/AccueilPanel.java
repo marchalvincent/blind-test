@@ -4,8 +4,8 @@ import java.awt.GridBagConstraints;
 
 import javax.swing.JLabel;
 
+import org.client.ui.listeners.CreerPartieListener;
 import org.client.ui.listeners.DeconnexionListener;
-import org.client.ui.listeners.JouerListener;
 import org.client.ui.listeners.ProposListener;
 import org.client.ui.listeners.QuitterListener;
 import org.client.ui.listeners.ReglesListener;
@@ -85,9 +85,10 @@ public class AccueilPanel extends AbstractPanel {
 //		getContraintes().fill = GridBagConstraints.NONE;
 //		this.add(boutonRefresh, getContraintes());
 		
-		//Bouton Jouer
-		BoutonGris boutonJouer = new BoutonGris ("Jouer !");
-		boutonJouer.addMouseListener(new JouerListener (_login, boutonJouer));
+		//TODO : refactorer jouer en creer une partie
+		//Bouton Jouer -> Creer une partie
+		BoutonGris boutonCreerPartie = new BoutonGris ("Créer une partie");
+		boutonCreerPartie.addMouseListener(new CreerPartieListener (this, _login, boutonCreerPartie));
 		getContraintes().gridx = 0;
 		getContraintes().gridy = 1;
 		getContraintes().gridheight = 1;
@@ -95,7 +96,7 @@ public class AccueilPanel extends AbstractPanel {
 		getContraintes().gridwidth = GridBagConstraints.REMAINDER;
 		getContraintes().weightx = 0.8;
 		getContraintes().anchor = GridBagConstraints.PAGE_END;
-		this.add(boutonJouer, getContraintes());
+		this.add(boutonCreerPartie, getContraintes());
 		
 		//Bouton Stats
 		BoutonGris boutonStat = new BoutonGris ("Statistiques");

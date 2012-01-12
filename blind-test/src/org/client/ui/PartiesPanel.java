@@ -20,9 +20,11 @@ public class PartiesPanel extends AbstractPanel {
 	private List<String> _listParties;
 	private DefaultListModel<String> _model;
 	private JList _jlist;
+	private String _login;
 	
-	public PartiesPanel (List<String> parListParties) {
+	public PartiesPanel (String login, List<String> parListParties) {
 		_listParties = parListParties;
+		_login = login;
 	}
 	
 	@Override
@@ -32,6 +34,8 @@ public class PartiesPanel extends AbstractPanel {
 		_jlist = new JList (_model);
 		_jlist.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		_jlist.setAutoscrolls(true);
+		_jlist.setOpaque(false);
+		_jlist.setLayoutOrientation(JList.HORIZONTAL_WRAP);
 		refresh (_listParties);
 		getContraintes().gridx = 0;
 		getContraintes().gridy = 0;
@@ -41,7 +45,7 @@ public class PartiesPanel extends AbstractPanel {
 		
 		BoutonGris boutonRejoindre = new BoutonGris ("Rejoindre");
 		//TODO : a finir : mettre le login et tout dans rejoindre, pas passer en param la
-		boutonRejoindre.addMouseListener(new RejoindreListener (boutonRejoindre));
+		boutonRejoindre.addMouseListener(new RejoindreListener (_login, _jlist.getSelectedValue().toString(), boutonRejoindre));
 		getContraintes().gridx = 0;
 		getContraintes().gridy = 1;
 		getContraintes().anchor = GridBagConstraints.PAGE_END;

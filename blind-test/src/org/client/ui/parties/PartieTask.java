@@ -15,9 +15,9 @@ public class PartieTask extends TimerTask {
 	private JFrame _partiesWindow;
 	private PartiesPanel _partiesPanel;
 	
-	public PartieTask () {
+	public PartieTask (String login) {
 		_partiesWindow = new JFrame ("Parties");
-		_partiesPanel = new PartiesPanel(Arrays.<String>asList("")).initPanel();
+		_partiesPanel = new PartiesPanel(login, Arrays.<String>asList("")).initPanel();
 		_partiesWindow.setContentPane(_partiesPanel);
 		_partiesWindow.setSize(300, 300);
 		_partiesWindow.setVisible(true);

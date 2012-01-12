@@ -9,10 +9,10 @@ public class PartieTimer {
 
 	Timer timer;
 
-	public PartieTimer () {
+	public PartieTimer (String login) {
 		final Configuration locConfiguration = ConfigurationManager.getConfiguration();
 		timer = new Timer();
-		timer.schedule(new PartieTask(), locConfiguration.getTimer());
+		timer.schedule(new PartieTask(login), locConfiguration.getTimer());
 	}
 
 	public final Timer getTimer() {
