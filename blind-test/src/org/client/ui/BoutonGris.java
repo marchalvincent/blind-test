@@ -41,7 +41,7 @@ public class BoutonGris extends JButton {
 			g2d.fillRoundRect(0, 0, getWidth(), getHeight(), 10, 10);
 			
 			g2d.setPaint (foreground);
-			g2d.drawString(getText(), getWidth()/2 - getWidth()/3, getHeight()/2 + getHeight()/5);
+			g2d.drawString(getText(), getWidth()/2 - getWidth()/2 + (getWidth()/2 - getText().length())/3, getHeight()/2 + getHeight()/5);
 			g2d.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, 10, 10);
 	}
 	
