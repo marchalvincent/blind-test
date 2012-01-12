@@ -3,6 +3,9 @@ package org.client.ui;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
+import java.awt.Image;
+import java.awt.image.RenderedImage;
+import java.io.IOException;
 import java.util.List;
 
 import javax.swing.DefaultListModel;
@@ -10,6 +13,7 @@ import javax.swing.JList;
 import javax.swing.ListSelectionModel;
 
 import org.client.ui.listeners.RejoindreListener;
+import org.commons.entity.BanqueFacade;
 
 public class PartiesPanel extends AbstractPanel {
 
@@ -65,6 +69,11 @@ public class PartiesPanel extends AbstractPanel {
 	
 	@Override
 	public void paintComponent (Graphics g) {
-		g.fillRect(0, 0, this.getWidth(), this.getHeight());
+		try {
+			RenderedImage image = BanqueFacade.instance().readImage("image/fond-parties.jpg");
+			g.drawImage((Image) image, 0, 0, Fenetre.instance().getPartieWidth(), Fenetre.instance().getPartieHeight(), null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
