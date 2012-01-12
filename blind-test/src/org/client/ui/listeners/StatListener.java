@@ -16,6 +16,7 @@ import org.commons.logger.InfoProviderManager;
 import org.commons.message.EnumMessage;
 import org.commons.message.IMessage;
 import org.commons.message.StatMessage;
+import org.commons.util.ScoreUtil;
 import org.commons.util.StringUtil;
 import org.commons.util.SystemUtil;
 import org.server.concurrent.ReadWriterUtil;
@@ -67,7 +68,9 @@ public class StatListener extends AbstractBoutonListener {
 			double locVictoires = statMessage.getVictoire();
 			double locDefaites = statMessage.getDefaite();
 			
-			double locTotal = locDefaites + locVictoires;
+			double locTotal = locVictoires + locDefaites;
+			
+			double locScore = ScoreUtil.score(locVictoires, locDefaites);
 			
 			if(locTotal == 0) {
 				locTotal = 1;
@@ -78,7 +81,18 @@ public class StatListener extends AbstractBoutonListener {
 			sb.append("Nombre de victoires : " + locVictoires + "\n");
 			sb.append("Nombre de défaites : " + locDefaites + "\n");
 			sb.append("Victoires : " + Math.rint(locPercentVictoire) + "%"+"\n");
-			sb.append("Défaites : " + Math.rint(locPercentDefaite) + "%");
+			sb.append("Défaites : " + Math.rint(locPercentDefaite) + "%\n");
+			sb.append("Score total : " + locScore + "\n");
+			
+			if (locVictoires*2 < locDefaites) {
+				sb.append("T'es un looser :-p");
+			}
+			else if (locVictoires > locDefaites) {
+				sb.append("Bien joué winner ;-)");
+			}
+			else {
+				sb.append("Mouai... peut mieux faire !");
+			}
 			
 		} catch (IOException e1) {
 			fileProvider.appendMessage(Level.SEVERE, String.format("Impossible d'écrire dans la socket d'adresse %s", socket.getInetAddress().getHostAddress()), e1);
