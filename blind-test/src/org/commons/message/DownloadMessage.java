@@ -69,4 +69,12 @@ public final class DownloadMessage extends AbstractMessage {
 	public final List<String> keys() {
 		return new ArrayList<String>(download.keySet());
 	}
+	
+	public final int totalSize() {
+		int locSize = 0;
+		for(final byte[] locImage : download.values()) {
+			locSize += locImage.length;
+		}
+		return locSize;
+	}
 }

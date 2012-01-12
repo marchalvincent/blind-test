@@ -3,9 +3,7 @@ package org.client.ui.listeners;
 import java.awt.event.MouseEvent;
 import org.client.ui.BoutonGris;
 import org.client.ui.Fenetre;
-import org.client.ui.ProposPanel;
-import org.client.ui.ReglesPanel;
-
+import org.client.ui.ProposFinalPanel;
 	/**
 	 * affiche les infos du jeu
 	 * 
@@ -24,6 +22,6 @@ import org.client.ui.ReglesPanel;
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			super.mouseClicked(e);
-			Fenetre.instance().changePage(new ProposPanel (_login).initPanel());
+			Fenetre.instance().changePage(new ProposFinalPanel (_login).initPanel());
 		}
 	}
