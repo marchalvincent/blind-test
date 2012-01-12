@@ -6,7 +6,7 @@ import java.util.List;
 public class ListGamesMessage extends AbstractMessage {
 
 	private static final long serialVersionUID = 1L;
-	private List<String> listGames = null;
+	private List<String> listGames;
 	
 	protected ListGamesMessage() {
 		this(new ArrayList<String>());

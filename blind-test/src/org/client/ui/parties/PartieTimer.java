@@ -12,7 +12,7 @@ public class PartieTimer {
 	public PartieTimer () {
 		final Configuration locConfiguration = ConfigurationManager.getConfiguration();
 		timer = new Timer();
-		timer.schedule(new PartieTask(), locConfiguration.getTimer());
+		timer.schedule(new PartieTask(locConfiguration), locConfiguration.getTimer());
 	}
 
 	public final Timer getTimer() {

@@ -29,14 +29,14 @@ public class SendAllGamesAction extends AbstractAction {
 			SystemUtil.close(getSocket());
 			return;
 		}
-		
-		ListGamesMessage listGames = (ListGamesMessage) locMessage;
+
 		List<String> allParties = Caches.parties().keys();
+		ListGamesMessage listGames = (ListGamesMessage) locMessage;
 		listGames.addAll(allParties);
 		try {
 			ReadWriterUtil.write(getSocket(), locMessage);
 		} catch (IOException e) {
-			e.printStackTrace();
+			locInfoProvider.appendMessage(Level.SEVERE, "Impossible d'envoyer la liste des parties.");
 		} finally {
 			SystemUtil.close(getSocket());
 		}
