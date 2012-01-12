@@ -10,7 +10,6 @@ import org.commons.configuration.Configuration;
 import org.commons.configuration.ConfigurationManager;
 import org.commons.logger.InfoProvider;
 import org.commons.logger.InfoProviderManager;
-import org.commons.util.StringUtil;
 import org.commons.util.SystemUtil;
 
 public class PartieClientLauncher {
@@ -19,13 +18,9 @@ public class PartieClientLauncher {
 	private String login = null;
 	private String _nomPartie = "";
 	
-	public PartieClientLauncher(JouerPanel fenetre, String login) {
+	public PartieClientLauncher (JouerPanel fenetre, String login, String nomPartie) {
 		this.fenetre = fenetre;
 		this.login = login;
-	}
-	
-	public PartieClientLauncher (JouerPanel fenetre, String login, String nomPartie) {
-		this(fenetre, login);
 		_nomPartie = nomPartie;
 	}
 	
