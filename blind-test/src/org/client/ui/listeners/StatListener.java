@@ -64,22 +64,21 @@ public class StatListener extends AbstractBoutonListener {
 			}
 			
 			StatMessage statMessage = (StatMessage) messageRetour;
-			final Integer locVictoires = statMessage.getVictoire();
-			final Integer locDefaites = statMessage.getDefaite();
+			double locVictoires = statMessage.getVictoire();
+			double locDefaites = statMessage.getDefaite();
 			
-			Integer locTotal = locDefaites + locVictoires;
+			double locTotal = locDefaites + locVictoires;
 			
 			if(locTotal == 0) {
 				locTotal = 1;
 			}
-
-			final Integer locPercentVictoire = (locVictoires / locTotal) * 100;
-			final Integer locPercentDefaite = (locDefaites / locTotal) * 100;
+			final double locPercentVictoire = (locVictoires / locTotal) * 100;
+			final double locPercentDefaite = (locDefaites / locTotal) * 100;
 
 			sb.append("Nombre de victoires : " + locVictoires + "\n");
 			sb.append("Nombre de défaites : " + locDefaites + "\n");
-			sb.append("% Victoires : " + locPercentVictoire + "%"+"\n");
-			sb.append("% Défaites : " + locPercentDefaite + "%");
+			sb.append("Victoires : " + Math.rint(locPercentVictoire) + "%"+"\n");
+			sb.append("Défaites : " + Math.rint(locPercentDefaite) + "%");
 			
 		} catch (IOException e1) {
 			fileProvider.appendMessage(Level.SEVERE, String.format("Impossible d'écrire dans la socket d'adresse %s", socket.getInetAddress().getHostAddress()), e1);
