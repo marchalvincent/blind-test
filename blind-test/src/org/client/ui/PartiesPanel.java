@@ -14,6 +14,7 @@ import javax.swing.ListSelectionModel;
 
 import org.client.ui.listeners.RejoindreListener;
 import org.commons.entity.BanqueFacade;
+import org.commons.util.StringUtil;
 
 public class PartiesPanel extends AbstractPanel {
 
@@ -61,6 +62,9 @@ public class PartiesPanel extends AbstractPanel {
 		final int locSelectedIndex = _jlist.getSelectedIndex();
 		_model.clear();
 		for (final String locPartieName : _listParties) {
+			System.out.println("partie panel refresh parties =>" + locPartieName);
+			if (StringUtil.isEmpty(locPartieName))
+				continue;
 			_model.addElement(locPartieName);
 		}
 		_jlist.setSelectedIndex(locSelectedIndex);
