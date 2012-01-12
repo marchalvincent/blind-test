@@ -9,7 +9,6 @@ import org.commons.logger.InfoProvider;
 import org.commons.logger.InfoProviderManager;
 import org.commons.message.DisconnectMessage;
 import org.commons.message.IMessage;
-import org.commons.message.StatMessage;
 import org.commons.util.StringUtil;
 import org.commons.util.SystemUtil;
 import org.server.partie.Partie;
@@ -25,14 +24,14 @@ public class DisconnectAction extends AbstractAction {
 		final InfoProvider locInfoProvider = InfoProviderManager.getFileProvider();
 		final IMessage locMessage = getMessage();
 		
-		if(locMessage instanceof StatMessage == false) {
+		if(locMessage instanceof DisconnectMessage == false) {
 			locInfoProvider.appendMessage(Level.SEVERE, "Le type du message est incorrect. Le message reçu est : " + locMessage);
 			SystemUtil.close(getSocket());
 			return;
 		}
 		
 		DisconnectMessage locDiscoMess = (DisconnectMessage) locMessage;
-		
+
 		//On supprime le user
 		Caches.user().remove(locDiscoMess.getLogin());
 		
