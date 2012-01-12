@@ -3,6 +3,7 @@ package org.server.action;
 import java.net.Socket;
 import java.util.logging.Level;
 
+import org.commons.cache.AbstractCache;
 import org.commons.cache.Caches;
 import org.commons.logger.InfoProvider;
 import org.commons.logger.InfoProviderManager;
@@ -11,6 +12,7 @@ import org.commons.message.IMessage;
 import org.commons.message.StatMessage;
 import org.commons.util.StringUtil;
 import org.commons.util.SystemUtil;
+import org.server.partie.Partie;
 
 public class DisconnectAction extends AbstractAction {
 
@@ -37,7 +39,11 @@ public class DisconnectAction extends AbstractAction {
 		//On supprime la partie
 		final String partie = locDiscoMess.getPartie();
 		if (StringUtil.isNotEmpty(partie)) {
-			Caches.parties().remove(partie);
+			final AbstractCache<String, Partie> locPartiesCache = Caches.parties();
+			final Partie locPartie = locPartiesCache.get(partie);
+			if(locPartie.isEmpty()) {
+				locPartiesCache.remove(partie);
+			}
 		}
 		
 		SystemUtil.close(getSocket());
