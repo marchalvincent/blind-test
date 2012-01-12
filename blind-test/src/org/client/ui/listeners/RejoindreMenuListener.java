@@ -2,10 +2,8 @@ package org.client.ui.listeners;
 
 import java.awt.event.MouseEvent;
 
-import org.client.main.PartieClientLauncher;
 import org.client.ui.BoutonGris;
 import org.client.ui.Fenetre;
-import org.client.ui.JouerPanel;
 
 public class RejoindreMenuListener extends AbstractBoutonListener {
 
