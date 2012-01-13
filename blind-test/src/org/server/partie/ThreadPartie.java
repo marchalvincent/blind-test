@@ -66,16 +66,19 @@ public final class ThreadPartie implements Runnable {
 						ReadWriterUtil.write(_socket, locMessage);
 					} catch (IOException e) {
 					}
-				}finally {
+				} finally {
 					_partie.lock().writeLock().unlock();
 				}
 
 				while (true) {
 					IMessage locResponseMessage = null;
+					_partie.lock().writeLock().lock();
 					try {
 						locResponseMessage = ReadWriterUtil.read(_socket);
 					} catch (ClassNotFoundException e) {
 					} catch (IOException e) {
+					} finally {
+						_partie.lock().writeLock().unlock();
 					}
 					if(locResponseMessage == null || locResponseMessage instanceof DisconnectMessage) {
 						locInfoProvider.appendMessage(Level.INFO, String.format("Le joueur %s s'est déconnecté de la partie %s", _user.getConstName(), _partie.getConstName()));
@@ -98,10 +101,10 @@ public final class ThreadPartie implements Runnable {
 							_partie.lock().writeLock().unlock();
 						}
 					}
-					final AnswerMessage locAnswerMessage = (AnswerMessage) locResponseMessage;
-					final String locAnswer = locAnswerMessage.getAnswer();
 					_partie.lock().writeLock().lock();
 					try {
+					final AnswerMessage locAnswerMessage = (AnswerMessage) locResponseMessage;
+					final String locAnswer = locAnswerMessage.getAnswer();
 						if (_partie.hasWinner() == false && _partie.isValidAnswer(locAnswer)) {
 							_partie.notifyWinner(locInfoProvider, _user);
 							if(_partie.isFinished()) {
