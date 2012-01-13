@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.logging.Level;
 
 import org.commons.cache.AbstractCache;
@@ -39,6 +40,7 @@ public class Partie implements IWithName, Closeable {
 	private AtomicBoolean _hasWinner;
 	private int _size;
 	private AbstractCache<String, Integer> _currentStat;
+	private ReentrantReadWriteLock _lock;
 
 	public Partie(final String name, final int parSize){
 		_size = parSize;
@@ -50,6 +52,11 @@ public class Partie implements IWithName, Closeable {
 		_hasChangedImage = new AtomicBoolean(false);
 		_hasWinner = new AtomicBoolean(false);
 		_currentStat = new PartieStat();
+		_lock = new ReentrantReadWriteLock();
+	}
+	
+	protected final ReentrantReadWriteLock lock() {
+		return _lock;
 	}
 
 	public List<User> getUsers(){
