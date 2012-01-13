@@ -31,7 +31,7 @@ public class RejoindreListener extends AbstractBoutonListener {
 			return;
 		}
 		Fenetre.instance().getPartieWindow().dispose();
-		JouerPanel jp = new JouerPanel (_login).initPanel();
+		JouerPanel jp = new JouerPanel().initPanel();
 		Fenetre.instance().changePage(jp);
 		partieClientLauncher = new PartieClientLauncher(jp, _login, nomPartie.toString());
 		partieClientLauncher.startPartieClient();

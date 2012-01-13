@@ -50,7 +50,7 @@ public class CreerPartieListener extends AbstractBoutonListener {
 				else if (locResultat == 0) {
 					locResultat = Integer.valueOf(999);
 				}
-				JouerPanel jp = new JouerPanel (_login).initPanel();
+				JouerPanel jp = new JouerPanel().initPanel();
 				Fenetre.instance().changePage(jp);
 				partieClientLauncher = new PartieClientLauncher(jp, _login, _nomPartie, locResultat);
 				partieClientLauncher.startPartieClient();

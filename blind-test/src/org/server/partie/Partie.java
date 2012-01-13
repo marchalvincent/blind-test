@@ -30,19 +30,19 @@ import org.server.persistence.Managers;
 public class Partie implements IWithName, Closeable {
 
 	private List<User> _userList;
-	private List<Banque> banqueList;
+	private List<Banque> _banqueList;
 	private String _name;
 	private AbstractCache<User, Socket> _sockets;
 	private Banque _banque;
 	private AtomicInteger _currentAck;
 	private AtomicBoolean _hasChangedImage;
 	private AtomicBoolean _hasWinner;
-	private final int _size;
+	private int _size;
 	private AbstractCache<String, Integer> _currentStat;
 
 	public Partie(final String name, final int parSize){
 		_size = parSize;
-		banqueList = new ArrayList<Banque>();
+		_banqueList = new ArrayList<Banque>();
 		_userList = new ArrayList<User>();
 		_name = name;
 		_sockets = Caches.createSocketCache();
@@ -68,11 +68,17 @@ public class Partie implements IWithName, Closeable {
 		final Manager<Banque> locBanqueManager = Managers.createBanqueManager();	
 		final List<Banque> listImage = locBanqueManager.findAll();
 		Collections.shuffle(listImage, new Random(System.nanoTime()));
+		final int locSize = listImage.size();
+		if(_size <= 0 || _size > locSize)  {
+			_size = locSize;
+			_banqueList.addAll(listImage);
+			return;
+		}
 		final List<Banque> locRealList = new ArrayList<Banque>(_size);
 		for(int i = 0 ; i < _size ; ++i) {
 			locRealList.add(listImage.get(i));
 		}
-		banqueList.addAll(locRealList);
+		_banqueList.addAll(locRealList);
 	}
 
 	public final boolean hasChangedImage() {
@@ -101,13 +107,13 @@ public class Partie implements IWithName, Closeable {
 	}
 
 	public boolean isFinished(){
-		return banqueList.isEmpty();
+		return _banqueList.isEmpty();
 	}
 
 	//Renvoi le prochain élement qu'on doit afficher
 	public final Banque next(){
 		this.setChangedImage(true);
-		_banque = banqueList.remove(banqueList.size()-1);
+		_banque = _banqueList.remove(_banqueList.size()-1);
 		return _banque;
 	}	
 

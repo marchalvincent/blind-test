@@ -1,10 +1,9 @@
 package org.client.ui;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.Image;
-import java.awt.image.RenderedImage;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,35 +13,35 @@ import java.util.logging.Level;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import org.client.ui.listeners.ValidListener;
+import org.client.ui.display.EnumDisplayImage;
 import org.client.ui.listeners.BoutonEntree;
+import org.client.ui.listeners.ValidListener;
 import org.commons.entity.BanqueFacade;
 import org.commons.logger.InfoProvider;
 
 /**
  * panel pour jouer au jeu
- *
+ * 
  */
 public class JouerPanel extends AbstractPanel {
 
 	private static final long serialVersionUID = 1L;
-	private RenderedImage _currentImage;
+	private BufferedImage _currentImage;
 	private JTextField champsReponse;
 	private List<Observable> _observable;
-	@SuppressWarnings("unused")
-	private String _login;
 	private BoutonGris boutonQuitter;
-	
-	public JouerPanel (String parLogin) {
+	private EnumDisplayImage _displayImage;
+
+	public JouerPanel() {
 		_observable = new ArrayList<Observable>();
-		_login = parLogin;
+		_displayImage = EnumDisplayImage.TRANSPARENCY;
 	}
-	
+
 	@Override
-	public JouerPanel initPanel() {	
-		
-		//Bouton Quitter la partie
-		boutonQuitter = new BoutonGris("Quitter la partie :(");
+	public JouerPanel initPanel() {
+		this.setOpaque(false);
+		// Bouton Quitter la partie
+		boutonQuitter = new BoutonGris("Quitter la partie");
 		getContraintes().gridx = 0;
 		getContraintes().gridy = 0;
 		getContraintes().weighty = 0.1;
@@ -51,17 +50,17 @@ public class JouerPanel extends AbstractPanel {
 		getMarges().top = 15;
 		getContraintes().insets = getMarges();
 		this.add(boutonQuitter, getContraintes());
-		
-		//espace
-		JLabel espace = new JLabel (" ");
+
+		// espace
+		JLabel espace = new JLabel(" ");
 		getContraintes().gridx = 0;
 		getContraintes().gridy = 1;
 		getContraintes().weighty = 1.0;
 		getContraintes().gridwidth = GridBagConstraints.REMAINDER;
 		this.add(espace, getContraintes());
-		
-		//Champs réponse
-		champsReponse = new JTextField (30);
+
+		// Champs réponse
+		champsReponse = new JTextField(30);
 		getContraintes().gridx = 0;
 		getContraintes().gridy = 2;
 		getMarges().left = 15;
@@ -74,64 +73,69 @@ public class JouerPanel extends AbstractPanel {
 		this.add(champsReponse, getContraintes());
 		champsReponse.setFocusable(true);
 		champsReponse.requestFocusInWindow();
-		//Bouton Valider !
-		final BoutonGris locBoutonValide = new BoutonGris ("Valider !");
-		ValidListener validL = new ValidListener (this, locBoutonValide);
+		// Bouton Valider !
+		final BoutonGris locBoutonValide = new BoutonGris("Valider !");
+		ValidListener validL = new ValidListener(this, locBoutonValide);
 		locBoutonValide.addMouseListener(validL);
 		_observable.add(validL);
-		BoutonEntree locBoutonValidEntree = new BoutonEntree (this, null);
+		BoutonEntree locBoutonValidEntree = new BoutonEntree(this, null);
 		champsReponse.addKeyListener(locBoutonValidEntree);
 		_observable.add(locBoutonValidEntree);
 		getContraintes().gridx = 1;
 		getContraintes().gridy = 2;
 		getMarges().bottom = 12;
 		getContraintes().anchor = GridBagConstraints.LAST_LINE_START;
-		this.add(locBoutonValide, getContraintes());		
+		this.add(locBoutonValide, getContraintes());
 		return this;
 	}
-	
-	public BoutonGris getBoutonQuitter () {
+
+	public BoutonGris getBoutonQuitter() {
 		return boutonQuitter;
 	}
-	
+
 	public final String getAnswer() {
 		return champsReponse.getText();
 	}
-	
+
 	public final List<Observable> getObservable() {
 		return _observable;
 	}
-	
-	public RenderedImage getCurrentImagePath () {
+
+	public Image getCurrentImagePath() {
 		return _currentImage;
 	}
-	
-	private void setImagePath (final InfoProvider parInfoProvider, final String imagePath) {
+
+	private void setImagePath(final InfoProvider parInfoProvider,
+			final String imagePath) {
 		try {
-			this._currentImage = BanqueFacade.instance().readImage(imagePath);
+			this._currentImage = (BufferedImage) BanqueFacade.instance().readImage(imagePath);
 		} catch (IOException e) {
-			parInfoProvider.appendMessage(Level.SEVERE, String.format("Impossible d'afficher l'image %s", imagePath), e);
+			parInfoProvider.appendMessage(Level.SEVERE, String.format(
+					"Impossible d'afficher l'image %s", imagePath), e);
 		}
 	}
-	
-	public void newTest (final InfoProvider parInfoProvider, final String imagePath) {
+
+	public void newTest(final InfoProvider parInfoProvider,
+			final String imagePath) {
 		setImagePath(parInfoProvider, imagePath);
-		champsReponse.setText("");
+		clearText();
+		// TODO : On récupère le display ICI et on le fout dans la variable
+		// d'instance
 		this.validate();
 		this.repaint();
 	}
-	
-	public void clearText () {
+
+	public final void clearText() {
 		champsReponse.setText("");
 	}
-	
+
 	@Override
-	public void paintComponent (Graphics g) {
-		super.paintComponent(g);
-		if(_currentImage == null) return;
-			
-		g.drawImage((Image) _currentImage, 0, 0, Fenetre.instance().getWidth(), Fenetre.instance().getHeight(), null);
-		g.setColor(Color.WHITE);
-		//g.drawRect(20, 20, Fenetre.instance().getWidth() - 20, Fenetre.instance().getHeight() - 20);
+	public final void paintComponent(final Graphics parGraphics) {
+		super.paintComponent(parGraphics);
+		if (_currentImage == null)
+			return;
+
+		final Fenetre locFenetre = Fenetre.instance();
+		_displayImage.displayImage(parGraphics, _currentImage, locFenetre.getWidth(), locFenetre.getHeight());
 	}
 }
