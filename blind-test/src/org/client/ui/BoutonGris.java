@@ -24,7 +24,7 @@ public class BoutonGris extends JButton {
 
 	@Override
 	public void paintComponent (Graphics g) {
-		//TODO : Merde lors du repaint a cause de transparence
+
 		Graphics2D g2d = (Graphics2D) g;
 
 		g2d.setPaint (currentBackgroundColor);
