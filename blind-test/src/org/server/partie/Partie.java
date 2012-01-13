@@ -105,7 +105,6 @@ public class Partie implements IWithName, Closeable {
 	public void removeUser(final User user){
 		_userList.remove(user);
 		_sockets.remove(user);
-		_currentStat.remove(user.getConstName());
 	}
 
 	@Override
