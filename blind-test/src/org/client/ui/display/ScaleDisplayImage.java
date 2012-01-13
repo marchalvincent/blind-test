@@ -29,21 +29,17 @@ public class ScaleDisplayImage implements DisplayImage {
 		par2DGraphics.fillRect((int)((parWidth / 2) + ((parWidth / locRepeat) * locCurrentRepeat)), 0, parWidth, parHeight);
 		par2DGraphics.fillRect(0, 0, parWidth, (int)((parHeight / 2) - ((parHeight / locRepeat) * locCurrentRepeat)));
 		par2DGraphics.fillRect(0, (int)((parHeight / 2) + ((parHeight / locRepeat) * locCurrentRepeat)), parWidth, parHeight);
-		try {
-			Thread.sleep(getTimeRepeat());
-		} catch (InterruptedException e) {
-		}
 	}
 
 	@Override
 	public int getRepeat() {
-		final DisplayConfigurationType locType  = _configuration.getDisplayType(EnumDisplayImage.BANDE);
+		final DisplayConfigurationType locType  = _configuration.getDisplayType(EnumDisplayImage.SCALE);
 		return (locType == null) ? 1 : locType.getRepeat().intValue();
 	}
 
 	@Override
 	public long getTimeRepeat() {
-		final DisplayConfigurationType locType  = _configuration.getDisplayType(EnumDisplayImage.BANDE);
+		final DisplayConfigurationType locType  = _configuration.getDisplayType(EnumDisplayImage.SCALE);
 		return (locType == null) ? 0L : locType.getTime().longValue();
 	}
 
