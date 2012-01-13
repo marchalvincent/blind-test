@@ -2,7 +2,12 @@ package org.client.ui.display;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.commons.configuration.Configuration;
+import org.commons.configuration.ConfigurationManager;
+import org.commons.configuration.DisplayConfigurationType;
 import org.commons.configuration.EnumConfiguration;
 import org.commons.util.IWithId;
 import org.commons.util.IWithName;
@@ -46,10 +51,30 @@ public enum EnumDisplayImage implements IWithId, IWithName, DisplayImage {
 		return _name;
 	}
 	
+	public final boolean isEnabled() {
+		final Configuration locConfiguration = ConfigurationManager.getConfiguration();
+		final DisplayConfigurationType locType = locConfiguration.getDisplayType(this);
+		return (locType != null) ? locType.isEnabled() : false;
+	}
+	
 	static public final EnumDisplayImage randomDisplay() {
-		final EnumDisplayImage[] locArray = values();
-		final int locSize = (int) (Math.random() * (locArray.length));
-		return locArray[locSize];
+		final List<EnumDisplayImage> locArray = getValues();
+		if(locArray.isEmpty()) {
+			return EnumDisplayImage.NONE;
+		}
+		final int locSize = (int) (Math.random() * (locArray.size()));
+		return locArray.get(locSize);
+	}
+	
+	static private final List<EnumDisplayImage> getValues() {
+		final EnumDisplayImage[] locDisplayValues = values();
+		final List<EnumDisplayImage> locList = new ArrayList<EnumDisplayImage>(locDisplayValues.length);
+		for(final EnumDisplayImage locDisplay : locDisplayValues) {
+			if(locDisplay.isEnabled()) {
+				locList.add(locDisplay);
+			}
+		}
+		return locList;
 	}
 	
 }
