@@ -59,16 +59,17 @@ public final class ThreadPartie implements Runnable {
 							locBanque = _partie.next();
 						}
 					}
+					locMessage.setFileName(locBanque.getConstName());
+					final EnumDisplayImage locDisplay = EnumDisplayImage.randomDisplay();
+					locMessage.setType(locDisplay.getId());
+					try {
+						ReadWriterUtil.write(_socket, locMessage);
+					} catch (IOException e) {
+					}
 				}finally {
 					_partie.lock().writeLock().unlock();
 				}
-				locMessage.setFileName(locBanque.getConstName());
-				final EnumDisplayImage locDisplay = EnumDisplayImage.randomDisplay();
-				locMessage.setType(locDisplay.getId());
-				try {
-					ReadWriterUtil.write(_socket, locMessage);
-				} catch (IOException e) {
-				}
+
 				while (true) {
 					IMessage locResponseMessage = null;
 					try {

@@ -21,7 +21,6 @@ import org.commons.logger.InfoProvider;
 import org.commons.message.EnumMessage;
 import org.commons.message.WinnerMessage;
 import org.commons.util.IWithName;
-import org.commons.util.ScoreUtil;
 import org.commons.util.StringUtil;
 import org.commons.util.SystemUtil;
 import org.server.concurrent.ReadWriterUtil;
@@ -163,9 +162,9 @@ public class Partie implements IWithName, Closeable {
 			if(locUser.equals(parLooser) == false) continue;
 			
 			parLooser.setDefaite(parLooser.getDefaite() + 1);
-			final int locCurrentStat = _currentStat.get(parLooser.getConstName());
-			final int locDefaite = ScoreUtil.computeDefaite(locCurrentStat);
-			_currentStat.put(locUser.getConstName(), Integer.valueOf(locDefaite));
+			int locCurrentStat = _currentStat.get(parLooser.getConstName());
+			locCurrentStat -= 1;
+			_currentStat.put(locUser.getConstName(), Integer.valueOf(locCurrentStat));
 		}
 		locUserManager.merge(parLooser);
 	}
