@@ -51,20 +51,10 @@ public class PartiesPanel extends AbstractPanel {
 	public void refresh (final List<String> parListe) {
 		final int locSelectedIndex = _jlist.getSelectedIndex();
 		_model.clear();
-		for (final String locPartieName : parListe) {			
+		for (final String locPartieName : parListe) {
 			_model.addElement(locPartieName);
 		}
 		_jlist.setSelectedIndex(locSelectedIndex);
 		_jlist.validate();
 	}
-	
-	/*@Override
-	public void paintComponent (final Graphics g) {
-		try {
-			RenderedImage image = BanqueFacade.instance().readImage("image/fond-parties.jpg");
-			g.drawImage((Image) image, 0, 0, Fenetre.instance().getPartieWidth(), Fenetre.instance().getPartieHeight(), null);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}*/
 }
