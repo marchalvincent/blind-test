@@ -14,7 +14,7 @@ public class Score implements Comparable<Score>, IWithName {
 	
 	public Score(final String parName, final int parValue) {
 		_name = parName;
-		_value = parValue;
+		_value = (parValue <= 0) ? 0 : parValue;
 	}
 	
 	public final int getValue() {

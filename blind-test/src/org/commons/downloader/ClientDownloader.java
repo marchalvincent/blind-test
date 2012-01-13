@@ -27,6 +27,7 @@ public final class ClientDownloader extends AbstractDownloader {
 
 	@Override
 	public final Boolean call() {
+		final long locStartTime = System.currentTimeMillis();
 		final DownloadMessage locDownloadMessage = (DownloadMessage) EnumMessage.DOWNLOAD.createMessage();
 		final Configuration locConfiguration = ConfigurationManager.getConfiguration();
 		final ImageIndex locIndex = new ImageIndex();
@@ -74,12 +75,13 @@ public final class ClientDownloader extends AbstractDownloader {
 		}
 		final int locSize = locValuesDownloaded.size();
 		locDownloadSize = Math.rint(locDownloadSize / 1000.0);
+		double locEndTime = System.currentTimeMillis() - locStartTime;
 		if(locSize == 0) {
 			_infoProvider.appendMessage(Level.INFO, "Aucune image n'a été téléchargée.");
 		} else if(locSize == 1) {
-			_infoProvider.appendMessage(Level.INFO, String.format("1 image a été téléchargée pour un total de %.2f Kbits.", locDownloadSize));
+			_infoProvider.appendMessage(Level.INFO, String.format("1 image a été téléchargée pour un total de %.2f Kbits. Temps de téléchargement : %.2f secondes.", locDownloadSize, Math.rint(locEndTime / 1000.0)));
 		} else {
-			_infoProvider.appendMessage(Level.INFO, String.format("%d images ont été téléchargées pour un total de %.2f Kbits.", locSize, locDownloadSize));	
+			_infoProvider.appendMessage(Level.INFO, String.format("%d images ont été téléchargées pour un total de %.2f Kbits. Temps de téléchargement : %.2f secondes.", locSize, locDownloadSize, Math.rint(locEndTime / 1000.0)));	
 		}
 		return Boolean.TRUE;
 	}
