@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
@@ -63,17 +64,15 @@ public class Partie implements IWithName, Closeable {
 		return _userList.isEmpty();
 	}
 
-	public void updateImage(){	
-		Manager<Banque> bm = Managers.createBanqueManager();	
-		final List<Banque> listImage = bm.findAll();
-		final int locSize = listImage.size();
-		if(locSize > _size) {
-			for(int i = 0 ; i < locSize - _size ; ++i) {
-				listImage.remove(i);
-			}
+	public final void updateImage(){	
+		final Manager<Banque> locBanqueManager = Managers.createBanqueManager();	
+		final List<Banque> listImage = locBanqueManager.findAll();
+		Collections.shuffle(listImage, new Random(System.nanoTime()));
+		final List<Banque> locRealList = new ArrayList<Banque>(_size);
+		for(int i = 0 ; i < _size ; ++i) {
+			locRealList.add(listImage.get(i));
 		}
-		Collections.shuffle(listImage);//On tire aléatoirement
-		banqueList.addAll(listImage);
+		banqueList.addAll(locRealList);
 	}
 
 	public final boolean hasChangedImage() {
@@ -145,8 +144,21 @@ public class Partie implements IWithName, Closeable {
 		this._hasWinner.set(false);
 	}
 
+	public final void updatePassStat(final User parLooser) {
+		final Manager<User> locUserManager = Managers.getUserManager();
+		for(final User locUser : _sockets.keys()) {
+			if(locUser.equals(parLooser) == false) continue;
+			
+			parLooser.setDefaite(parLooser.getDefaite() + 1);
+			final int locCurrentStat = _currentStat.get(parLooser.getConstName());
+			final int locDefaite = ScoreUtil.computeDefaite(locCurrentStat);
+			_currentStat.put(locUser.getConstName(), Integer.valueOf(locDefaite));
+		}
+		locUserManager.merge(parLooser);
+	}
+	
 	public final void updateStats(final User parWinner) {
-		final Manager<User> locUserManager = Managers.createUserManager();
+		final Manager<User> locUserManager = Managers.getUserManager();
 		for(final User locUser : _sockets.keys()) {
 			final int locCurrentStat = _currentStat.get(locUser.getConstName());
 			if(locUser.equals(parWinner)) {
@@ -166,15 +178,17 @@ public class Partie implements IWithName, Closeable {
 		return _currentStat.toMap();
 	}
 
-	public final void notifyWinner(final InfoProvider parInfoProvider, final String parWinner, final boolean parHasWinner) {
+	public final void notifyWinner(final InfoProvider parInfoProvider, final User parWinner, final boolean parHasWinner) {
 		final WinnerMessage locMessage = (WinnerMessage) EnumMessage.WINNER.createMessage();
 		final String locValueMessage;
 		if(parHasWinner == true) {
 			locValueMessage = String.format("Le joueur %s a gagné la manche.", parWinner);
+			updateStats(parWinner);
 		} else {
 			locValueMessage = String.format("Il n'y a aucun gagnant. Le joueur %s a fait passer l'image.", parWinner);
+			updatePassStat(parWinner);
 		}
-		locMessage.setLogin(parWinner);
+		locMessage.setLogin(parWinner.getConstName());
 		locMessage.setMessage(locValueMessage);
 		parInfoProvider.appendMessage(Level.INFO, locValueMessage);
 		for(final Map.Entry<User, Socket> locEntry : _sockets.entrySet()) {
@@ -187,6 +201,7 @@ public class Partie implements IWithName, Closeable {
 				removeUser(locUser);
 				final String locLogin = locUser.getConstName();
 				_sockets.remove(locUser);
+				_currentStat.remove(locUser.getConstName());
 				final String locIp = locSocket.getInetAddress().getHostAddress();
 				parInfoProvider.appendMessage(Level.SEVERE, String.format("Impossible d'écrire dans la socket d'adresse %s du joueur %s.", locIp, locLogin), e);
 				SystemUtil.close(locSocket);
@@ -195,7 +210,7 @@ public class Partie implements IWithName, Closeable {
 		this.setChangedImage(false);
 	}
 
-	public final void notifyWinner(final InfoProvider parInfoProvider, final String parWinner) {
+	public final void notifyWinner(final InfoProvider parInfoProvider, final User parWinner) {
 		this.notifyWinner(parInfoProvider, parWinner, true);
 	}
 
@@ -214,6 +229,7 @@ public class Partie implements IWithName, Closeable {
 		for(final Socket locSocket : _sockets.values()) {
 			SystemUtil.close(locSocket);
 		}
+		_currentStat = null;
 		_sockets = null;
 		_userList.clear();
 		_userList = null;

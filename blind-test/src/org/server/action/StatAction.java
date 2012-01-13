@@ -31,7 +31,7 @@ public class StatAction extends AbstractAction {
 		}
 		
 		final StatMessage locStatMessage = (StatMessage) locMessage;
-		final Manager<User> locUserManager = Managers.createUserManager();
+		final Manager<User> locUserManager = Managers.getUserManager();
 		final String locLogin = locStatMessage.getLogin();
 		User locUser = locUserManager.find(locLogin);
 		final Socket locSocket = getSocket();

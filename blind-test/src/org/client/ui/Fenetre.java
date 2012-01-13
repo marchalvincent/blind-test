@@ -4,7 +4,6 @@ import java.awt.Dimension;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
-import java.util.Arrays;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -80,16 +79,20 @@ public class Fenetre {
 	
 	public void chargeListParties (final String parLogin) {
 		fenetreParties = new JFrame ("Parties");
-		_partiesPanel = new PartiesPanel(parLogin, Arrays.<String>asList("")).initPanel();
+		_partiesPanel = new PartiesPanel(parLogin).initPanel();
 		fenetreParties.setContentPane(_partiesPanel);
 		fenetreParties.setSize(300, 300);
 		fenetreParties.setVisible(true);
 		fenetreParties.setLocation(800, 300);
-		if(_partieTimer != null) {
-			_partieTimer.cancel();
-		} 
-		_partieTimer = new PartieTimer(parLogin, fenetreParties, _partiesPanel);
 		fenetreParties.addWindowListener(new WindowAdapter() {
+			
+		    public final void windowOpened(WindowEvent e) {
+		    	if(_partieTimer != null) {
+		    		_partieTimer.cancel();
+		    		_partieTimer = null;
+		    	}
+		    	_partieTimer = new PartieTimer(parLogin, fenetreParties, _partiesPanel);
+		    }
 			
 			public final void windowClosing(final WindowEvent parEvent) {
 				 if(_partieTimer != null) {

@@ -37,9 +37,8 @@ public class ArgumentTest {
 		assertEquals(_configuration.getHostName(), "localhost");
 		
 		_configuration.load();
-		final String locValue = _configuration.getHostName();
 		EnumConfiguration.updateConfiguration(_configuration, convert("-h", "salut"));
-		assertEquals(_configuration.getHostName(), locValue);
+		assertEquals(_configuration.getHostName(), "127.0.0.1");
 	}
 	
 	@Test

@@ -123,4 +123,16 @@ public interface Configuration {
 	 */
 	
 	Integer getTimer();
+	
+	/**
+	 * Retourne le chemin du le fond d'écran de l'application.
+	 * @return {@link String} le fond d'écran de l'application.
+	 */
+	String getBackgroundImage();
+	
+	/**
+	 * Modifie le chemin du fond d'écran de l'application.
+	 * @param parBackgroundImage le nouveau chemin du fond d'écran de l'application.
+	 */
+	void setBackgroundImage(final String parBackgroundImage);
 }

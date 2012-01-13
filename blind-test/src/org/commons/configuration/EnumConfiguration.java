@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import org.commons.exception.BlindTestException;
 import org.commons.util.IWithName;
 import org.commons.util.IWithSupport;
+import org.commons.util.StringUtil;
 import org.commons.util.SystemUtil;
 
 /**
@@ -101,12 +102,10 @@ public enum EnumConfiguration implements IWithName, IWithSupport {
 			return String.format("Le fichier d'index se situe à : \"%s\"", parConfiguration.getIndexFile());
 		}
 	},
-	
 	TIMER_PARTIE ("timer", "-t", 1000) {
 
 		@Override
-		public void setConfigurationValue(
-				final Configuration parConfiguration, final String parValue) {
+		public void setConfigurationValue(final Configuration parConfiguration, final String parValue) {
 			parConfiguration.setTimer(parValue);
 		}
 
@@ -115,6 +114,21 @@ public enum EnumConfiguration implements IWithName, IWithSupport {
 			return String.format("Le Timer de refresh des parties est de : \"%s\"", parConfiguration.getTimer());
 		}
 		
+	},
+	BACKGROUND_IMAGE("background_image", "-b", null) {
+		@Override
+		public void setConfigurationValue(final Configuration parConfiguration, final String parValue) {
+			parConfiguration.setBackgroundImage(parValue);
+		}
+
+		@Override
+		public final String getFormattedValue(final Configuration parConfiguration) {
+			final String locChemin = parConfiguration.getBackgroundImage();
+			if(StringUtil.isEmpty(locChemin)) {
+				return "Il n'y a aucun fond d'écran dans l'application.";
+			}
+			return String.format("Le chemin du fond d'écran de l'application est \"%s\".", parConfiguration.getBackgroundImage());
+		}
 	};
 
 	final private String _name;

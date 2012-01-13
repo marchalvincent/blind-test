@@ -7,11 +7,13 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.nio.charset.Charset;
+import java.util.Map;
 import java.util.Properties;
 import java.util.logging.Level;
 
 import org.commons.exception.BlindTestException;
 import org.commons.util.StringUtil;
+import org.commons.util.WithUtilities;
 
 /**
  * Une {@link Configuration} par défaut de l'application.
@@ -31,6 +33,7 @@ public final class DefaultConfiguration implements Configuration {
 	private Charset _charset;
 	private String _indexFile;
 	private Integer _port, _timer;
+	private String _backgroundImage;
 	
 	private Properties _properties;
 	
@@ -83,14 +86,16 @@ public final class DefaultConfiguration implements Configuration {
 	
 	@Override
 	public final void setIndexFile(final String parIndexFile) {
-		_indexFile = resolveIndexFile(parIndexFile);
-		_properties.put(EnumConfiguration.INDEX_FILE.getConstName(), parIndexFile);
+		final EnumConfiguration locIndexFile = EnumConfiguration.INDEX_FILE;
+		_indexFile = resolveFile(parIndexFile, locIndexFile, false);
+		_properties.put(locIndexFile.getConstName(), parIndexFile);
 	}
 	
 	@Override
 	public final void setImageDirectory(final String parImageDirectory) {
-		_imageDirectory = resolveImageDirectory(parImageDirectory);
-		_properties.put(EnumConfiguration.IMAGE_DIRECTORY.getConstName(), _imageDirectory);
+		final EnumConfiguration locImageDirectory = EnumConfiguration.IMAGE_DIRECTORY;
+		_imageDirectory = resolveFile(parImageDirectory, locImageDirectory, true);
+		_properties.put(locImageDirectory.getConstName(), _imageDirectory);
 	}
 
 	@Override
@@ -123,8 +128,15 @@ public final class DefaultConfiguration implements Configuration {
 		_properties.put(EnumConfiguration.TIMER_PARTIE.getConstName(), _timer.toString());
 	}
 
+	public final String getBackgroundImage() {
+		return _backgroundImage;
+	}
 	
-
+	public final void setBackgroundImage (final String parBackgroundImage) {
+		final EnumConfiguration locBackgroundImage = EnumConfiguration.BACKGROUND_IMAGE;
+		_backgroundImage = resolveFile(parBackgroundImage, locBackgroundImage, false);
+		_properties.put(locBackgroundImage.getConstName(), _backgroundImage);
+	}
 
 	@Override
 	public final Configuration load() throws BlindTestException {
@@ -134,21 +146,14 @@ public final class DefaultConfiguration implements Configuration {
 		} catch (IOException locException) {
 			throw new BlindTestException("Erreur lors du chargement de la configuration.", locException);
 		}
-		final String locMinLevel = _properties.getProperty(EnumConfiguration.MIN_LEVEL.getConstName());
-		setMinLevel(locMinLevel);
-		final String locPort = _properties.getProperty(EnumConfiguration.PORT.getConstName());
-		setPort(locPort);
-		final EnumConfiguration locHostNameEnum = EnumConfiguration.HOSTNAME;
-		final String locHostName = _properties.getProperty(locHostNameEnum.getConstName(), (String) locHostNameEnum.getDefaultValue());
-		setHostName(locHostName);
-		final String locCharset = _properties.getProperty(EnumConfiguration.CHARSET.getConstName());
-		setCharset(locCharset);
-		final String locImageDirectory = _properties.getProperty(EnumConfiguration.IMAGE_DIRECTORY.getConstName());
-		setImageDirectory(locImageDirectory);
-		final String locIndexFile = _properties.getProperty(EnumConfiguration.INDEX_FILE.getConstName());
-		setIndexFile(locIndexFile);
-		final String locTimer = _properties.getProperty(EnumConfiguration.TIMER_PARTIE.getConstName());
-		setTimer(locTimer);
+		final EnumConfiguration[] locArray = EnumConfiguration.values();
+		for(final Map.Entry<Object, Object> locEntry : _properties.entrySet()) {
+			final String locProperty = locEntry.getKey().toString();
+			final EnumConfiguration locConfigurationEnum = WithUtilities.getByName(locArray, locProperty);
+			if(locConfigurationEnum == null) continue;
+			
+			locConfigurationEnum.setConfigurationValue(this, locEntry.getValue().toString());
+		}
 		return refresh();
 	}
 
@@ -295,20 +300,14 @@ public final class DefaultConfiguration implements Configuration {
 		}
 	}
 	
-	private final String resolveImageDirectory (final String parPath) {
+	private final String resolveFile(final String parPath, final EnumConfiguration parConfiguration, final boolean parIsDirectory) {
 		if(StringUtil.isEmpty(parPath)) {
-			return (_imageDirectory != null) ? _imageDirectory : (String) EnumConfiguration.INDEX_FILE.getDefaultValue();
+			return parConfiguration.getDefaultValue().toString();
 		}
-		final File locDirectory = new File(parPath);
-		return (locDirectory.isDirectory()) ? parPath : (String) EnumConfiguration.INDEX_FILE.getDefaultValue();
-	}
-	private final String resolveIndexFile (final String parPath) {
-		if(StringUtil.isEmpty(parPath)) {
-			return (_imageDirectory != null) ? _imageDirectory : (String) EnumConfiguration.INDEX_FILE.getDefaultValue();
+		final File locFile = new File(parPath);
+		if(parIsDirectory == true) {
+			return (locFile.isDirectory()) ? parPath : parConfiguration.getDefaultValue().toString();
 		}
-		final File locDirectory = new File(parPath);
-		return (locDirectory.isFile()) ? parPath : (String) EnumConfiguration.INDEX_FILE.getDefaultValue();
+		return (locFile.isFile()) ? parPath : parConfiguration.getDefaultValue().toString();
 	}
-
-
 }

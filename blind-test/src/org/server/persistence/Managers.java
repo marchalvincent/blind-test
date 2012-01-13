@@ -20,7 +20,7 @@ public final class Managers {
 		return ManagerBanque.INSTANCE;
 	}
 	
-	final static public Manager<User> createUserManager() {
+	final static public Manager<User> getUserManager() {
 		return ManagerUser.INSTANCE;
 	}
 	/**

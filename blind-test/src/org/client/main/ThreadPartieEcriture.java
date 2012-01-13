@@ -120,7 +120,6 @@ public class ThreadPartieEcriture implements Runnable, Observer {
 				else if (EnumMessage.isDisplay(mess)) {
 					final DisplayMessage locDisplayMessage = (DisplayMessage) messageRetour;
 					name = locDisplayMessage.getFileName();
-					fileProvider.appendMessage(Level.WARNING, String.format("Affichage de l'image %s", name));
 					if (!StringUtil.equals(name, currentImage)) {
 						currentImage = name;
 						if(_stringBuilder.length() != 0) {

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.logging.Level;
 
+import org.commons.cache.AbstractCache;
 import org.commons.cache.Caches;
 import org.commons.downloader.Downloader;
 import org.commons.downloader.ServerDownloader;
@@ -38,21 +39,18 @@ public final class ConnexionAction extends AbstractAction {
 		}
 		final ConnexionMessage locConnexionMessage = (ConnexionMessage) getMessage();
 		final String locLogin = locConnexionMessage.getLogin();
-		final Manager<User> locUserManager = Managers.createUserManager();
+		final AbstractCache<String, User> locUserCacheConnected = Caches.user();
+		if(locUserCacheConnected.containsKey(locLogin)) {
+			final String locResponseMessage = String.format("L'utilisateur %s est déjà connecté. Veuillez vous connecter avec un autre compte.", locLogin);
+			computeError(locInfoProvider, locResponseMessage);
+			return;
+		}
+		final Manager<User> locUserManager = Managers.getUserManager();
 		final User locUser = locUserManager.find(locLogin);
 		final Socket locSocket = getSocket();
 		if(locUser == null) {
 			final String locResponseMessage = String.format("Le compte de l'utilisateur %s n'existe pas. Veuillez créer un compte avant de tenter de vous connecter.", locLogin);
-			locInfoProvider.appendMessage(Level.WARNING, locResponseMessage);
-			final ErrorMessage locErrorMessage = (ErrorMessage) EnumMessage.ERROR.createMessage();
-			locErrorMessage.setMessage(locResponseMessage);
-			try {
-				ReadWriterUtil.write(locSocket, locErrorMessage);
-			} catch (IOException e) {
-				locInfoProvider.appendMessage(Level.SEVERE, String.format("Impossible d'écrire dans la socket d'adresse %s", locSocket.getInetAddress().getHostAddress()), e);
-			} finally {
-				SystemUtil.close(locSocket);
-			}
+			computeError(locInfoProvider, locResponseMessage);
 			return;
 		}
 		final String locPassword = locConnexionMessage.getPassword();
@@ -61,9 +59,14 @@ public final class ConnexionAction extends AbstractAction {
 			return;
 		}
 		final String locResponseMessage = String.format("Le login ou le mot de passe est incorrect. Impossible de se connecter");
-		locInfoProvider.appendMessage(Level.INFO, locResponseMessage);
+		computeError(locInfoProvider, locResponseMessage);
+	}
+	
+	private final void computeError(final InfoProvider locInfoProvider, final String parMessage) {
+		locInfoProvider.appendMessage(Level.WARNING, parMessage);
 		final ErrorMessage locErrorMessage = (ErrorMessage) EnumMessage.ERROR.createMessage();
-		locErrorMessage.setMessage(locResponseMessage);
+		locErrorMessage.setMessage(parMessage);
+		final Socket locSocket = getSocket();
 		try {
 			ReadWriterUtil.write(locSocket, locErrorMessage);
 		} catch (IOException e) {
@@ -85,7 +88,7 @@ public final class ConnexionAction extends AbstractAction {
 		} catch (IOException e) {
 			parInfoProvider.appendMessage(Level.SEVERE, String.format("Impossible d'écrire dans la socket d'adresse %s", parSocket.getInetAddress().getHostAddress()), e);
 		} 
-		final Downloader locDownloader = new ServerDownloader(parSocket, parInfoProvider);
+		final Downloader locDownloader = new ServerDownloader(parUser, parSocket, parInfoProvider);
 		locDownloader.download();
 	}
 }

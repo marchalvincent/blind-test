@@ -15,7 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import org.client.ui.listeners.ValidListener;
-import org.client.ui.listeners.boutonValidEntree;
+import org.client.ui.listeners.BoutonEntree;
 import org.commons.entity.BanqueFacade;
 import org.commons.logger.InfoProvider;
 
@@ -79,7 +79,7 @@ public class JouerPanel extends AbstractPanel {
 		ValidListener validL = new ValidListener (this, locBoutonValide);
 		locBoutonValide.addMouseListener(validL);
 		_observable.add(validL);
-		boutonValidEntree locBoutonValidEntree = new boutonValidEntree (this, null);
+		BoutonEntree locBoutonValidEntree = new BoutonEntree (this, null);
 		champsReponse.addKeyListener(locBoutonValidEntree);
 		_observable.add(locBoutonValidEntree);
 		getContraintes().gridx = 1;

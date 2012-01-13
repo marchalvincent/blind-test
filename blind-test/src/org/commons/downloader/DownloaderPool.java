@@ -24,16 +24,20 @@ public final class DownloaderPool {
 		return _executor.isShutdown();
 	}
 	
-	final protected Boolean submit(final Downloader parDownloader, final InfoProvider parInfoProvider) {
-		parInfoProvider.appendMessage(Level.INFO, "Début du téléchargement des images...");
+	final protected Boolean submit(final Downloader parDownloader) {
 		final Future<Boolean> locFuture = _executor.submit(parDownloader);
 		try {
 			return locFuture.get();
 		} catch (Exception e) {
-		} finally {
-			parInfoProvider.appendMessage(Level.INFO, "Fin du téléchargement des images.");
 		}
 		return Boolean.FALSE;
+	}
+	
+	final protected Boolean submitWithMessage(final Downloader parDownloader, final InfoProvider parInfoProvider, final String parStartMessage, final String parEndMessage) {
+		parInfoProvider.appendMessage(Level.INFO, parStartMessage);
+		final Boolean locResultat = submit(parDownloader);
+		parInfoProvider.appendMessage(Level.INFO, parEndMessage);
+		return locResultat;
 	}
 	
 	private DownloaderPool() {
