@@ -2,7 +2,6 @@ package org.client.main;
 
 import java.io.IOException;
 import java.net.Socket;
-import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
@@ -32,7 +31,6 @@ import org.commons.util.StringUtil;
 import org.commons.util.SystemUtil;
 import org.commons.util.WithUtilities;
 import org.server.concurrent.ReadWriterUtil;
-import org.server.partie.Score;
 
 public class ThreadPartieEcriture implements Runnable, Observer {
 
@@ -123,13 +121,10 @@ public class ThreadPartieEcriture implements Runnable, Observer {
 				if (EnumMessage.isEndGame(mess)) {
 					//Si c'est la fin de partie on quitte les deux boucles pour revenir a la page précédente
 					final Map<String, Integer> locMap = ((EndGameMessage) messageRetour).toMap();
-					final List<Score> locScoreList = Score.convert(locMap);
 					final StringBuilder locBuilder = new StringBuilder();
 					locBuilder.append("Classement : \n");
-					int locCpt = 1;
-					for(final Score locScore : locScoreList) {
-						locBuilder.append("  - ").append(locCpt).append(". ").append(locScore).append("\n");
-						++locCpt;
+					for(final Map.Entry<String, Integer> locScore : locMap.entrySet()) {
+						locBuilder.append("  - ").append(locScore.getKey()).append(" : ").append(locScore.getValue()).append("\n");
 					}
 					JOptionPane.showMessageDialog(null, locBuilder.toString(), "Classement", JOptionPane.INFORMATION_MESSAGE);
 					break end;

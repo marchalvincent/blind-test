@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.TreeMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -38,7 +39,7 @@ public class Partie implements IWithName, Closeable {
 	private AtomicBoolean _hasChangedImage;
 	private AtomicBoolean _hasWinner;
 	private int _size;
-	private AbstractCache<String, Integer> _currentStat;
+	private TreeMap<String, Integer> _currentStat;
 	private ReentrantReadWriteLock _lock;
 
 	public Partie(final String name, final int parSize){
@@ -50,7 +51,7 @@ public class Partie implements IWithName, Closeable {
 		_currentAck = new AtomicInteger(0);
 		_hasChangedImage = new AtomicBoolean(false);
 		_hasWinner = new AtomicBoolean(false);
-		_currentStat = new PartieStat();
+		_currentStat = new TreeMap<String, Integer>();
 		_lock = new ReentrantReadWriteLock();
 	}
 	
@@ -187,7 +188,7 @@ public class Partie implements IWithName, Closeable {
 	}
 	
 	public final Map<String, Integer> getCurrentScore() {
-		return _currentStat.toMap();
+		return new TreeMap<String, Integer>(_currentStat);
 	}
 
 	public final void notifyWinner(final InfoProvider parInfoProvider, final User parWinner, final boolean parHasWinner) {
