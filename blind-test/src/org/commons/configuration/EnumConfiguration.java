@@ -14,6 +14,7 @@ import org.commons.util.IWithName;
 import org.commons.util.IWithSupport;
 import org.commons.util.StringUtil;
 import org.commons.util.SystemUtil;
+import org.commons.util.WithUtilities;
 
 /**
  * Une énumération de toutes les propriétés supportées pour une {@link Configuration}.
@@ -128,6 +129,46 @@ public enum EnumConfiguration implements IWithName, IWithSupport {
 				return "Il n'y a aucun fond d'écran dans l'application.";
 			}
 			return String.format("Le chemin du fond d'écran de l'application est \"%s\".", parConfiguration.getBackgroundImage());
+		}
+	},
+	DISPLAY_TRANSPARENCY("display_transparency", "-dt", false) {
+		@Override
+		public final void setConfigurationValue(final Configuration parConfiguration, final String parValue) {
+			parConfiguration.addDisplayTypes(new DisplayConfigurationType(getConstName(), parValue));
+		}
+
+		@Override
+		public final String getFormattedValue(final Configuration parConfiguration) {
+			final List<DisplayConfigurationType> locChemin = parConfiguration.getDisplayTypes();
+			final DisplayConfigurationType locType = WithUtilities.getByName(locChemin, getConstName());
+			if(locType == null) {
+				return "Il n'y a aucune propriété pour la transparence. Celle-ci est donc désactivée.";
+			}
+			if(locType.isEnabled()) {
+				return String.format("La transparence est activée. Le nombre de répétitions est de %d et le temps de rechargement est de %f.", locType.getRepeat(), locType.getTime());
+			} else {
+				return "La transparence est désactivée.";
+			}
+		}
+	},	
+	DISPLAY_NONE("display_none", "-dn", false) {
+		@Override
+		public void setConfigurationValue(final Configuration parConfiguration, final String parValue) {
+			parConfiguration.addDisplayTypes(new DisplayConfigurationType(getConstName(), parValue));
+		}
+
+		@Override
+		public final String getFormattedValue(final Configuration parConfiguration) {
+			final List<DisplayConfigurationType> locChemin = parConfiguration.getDisplayTypes();
+			final DisplayConfigurationType locType = WithUtilities.getByName(locChemin, getConstName());
+			if(locType == null) {
+				return "Il n'y a aucune propriété pour l'effet normal. Celui-ci est donc désactivé.";
+			}
+			if(locType.isEnabled()) {
+				return "L'effet normal est activé.";
+			} else {
+				return "L'effet normal est désactivé.";
+			}
 		}
 	};
 

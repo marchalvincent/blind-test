@@ -17,6 +17,10 @@ public interface DisplayImage  {
 	 * @param parWidth {@code int} la largeur de l'image
 	 * @param parHeight {@code int} la hauteur de l'image
 	 */
-	void displayImage(final Graphics parGraphics, final BufferedImage parImage, final int parWidth, final int parHeight);
+	void displayImage(final Graphics parGraphics, final BufferedImage parImage, final int parWidth, final int parHeight, final int parCurrentRepeat);
+	
+	int getRepeat();
+	
+	long getTimeRepeat();
 
 }
