@@ -31,10 +31,6 @@ public class BandeDisplayImage implements DisplayImage {
 		par2DGraphics.drawImage(parImage, 0, 0, parWidth, parHeight, null);
 		par2DGraphics.setPaint(Color.BLACK);
 		par2DGraphics.fillRect(0, 0, (int)(parWidth - ((parWidth / locRepeat) * locCurrentRepeat)), parHeight);
-		try {
-			Thread.sleep(getTimeRepeat());
-		} catch (InterruptedException e) {
-		}
 	}
 
 	@Override

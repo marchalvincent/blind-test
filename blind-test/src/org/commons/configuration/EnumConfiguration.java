@@ -178,7 +178,6 @@ public enum EnumConfiguration implements IWithName, IWithSupport {
 		@Override
 		public void setConfigurationValue(Configuration parConfiguration, String parValue) {
 			parConfiguration.addDisplayTypes(new DisplayConfigurationType(getConstName(), parValue));
-			
 		}
 
 		@Override
@@ -192,6 +191,29 @@ public enum EnumConfiguration implements IWithName, IWithSupport {
 				return String.format("L'échelle est activée. Le nombre de répétitions est de %d et le temps de rechargement est de %d.", locType.getRepeat(), locType.getTime());
 			} else {
 				return "L'échelle est désactivée.";
+			}
+		}
+		
+	},
+	DISPLAY_FLOU("display_flou", "-df", false) {
+
+		@Override
+		public void setConfigurationValue(Configuration parConfiguration, String parValue) {
+			parConfiguration.addDisplayTypes(new DisplayConfigurationType(getConstName(), parValue));
+			
+		}
+
+		@Override
+		public String getFormattedValue(Configuration parConfiguration) {
+			final List<DisplayConfigurationType> locChemin = parConfiguration.getDisplayTypes();
+			final DisplayConfigurationType locType = WithUtilities.getByName(locChemin, getConstName());
+			if(locType == null) {
+				return "Il n'y a aucune propriété pour le flou. Celle-ci est donc désactivée.";
+			}
+			if(locType.isEnabled()) {
+				return String.format("Le flou est activé. Le nombre de répétitions est de %d et le temps de rechargement est de %d.", locType.getRepeat(), locType.getTime());
+			} else {
+				return "Le flou est désactivé.";
 			}
 		}
 		
