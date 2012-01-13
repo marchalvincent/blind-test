@@ -55,7 +55,7 @@ public class Partie implements IWithName, Closeable {
 		_lock = new ReentrantReadWriteLock();
 	}
 	
-	protected synchronized final ReentrantReadWriteLock lock() {
+	protected final ReentrantReadWriteLock lock() {
 		return _lock;
 	}
 
