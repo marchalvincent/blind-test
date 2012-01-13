@@ -34,10 +34,6 @@ public final class ZoomDisplayImage implements DisplayImage {
 			scale = 1;
 		}
 		par2DGraphics.drawImage(parImage, 0, 0, parWidth, parHeight, null);
-		try {
-			Thread.sleep(getTimeRepeat());
-		} catch (InterruptedException e) {
-		}
 	}
 
 	@Override

@@ -173,15 +173,15 @@ public class Partie implements IWithName, Closeable {
 	public final void updateStats(final User parWinner) {
 		final Manager<User> locUserManager = Managers.getUserManager();
 		for(final User locUser : _sockets.keys()) {
-			final int locCurrentStat = _currentStat.get(locUser.getConstName());
+			int locCurrentStat = _currentStat.get(locUser.getConstName());
 			if(locUser.equals(parWinner)) {
 				locUser.setVictoire(locUser.getVictoire().intValue() + 1);
-				final int locVictoire = ScoreUtil.computeVictoire(locCurrentStat);
-				_currentStat.put(locUser.getConstName(), Integer.valueOf(locVictoire));
+				locCurrentStat += 1;
+				_currentStat.put(locUser.getConstName(), Integer.valueOf(locCurrentStat));
 			} else {
 				locUser.setDefaite(locUser.getDefaite().intValue() + 1);
-				final int locDefaite = ScoreUtil.computeDefaite(locCurrentStat);
-				_currentStat.put(locUser.getConstName(), Integer.valueOf(locDefaite));
+				locCurrentStat -= 1;
+				_currentStat.put(locUser.getConstName(), Integer.valueOf(locCurrentStat));
 			}
 			locUserManager.merge(locUser);
 		}

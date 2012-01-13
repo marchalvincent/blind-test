@@ -42,6 +42,6 @@ public class Score implements Comparable<Score>, IWithName {
 	}
 	
 	public final String toString() {
-		return _name + " - " + _value;
+		return _name + " - " + (_value);
 	}
 }
