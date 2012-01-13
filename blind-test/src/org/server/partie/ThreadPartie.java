@@ -2,7 +2,6 @@ package org.server.partie;
 
 import java.io.IOException;
 import java.net.Socket;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.logging.Level;
 
 import org.client.ui.display.EnumDisplayImage;
@@ -21,8 +20,6 @@ import org.commons.message.InfoMessage;
 import org.server.concurrent.ReadWriterUtil;
 
 public final class ThreadPartie implements Runnable {
-
-	static private final ReentrantReadWriteLock LOCK = new ReentrantReadWriteLock();
 
 	final private Partie _partie;
 	final private Socket _socket;
@@ -46,7 +43,7 @@ public final class ThreadPartie implements Runnable {
 				final DisplayMessage locMessage = (DisplayMessage) EnumMessage.DISPLAY.createMessage();
 				Banque locBanque = null;
 				_wrongAnswer = 0;
-				LOCK.writeLock().lock();
+				_partie.lock().writeLock().lock();
 				try {
 					if(_partie.hasUser(_user)) {
 						if(_partie.hasChangedImage() == false) {
@@ -63,7 +60,7 @@ public final class ThreadPartie implements Runnable {
 						}
 					}
 				}finally {
-					LOCK.writeLock().unlock();
+					_partie.lock().writeLock().unlock();
 				}
 				locMessage.setFileName(locBanque.getConstName());
 				final EnumDisplayImage locDisplay = EnumDisplayImage.randomDisplay();
@@ -86,7 +83,7 @@ public final class ThreadPartie implements Runnable {
 						break end;
 					}
 					if (locResponseMessage instanceof InfoMessage) {
-						LOCK.writeLock().lock();
+						_partie.lock().writeLock().lock();
 						try {
 							_partie.incrementAck();
 							if (_partie.canDisplayNewImage() == true) {
@@ -97,12 +94,12 @@ public final class ThreadPartie implements Runnable {
 							}
 							break;
 						} finally {
-							LOCK.writeLock().unlock();
+							_partie.lock().writeLock().unlock();
 						}
 					}
 					final AnswerMessage locAnswerMessage = (AnswerMessage) locResponseMessage;
 					final String locAnswer = locAnswerMessage.getAnswer();
-					LOCK.writeLock().lock();
+					_partie.lock().writeLock().lock();
 					try {
 						if (_partie.hasWinner() == false && _partie.isValidAnswer(locAnswer)) {
 							_partie.notifyWinner(locInfoProvider, _user);
@@ -128,8 +125,8 @@ public final class ThreadPartie implements Runnable {
 							} catch (IOException e) {
 							}
 						}
-					}finally {
-						LOCK.writeLock().unlock();
+					} finally {
+						_partie.lock().writeLock().unlock();
 					}
 				}
 			}
