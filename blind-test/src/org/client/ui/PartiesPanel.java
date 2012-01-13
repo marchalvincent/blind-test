@@ -54,6 +54,7 @@ public class PartiesPanel extends AbstractPanel {
 		_model.clear();
 		for (final String locPartieName : parListe) {
 			if (StringUtil.isEmpty(locPartieName)) continue;
+			
 			_model.addElement(locPartieName);
 		}
 		_jlist.setSelectedIndex(locSelectedIndex);
