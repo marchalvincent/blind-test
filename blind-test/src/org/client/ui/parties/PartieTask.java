@@ -28,10 +28,6 @@ public class PartieTask extends TimerTask {
 		_configuration = parConfiguration;
 		_partiesWindow = window;
 		_partiesPanel = panel;
-//		_partiesPanel = new PartiesPanel(parLogin, Arrays.<String>asList("")).initPanel();
-//		_partiesWindow.setContentPane(_partiesPanel);
-//		_partiesWindow.setSize(300, 300);
-//		_partiesWindow.setVisible(true);
 	}
 	
 	@Override
