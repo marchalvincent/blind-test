@@ -143,13 +143,16 @@ public class Fenetre extends WindowAdapter {
 		Configuration conf = ConfigurationManager.getConfiguration();
 		InfoProvider info = InfoProviderManager.getUiInfoProvider();
 		
-		try {
-			Socket socket = new Socket(conf.getHostName(), conf.getPort());
-			ReadWriterUtil.write(socket, disconnectMessage);
-			SystemUtil.close(socket);
-		} catch (IOException e) {
-			info.appendMessage(Level.SEVERE, "Impossible de spécifier au serveur que l'utilisateur s'est déconnecté.");
+		if (ClientManager.getLogin() != "") {
+			try {
+				Socket socket = new Socket(conf.getHostName(), conf.getPort());
+				ReadWriterUtil.write(socket, disconnectMessage);
+				SystemUtil.close(socket);
+			} catch (IOException e) {
+				info.appendMessage(Level.SEVERE, "Impossible de spécifier au serveur que l'utilisateur s'est déconnecté.");
+			}
 		}
+		
 		
 	}
 }
