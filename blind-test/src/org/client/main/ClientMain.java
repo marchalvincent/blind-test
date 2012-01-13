@@ -25,10 +25,6 @@ public final class ClientMain {
 		final Configuration locConfiguration = loadConfiguration(parArguments);
 		loadApplication(locConfiguration);
 		loadUI();
-//		final DownloaderPool locPool = DownloaderPool.getInstance();
-//		if(locPool.isShutdown() == false) {
-//			locPool.shutdown();
-//		}
 	}
 
 	static private final Configuration loadConfiguration(final String[] parArguments) {
@@ -56,7 +52,6 @@ public final class ClientMain {
 			@Override
 			public final void run() {
 				Fenetre.instance().initFenetre();
-				//TODO : Francois, tu ajoute un UiInfoProvider ici
 			}
 		});
 	}

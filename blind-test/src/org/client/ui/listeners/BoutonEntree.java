@@ -21,7 +21,6 @@ public class BoutonEntree extends Observable implements KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-			//TODO : envoyer reponse jeu
 			this.setChanged();
 			this.notifyObservers(_panel.getAnswer());
 			_panel.clearText();
