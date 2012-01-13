@@ -27,10 +27,6 @@ public final class TransparencyDisplayImage implements DisplayImage {
 		float locCurrentRepeat = parCurrentRepeat;
 		par2DGraphics.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (locCurrentRepeat / locRepeat)));
 		par2DGraphics.drawImage(parImage, 0, 0, parWidth, parHeight, null);
-		try {
-			Thread.sleep(getTimeRepeat());
-		} catch (InterruptedException e) {
-		}
 	}
 
 	@Override
