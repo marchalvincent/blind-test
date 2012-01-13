@@ -9,16 +9,11 @@ import org.commons.configuration.Configuration;
 import org.commons.configuration.ConfigurationManager;
 import org.commons.configuration.DisplayConfigurationType;
 
-/**
- * 
- * @author francois
- *
- */
-public class BandeDisplayImage implements DisplayImage {
+public class ScaleDisplayImage implements DisplayImage {
 	
 	final private Configuration _configuration;
 	
-	protected BandeDisplayImage () {
+	protected ScaleDisplayImage () {
 		super();
 		_configuration = ConfigurationManager.getConfiguration();
 	}
@@ -30,7 +25,10 @@ public class BandeDisplayImage implements DisplayImage {
 		float locCurrentRepeat = parCurrentRepeat;
 		par2DGraphics.drawImage(parImage, 0, 0, parWidth, parHeight, null);
 		par2DGraphics.setPaint(Color.BLACK);
-		par2DGraphics.fillRect(0, 0, (int)(parWidth - ((parWidth / locRepeat) * locCurrentRepeat)), parHeight);
+		par2DGraphics.fillRect(0, 0, (int)((parWidth / 2) - ((parWidth / locRepeat) * locCurrentRepeat)), parHeight);
+		par2DGraphics.fillRect((int)((parWidth / 2) + ((parWidth / locRepeat) * locCurrentRepeat)), 0, parWidth, parHeight);
+		par2DGraphics.fillRect(0, 0, parWidth, (int)((parHeight / 2) - ((parHeight / locRepeat) * locCurrentRepeat)));
+		par2DGraphics.fillRect(0, (int)((parHeight / 2) + ((parHeight / locRepeat) * locCurrentRepeat)), parWidth, parHeight);
 		try {
 			Thread.sleep(getTimeRepeat());
 		} catch (InterruptedException e) {
