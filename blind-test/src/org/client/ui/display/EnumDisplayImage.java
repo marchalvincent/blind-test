@@ -18,7 +18,8 @@ public enum EnumDisplayImage implements IWithId, IWithName, DisplayImage {
 	TRANSPARENCY(Integer.valueOf(1), EnumConfiguration.DISPLAY_TRANSPARENCY.getConstName(), new TransparencyDisplayImage()),
 	BANDE(Integer.valueOf(2), EnumConfiguration.DISPLAY_BANDE.getConstName(), new BandeDisplayImage()),
 	SCALE(Integer.valueOf(3), EnumConfiguration.DISPLAY_SCALE.getConstName(), new ScaleDisplayImage()),
-	FLOU(Integer.valueOf(4), EnumConfiguration.DISPLAY_FLOU.getConstName(), new FlouDisplayImage());
+	FLOU(Integer.valueOf(4), EnumConfiguration.DISPLAY_FLOU.getConstName(), new FlouDisplayImage()),
+	ZOOM(Integer.valueOf(5), EnumConfiguration.DISPLAY_ZOOM.getConstName(), new ZoomDisplayImage());
 	
 	final private Integer _id;
 	final private String _name;

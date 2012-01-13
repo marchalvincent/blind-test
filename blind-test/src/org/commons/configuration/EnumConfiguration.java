@@ -173,6 +173,29 @@ public enum EnumConfiguration implements IWithName, IWithSupport {
 		}
 		
 	},
+	DISPLAY_ZOOM("display_zoom", "-dz", false) {
+
+		@Override
+		public void setConfigurationValue(Configuration parConfiguration,
+				String parValue) {
+			parConfiguration.addDisplayTypes(new DisplayConfigurationType(getConstName(), parValue));
+		}
+
+		@Override
+		public String getFormattedValue(Configuration parConfiguration) {
+			final List<DisplayConfigurationType> locChemin = parConfiguration.getDisplayTypes();
+			final DisplayConfigurationType locType = WithUtilities.getByName(locChemin, getConstName());
+			if(locType == null) {
+				return "Il n'y a aucune propriété pour le zoom. Celle-ci est donc désactivée.";
+			}
+			if(locType.isEnabled()) {
+				return String.format("Le zoom est activé. Le nombre de répétitions est de %d et le temps de rechargement est de %d.", locType.getRepeat(), locType.getTime());
+			} else {
+				return "Le zoom est désactivé.";
+			}
+		}
+		
+	},
 	DISPLAY_SCALE("display_scale", "-ds", false) {
 
 		@Override
