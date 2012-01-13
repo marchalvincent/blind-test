@@ -145,7 +145,7 @@ public enum EnumConfiguration implements IWithName, IWithSupport {
 				return "Il n'y a aucune propriété pour la transparence. Celle-ci est donc désactivée.";
 			}
 			if(locType.isEnabled()) {
-				return String.format("La transparence est activée. Le nombre de répétitions est de %d et le temps de rechargement est de %f.", locType.getRepeat(), locType.getTime());
+				return String.format("La transparence est activée. Le nombre de répétitions est de %d et le temps de rechargement est de %d.", locType.getRepeat(), locType.getTime());
 			} else {
 				return "La transparence est désactivée.";
 			}
@@ -166,9 +166,32 @@ public enum EnumConfiguration implements IWithName, IWithSupport {
 				return "Il n'y a aucune propriété pour les bandes. Celle-ci est donc désactivée.";
 			}
 			if(locType.isEnabled()) {
-				return String.format("Les bandes sont activées. Le nombre de répétitions est de %d et le temps de rechargement est de %f.", locType.getRepeat(), locType.getTime());
+				return String.format("Les bandes sont activées. Le nombre de répétitions est de %d et le temps de rechargement est de %d.", locType.getRepeat(), locType.getTime());
 			} else {
 				return "Les bandes sont désactivées.";
+			}
+		}
+		
+	},
+	DISPLAY_SCALE("display_scale", "-ds", false) {
+
+		@Override
+		public void setConfigurationValue(Configuration parConfiguration, String parValue) {
+			parConfiguration.addDisplayTypes(new DisplayConfigurationType(getConstName(), parValue));
+			
+		}
+
+		@Override
+		public String getFormattedValue(Configuration parConfiguration) {
+			final List<DisplayConfigurationType> locChemin = parConfiguration.getDisplayTypes();
+			final DisplayConfigurationType locType = WithUtilities.getByName(locChemin, getConstName());
+			if(locType == null) {
+				return "Il n'y a aucune propriété pour l'échelle. Celle-ci est donc désactivée.";
+			}
+			if(locType.isEnabled()) {
+				return String.format("L'échelle est activée. Le nombre de répétitions est de %d et le temps de rechargement est de %d.", locType.getRepeat(), locType.getTime());
+			} else {
+				return "L'échelle est désactivée.";
 			}
 		}
 		

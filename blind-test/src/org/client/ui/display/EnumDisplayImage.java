@@ -16,7 +16,8 @@ public enum EnumDisplayImage implements IWithId, IWithName, DisplayImage {
 
 	NONE(Integer.valueOf(0), EnumConfiguration.DISPLAY_NONE.getConstName(), new NoneDisplayImage()),
 	TRANSPARENCY(Integer.valueOf(1), EnumConfiguration.DISPLAY_TRANSPARENCY.getConstName(), new TransparencyDisplayImage()),
-	BANDE(Integer.valueOf(2), EnumConfiguration.DISPLAY_BANDE.getConstName(), new BandeDisplayImage());
+	BANDE(Integer.valueOf(2), EnumConfiguration.DISPLAY_BANDE.getConstName(), new BandeDisplayImage()),
+	SCALE(Integer.valueOf(3), EnumConfiguration.DISPLAY_SCALE.getConstName(), new ScaleDisplayImage());
 	
 	final private Integer _id;
 	final private String _name;
