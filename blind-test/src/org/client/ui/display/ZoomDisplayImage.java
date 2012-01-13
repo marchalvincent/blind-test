@@ -25,14 +25,15 @@ public final class ZoomDisplayImage implements DisplayImage {
 		float locRepeat = getRepeat();
 		par2DGraphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		par2DGraphics.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-		par2DGraphics.translate(0, 0);
+		//par2DGraphics.translate(0, 0);
 		for (int i=parCurrentRepeat; i<locRepeat;i++) {
 			scale += 0.01;
 			par2DGraphics.scale(scale,scale);
+			if (scale > 1){
+				scale = 1;
+			}
 		}
-		if (scale > 1){
-			scale = 1;
-		}
+		
 		par2DGraphics.drawImage(parImage, 0, 0, parWidth, parHeight, null);
 	}
 
