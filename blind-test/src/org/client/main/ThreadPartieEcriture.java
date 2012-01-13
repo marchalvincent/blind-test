@@ -2,10 +2,14 @@ package org.client.main;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.List;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.logging.Level;
+
+import javax.swing.JOptionPane;
 
 import org.client.ui.AccueilPanel;
 import org.client.ui.Fenetre;
@@ -19,6 +23,7 @@ import org.commons.logger.InfoProviderManager;
 import org.commons.message.AnswerMessage;
 import org.commons.message.DisconnectMessage;
 import org.commons.message.DisplayMessage;
+import org.commons.message.EndGameMessage;
 import org.commons.message.EnumMessage;
 import org.commons.message.IMessage;
 import org.commons.message.PlayMessage;
@@ -27,6 +32,7 @@ import org.commons.util.StringUtil;
 import org.commons.util.SystemUtil;
 import org.commons.util.WithUtilities;
 import org.server.concurrent.ReadWriterUtil;
+import org.server.partie.Score;
 
 public class ThreadPartieEcriture implements Runnable, Observer {
 
@@ -116,6 +122,16 @@ public class ThreadPartieEcriture implements Runnable, Observer {
 
 				if (EnumMessage.isEndGame(mess)) {
 					//Si c'est la fin de partie on quitte les deux boucles pour revenir a la page précédente
+					final Map<String, Integer> locMap = ((EndGameMessage) messageRetour).toMap();
+					final List<Score> locScoreList = Score.convert(locMap);
+					final StringBuilder locBuilder = new StringBuilder();
+					locBuilder.append("Classement : \n");
+					int locCpt = 1;
+					for(final Score locScore : locScoreList) {
+						locBuilder.append("  - ").append(locCpt).append(". ").append(locScore).append("\n");
+						++locCpt;
+					}
+					JOptionPane.showMessageDialog(null, locBuilder.toString(), "Classement", JOptionPane.INFORMATION_MESSAGE);
 					break end;
 				}
 				else if (EnumMessage.isDisplay(mess)) {

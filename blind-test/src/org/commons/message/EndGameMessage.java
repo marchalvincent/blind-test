@@ -29,6 +29,10 @@ public class EndGameMessage extends AbstractMessage implements IWithSupport {
 	public final String getMessage() {
 		return message;
 	}
+	
+	public final Map<String, Integer> toMap() {
+		return new HashMap<String, Integer>(_scores);
+	}
 
 	public final void setMessage(String message) {
 		this.message = message;
