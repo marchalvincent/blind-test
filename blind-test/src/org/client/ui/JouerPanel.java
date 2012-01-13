@@ -31,6 +31,7 @@ public class JouerPanel extends AbstractPanel {
 	private List<Observable> _observable;
 	private BoutonGris boutonQuitter;
 	private EnumDisplayImage _displayImage;
+	private int _currentPosition;
 
 	public JouerPanel() {
 		_observable = new ArrayList<Observable>();
@@ -115,14 +116,24 @@ public class JouerPanel extends AbstractPanel {
 		}
 	}
 
-	public void newTest(final InfoProvider parInfoProvider,
-			final String imagePath) {
+	public void newTest(final InfoProvider parInfoProvider, final String imagePath, final EnumDisplayImage parDisplay) {
+		_displayImage = parDisplay;
 		setImagePath(parInfoProvider, imagePath);
 		clearText();
-		// TODO : On récupère le display ICI et on le fout dans la variable
-		// d'instance
-		this.validate();
-		this.repaint();
+		_currentPosition = 0;
+		if(_displayImage.getRepeat() <= 1) {
+			this.validate();
+			this.repaint();	
+			return;
+		}
+		for(int i = 0 ; i < _displayImage.getRepeat() ; i++) {
+			this.validate();
+			this.repaint();	
+			++_currentPosition;
+			try {
+				Thread.sleep(_displayImage.getTimeRepeat());
+			} catch (InterruptedException e) {}
+		}
 	}
 
 	public final void clearText() {
@@ -136,6 +147,6 @@ public class JouerPanel extends AbstractPanel {
 			return;
 
 		final Fenetre locFenetre = Fenetre.instance();
-		_displayImage.displayImage(parGraphics, _currentImage, locFenetre.getWidth(), locFenetre.getHeight());
+		_displayImage.displayImage(parGraphics, _currentImage, locFenetre.getWidth(), locFenetre.getHeight(), _currentPosition);
 	}
 }

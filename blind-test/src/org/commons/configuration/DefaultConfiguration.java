@@ -7,10 +7,13 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.logging.Level;
 
+import org.client.ui.display.EnumDisplayImage;
 import org.commons.exception.BlindTestException;
 import org.commons.util.StringUtil;
 import org.commons.util.WithUtilities;
@@ -34,6 +37,7 @@ public final class DefaultConfiguration implements Configuration {
 	private String _indexFile;
 	private Integer _port, _timer;
 	private String _backgroundImage;
+	private List<DisplayConfigurationType> _types;
 	
 	private Properties _properties;
 	
@@ -146,6 +150,7 @@ public final class DefaultConfiguration implements Configuration {
 		} catch (IOException locException) {
 			throw new BlindTestException("Erreur lors du chargement de la configuration.", locException);
 		}
+		_types = new ArrayList<DisplayConfigurationType>();
 		final EnumConfiguration[] locArray = EnumConfiguration.values();
 		for(final Map.Entry<Object, Object> locEntry : _properties.entrySet()) {
 			final String locProperty = locEntry.getKey().toString();
@@ -309,5 +314,20 @@ public final class DefaultConfiguration implements Configuration {
 			return (locFile.isDirectory()) ? parPath : parConfiguration.getDefaultValue().toString();
 		}
 		return (locFile.isFile()) ? parPath : parConfiguration.getDefaultValue().toString();
+	}
+
+	@Override
+	public final List<DisplayConfigurationType> getDisplayTypes() {
+		return new ArrayList<DisplayConfigurationType>(_types);
+	}
+
+	@Override
+	public final void addDisplayTypes(final DisplayConfigurationType parType) {
+		_types.add(parType);
+	}
+	
+	@Override
+	public final DisplayConfigurationType getDisplayType(final EnumDisplayImage parImage) {
+		return WithUtilities.getByName(_types, parImage.getConstName());
 	}
 }
