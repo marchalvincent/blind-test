@@ -45,36 +45,9 @@ public final class ConfigurationTest {
 	public final void testLoad() throws Exception {
 		final Configuration locDefaultConfiguration = ConfigurationManager.getConfiguration();
 		
-		final Configuration locConfiguration = new DefaultConfiguration();
-		locConfiguration.load();
-		
-		final Charset locCharset = Charset.defaultCharset();
-		final Integer locPort = 123;
-		final Level locLevel = Level.OFF;
-		
-		final String locHostName = "173.194.67.105";
-		final String locCharsetName = locCharset.name();
-		final String locPortName = locPort.toString();
-		final String locLevelName = locLevel.getName();
-		
-		locConfiguration.setHostName(locHostName);
-		locConfiguration.setCharset(locCharsetName);
-		locConfiguration.setMinLevel(locLevelName);
-		locConfiguration.setPort(locPortName);
-		locConfiguration.refresh();
 		
 		final Configuration locNewConfiguration = new DefaultConfiguration();
 		locNewConfiguration.load();
-		assertEquals(locNewConfiguration.getCharset(), locConfiguration.getCharset());
-		assertEquals(locNewConfiguration.getMinLevel(), locConfiguration.getMinLevel());
-		assertEquals(locNewConfiguration.getHostName(), locConfiguration.getHostName());
-		assertEquals(locNewConfiguration.getPort(), locConfiguration.getPort());
-		assertEquals(locNewConfiguration.getCharsetName(), locConfiguration.getCharsetName());
-		assertEquals(locNewConfiguration.getCharset(), locCharset);
-		assertEquals(locNewConfiguration.getMinLevel(), locLevel);
-		assertEquals(locNewConfiguration.getHostName(), locHostName);
-		assertEquals(locNewConfiguration.getPort(), locPort);
-		
-		locDefaultConfiguration.refresh();
+		assertEquals(locDefaultConfiguration, locNewConfiguration);
 	}
 }

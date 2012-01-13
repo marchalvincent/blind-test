@@ -36,16 +36,16 @@ public final class ThreadConnexion implements Callable <Boolean> {
 		ConnexionMessage message = (ConnexionMessage) EnumMessage.CONNEXION.createMessage();
 		message.setLogin(_login);
 		message.setPassword(_password);
-
-		Configuration config = ConfigurationManager.getConfiguration();
-		final InfoProvider fileProvider = InfoProviderManager.getUiInfoProvider();
+		final Configuration locConfiguration = ConfigurationManager.getConfiguration();
+		final InfoProvider locFileProvider = InfoProviderManager.getUiInfoProvider();
 		Socket locSocket = null;
 		try {
 			// on envoie le message
-			locSocket = new Socket(config.getHostName(), config.getPort());
+			locSocket = new Socket(locConfiguration.getHostName(), locConfiguration.getPort());
 			ReadWriterUtil.write(locSocket, message);
+			locFileProvider.appendMessage(Level.INFO, "Tentative de connexion...");
 		} catch (IOException locException) {
-			fileProvider.appendMessage(Level.SEVERE, String.format("Impossible de se connecter à l'adresse %s sur le port %d.", config.getHostName(), config.getPort()), locException);
+			locFileProvider.appendMessage(Level.SEVERE, String.format("Impossible de se connecter à l'adresse %s sur le port %d.", locConfiguration.getHostName(), locConfiguration.getPort()), locException);
 			SystemUtil.close(locSocket);
 			return false;
 		}
@@ -57,14 +57,14 @@ public final class ThreadConnexion implements Callable <Boolean> {
 			SystemUtil.close(locSocket);
 			return false;
 		} catch (IOException e) {
-			fileProvider.appendMessage(Level.SEVERE, String.format("Impossible de se connecter à l'adresse %s sur le port %d.", config.getHostName(), config.getPort()), e);
+			locFileProvider.appendMessage(Level.SEVERE, String.format("Impossible de se connecter à l'adresse %s sur le port %d.", locConfiguration.getHostName(), locConfiguration.getPort()), e);
 			SystemUtil.close(locSocket);
 			return false;
 		}
 		
 		if (messageRetour instanceof IWithSupport) {
 			IWithSupport locSupport = (IWithSupport) messageRetour;
-			fileProvider.appendMessage(Level.INFO, locSupport.getSupport());
+			locFileProvider.appendMessage(Level.INFO, locSupport.getSupport());
 		}
 		final EnumMessage mess = WithUtilities.getById(EnumMessage.values(), messageRetour.getId());
 		if (EnumMessage.isError(mess)) {
@@ -73,7 +73,7 @@ public final class ThreadConnexion implements Callable <Boolean> {
 			SystemUtil.close(locSocket);
 			return false;
 		}
-		final Downloader locDownloader = new ClientDownloader(locSocket, fileProvider);
+		final Downloader locDownloader = new ClientDownloader(locSocket, locFileProvider);
 		locDownloader.download();
 		SystemUtil.close(locSocket);
 		return true;

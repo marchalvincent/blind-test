@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.logging.Level;
 
+import org.commons.entity.User;
 import org.commons.incremental.DownloadImageFacade;
 import org.commons.logger.InfoProvider;
 import org.commons.message.DownloadMessage;
@@ -13,8 +14,12 @@ import org.server.concurrent.ReadWriterUtil;
 
 public final class ServerDownloader extends AbstractDownloader {
 	
-	public ServerDownloader(final Socket parSocket, final InfoProvider parInfoProvider) {
+	private final User _user;
+	
+	public ServerDownloader(final User parUser,final Socket parSocket, final InfoProvider parInfoProvider) {
 		super(parSocket, parInfoProvider);
+		
+		_user = parUser;
 	}
 	
 	@Override
@@ -23,7 +28,7 @@ public final class ServerDownloader extends AbstractDownloader {
 		try {
 			locDownloadMessage = ReadWriterUtil.read(_socket);
 		} catch (IOException e) {
-			_infoProvider.appendMessage(Level.SEVERE, String.format("Impossible d'écrire ou de lire dans la socket d'adresse %s", _socket.getInetAddress().getHostAddress()), e);
+			_infoProvider.appendMessage(Level.SEVERE, String.format("Le téléchargement de l'utilisateur %s a échoué.", _user.getConstName()), e);
 			SystemUtil.close(_socket);
 			return Boolean.FALSE;
 		} catch (ClassNotFoundException e) {
@@ -35,7 +40,7 @@ public final class ServerDownloader extends AbstractDownloader {
 			final IMessage locResponse = DownloadImageFacade.getImages(locDownloadrealMessage.getVersions());
 			ReadWriterUtil.write(_socket, locResponse);
 		} catch (IOException e) {
-			_infoProvider.appendMessage(Level.SEVERE, String.format("Impossible d'envoyer des images dans la socket d'adresse %s", _socket.getInetAddress().getHostAddress()), e);
+			_infoProvider.appendMessage(Level.SEVERE, String.format("Le téléchargement de l'utilisateur %s a échoué.", _user.getConstName()), e);
 			return Boolean.FALSE;
 		} finally {
 			SystemUtil.close(_socket);
@@ -45,6 +50,8 @@ public final class ServerDownloader extends AbstractDownloader {
 
 	@Override
 	public final Boolean download() {
-		return DownloaderPool.getInstance().submit(this, _infoProvider);
+		final String locStartMessage = String.format("L'utilisateur %s lance un téléchargement d'images.", _user.getConstName());
+		final String locEndMessage = String.format("L'utilisateur %s a fini le téléchargement des images.", _user.getConstName());
+		return DownloaderPool.getInstance().submitWithMessage(this, _infoProvider, locStartMessage, locEndMessage);
 	}
 }

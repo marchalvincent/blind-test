@@ -18,6 +18,9 @@ import org.server.concurrent.ReadWriterUtil;
 
 public final class ClientDownloader extends AbstractDownloader {
 	
+	static private final String START_MESSAGE = "Début du téléchargement des images...";
+	static private final String END_MESSAGE = "Fin du téléchargement des images.";
+	
 	public ClientDownloader(final Socket parSocket, final InfoProvider parInfoProvider) {
 		super(parSocket, parInfoProvider);
 	}
@@ -55,9 +58,13 @@ public final class ClientDownloader extends AbstractDownloader {
 			return Boolean.FALSE;
 		}
 		final BanqueFacade locFacade = BanqueFacade.instance();
-		for(final Map.Entry<String, byte[]> locEntry : locResponseDownload.getDownload().entrySet()) {
+		double locDownloadSize = 0;
+		final Map<String, byte[]> locValuesDownloaded = locResponseDownload.getDownload();
+		for(final Map.Entry<String, byte[]> locEntry : locValuesDownloaded.entrySet()) {
 			try {
-				final RenderedImage locImage = locFacade.convertByte(locEntry.getValue());
+				final byte[] locEntryValue = locEntry.getValue();
+				locDownloadSize += locEntryValue.length;
+				final RenderedImage locImage = locFacade.convertByte(locEntryValue);
 				final String locPath = locConfiguration.getImageDirectory() + locEntry.getKey();
 				locFacade.writeImage(locPath, locImage);
 			} catch (IOException e) {
@@ -65,11 +72,20 @@ public final class ClientDownloader extends AbstractDownloader {
 				return Boolean.FALSE;
 			}
 		}
+		final int locSize = locValuesDownloaded.size();
+		locDownloadSize = Math.rint(locDownloadSize / 1000.0);
+		if(locSize == 0) {
+			_infoProvider.appendMessage(Level.INFO, "Aucune image n'a été téléchargée.");
+		} else if(locSize == 1) {
+			_infoProvider.appendMessage(Level.INFO, String.format("1 image a été téléchargée pour un total de %.2f Kbits.", locDownloadSize));
+		} else {
+			_infoProvider.appendMessage(Level.INFO, String.format("%d images ont été téléchargées pour un total de %.2f Kbits.", locSize, locDownloadSize));	
+		}
 		return Boolean.TRUE;
 	}
 
 	@Override
 	public final Boolean download() {
-		return DownloaderPool.getInstance().submit(this, _infoProvider);
+		return DownloaderPool.getInstance().submitWithMessage(this, _infoProvider, START_MESSAGE, END_MESSAGE);
 	}
 }

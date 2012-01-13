@@ -33,7 +33,7 @@ public final class InscriptionAction extends AbstractAction {
 			return;
 		}
 		final InscriptionMessage locInscriptionMessage = (InscriptionMessage) locMessage;
-		final Manager<User> locUserManager = Managers.createUserManager();
+		final Manager<User> locUserManager = Managers.getUserManager();
 		final String locLogin = locInscriptionMessage.getLogin();
 		User locUser = locUserManager.find(locLogin);
 		// Le compte existe déjà

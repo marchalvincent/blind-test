@@ -102,8 +102,7 @@ public final class ThreadPartie implements Runnable {
 					LOCK.writeLock().lock();
 					try {
 						if (_partie.hasWinner() == false && _partie.isValidAnswer(locAnswer)) {
-							_partie.updateStats(_user);
-							_partie.notifyWinner(locInfoProvider, _user.getConstName());
+							_partie.notifyWinner(locInfoProvider, _user);
 							if(_partie.isFinished()) {
 								break end;
 							}
@@ -115,7 +114,7 @@ public final class ThreadPartie implements Runnable {
 							final String locValue = "La réponse est incorrect.";
 							++_wrongAnswer;
 							if(_wrongAnswer >= 3) {
-								_partie.notifyWinner(locInfoProvider, _user.getConstName());
+								_partie.notifyWinner(locInfoProvider, _user, false);
 								if(_partie.isFinished()) {
 									break end;
 								}

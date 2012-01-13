@@ -11,12 +11,12 @@ import org.client.ui.JouerPanel;
  * @author francois
  *
  */
-public class boutonValidEntree extends Observable implements KeyListener {
+public class BoutonEntree extends Observable implements KeyListener {
 	
 	protected Observer _observer;
 	public JouerPanel _panel;
 	
-	public boutonValidEntree (JouerPanel parPanel, final Observer parObserver) {
+	public BoutonEntree (JouerPanel parPanel, final Observer parObserver) {
 		_observer = parObserver;
 		_panel = parPanel;
 	}
