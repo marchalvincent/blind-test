@@ -23,7 +23,6 @@ import org.server.concurrent.ReadWriterUtil;
 
 /**
  * Affiche les stats
- * @author Takfarinas
  *
  */
 public class StatListener extends AbstractBoutonListener {

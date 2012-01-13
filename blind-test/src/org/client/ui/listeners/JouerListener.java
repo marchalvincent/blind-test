@@ -9,7 +9,6 @@ import org.client.ui.JouerPanel;
 
 /**
  * Affiche le jeu
- * @author francois
  *
  */
 public class JouerListener extends AbstractBoutonListener {

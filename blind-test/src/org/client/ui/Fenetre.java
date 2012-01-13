@@ -4,25 +4,36 @@ import java.awt.Dimension;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
+import java.io.IOException;
+import java.net.Socket;
+import java.util.logging.Level;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import org.client.main.ClientManager;
 import org.client.ui.parties.PartieTimer;
+import org.commons.configuration.Configuration;
+import org.commons.configuration.ConfigurationManager;
+import org.commons.logger.InfoProvider;
+import org.commons.logger.InfoProviderManager;
+import org.commons.message.DisconnectMessage;
+import org.commons.message.EnumMessage;
+import org.commons.message.IMessage;
+import org.commons.util.SystemUtil;
+import org.server.concurrent.ReadWriterUtil;
 
 /**
  * Classe contenant un singleton de la fenetre de
  * l'application.
  *
  */
-public class Fenetre {
+public class Fenetre extends WindowAdapter {
 
 	static private final Fenetre INSTANCE = new Fenetre();
 	private JFrame fenetre;
-	//private JFrame fenetreLog;
 	private JFrame fenetreParties;
 	private PartiesPanel _partiesPanel;
-	//private LogClient logClient;
 	private PartieTimer _partieTimer;
 	
 	static public final Fenetre instance() {
@@ -30,9 +41,7 @@ public class Fenetre {
 	}
 	
 	private Fenetre () {
-		//createLogClient ();
 		fenetre = new JFrame ("Blind Test");
-		//fenetreLog = new JFrame ("Historique");
 	}
 	
 	public void initFenetre () {
@@ -41,12 +50,6 @@ public class Fenetre {
 		fenetre.setContentPane(new ConnexionPanel().initPanel());
 		fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		fenetre.setVisible(true);
-		//logClient.getScrollPane().add(new JLabel ("coucou"));
-		//fenetreLog.add(logClient.getScrollPane());
-		//fenetreLog.getContentPane().setBackground(Color.BLACK);
-		//fenetreLog.setSize(500, 300);
-		//fenetreLog.setLocation(800, 0);
-		//fenetreLog.setVisible(true);
 		fenetre.toFront();
 		fenetre.addWindowFocusListener(new WindowFocusListener() {
 			
@@ -61,12 +64,12 @@ public class Fenetre {
 				}
 			}
 		});
+		fenetre.addWindowListener(this);
 	}
 	
 	public void changePage (JPanel nouveau) {
 		fenetre.setContentPane(nouveau);
 		fenetre.validate();
-		//fenetreLog.validate();
 	}
 	
 	public int getPartieHeight () {
@@ -114,21 +117,39 @@ public class Fenetre {
 		return fenetreParties;
 	}
 	
-	/*private void createLogClient () {
-		logClient = new LogClient ();
-		UiInfoProvider infoProvider = new UiInfoProvider ("log/blind_test.log", logClient);
-		InfoProviderManager.setUiInfoProvider(infoProvider);
-	}
-	
-	public LogClient getLogClient () {
-		return logClient;
-	}*/
-	
 	public int getHeight () {
 		return fenetre.getHeight();
 	}
 	
 	public int getWidth () {
 		return fenetre.getWidth();
+	}
+	
+	@Override
+	public void windowClosed(WindowEvent e) {
+		closeWindow();
+	}
+	
+	@Override
+	public void windowClosing(WindowEvent e) {
+		closeWindow();
+	}
+	
+	private void closeWindow() {
+		IMessage message = EnumMessage.DISCONNECT.createMessage();
+		DisconnectMessage disconnectMessage = (DisconnectMessage) message;
+		disconnectMessage.setLogin(ClientManager.getLogin());
+		
+		Configuration conf = ConfigurationManager.getConfiguration();
+		InfoProvider info = InfoProviderManager.getUiInfoProvider();
+		
+		try {
+			Socket socket = new Socket(conf.getHostName(), conf.getPort());
+			ReadWriterUtil.write(socket, disconnectMessage);
+			SystemUtil.close(socket);
+		} catch (IOException e) {
+			info.appendMessage(Level.SEVERE, "Impossible de spécifier au serveur que l'utilisateur s'est déconnecté.");
+		}
+		
 	}
 }

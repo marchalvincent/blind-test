@@ -20,7 +20,6 @@ public class QuitterPartieListener extends AbstractBoutonListener {
 	
 	public QuitterPartieListener(String parLogin, Socket socket, IMessage message, BoutonGris bouton) {
 		super(bouton);
-		// TODO Auto-generated constructor stub
 		_login = parLogin;
 		this.socket = socket;
 		this.message = message;

@@ -8,7 +8,6 @@ import org.client.ui.ReglesPanel;
 
 /**
  * affiche les regles du jeu
- * @author francois
  *
  */
 public class ReglesListener extends AbstractBoutonListener {

@@ -8,7 +8,6 @@ import org.client.ui.Fenetre;
 
 /**
  * retour au menu d'acceuil
- * @author francois
  *
  */
 public class RetourMenuListener extends AbstractBoutonListener {

@@ -4,11 +4,8 @@ import java.awt.event.MouseEvent;
 
 import org.client.ui.BoutonGris;
 import org.client.ui.JouerPanel;
-/**
- * 
- * @author francois
- *
- */
+
+
 public class ValidListener extends AbstractBoutonListener {
 
 	private JouerPanel _panel;

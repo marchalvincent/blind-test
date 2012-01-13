@@ -9,7 +9,6 @@ public class RefreshListener extends AbstractBoutonListener {
 	
 	public RefreshListener(String login, BoutonGris bouton) {
 		super(bouton);
-		// TODO Auto-generated constructor stub
 		this.login = login;
 	}
 }

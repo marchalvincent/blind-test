@@ -7,7 +7,6 @@ import java.awt.Color;
  * on pour souris au dessus
  * off de base
  * click pour bouton clické
- * @author francois
  *
  */
 public enum BoutonState {

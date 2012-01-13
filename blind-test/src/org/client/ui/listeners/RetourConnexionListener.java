@@ -10,7 +10,6 @@ public class RetourConnexionListener extends AbstractBoutonListener {
 
 	public RetourConnexionListener(BoutonGris bouton) {
 		super(bouton);
-		// TODO Auto-generated constructor stub
 	}
 	
 	@Override

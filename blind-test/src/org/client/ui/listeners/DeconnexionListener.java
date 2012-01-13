@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.logging.Level;
 
+import org.client.main.ClientManager;
 import org.client.ui.BoutonGris;
 import org.client.ui.ConnexionPanel;
 import org.client.ui.Fenetre;
@@ -41,6 +42,7 @@ public class DeconnexionListener extends AbstractBoutonListener {
 			((DisconnectMessage) locMessage).setLogin(_login);
 
 			ReadWriterUtil.write(socket, locMessage);
+			ClientManager.setLogin("");
 			Fenetre.instance().changePage(new ConnexionPanel().initPanel());
 
 		} catch (IOException e1) {

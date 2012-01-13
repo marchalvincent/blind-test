@@ -6,11 +6,8 @@ import java.util.Observable;
 import java.util.Observer;
 
 import org.client.ui.JouerPanel;
-/**
- * 
- * @author francois
- *
- */
+
+
 public class BoutonEntree extends Observable implements KeyListener {
 	
 	protected Observer _observer;

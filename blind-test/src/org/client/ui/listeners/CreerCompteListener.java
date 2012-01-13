@@ -16,7 +16,6 @@ import org.commons.util.StringUtil;
 
 /**
  * creation d'un compte lors de l'inscription
- * @author francois
  *
  */
 public class CreerCompteListener extends AbstractBoutonListener {
@@ -25,7 +24,6 @@ public class CreerCompteListener extends AbstractBoutonListener {
 
 	public CreerCompteListener(BoutonGris bouton, InscriptionPanel panel) {
 		super(bouton);
-		// TODO Auto-generated constructor stub
 		this.panel = panel;
 	}
 

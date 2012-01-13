@@ -4,6 +4,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JOptionPane;
 
+import org.client.main.ClientManager;
 import org.client.main.ThreadConnexion;
 import org.client.ui.AccueilPanel;
 import org.client.ui.BoutonGris;
@@ -16,7 +17,6 @@ import org.commons.util.StringUtil;
 
 /**
  * renvoit sur la page d'accueil
- * @author francois
  *
  */
 public class ConnexionListener extends AbstractBoutonListener {
@@ -32,6 +32,7 @@ public class ConnexionListener extends AbstractBoutonListener {
 	public void mouseClicked(MouseEvent e) {
 		super.mouseClicked (e);
 		final String locLogin = panel.getLogin();
+		ClientManager.setLogin(locLogin);
 
 		String locPassword = panel.getPassword();
 		if (StringUtil.isNotEmpty(locPassword) && StringUtil.isNotEmpty(locLogin)) {
