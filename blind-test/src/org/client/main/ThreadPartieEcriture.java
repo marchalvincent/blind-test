@@ -124,7 +124,9 @@ public class ThreadPartieEcriture implements Runnable, Observer {
 					final StringBuilder locBuilder = new StringBuilder();
 					locBuilder.append("Classement : \n");
 					for(final Map.Entry<String, Integer> locScore : locMap.entrySet()) {
-						locBuilder.append("  - ").append(locScore.getKey()).append(" : ").append(locScore.getValue()).append("\n");
+						final Integer locValue = locScore.getValue();
+						final Integer locRealValue = (locValue.intValue() <= 0) ? 0 : locValue;
+						locBuilder.append("  - ").append(locScore.getKey()).append(" : ").append(locRealValue).append("\n");
 					}
 					JOptionPane.showMessageDialog(null, locBuilder.toString(), "Classement", JOptionPane.INFORMATION_MESSAGE);
 					break end;
