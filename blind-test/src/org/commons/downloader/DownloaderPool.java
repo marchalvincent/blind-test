@@ -41,6 +41,6 @@ public final class DownloaderPool {
 	}
 	
 	private DownloaderPool() {
-		_executor = new BlindTestExecutor(10);
+		_executor = new BlindTestExecutor(2);
 	}
 }

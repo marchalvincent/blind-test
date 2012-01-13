@@ -27,7 +27,7 @@ public final class Server {
 
 	public Server(final InfoProvider parLogger){
 		this._logger = parLogger;
-		_blindTestExecutor = new BlindTestExecutor(30);
+		_blindTestExecutor = new BlindTestExecutor(4);
 		_port = ConfigurationManager.getConfiguration().getPort();
 	}
 
