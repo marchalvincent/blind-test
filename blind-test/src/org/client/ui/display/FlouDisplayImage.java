@@ -9,6 +9,11 @@ import org.commons.configuration.Configuration;
 import org.commons.configuration.ConfigurationManager;
 import org.commons.configuration.DisplayConfigurationType;
 
+/**
+ * 
+ * @author francois
+ *
+ */
 public class FlouDisplayImage implements DisplayImage {
 	
 	final private Configuration _configuration;
@@ -45,11 +50,9 @@ public class FlouDisplayImage implements DisplayImage {
 	
 	public float[] gaussianKernel1D(double sigma2) {
 		int radius = (int)Math.round(2*Math.sqrt(sigma2));
-		// compute gaussian values
 		float[] data = new float[1+2*radius];
 		for(int r=-radius;r<=radius;r++)
 			data[r+radius] = (float)Math.exp(-(r*r)/(2.0*sigma2));
-		// normalize
 		float sum=0;
 		for(int i=0;i<data.length;i++) sum+=data[i];
 		for(int i=0;i<data.length;i++) data[i]/=sum;
@@ -62,8 +65,6 @@ public class FlouDisplayImage implements DisplayImage {
 		int width = input.getWidth(), height=input.getHeight();
 		WritableRaster raster = input.getRaster();
 		int kernelradius = kernel.length/2;
-	 
-		// horizontal
 		int[][] wbuffer = new int[width][3];
 		for(int y=0;y<height;y++) {
 			for(int x=0;x<width;x++) {
@@ -84,9 +85,6 @@ public class FlouDisplayImage implements DisplayImage {
 				raster.setSample(x, y, 2, (int)b);
 			}
 		}
-	 
-	 
-		// vertical
 		int[][] hbuffer = new int[height][3];
 		for(int x=0;x<width;x++) {
 			for(int y=0;y<height;y++) {
@@ -111,16 +109,11 @@ public class FlouDisplayImage implements DisplayImage {
 	}
 	 
 	public BufferedImage fastGaussianBlur(BufferedImage input, double sigma2) {
-		int factor=1;              // reduction factor
-		double ds_sigma2=sigma2;   // downscale gaussian sigma2
-		double us_sigma2=1.0;      // final upscale gaussian sigma2
-	 
-		// find best reduction factor and sigma2
+		int factor=1;
+		double ds_sigma2=sigma2;
+		double us_sigma2=1.0;
 		int scale=0;
-		while(us_sigma2<ds_sigma2) {  
-			// exit when downscale/upscale sigma2 are equivalents
-	 
-			// compute sigma2 for next scale
+		while(us_sigma2<ds_sigma2) {
 			scale++;
 			double next_us_sigma2 = Math.pow(factor, 2);
 			double next_ds_sigma2 = (sigma2 - next_us_sigma2) / Math.pow(4, scale); 
@@ -130,24 +123,16 @@ public class FlouDisplayImage implements DisplayImage {
 			ds_sigma2 = next_ds_sigma2;
 			us_sigma2 = next_us_sigma2;
 		}
-	 
-		// downscale (fast)
 		int width = input.getWidth(), height=input.getHeight();
 		BufferedImage dwnscaled = new BufferedImage(width/factor, height/factor, BufferedImage.TYPE_INT_RGB);
 		dwnscaled.createGraphics().drawImage(
 				input.getScaledInstance(width/factor, height/factor, BufferedImage.SCALE_AREA_AVERAGING)
 				, 0, 0, null);
-	 
-		// convolve with gaussian 
 		convolve2DSeparate(dwnscaled,gaussianKernel1D(ds_sigma2));
-	 
-		// upscale (fast)
 		BufferedImage upscaled = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 		upscaled.createGraphics().drawImage(
 				dwnscaled.getScaledInstance(width, height, BufferedImage.SCALE_FAST)
 				, 0, 0, null);
-	 
-		// convolve with gaussian
 		convolve2DSeparate(upscaled,gaussianKernel1D(us_sigma2));
 	 
 		return upscaled;

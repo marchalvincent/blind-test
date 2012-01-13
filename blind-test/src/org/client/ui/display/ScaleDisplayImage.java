@@ -9,6 +9,11 @@ import org.commons.configuration.Configuration;
 import org.commons.configuration.ConfigurationManager;
 import org.commons.configuration.DisplayConfigurationType;
 
+/**
+ * 
+ * @author francois
+ *
+ */
 public class ScaleDisplayImage implements DisplayImage {
 	
 	final private Configuration _configuration;
