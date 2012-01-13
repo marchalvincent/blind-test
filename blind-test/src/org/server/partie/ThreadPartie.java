@@ -5,6 +5,7 @@ import java.net.Socket;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.logging.Level;
 
+import org.client.ui.display.EnumDisplayImage;
 import org.commons.entity.Banque;
 import org.commons.entity.User;
 import org.commons.logger.InfoProvider;
@@ -65,6 +66,8 @@ public final class ThreadPartie implements Runnable {
 					LOCK.writeLock().unlock();
 				}
 				locMessage.setFileName(locBanque.getConstName());
+				final EnumDisplayImage locDisplay = EnumDisplayImage.randomDisplay();
+				locMessage.setType(locDisplay.getId());
 				try {
 					ReadWriterUtil.write(_socket, locMessage);
 				} catch (IOException e) {
