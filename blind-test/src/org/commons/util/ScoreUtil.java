@@ -9,7 +9,7 @@ public final class ScoreUtil {
 	}
 	
 	public static double computeDefaite(final double parScore) {
-		return parScore - 1.0;
+		return parScore;
 	}
 	
 	public static double computeVictoire(final double parScore) {
@@ -21,7 +21,7 @@ public final class ScoreUtil {
 	}
 	
 	public static int computeDefaite(final int parScore) {
-		return parScore - 1;
+		return parScore;
 	}
 	
 	public static int computeVictoire(final int parScore) {
