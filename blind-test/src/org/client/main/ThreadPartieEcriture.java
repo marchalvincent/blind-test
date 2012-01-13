@@ -10,6 +10,7 @@ import java.util.logging.Level;
 import org.client.ui.AccueilPanel;
 import org.client.ui.Fenetre;
 import org.client.ui.JouerPanel;
+import org.client.ui.display.EnumDisplayImage;
 import org.client.ui.listeners.QuitterPartieListener;
 import org.commons.configuration.Configuration;
 import org.commons.configuration.ConfigurationManager;
@@ -128,7 +129,8 @@ public class ThreadPartieEcriture implements Runnable, Observer {
 						_stringBuilder.append(config.getImageDirectory());
 						_stringBuilder.append(name);
 						final String fileName = _stringBuilder.toString();
-						fenetre.newTest(fileProvider, fileName);
+						final EnumDisplayImage locDisplay = WithUtilities.getById(EnumDisplayImage.values(), locDisplayMessage.getType());
+						fenetre.newTest(fileProvider, fileName, locDisplay);
 					}
 				}
 

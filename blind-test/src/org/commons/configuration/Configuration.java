@@ -1,8 +1,10 @@
 package org.commons.configuration;
 
 import java.nio.charset.Charset;
+import java.util.List;
 import java.util.logging.Level;
 
+import org.client.ui.display.EnumDisplayImage;
 import org.commons.exception.BlindTestException;
 
 /**
@@ -135,4 +137,10 @@ public interface Configuration {
 	 * @param parBackgroundImage le nouveau chemin du fond d'écran de l'application.
 	 */
 	void setBackgroundImage(final String parBackgroundImage);
+	
+	List<DisplayConfigurationType> getDisplayTypes();
+	
+	void addDisplayTypes(final DisplayConfigurationType parType);
+	
+	DisplayConfigurationType getDisplayType(final EnumDisplayImage parImage);
 }
